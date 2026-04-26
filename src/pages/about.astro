@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FounderCard from '../components/FounderCard.astro';
+import CertificationsBlock from '../components/CertificationsBlock.astro';
+import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 import { founders } from '../content/founders';
 ---
 
@@ -13,7 +15,7 @@ import { founders } from '../content/founders';
 			<p class="hero-eyebrow">About Heritage Co.</p>
 			<h1 class="hero-h1">Built by operators,<br />not marketers.</h1>
 			<p class="hero-sub">
-				Locally owned in East Texas. 30+ combined years on the roof. The people you call are the people who answer.
+				Locally owned. Headquartered in Longview, Texas. Crews across East Texas and Central Arkansas. The four people who founded the company are the four people you talk to.
 			</p>
 		</div>
 	</section>
@@ -24,33 +26,56 @@ import { founders } from '../content/founders';
 		<h2 class="section-h">We did the work for someone else first.</h2>
 		<div class="story-body">
 			<p>
-				Heritage Co. came together because the four of us kept seeing the same thing on roofs across East Texas — work that was rushed, crews that were gone, and homeowners who could not get a callback when something went wrong six months later. The big national chains can sell a roof. They cannot stand behind one in your zip code.
+				Heritage Co. is locally owned and operated. The four founders — Jordy, Peyton, Nishil, and Vivek — between them have years on East Texas roofs, years running commercial projects, and years running operations and finance. They started Heritage Co. to build a roofing company that answers the phone, stands behind its work, and is still 30 minutes away when you need it.
 			</p>
+			<HeritagePlaceholder fact="Real founding story — actual year of founding, what triggered it (specific incident, gap in market, prior shop they left), where the four founders met, and the one or two sentences that capture *why* in their own words. 2–3 short paragraphs. See Founder Input page §7." />
 			<p>
-				So we started a company you can actually reach. Locally owned. Locally crewed. Same people on the phone as on the ladder. Insurance work, retail roofs, commercial re-roofs — the same standard on every job, because it is our name on the truck.
-			</p>
-			<p>
-				We are not the cheapest roofer in East Texas. We are the one that is still going to be 30 minutes away when you need us in 2030.
+				What you can count on: the same name on the truck and the contract, the same crew on the install and the warranty visit, and a number that goes to a person.
 			</p>
 		</div>
 	</section>
 
-	<!-- Founders expanded -->
+	<!-- Founders -->
 	<section class="founders">
 		<p class="section-eyebrow">Meet the team</p>
 		<h2 class="section-h">The people answering your call.</h2>
-		<p class="section-sub">30+ combined years of roofing. Locally owned and operated.</p>
+		<p class="section-sub">Locally owned and operated. The bios below show the role today — the paragraph each founder added is being filled in.</p>
 		<div class="founders-grid">
 			{founders.map((f) => (
-				<FounderCard name={f.name} role={f.role} cred={f.cred} bio={f.bio} />
+				<FounderCard name={f.name} role={f.role} cred={f.cred} expectBio={true} />
 			))}
+		</div>
+	</section>
+
+	<!-- Certifications -->
+	<CertificationsBlock />
+
+	<!-- Named guarantee -->
+	<section class="guarantee">
+		<p class="section-eyebrow on-dark">The guarantee</p>
+		<h2 class="section-h on-dark">What every Heritage Co. roof comes with.</h2>
+		<div class="guarantee-card">
+			<p class="guarantee-label">Workmanship warranty</p>
+			<HeritagePlaceholder fact="Workmanship warranty length on residential installs (years) and on commercial installs (years). State as a single sentence: e.g. '10-year workmanship warranty on residential installs, 5-year on commercial.'" />
+		</div>
+		<div class="guarantee-card">
+			<p class="guarantee-label">Material warranty</p>
+			<HeritagePlaceholder fact="Material warranty pass-through — from which manufacturer(s), how long, transferable on home sale (Y/N)" />
+		</div>
+		<div class="guarantee-card">
+			<p class="guarantee-label">Named guarantee</p>
+			<HeritagePlaceholder fact="Branded one-line guarantee phrase if Heritage has one (e.g. Schulte's 'BulletProof Roof Guarantee®'). If not, leave this card off the page — do not invent one." />
+		</div>
+		<div class="guarantee-card">
+			<p class="guarantee-label">Money-back / satisfaction</p>
+			<HeritagePlaceholder fact="Money-back or satisfaction guarantee (Y/N + conditions)" />
 		</div>
 	</section>
 
 	<!-- Credentials band -->
 	<section class="creds">
 		<p class="creds-text">
-			30+ combined years roofing experience. Locally owned and operated. East Texas + Central Arkansas.
+			Locally owned and operated. East Texas + Central Arkansas. <span class="creds-inline-placeholder"><HeritagePlaceholder inline={true} fact="real total years roofing across the four founders" /></span> on the roof between us.
 		</p>
 	</section>
 </BaseLayout>
@@ -81,20 +106,21 @@ import { founders } from '../content/founders';
 		margin: 0; max-width: 560px;
 	}
 
-	/* Section labels */
 	.section-eyebrow {
 		color: #b54620; font-size: 13px; font-weight: 500;
 		text-align: center; margin: 0 0 16px;
 		letter-spacing: 1px; text-transform: uppercase;
 	}
+	.section-eyebrow.on-dark { color: #b54620; }
 	.section-h {
 		color: #1a1a1a; font-size: 40px; font-weight: 600;
 		text-align: center; margin: 0 0 16px;
 		letter-spacing: -1px; line-height: 1.1;
 	}
+	.section-h.on-dark { color: #faf8f4; }
 	.section-sub {
 		color: #5a5347; font-size: 16px; text-align: center;
-		margin: 0 0 56px;
+		margin: 0 0 56px; max-width: 600px; margin-left: auto; margin-right: auto;
 	}
 
 	/* Story */
@@ -116,11 +142,27 @@ import { founders } from '../content/founders';
 		gap: 48px; max-width: 960px; margin: 0 auto;
 	}
 
-	/* Credentials band */
-	.creds { background: #1a1a1a; padding: 56px 48px; text-align: center; }
-	.creds-text {
-		color: #faf8f4; font-size: 22px; font-weight: 600;
-		max-width: 800px; margin: 0 auto;
-		letter-spacing: -0.3px; line-height: 1.4;
+	/* Guarantee (dark section) */
+	.guarantee { background: #1a1a1a; padding: 96px 48px; }
+	.guarantee-card {
+		max-width: 720px;
+		margin: 0 auto 24px;
+		padding: 28px 32px;
+		background: rgba(250, 248, 244, 0.04);
+		border: 1px solid rgba(250, 248, 244, 0.12);
 	}
+	.guarantee-card:last-child { margin-bottom: 0; }
+	.guarantee-label {
+		color: #b54620; font-size: 12px; font-weight: 500;
+		margin: 0 0 14px; letter-spacing: 1.5px; text-transform: uppercase;
+	}
+
+	/* Credentials band */
+	.creds { background: #faf8f4; padding: 56px 48px; text-align: center; border-top: 1px solid #ece7de; }
+	.creds-text {
+		color: #1a1a1a; font-size: 19px; font-weight: 600;
+		max-width: 800px; margin: 0 auto;
+		letter-spacing: -0.2px; line-height: 1.5;
+	}
+	.creds-inline-placeholder { display: inline-block; vertical-align: middle; }
 </style>

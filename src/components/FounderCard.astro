@@ -1,12 +1,15 @@
 ---
+import HeritagePlaceholder from './HeritagePlaceholder.astro';
+
 interface Props {
 	name: string;
 	role: string;
 	cred: string;
 	bio?: string;
+	expectBio?: boolean;
 }
 
-const { name, role, cred, bio } = Astro.props;
+const { name, role, cred, bio, expectBio = false } = Astro.props;
 ---
 
 <div class="founder">
@@ -14,7 +17,13 @@ const { name, role, cred, bio } = Astro.props;
 	<p class="founder-name">{name}</p>
 	<p class="founder-role">{role}</p>
 	<p class="founder-cred" set:html={cred}></p>
-	{bio && <p class="founder-bio">{bio}</p>}
+	{bio ? (
+		<p class="founder-bio">{bio}</p>
+	) : expectBio ? (
+		<div class="founder-bio-placeholder">
+			<HeritagePlaceholder fact={`Bio paragraph for ${name} — prior employer(s), notable past projects, where born/raised, anything specific (military, trade school, family in roofing)`} />
+		</div>
+	) : null}
 </div>
 
 <style>
@@ -34,4 +43,5 @@ const { name, role, cred, bio } = Astro.props;
 		color: #5a5347; font-size: 14px; line-height: 1.6;
 		margin: 16px 0 0; text-align: left;
 	}
+	.founder-bio-placeholder { margin-top: 16px; text-align: left; }
 </style>
