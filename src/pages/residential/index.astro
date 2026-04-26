@@ -5,6 +5,8 @@ import LocalItem from '../../components/LocalItem.astro';
 import FAQItem from '../../components/FAQItem.astro';
 import WarrantyBlock from '../../components/WarrantyBlock.astro';
 import Testimonial from '../../components/Testimonial.astro';
+import MaterialCard from '../../components/MaterialCard.astro';
+import ColorSwatchGrid from '../../components/ColorSwatchGrid.astro';
 import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
 
 const services = [
@@ -18,16 +20,40 @@ const services = [
 
 const materials = [
 	{
-		label: 'Asphalt shingle',
-		body: 'The standard for East Texas residential. Lower up-front cost, wide color range, replaceable shingle-by-shingle on repairs.',
+		name: 'Asphalt shingle',
+		intro: 'The standard for East Texas residential. Lower up-front cost, wide color range, replaceable shingle-by-shingle on repairs.',
+		gradient: 'linear-gradient(135deg, #8a6f54 0%, #5a4836 60%, #2a2a28 100%)',
+		specs: [
+			{ label: 'Service life', value: '20–30 years (architectural / dimensional)' },
+			{ label: 'Hail rating', value: 'Class 3 or Class 4 impact-resistant available' },
+			{ label: 'Repair', value: 'Shingle-by-shingle on damaged sections' },
+			{ label: 'Cost band', value: 'Lowest of the three. Standard for insurance jobs.' },
+		],
+		manufacturerPlaceholder: "Preferred asphalt manufacturer Heritage stocks (e.g. GAF Timberline HDZ, Owens Corning Duration, CertainTeed Landmark) and the impact-rating line. See Founder Input page §2.",
 	},
 	{
-		label: 'Metal',
-		body: 'Longer service life, better in hail. Higher up-front. Standing seam or stamped profile.',
+		name: 'Metal',
+		intro: 'Longer service life, better in hail. Higher up-front. Standing seam or stamped-profile panel.',
+		gradient: 'linear-gradient(135deg, #7d8b9e 0%, #4a5566 60%, #2a3035 100%)',
+		specs: [
+			{ label: 'Service life', value: '40–60 years' },
+			{ label: 'Hail rating', value: 'Standing seam: Class 4 standard' },
+			{ label: 'Repair', value: 'Panel replacement; seam-level fixes possible' },
+			{ label: 'Cost band', value: 'Roughly 2–3× asphalt up-front, lower lifetime cost.' },
+		],
+		manufacturerPlaceholder: "Metal panel brand Heritage installs most often (e.g. McElroy, Mueller, Berridge) and standard gauges offered. See Founder Input page §2.",
 	},
 	{
-		label: 'Synthetic + tile',
-		body: 'Slate-look or tile-look at lower install weight. Niche, but worth the conversation if the roof line is right.',
+		name: 'Synthetic + tile',
+		intro: 'Slate-look or tile-look at lower install weight. Niche, but worth the conversation if the roof line and the budget are right.',
+		gradient: 'linear-gradient(135deg, #b8a78c 0%, #8a7d63 60%, #4a4239 100%)',
+		specs: [
+			{ label: 'Service life', value: '40–50 years (synthetic); 50+ (real tile)' },
+			{ label: 'Hail rating', value: 'Synthetic: Class 4 standard. Real tile varies.' },
+			{ label: 'Repair', value: 'Tile-by-tile or panel; specialty install.' },
+			{ label: 'Cost band', value: '3–5× asphalt up-front. Worth it on the right home.' },
+		],
+		manufacturerPlaceholder: "Synthetic-tile or composite brand Heritage installs (e.g. DaVinci Roofscapes, Brava). See Founder Input page §2.",
 	},
 ];
 
@@ -109,17 +135,27 @@ const faqs = [
 	<section class="materials">
 		<p class="section-eyebrow">Materials</p>
 		<h2 class="section-h">What we install.</h2>
-		<p class="section-sub">A short read, not a manufacturer brochure. We talk through the trade-offs at the inspection.</p>
+		<p class="section-sub">A short read, not a manufacturer brochure. We talk trade-offs at the inspection.</p>
 		<div class="materials-grid">
 			{materials.map((m) => (
-				<div class="material-card">
-					<p class="material-label">{m.label}</p>
-					<p class="material-body">{m.body}</p>
-				</div>
+				<MaterialCard
+					name={m.name}
+					intro={m.intro}
+					gradient={m.gradient}
+					specs={m.specs}
+					manufacturerPlaceholder={m.manufacturerPlaceholder}
+				/>
 			))}
 		</div>
-		<div class="materials-note">
-			<HeritagePlaceholder fact="Heritage's preferred manufacturer(s) for asphalt shingle (e.g. GAF Timberline, Owens Corning Duration, CertainTeed Landmark) and the rough range of color options carried. See Founder Input page §2." />
+	</section>
+
+	<!-- Color swatches (ivory-tint section) -->
+	<section class="colors">
+		<p class="section-eyebrow">Asphalt color options</p>
+		<h2 class="section-h">A range that fits the house.</h2>
+		<p class="section-sub">Six common color families below. The full line carries 20+ options — your inspection report includes a color sheet.</p>
+		<div class="colors-inset">
+			<ColorSwatchGrid />
 		</div>
 	</section>
 
@@ -271,12 +307,18 @@ const faqs = [
 	.materials { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
 	.materials-grid {
 		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px; max-width: 1100px; margin: 0 auto;
+		gap: 24px; max-width: 1200px; margin: 0 auto;
 	}
-	.material-card { padding: 32px; background: #faf8f4; border: 1px solid #ece7de; }
-	.material-label { color: #1a1a1a; font-size: 22px; font-weight: 600; margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2; }
-	.material-body { color: #5a5347; font-size: 15px; line-height: 1.6; margin: 0; }
-	.materials-note { max-width: 1100px; margin: 24px auto 0; }
+
+	/* Colors (ivory-tint section, inset card-on-card) */
+	.colors { padding: 96px 48px; background: var(--ivory-tint); border-top: 1px solid #ece7de; }
+	.colors-inset {
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 36px;
+		background: #ffffff;
+		border: 1px solid #ece7de;
+	}
 
 	/* Why local */
 	.local { padding: 120px 48px; background: #1a1a1a; }
