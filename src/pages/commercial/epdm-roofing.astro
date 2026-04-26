@@ -1,0 +1,67 @@
+---
+import SystemDetailLayout from '../../layouts/SystemDetailLayout.astro';
+import { imagery } from '../../content/imagery';
+
+const faqs = [
+	{ q: 'Why would I choose EPDM over TPO?', a: 'EPDM has 50+ years of field history; TPO has \\~25 years. If the building is in a long-term hold and the owner wants the most-tested commercial roof system, EPDM is the safer bet. EPDM is also more puncture-resistant than TPO — better on roofs with heavy foot traffic.' },
+	{ q: 'How are EPDM seams sealed?', a: 'Adhesive — either tape, cold liquid adhesive, or heat-bonded depending on the system. Modern EPDM seam tapes have decades of track record. Heat-welded EPDM (where available) approaches TPO seam strength.' },
+	{ q: 'Does black EPDM cost more in cooling?', a: 'Yes — measurably. Black EPDM absorbs nearly all incident solar radiation. In a cooling-dominated climate, this can add 10–20% to summer cooling. White EPDM is available at a 15–25% premium and eliminates the heat absorption problem.' },
+	{ q: 'How does ballasted compare to fully adhered?', a: 'Ballasted (gravel weight holding the membrane down) is the cheapest install but adds significant deck weight and is hard to inspect. Fully adhered (glued to the substrate) is the modern default — lighter, easier to maintain, more wind-uplift resistant.' },
+	{ q: 'Can EPDM be repaired easily?', a: 'Yes — EPDM is the easiest commercial system to repair. A puncture or seam failure can be patched with a square of new membrane and adhesive in under an hour. No specialized welding equipment required.' },
+	{ q: "What's the warranty difference between thicknesses?", a: '45-mil EPDM typically carries a 15–20 year warranty. 60-mil carries 25–30 years. 90-mil carries 30+ years. Most modern commercial specs default to 60-mil for the warranty math.' },
+];
+---
+
+<SystemDetailLayout
+	title="EPDM Roofing — Heritage Co. Commercial"
+	heroEyebrow="Commercial · EPDM"
+	heroH1="EPDM. The 50-year proven roof system."
+	heroSub="Single-ply rubber membrane. Long service life, forgiving install, and the most-tested low-slope commercial system on the market."
+	heroPhoto={imagery.metal.secondary.url}
+	heroPhotoAlt="Commercial building"
+	whatItIsHeading="Single-ply synthetic rubber, glued together."
+	whatItIsParagraphs={[
+		'EPDM (Ethylene Propylene Diene Monomer) is a single-ply synthetic rubber membrane — one continuous sheet, typically 60-mil thick, available black (default) or white. Seams are bonded with adhesive tape or liquid adhesive. The membrane has been the workhorse of low-slope commercial roofing since the 1960s.',
+		'EPDM is the most-studied, longest-tracked commercial roof system in the industry. Real-world EPDM roofs from the 1970s are still performing today. When the priority is long-term ownership and known-quantity performance, EPDM is hard to beat.',
+	]}
+	bestFitHeading="Where EPDM is the right call."
+	bestFitItems={[
+		{ title: 'Long-term hold buildings', body: 'Owner-occupied commercial where the 50-year track record matters more than recent innovation.' },
+		{ title: 'High-traffic roofs', body: 'Buildings with frequent HVAC service, antenna work, or other foot traffic. EPDM is more puncture-resistant than TPO.' },
+		{ title: 'Cold-climate buildings', body: 'EPDM stays flexible in cold weather better than thermoplastic membranes.' },
+		{ title: 'Replacement on existing EPDM', body: 'Matching the existing system means easier transitions and faster install.' },
+		{ title: 'Older institutional buildings', body: 'Schools, government, healthcare with existing flat-roof systems being matched.' },
+		{ title: 'Cost-conscious specs', body: 'Black EPDM is typically the cheapest single-ply option. White costs more but reduces cooling.' },
+	]}
+	specsHeading="EPDM at a glance."
+	specRows={[
+		{ label: 'Service life', value: '25–35 years' },
+		{ label: 'Membrane thickness', value: '45 mil / 60 mil / 90 mil (60 is standard)' },
+		{ label: 'Fire rating', value: 'Class A (with ballast or fire-rated assembly)' },
+		{ label: 'Color', value: 'Black (default); white EPDM at \\~20% premium' },
+		{ label: 'Reflectivity', value: 'Low on black; high on white' },
+		{ label: 'Install method', value: 'Ballasted / mechanically attached / fully adhered' },
+		{ label: 'Seam method', value: 'Adhesive tape, liquid adhesive, or heat-bonded' },
+	]}
+	manufacturerPlaceholder="Heritage's preferred EPDM manufacturer (Carlisle Sure-Seal / Firestone RubberGard / Versico). See Founder Input page §2."
+	howInstallHeading="How an EPDM install runs."
+	howInstallBody="Substrate prep — clean and dry. Insulation board fastened to the deck. Membrane rolled out (large sheets — often 10' or 20' wide rolls). Mechanically fastened or fully adhered. Seams cleaned, primed, and bonded with seam tape. Flashings detailed at penetrations. Probe-test of every seam. A 20,000 sq ft re-roof typically runs 6–10 working days — slightly slower than TPO due to seam-by-seam adhesive cure time."
+	maintenanceHeading="What EPDM needs over its life."
+	maintenanceBody="Annual inspection of seams, flashings, drains. Punctures patch with a fresh membrane square + adhesive — fast and field-repairable. White EPDM may need biological-growth treatment in humid climates. Black EPDM is essentially maintenance-free between inspections."
+	tradeoffsHeading="Where EPDM shines, and where it doesn't."
+	tradeoffs={[
+		{ kind: 'pro', body: '50+ years of installed track record — most-tested system' },
+		{ kind: 'pro', body: 'Excellent puncture resistance vs single-ply alternatives' },
+		{ kind: 'pro', body: 'Easy field repair — no specialized welder needed' },
+		{ kind: 'pro', body: 'Forgiving in cold-weather installs' },
+		{ kind: 'con', body: 'Black absorbs heat — cooling penalty in hot climates' },
+		{ kind: 'con', body: 'Adhesive seams less robust than TPO heat-weld' },
+		{ kind: 'con', body: 'White EPDM costs more than equivalent TPO' },
+	]}
+	faqItems={faqs}
+	endCtaPhoto={imagery.metal.hero.url}
+	endCtaHeading="Walkthrough, scope, and EPDM bid within the week."
+	endCtaSub="Bonded estimate ready for procurement."
+	endCtaLabel="Request consultation"
+	endCtaHref="/free-inspection"
+/>
