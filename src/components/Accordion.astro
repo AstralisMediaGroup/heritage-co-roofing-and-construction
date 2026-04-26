@@ -15,19 +15,21 @@ const { items } = Astro.props;
 ---
 
 <div class="accordion" data-accordion>
-	{items.map((item, i) => (
-		<details class="acc-item" open={i === 0 ? true : undefined}>
+	{items.map((item) => (
+		<details class="acc-item">
 			<summary class="acc-summary">
 				<span class="acc-q">{item.q}</span>
 				<span class="acc-icon" aria-hidden="true"></span>
 			</summary>
-			<div class="acc-body">
-				<p class="acc-a">{item.a}</p>
-				{item.placeholderFact && (
-					<div class="acc-placeholder">
-						<HeritagePlaceholder fact={item.placeholderFact} />
-					</div>
-				)}
+			<div class="acc-collapse">
+				<div class="acc-body">
+					<p class="acc-a">{item.a}</p>
+					{item.placeholderFact && (
+						<div class="acc-placeholder">
+							<HeritagePlaceholder fact={item.placeholderFact} />
+						</div>
+					)}
+				</div>
 			</div>
 		</details>
 	))}
@@ -47,7 +49,9 @@ const { items } = Astro.props;
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-subtle);
 		overflow: hidden;
+		transition: box-shadow 200ms ease;
 	}
+	.acc-item[open] { box-shadow: var(--shadow-active); }
 	.acc-summary {
 		list-style: none;
 		cursor: pointer;
@@ -67,9 +71,9 @@ const { items } = Astro.props;
 	}
 	.acc-icon {
 		flex-shrink: 0;
-		width: 24px; height: 24px;
+		width: 14px; height: 14px;
 		position: relative;
-		transition: transform 200ms ease;
+		transition: transform 250ms ease-out;
 	}
 	.acc-icon::before, .acc-icon::after {
 		content: '';
@@ -78,10 +82,24 @@ const { items } = Astro.props;
 	}
 	.acc-icon::before { left: 50%; top: 0; bottom: 0; width: 2px; transform: translateX(-50%); }
 	.acc-icon::after { top: 50%; left: 0; right: 0; height: 2px; transform: translateY(-50%); }
-	.acc-item[open] .acc-icon::before { display: none; }
-	.acc-body {
-		padding: 0 26px 22px;
+	.acc-item[open] .acc-icon { transform: rotate(180deg); }
+	.acc-item[open] .acc-icon::before { opacity: 0; }
+
+	/* Animated collapse using grid-template-rows trick (modern Chrome/Firefox/Safari) */
+	.acc-collapse {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 250ms ease-out;
 	}
+	.acc-item[open] .acc-collapse {
+		grid-template-rows: 1fr;
+	}
+	.acc-body {
+		min-height: 0;
+		overflow: hidden;
+		padding: 0 26px;
+	}
+	.acc-item[open] .acc-body { padding: 0 26px 22px; }
 	.acc-a {
 		color: var(--warm-gray);
 		font-size: 15px;
@@ -90,9 +108,9 @@ const { items } = Astro.props;
 	}
 	.acc-placeholder { margin-top: 14px; }
 
-	/* Smooth height animation only when JS is on (uses content-visibility approach) */
-	.accordion[data-accordion-enhanced] .acc-item:not([open]) .acc-body {
-		display: none;
+	@media (prefers-reduced-motion: reduce) {
+		.acc-collapse { transition: none; }
+		.acc-icon { transition: none; }
 	}
 </style>
 
@@ -101,7 +119,6 @@ const { items } = Astro.props;
 		const accs = document.querySelectorAll('[data-accordion]');
 		accs.forEach((acc) => {
 			acc.setAttribute('data-accordion-enhanced', 'true');
-			// Optional: only one open at a time
 			acc.querySelectorAll('details').forEach((d) => {
 				d.addEventListener('toggle', () => {
 					if (d.open) {
