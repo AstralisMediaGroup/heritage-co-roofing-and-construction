@@ -182,6 +182,16 @@ export const imagery = {
 		{ url: u('1755113717103-eceec858546a', 1024), alt: 'Suburban house nestled among trees', source: 'unsplash', photographer: 'Paragon Exterior' } satisfies ImageRef,
 	],
 
+	// ── Manufacturer brand imagery (real CDN URLs from manufacturer sites)
+	manufacturerBrands: {
+		atlasStormMaster: { url: 'https://www.atlasroofing.com/img/StormMaster-Shake-Logo-Homeowner_2024-01-31-211555_gogq.png', alt: 'Atlas StormMaster Shake', source: 'manufacturer', manufacturer: 'Atlas Roofing' } satisfies ImageRef,
+		atlasPinnacleImpact: { url: 'https://www.atlasroofing.com/img/product-logos/LOGO-Pinnacle-Impact-BL.png', alt: 'Atlas Pinnacle Impact', source: 'manufacturer', manufacturer: 'Atlas Roofing' } satisfies ImageRef,
+		atlasPinnaclePristine: { url: 'https://www.atlasroofing.com/img/product-logos/LOGO-Pinnacle-Pristine-BL_2023-01-26-170147_xntw.png', alt: 'Atlas Pinnacle Pristine', source: 'manufacturer', manufacturer: 'Atlas Roofing' } satisfies ImageRef,
+		atlasPinnacleSun: { url: 'https://www.atlasroofing.com/img/product-logos/LOGO-Pinnacle-Sun-BL.png', alt: 'Atlas Pinnacle Sun (cool roof)', source: 'manufacturer', manufacturer: 'Atlas Roofing' } satisfies ImageRef,
+		malarkeyLegacy: { url: 'https://www.malarkeyroofing.com/app/uploads/2021/02/legacy-midnight-black_camas-wa-20210119_Malarkey_0737-600x400.jpg', alt: 'Malarkey Legacy Scotchgard installed roof', source: 'manufacturer', manufacturer: 'Malarkey' } satisfies ImageRef,
+		malarkeyWindsor: { url: 'https://www.malarkeyroofing.com/app/uploads/2021/04/windsor-scotchgard-natural-wood-16031-parker-CO-8-malarkey-600x448.jpg', alt: 'Malarkey Windsor Scotchgard installed roof', source: 'manufacturer', manufacturer: 'Malarkey' } satisfies ImageRef,
+	},
+
 	// ── Heritage-specific people/projects — locked HeritagePlaceholder.
 	//    Will not substitute Unsplash people for Heritage people.
 	heritage: {
