@@ -7,6 +7,7 @@ import StatRow from '../components/StatRow.astro';
 import LayeredCard from '../components/LayeredCard.astro';
 import FullBleedSection from '../components/FullBleedSection.astro';
 import ProcessFlow from '../components/ProcessFlow.astro';
+import MaterialTabs from '../components/MaterialTabs.astro';
 import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 import { imagery } from '../content/imagery';
 
@@ -20,12 +21,85 @@ const services = [
 ];
 
 const systemsDetail = [
-	{ name: 'TPO', body: 'Single-ply thermoplastic. Bright white, reflective, weldable seams. Standard for retail and warehouse re-roofs.' },
-	{ name: 'EPDM', body: 'Single-ply rubber. Long service life, forgiving install. Common on flat commercial.' },
-	{ name: 'Modified bitumen', body: 'Asphalt-based, multi-ply. Torch-down or self-adhered. Workhorse for institutional buildings.' },
-	{ name: 'Metal', body: 'Standing seam, R-panel, structural. Long life, high wind ratings. Common on schools and ag.' },
-	{ name: 'Built-up', body: 'Tar-and-gravel BUR systems. Older spec but still installed where the building calls for it.' },
-	{ name: 'Coatings', body: 'Acrylic, silicone, urethane. Restoration over an existing roof to extend life and reflect heat.' },
+	{
+		id: 'tpo',
+		name: 'TPO',
+		intro: 'Single-ply thermoplastic. Bright white, reflective, weldable seams. The default spec for retail and warehouse re-roofs in East Texas.',
+		gradient: 'linear-gradient(180deg, #c4c1ba 0%, #8a8580 50%, #4a4a48 100%)',
+		specs: [
+			{ label: 'Thickness', value: '45 mil / 60 mil / 80 mil' },
+			{ label: 'Service life', value: '20–30 years (depends on thickness + spec)' },
+			{ label: 'Reflectivity', value: 'Class 1 cool-roof; SRI 78+ on white' },
+			{ label: 'Common on', value: 'Retail, warehouse, light industrial, MOBs' },
+		],
+		manufacturerPlaceholder: 'Heritage\'s preferred TPO manufacturer (Carlisle SureWeld / GAF EverGuard / Johns Manville TPO / Versico). See Founder Input page §2.',
+	},
+	{
+		id: 'epdm',
+		name: 'EPDM',
+		intro: 'Single-ply rubber. Long service life, forgiving install, well understood by every facility manager. Common on flat commercial.',
+		gradient: 'linear-gradient(180deg, #4a4a48 0%, #2a2a28 100%)',
+		specs: [
+			{ label: 'Thickness', value: '45 mil / 60 mil / 90 mil' },
+			{ label: 'Service life', value: '25–35 years' },
+			{ label: 'Reflectivity', value: 'Black absorbs heat; white EPDM available' },
+			{ label: 'Common on', value: 'Office, government, older institutional' },
+		],
+		manufacturerPlaceholder: 'Heritage\'s preferred EPDM manufacturer (Carlisle Sure-Seal / Firestone RubberGard / Versico). See Founder Input page §2.',
+	},
+	{
+		id: 'modified-bitumen',
+		name: 'Modified bitumen',
+		intro: 'Asphalt-based, multi-ply. Torch-down, self-adhered, or hot-mopped. Workhorse for institutional buildings with parapet detailing.',
+		gradient: 'linear-gradient(180deg, #5a4836 0%, #2a2a28 100%)',
+		specs: [
+			{ label: 'Plies', value: '2-ply or 3-ply systems' },
+			{ label: 'Service life', value: '20–25 years' },
+			{ label: 'Install method', value: 'Torch / cold-process / self-adhered' },
+			{ label: 'Common on', value: 'Schools, hospitals, parapet-heavy buildings' },
+		],
+		manufacturerPlaceholder: 'Heritage\'s preferred mod-bit manufacturer (GAF Ruberoid / Siplast / Johns Manville). See Founder Input page §2.',
+	},
+	{
+		id: 'metal',
+		name: 'Metal',
+		intro: 'Standing seam, R-panel, structural. Long life, high wind ratings. The right call on schools, ag, and any building where lifecycle cost matters more than upfront.',
+		gradient: 'linear-gradient(180deg, #7d8b9e 0%, #4a5566 100%)',
+		imageSrc: imagery.metal.hero.url,
+		imageAlt: imagery.metal.hero.alt,
+		specs: [
+			{ label: 'Profile', value: 'Standing seam (1.5"–3"), R-panel, structural' },
+			{ label: 'Service life', value: '40–60 years' },
+			{ label: 'Wind rating', value: 'UL 580 / FM 4471 standard on standing seam' },
+			{ label: 'Common on', value: 'Schools, agricultural, manufacturing' },
+		],
+		manufacturerPlaceholder: 'Heritage\'s preferred metal panel brand (McElroy / Drexel / Mueller / Berridge). See Founder Input page §2.',
+	},
+	{
+		id: 'built-up',
+		name: 'Built-up',
+		intro: 'Tar-and-gravel BUR systems. Older spec but still installed where the building calls for it — heavy substrates, parapet-detailed roofs.',
+		gradient: 'linear-gradient(180deg, #8a7d63 0%, #4a4239 100%)',
+		specs: [
+			{ label: 'Plies', value: '3-ply or 4-ply' },
+			{ label: 'Surface', value: 'Gravel cap or smooth-surface' },
+			{ label: 'Service life', value: '20–30 years' },
+			{ label: 'Common on', value: 'Older institutional, government, heritage buildings' },
+		],
+	},
+	{
+		id: 'coatings',
+		name: 'Coatings',
+		intro: 'Acrylic, silicone, urethane. Restoration over an existing roof to extend life and reflect heat. The right move when tear-off is not in the budget yet.',
+		gradient: 'linear-gradient(180deg, #faf8f4 0%, #c4b89e 50%, #8a7d63 100%)',
+		specs: [
+			{ label: 'Chemistry', value: 'Acrylic / silicone / urethane / aluminum' },
+			{ label: 'Service life', value: '10–20 years per recoat cycle' },
+			{ label: 'Reflectivity', value: 'High-SRI silicone or acrylic available' },
+			{ label: 'Common on', value: 'Aging metal, smooth BUR, mod-bit restoration' },
+		],
+		manufacturerPlaceholder: 'Heritage\'s preferred coating manufacturer (GAF UniSeal / GE Enduris / Henry Enviroshield). See Founder Input page §2.',
+	},
 ];
 
 const industries = [
@@ -108,37 +182,17 @@ const bondingItems = [
 				))}
 			</div>
 		</section>
-	</div>
 
-	<!-- One darker island for the systems detail — feels like a "spec" section, not a bg swap -->
-	<section class="systems-island">
-		<div class="block-inner">
-			<div class="systems-row">
-				<div class="systems-content">
-					<p class="eyebrow on-dark">Roof systems</p>
-					<h2 class="block-h on-dark">Six systems. We spec to the building.</h2>
-					<p class="block-sub on-dark">The right system depends on slope, occupancy, climate, and budget — we walk through trade-offs at the inspection.</p>
-				</div>
-				<div class="systems-photo has-zoom-photo" aria-hidden="true">
-					<img src={imagery.metal.secondary.url} alt={imagery.metal.secondary.alt} loading="lazy" class="zoom-photo" />
-				</div>
-			</div>
-			<div class="systems-grid">
-				{systemsDetail.map((s) => (
-					<div class="system-card">
-						<p class="system-name">{s.name}</p>
-						<p class="system-body">{s.body}</p>
-					</div>
-				))}
-			</div>
+		<!-- Roof systems — interactive tabs (click a system → photo + spec breakdown). On the same off-white flow. -->
+		<section class="block systems">
+			<p class="eyebrow">Roof systems</p>
+			<h2 class="block-h">Six systems. We spec to the building.</h2>
+			<p class="block-sub">Click a tab. Each system has a different lifespan, install method, and best-fit building type. The right one depends on slope, occupancy, climate, and budget — we walk through trade-offs at the inspection.</p>
+			<MaterialTabs materials={systemsDetail} />
 			<div class="systems-cert">
-				<HeritagePlaceholder fact="Manufacturer system certifications Heritage holds (e.g. Carlisle SureWeld, Firestone Red Shield, GAF EverGuard, Johns Manville Peak Advantage). Plain-text list. See Founder Input page §2." />
+				<HeritagePlaceholder fact="Heritage's system-level manufacturer certifications (Carlisle SureWeld, Firestone Red Shield, GAF EverGuard, Johns Manville Peak Advantage, etc.). Plain-text list. See Founder Input page §2." />
 			</div>
-		</div>
-	</section>
-
-	<!-- Resume continuous flow on off-white -->
-	<div class="flow">
+		</section>
 
 		<!-- Why Heritage for commercial — LayeredCard + StatRow combined -->
 		<section class="block why-commercial">
@@ -380,39 +434,8 @@ const bondingItems = [
 	.industry-row-label { color: var(--charcoal); font-size: 14px; font-weight: 600; }
 	.industry-row-body { color: var(--warm-gray); font-size: 14px; line-height: 1.5; }
 
-	/* Systems island (one dark stretch) */
-	.systems-island { background: var(--charcoal); padding: 96px 48px; }
-	.block-inner { max-width: 1200px; margin: 0 auto; }
-	.systems-row {
-		display: grid;
-		grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-		gap: 56px;
-		align-items: center;
-		margin-bottom: 56px;
-	}
-	.systems-photo {
-		aspect-ratio: 4 / 3;
-		border-radius: var(--radius-large);
-		overflow: hidden;
-		box-shadow: var(--shadow-active);
-	}
-	.systems-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-	.systems-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px;
-	}
-	.system-card {
-		padding: 28px;
-		background: rgba(250,248,244,0.04);
-		border: 1px solid rgba(250,248,244,0.12);
-		border-radius: var(--radius-card);
-	}
-	.system-name {
-		color: var(--off-white); font-size: 20px; font-weight: 600;
-		margin: 0 0 12px; letter-spacing: -0.3px;
-	}
-	.system-body { color: var(--body-dark); font-size: 14px; line-height: 1.6; margin: 0; }
-	.systems-cert { margin-top: 28px; }
+	/* Systems tabs sit on the off-white flow; cert placeholder underneath */
+	.systems-cert { max-width: 1100px; margin: 28px auto 0; }
 
 	/* Why commercial — LayeredCard + StatRow */
 	.stats-inline { margin-top: 56px; }
