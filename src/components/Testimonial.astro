@@ -1,0 +1,58 @@
+---
+import HeritagePlaceholder from './HeritagePlaceholder.astro';
+
+interface Props {
+	quote?: string;
+	name?: string;
+	city?: string;
+	jobType?: string;
+	placeholderFact?: string;
+}
+
+const {
+	quote,
+	name,
+	city,
+	jobType,
+	placeholderFact = 'Real testimonial — first + last name, city, project type, 1–2 sentences in their words. We need permission to publish. See Founder Input page §5.',
+} = Astro.props;
+
+const hasReal = quote && name;
+---
+
+<figure class="testimonial">
+	{hasReal ? (
+		<>
+			<blockquote class="testimonial-quote">{quote}</blockquote>
+			<figcaption class="testimonial-attrib">
+				<span class="testimonial-name">{name}</span>
+				{(city || jobType) && (
+					<span class="testimonial-meta">
+						{[city, jobType].filter(Boolean).join(' · ')}
+					</span>
+				)}
+			</figcaption>
+		</>
+	) : (
+		<HeritagePlaceholder fact={placeholderFact} />
+	)}
+</figure>
+
+<style>
+	.testimonial {
+		padding: 32px;
+		background: #ffffff;
+		border: 1px solid #ece7de;
+		margin: 0;
+	}
+	.testimonial-quote {
+		color: #1a1a1a; font-size: 18px; font-weight: 500;
+		line-height: 1.5; letter-spacing: -0.2px;
+		margin: 0 0 20px;
+	}
+	.testimonial-quote::before { content: '"'; }
+	.testimonial-quote::after { content: '"'; }
+	.testimonial-attrib { display: flex; flex-direction: column; gap: 4px; }
+	.testimonial-name { color: #1a1a1a; font-size: 14px; font-weight: 600; }
+	.testimonial-meta { color: #5a5347; font-size: 13px; }
+</style>
