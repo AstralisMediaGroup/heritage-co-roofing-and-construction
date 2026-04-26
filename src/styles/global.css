@@ -12,6 +12,11 @@
   --footer-text: #8a8580;
   --footer-border: #2a2a28;
   --body-wrap: #f0ebe0;
+
+  /* Sectional background variations — derived from locked tokens, no new colors */
+  --ivory-tint: #f5f0e3;          /* off-white shifted toward body-wrap warmth */
+  --charcoal-deep: #141413;       /* charcoal slightly darker for photo-overlay sections */
+  --inset-surface: #f1ecdf;       /* card-on-card secondary surface, between off-white and body-wrap */
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
