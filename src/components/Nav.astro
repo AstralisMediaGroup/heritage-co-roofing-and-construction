@@ -32,6 +32,7 @@ const commercialPrograms = [
 ---
 
 <div class="nav" data-nav>
+	<div class="nav-inner">
 	<a class="nav-logo" href="/">HERITAGE Co. ROOFING</a>
 	<nav class="nav-links" aria-label="Primary">
 		<div class="nav-item has-dropdown">
@@ -81,27 +82,34 @@ const commercialPrograms = [
 		<a href="/reviews">Reviews</a>
 		<a class="nav-cta" href="/free-inspection">Free inspection</a>
 	</nav>
+	</div>
 </div>
 
 <style>
 	.nav {
 		background: #faf8f4;
-		padding: 22px 48px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
 		border-bottom: 1px solid #ece7de;
 		transition: padding 250ms ease, background 250ms ease, box-shadow 250ms ease;
 		position: relative;
 		z-index: 50;
+		width: 100%;
+	}
+	.nav-inner {
+		max-width: 1280px;
+		margin: 0 auto;
+		padding: 22px 48px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		transition: padding 250ms ease;
 	}
 	.nav.is-scrolled {
-		padding: 14px 48px;
 		background: rgba(250, 248, 244, 0.92);
 		backdrop-filter: saturate(160%) blur(8px);
 		-webkit-backdrop-filter: saturate(160%) blur(8px);
 		box-shadow: var(--shadow-subtle);
 	}
+	.nav.is-scrolled .nav-inner { padding: 14px 48px; }
 	.nav-logo {
 		color: #1a1a1a;
 		font-weight: 600;

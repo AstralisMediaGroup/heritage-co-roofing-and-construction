@@ -42,21 +42,17 @@ html {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: var(--body-wrap);
+  background: var(--off-white);
   color: var(--charcoal);
   font-size: 15px;
   line-height: 1.6;
-  padding: 40px 20px;
+  padding: 0;
+  margin: 0;
 }
 
+/* Plan 012.4 — site-frame is now a passive flow container, no painted edges. */
 .site-frame {
-  max-width: 1280px;
-  margin: 0 auto;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(26,26,26,0.08);
+  width: 100%;
 }
 
 /* Plan 007.1 — marquee keyframes (used by MarqueeStrip) */
