@@ -4,18 +4,20 @@ import ServiceTile from '../../components/ServiceTile.astro';
 import LocalItem from '../../components/LocalItem.astro';
 import FAQItem from '../../components/FAQItem.astro';
 import WarrantyBlock from '../../components/WarrantyBlock.astro';
-import Testimonial from '../../components/Testimonial.astro';
-import MaterialCard from '../../components/MaterialCard.astro';
+import ReviewCard from '../../components/ReviewCard.astro';
+import MaterialComparison from '../../components/MaterialComparison.astro';
 import ColorSwatchGrid from '../../components/ColorSwatchGrid.astro';
+import ProcessFlow from '../../components/ProcessFlow.astro';
+import LayeredCard from '../../components/LayeredCard.astro';
 import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
 
 const services = [
-	{ label: 'Roof replacement', body: 'Full tear-off and install. Asphalt, metal, synthetic. Workmanship and material warranties.' },
-	{ label: 'Roof repair', body: 'Leaks, missing shingles, flashing failures. Fast turnaround, no upsell.' },
-	{ label: 'Storm damage', body: 'Hail, wind, tree fall. We work directly with your insurance adjuster.', href: '/residential/storm-damage-roofing' },
-	{ label: 'Inspection', body: 'Free, no-obligation roof inspection. Honest report, photos included.' },
-	{ label: 'Maintenance', body: 'Annual checkups and tune-ups. Catch problems before they become claims.' },
-	{ label: 'Insurance claims', body: 'Adjuster meetings, documentation, scope review. We handle the back-and-forth.' },
+	{ label: 'Roof replacement', body: 'Full tear-off and install. Asphalt, metal, synthetic. Workmanship and material warranties.', gradient: 'linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)' },
+	{ label: 'Roof repair', body: 'Leaks, missing shingles, flashing failures. Fast turnaround, no upsell.', gradient: 'linear-gradient(180deg, #8a6f54 0%, #5a4836 100%)' },
+	{ label: 'Storm damage', body: 'Hail, wind, tree fall. We work directly with your insurance adjuster.', href: '/residential/storm-damage-roofing', gradient: 'linear-gradient(180deg, #4a4a48 0%, #6b5d4a 50%, #2a2a28 100%)' },
+	{ label: 'Inspection', body: 'Free, no-obligation roof inspection. Honest report, photos included.', gradient: 'linear-gradient(180deg, #7d8b9e 0%, #b8a78c 100%)' },
+	{ label: 'Maintenance', body: 'Annual checkups and tune-ups. Catch problems before they become claims.', gradient: 'linear-gradient(180deg, #c4b89e 0%, #8a7d63 100%)' },
+	{ label: 'Insurance claims', body: 'Adjuster meetings, documentation, scope review. We handle the back-and-forth.', gradient: 'linear-gradient(180deg, #6b5d4a 0%, #4a4239 100%)' },
 ];
 
 const materials = [
@@ -127,7 +129,7 @@ const faqs = [
 		<h2 class="section-h">Residential services.</h2>
 		<p class="section-sub">Six things we are good at, on every house.</p>
 		<div class="service-grid">
-			{services.map((s) => <ServiceTile label={s.label} body={s.body} href={s.href} />)}
+			{services.map((s) => <ServiceTile label={s.label} body={s.body} href={s.href} photo={true} gradient={s.gradient} />)}
 		</div>
 	</section>
 
@@ -136,17 +138,7 @@ const faqs = [
 		<p class="section-eyebrow">Materials</p>
 		<h2 class="section-h">What we install.</h2>
 		<p class="section-sub">A short read, not a manufacturer brochure. We talk trade-offs at the inspection.</p>
-		<div class="materials-grid">
-			{materials.map((m) => (
-				<MaterialCard
-					name={m.name}
-					intro={m.intro}
-					gradient={m.gradient}
-					specs={m.specs}
-					manufacturerPlaceholder={m.manufacturerPlaceholder}
-				/>
-			))}
-		</div>
+		<MaterialComparison materials={materials} />
 	</section>
 
 	<!-- Color swatches (ivory-tint section) -->
@@ -175,21 +167,30 @@ const faqs = [
 	<section class="process">
 		<p class="section-eyebrow">How we work</p>
 		<h2 class="section-h">Four steps. No surprises.</h2>
-		<div class="process-grid">
-			{process.map((p) => (
-				<div class="process-step">
-					<p class="process-num">{p.n}</p>
-					<p class="process-h">{p.h}</p>
-					<p class="process-body">{p.body}</p>
-				</div>
-			))}
-		</div>
+		<ProcessFlow steps={[
+			{ label: 'Inspect', caption: 'Free. We climb the roof, take photos, write it up.' },
+			{ label: 'Quote', caption: 'Clear scope, clear pricing. No surprise line items.' },
+			{ label: 'Install', caption: 'Most residential roofs install in one day.' },
+			{ label: 'Stand by', caption: 'Workmanship + material warranties. Owner-direct line.' },
+		]} />
 		<div class="process-sla">
 			<HeritagePlaceholder fact="Free-inspection turnaround SLA in plain words (e.g. 'same-day or next-day'). Same-crew on warranty visits Y/N. See Founder Input page §6 + §8." />
 		</div>
 	</section>
 
-	<!-- Warranty -->
+	<!-- Named guarantee callout (LayeredCard) -->
+	<section class="guarantee-callout">
+		<LayeredCard
+			eyebrow="The guarantee"
+			heading="Every Heritage Co. roof comes with a written guarantee."
+			body="Workmanship from us. Manufacturer pass-through on the materials. The full terms — years, transferability, named guarantee phrase — are filled in below as the founders confirm."
+			gradient="linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)"
+			ctaHref="/about"
+			ctaLabel="See full warranty terms"
+		/>
+	</section>
+
+	<!-- Warranty detailed -->
 	<WarrantyBlock theme="light" />
 
 	<!-- Financing + insurance partners -->
@@ -218,9 +219,9 @@ const faqs = [
 		<h2 class="section-h">What homeowners have said.</h2>
 		<p class="section-sub">Three named testimonials go below — first + last name, city, project, in their own words. Until we have permission to publish, the placeholders show what's coming.</p>
 		<div class="testimonials-grid">
-			<Testimonial placeholderFact="Residential testimonial #1 — first + last name, city, project type (replacement / repair / storm), 1–2 sentences. Permission required. See Founder Input page §5." />
-			<Testimonial placeholderFact="Residential testimonial #2 — first + last name, city, project type, 1–2 sentences. See Founder Input page §5." />
-			<Testimonial placeholderFact="Residential testimonial #3 — first + last name, city, project type, 1–2 sentences. See Founder Input page §5." />
+			<ReviewCard placeholderFact="Residential review #1 — first + last name, city, project type (replacement / repair / storm), star rating, 1–2 sentence quote. Permission required. See Founder Input page §5." />
+			<ReviewCard placeholderFact="Residential review #2 — first + last name, city, project type, star rating, 1–2 sentence quote. See Founder Input page §5." />
+			<ReviewCard placeholderFact="Residential review #3 — first + last name, city, project type, star rating, 1–2 sentence quote. See Founder Input page §5." />
 		</div>
 	</section>
 
@@ -271,13 +272,19 @@ const faqs = [
 	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
 	.cta-primary {
 		background: #b54620; color: #faf8f4;
-		padding: 16px 32px; font-size: 15px; font-weight: 500;
+		padding: 14px 28px; font-size: 15px; font-weight: 500;
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, box-shadow 150ms ease;
 	}
+	.cta-primary:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
 	.cta-secondary {
-		color: #faf8f4; padding: 16px 0;
+		color: #faf8f4; padding: 12px 26px;
 		font-size: 15px; font-weight: 500;
-		border-bottom: 2px solid #faf8f4;
+		border: 2px solid #faf8f4;
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, color 150ms ease;
 	}
+	.cta-secondary:hover { background: #faf8f4; color: #1a1a1a; }
 
 	.section-eyebrow {
 		color: #b54620; font-size: 13px; font-weight: 500;
@@ -343,15 +350,8 @@ const faqs = [
 
 	/* Process */
 	.process { padding: 96px 48px; background: #faf8f4; }
-	.process-grid {
-		display: grid; grid-template-columns: repeat(4, 1fr);
-		gap: 32px; max-width: 1100px; margin: 0 auto;
-	}
-	.process-step { padding: 32px; background: #ffffff; border: 1px solid #ece7de; }
-	.process-num { color: #b54620; font-size: 12px; font-weight: 500; margin: 0 0 16px; letter-spacing: 1.5px; }
-	.process-h { color: #1a1a1a; font-size: 22px; font-weight: 600; margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2; }
-	.process-body { color: #5a5347; font-size: 15px; line-height: 1.6; margin: 0; }
-	.process-sla { max-width: 1100px; margin: 24px auto 0; }
+	.process-sla { max-width: 1100px; margin: 40px auto 0; }
+	.guarantee-callout { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
 
 	/* Financing */
 	.financing { background: #1a1a1a; padding: 96px 48px; }
