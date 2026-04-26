@@ -1,0 +1,85 @@
+---
+interface Item {
+	label: string;
+	confirmed?: boolean; // true = Heritage holds this credential; false/undefined = HeritagePlaceholder
+}
+
+interface Props {
+	items: Item[];
+	speedSeconds?: number;
+}
+
+const {
+	items,
+	speedSeconds = 40,
+} = Astro.props;
+
+// Duplicate the list so the keyframe scrolls smoothly without seams
+const doubled = [...items, ...items];
+---
+
+<section class="marquee" aria-label="Manufacturer certifications and accreditations">
+	<div class="marquee-track" style={`--marquee-duration: ${speedSeconds}s;`}>
+		{doubled.map((item, i) => (
+			<span class={`marquee-item ${item.confirmed ? 'is-confirmed' : 'is-pending'}`} aria-hidden={i >= items.length ? 'true' : undefined}>
+				{!item.confirmed && <span class="marquee-pending-dot" aria-hidden="true"></span>}
+				{item.label}
+			</span>
+		))}
+	</div>
+	<p class="marquee-note">Faded entries are pending Heritage's confirmation (see Founder Input §2). The marquee shows what a finished credentials strip will look like once each is confirmed.</p>
+</section>
+
+<style>
+	.marquee {
+		background: var(--ivory-tint);
+		border-top: 1px solid var(--border);
+		border-bottom: 1px solid var(--border);
+		padding: 24px 0 14px;
+		overflow: hidden;
+		position: relative;
+	}
+	.marquee-track {
+		display: flex;
+		gap: 56px;
+		width: max-content;
+		animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+	}
+	.marquee:hover .marquee-track,
+	.marquee:focus-within .marquee-track {
+		animation-play-state: paused;
+	}
+	.marquee-item {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: var(--charcoal);
+		font-size: 14px;
+		font-weight: 600;
+		letter-spacing: 0.5px;
+		white-space: nowrap;
+		text-transform: uppercase;
+	}
+	.marquee-item.is-pending {
+		color: var(--warm-gray);
+		opacity: 0.55;
+		font-weight: 500;
+	}
+	.marquee-pending-dot {
+		display: inline-block;
+		width: 6px; height: 6px;
+		background: var(--rust);
+		border-radius: var(--radius-pill);
+	}
+	.marquee-note {
+		text-align: center;
+		font-size: 11px;
+		color: var(--warm-gray);
+		margin: 12px auto 0;
+		max-width: 800px;
+		padding: 0 24px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.marquee-track { animation: none; flex-wrap: wrap; justify-content: center; }
+	}
+</style>

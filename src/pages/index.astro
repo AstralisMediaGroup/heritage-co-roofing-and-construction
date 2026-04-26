@@ -8,6 +8,7 @@ import ReviewCard from '../components/ReviewCard.astro';
 import FullBleedSection from '../components/FullBleedSection.astro';
 import ConstrainedSection from '../components/ConstrainedSection.astro';
 import BleedingImage from '../components/BleedingImage.astro';
+import MarqueeStrip from '../components/MarqueeStrip.astro';
 import { founders } from '../content/founders';
 ---
 
@@ -32,6 +33,21 @@ import { founders } from '../content/founders';
 			</div>
 		</div>
 	</section>
+
+	<!-- Credentials marquee (between hero and audience) -->
+	<MarqueeStrip
+		speedSeconds={50}
+		items={[
+			{ label: 'BBB Accredited' },
+			{ label: 'NRCA Member' },
+			{ label: 'Texas Association of Builders' },
+			{ label: 'GAF Master Elite' },
+			{ label: 'Owens Corning Platinum' },
+			{ label: 'CertainTeed Credentialed' },
+			{ label: 'Angi Super Service' },
+			{ label: 'Google 5-Star' },
+		]}
+	/>
 
 	<!-- Audience cards -->
 	<section class="audience">
