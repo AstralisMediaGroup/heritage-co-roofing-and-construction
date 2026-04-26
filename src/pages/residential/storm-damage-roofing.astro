@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FAQItem from '../../components/FAQItem.astro';
+
+const insuranceSteps = [
+	{
+		n: '01',
+		h: 'Free inspection',
+		body: 'We come out, climb the roof, and document what we find. No charge, no obligation.',
+	},
+	{
+		n: '02',
+		h: 'We document the damage',
+		body: 'Photos, measurements, a written summary. The kind of paperwork an adjuster actually wants.',
+	},
+	{
+		n: '03',
+		h: 'We work directly with your adjuster',
+		body: 'You forward our report. We talk to them on your behalf. You stay out of the back-and-forth.',
+	},
+];
+
+const damageTypes = [
+	{ label: 'Hail', body: 'Bruising, granule loss, fractured shingles. Often invisible from the ground.' },
+	{ label: 'Wind', body: 'Lifted shingles, missing tabs, exposed underlayment. Common after East Texas storms.' },
+	{ label: 'Tree fall', body: 'Impact damage, structural compromise, immediate tarp + repair plan.' },
+	{ label: 'Water intrusion', body: 'Stained ceilings, attic moisture, soft decking. We trace it to the source.' },
+];
+
+const faqs = [
+	{
+		q: 'Will my premium go up if I file a claim?',
+		a: 'Storm damage claims typically do not raise rates the way at-fault claims do — most carriers treat hail and wind as acts of nature. Your specific policy is what matters. We can review the relevant section with you before you decide.',
+	},
+	{
+		q: 'Do I pay anything upfront?',
+		a: 'No. Free inspection. The only out-of-pocket cost on most insurance jobs is your deductible, due when work begins. We will walk you through every line item before you sign.',
+	},
+	{
+		q: 'How long does the process take?',
+		a: 'Inspection is same-day or next-day. Adjuster meeting usually within a week. Once the claim is approved, most residential roofs install in one day. Total timeline: typically 2–4 weeks start to finish.',
+	},
+	{
+		q: 'What if my claim is denied?',
+		a: 'It happens. Sometimes the adjuster misses damage, sometimes the policy genuinely does not cover it. If we believe damage was missed, we will help you request a re-inspection. If the denial sticks, you owe us nothing for the original inspection.',
+	},
+];
+---
+
+<BaseLayout title="Storm Damage Roofing — Heritage Co.">
+	<!-- Hero -->
+	<section class="hero">
+		<div class="hero-photo" aria-hidden="true"></div>
+		<div class="hero-overlay" aria-hidden="true"></div>
+		<div class="hero-content">
+			<p class="hero-eyebrow">Residential · Storm damage</p>
+			<h1 class="hero-h1">Storm damage?<br />We handle the whole roof.</h1>
+			<p class="hero-sub">
+				Hail, wind, tree fall, water intrusion. We inspect, document, and work directly with your insurance adjuster — so you do not get stuck in the middle.
+			</p>
+			<div class="hero-cta-row">
+				<a class="cta-primary" href="/#inspection">Get my free inspection</a>
+				<a class="cta-secondary" href="tel:9032428102">Call 903-242-8102</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- How insurance claims work -->
+	<section class="claims">
+		<p class="section-eyebrow">How it works</p>
+		<h2 class="section-h">How insurance claims work with us.</h2>
+		<p class="section-sub">Three steps. We do most of the work.</p>
+		<div class="claims-grid">
+			{insuranceSteps.map((s) => (
+				<div class="claim-step">
+					<p class="claim-num">{s.n}</p>
+					<p class="claim-h">{s.h}</p>
+					<p class="claim-body">{s.body}</p>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<!-- Damage types -->
+	<section class="damage">
+		<p class="section-eyebrow on-dark">What we see</p>
+		<h2 class="section-h on-dark">Damage we handle.</h2>
+		<p class="section-sub on-dark">If it is on the roof, we have probably worked it.</p>
+		<div class="damage-grid">
+			{damageTypes.map((d) => (
+				<div class="damage-card">
+					<div class="damage-photo" aria-hidden="true"></div>
+					<p class="damage-label">{d.label}</p>
+					<p class="damage-body">{d.body}</p>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<!-- Trust strip -->
+	<section class="trust">
+		<div class="trust-row">
+			<span>Insurance accepted</span>
+			<span class="trust-dot">·</span>
+			<span>Workmanship warranty</span>
+			<span class="trust-dot">·</span>
+			<span>Locally owned</span>
+		</div>
+	</section>
+
+	<!-- FAQ -->
+	<section class="faq">
+		<p class="section-eyebrow">Common questions</p>
+		<h2 class="section-h">What homeowners ask us.</h2>
+		<div class="faq-list">
+			{faqs.map((f) => <FAQItem question={f.q} answer={f.a} />)}
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	/* Hero */
+	.hero { position: relative; min-height: 540px; background: #1a1a1a; }
+	.hero-photo {
+		position: absolute; inset: 0;
+		background: linear-gradient(180deg, #4a4a48 0%, #6b5d4a 50%, #2a2a28 100%);
+		opacity: 0.92;
+	}
+	.hero-overlay {
+		position: absolute; inset: 0;
+		background: linear-gradient(90deg, rgba(26,26,26,0.82) 0%, rgba(26,26,26,0.4) 60%, rgba(26,26,26,0.15) 100%);
+	}
+	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
+	.hero-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
+	}
+	.hero-h1 {
+		color: #faf8f4; font-size: 56px; font-weight: 600;
+		line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px;
+	}
+	.hero-sub {
+		color: #d8d2c2; font-size: 17px; line-height: 1.55;
+		margin: 0 0 32px; max-width: 560px;
+	}
+	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
+	.cta-primary {
+		background: #b54620; color: #faf8f4;
+		padding: 16px 32px; font-size: 15px; font-weight: 500;
+	}
+	.cta-secondary {
+		color: #faf8f4; padding: 16px 0;
+		font-size: 15px; font-weight: 500;
+		border-bottom: 2px solid #faf8f4;
+	}
+
+	/* Section labels */
+	.section-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		text-align: center; margin: 0 0 16px;
+		letter-spacing: 1px; text-transform: uppercase;
+	}
+	.section-eyebrow.on-dark { color: #b54620; }
+	.section-h {
+		color: #1a1a1a; font-size: 40px; font-weight: 600;
+		text-align: center; margin: 0 0 16px;
+		letter-spacing: -1px; line-height: 1.1;
+	}
+	.section-h.on-dark { color: #faf8f4; }
+	.section-sub {
+		color: #5a5347; font-size: 16px; text-align: center;
+		margin: 0 0 56px;
+	}
+	.section-sub.on-dark { color: #d8d2c2; }
+
+	/* Claims */
+	.claims { padding: 96px 48px; background: #faf8f4; }
+	.claims-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 40px; max-width: 1100px; margin: 0 auto;
+	}
+	.claim-step {
+		padding: 36px;
+		background: #ffffff;
+		border: 1px solid #ece7de;
+	}
+	.claim-num {
+		color: #b54620; font-size: 12px; font-weight: 500;
+		margin: 0 0 16px; letter-spacing: 1.5px;
+	}
+	.claim-h {
+		color: #1a1a1a; font-size: 22px; font-weight: 600;
+		margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2;
+	}
+	.claim-body { color: #5a5347; font-size: 15px; line-height: 1.6; margin: 0; }
+
+	/* Damage */
+	.damage { padding: 120px 48px; background: #1a1a1a; }
+	.damage-grid {
+		display: grid; grid-template-columns: repeat(4, 1fr);
+		gap: 24px; max-width: 1100px; margin: 0 auto;
+	}
+	.damage-card { background: transparent; }
+	.damage-photo {
+		height: 200px;
+		background: linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%);
+		margin-bottom: 20px;
+	}
+	.damage-label {
+		color: #faf8f4; font-size: 22px; font-weight: 600;
+		margin: 0 0 10px; letter-spacing: -0.3px; line-height: 1.2;
+	}
+	.damage-body { color: #c4c1ba; font-size: 14px; line-height: 1.6; margin: 0; }
+
+	/* Trust strip */
+	.trust { background: #ffffff; padding: 36px 48px; border-top: 1px solid #ece7de; border-bottom: 1px solid #ece7de; }
+	.trust-row {
+		display: flex; gap: 18px; justify-content: center;
+		align-items: center; color: #1a1a1a;
+		font-size: 14px; font-weight: 500;
+		letter-spacing: 0.3px;
+	}
+	.trust-dot { color: #b54620; }
+
+	/* FAQ */
+	.faq { background: #faf8f4; padding: 96px 48px; }
+	.faq-list { max-width: 800px; margin: 0 auto; }
+</style>

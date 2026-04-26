@@ -1,0 +1,35 @@
+---
+interface Props {
+	question: string;
+	answer: string;
+}
+
+const { question, answer } = Astro.props;
+---
+
+<div class="faq-item">
+	<p class="faq-q">{question}</p>
+	<p class="faq-a">{answer}</p>
+</div>
+
+<style>
+	.faq-item {
+		padding: 28px 0;
+		border-bottom: 1px solid #ece7de;
+	}
+	.faq-item:last-child { border-bottom: 0; }
+	.faq-q {
+		color: #1a1a1a;
+		font-size: 19px;
+		font-weight: 600;
+		margin: 0 0 12px;
+		letter-spacing: -0.3px;
+		line-height: 1.3;
+	}
+	.faq-a {
+		color: #5a5347;
+		font-size: 15px;
+		line-height: 1.65;
+		margin: 0;
+	}
+</style>
