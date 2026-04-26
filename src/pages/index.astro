@@ -1,12 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const founders = [
-	{ name: 'Jordy', role: 'Operator', cred: '15 years roofing.<br>East Texas.' },
-	{ name: 'Peyton', role: 'Commercial PM', cred: 'Network of trusted craftsmen.' },
-	{ name: 'Nishil', role: 'Managing partner', cred: 'Operations and customer care.' },
-	{ name: 'Vivek', role: 'Finance', cred: 'Pricing fair, terms clear.' },
-];
+import FounderCard from '../components/FounderCard.astro';
+import { founders } from '../content/founders';
+import { eastTexas, eastTexasMore, centralArkansas } from '../content/cities';
 ---
 
 <BaseLayout title="Heritage Co. Roofing & Construction — East Texas + Central Arkansas">
@@ -88,12 +84,7 @@ const founders = [
 		<p class="founders-sub">30+ combined years of roofing. Locally owned and operated.</p>
 		<div class="founders-grid">
 			{founders.map((f) => (
-				<div class="founder">
-					<div class="founder-photo" aria-hidden="true"></div>
-					<p class="founder-name">{f.name}</p>
-					<p class="founder-role">{f.role}</p>
-					<p class="founder-cred" set:html={f.cred}></p>
-				</div>
+				<FounderCard name={f.name} role={f.role} cred={f.cred} />
 			))}
 		</div>
 	</section>
@@ -106,11 +97,11 @@ const founders = [
 		<div class="area-grid">
 			<div>
 				<p class="area-region-h">East Texas</p>
-				<p class="area-region-cities">Longview · Tyler · Marshall · Mt. Pleasant · Nacogdoches · Palestine · Kilgore · Henderson · Gladewater · Gilmer · + 25 more cities</p>
+				<p class="area-region-cities">{eastTexas.join(' · ')} · {eastTexasMore}</p>
 			</div>
 			<div>
 				<p class="area-region-h">Central Arkansas</p>
-				<p class="area-region-cities">Little Rock · Conway · Russellville · Clarksville</p>
+				<p class="area-region-cities">{centralArkansas.join(' · ')}</p>
 			</div>
 		</div>
 	</section>
@@ -239,19 +230,6 @@ const founders = [
 		display: grid; grid-template-columns: repeat(4, 1fr);
 		gap: 24px; max-width: 960px; margin: 0 auto;
 	}
-	.founder { text-align: center; }
-	.founder-photo {
-		width: 100%; aspect-ratio: 1;
-		background: linear-gradient(135deg, #6b5d4a 0%, #4a4239 100%);
-		margin-bottom: 18px;
-	}
-	.founder-name {
-		color: #1a1a1a; font-size: 19px; font-weight: 600;
-		margin: 0 0 4px; line-height: 1.2;
-	}
-	.founder-role { color: #5a5347; font-size: 14px; margin: 0 0 8px; }
-	.founder-cred { color: #5a5347; font-size: 13px; line-height: 1.5; margin: 0; }
-
 	/* Service area */
 	.area { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
 	.area-eyebrow {
