@@ -5,9 +5,8 @@ import TrustStrip from '../components/TrustStrip.astro';
 import FilterableProjectGrid from '../components/FilterableProjectGrid.astro';
 import StatRow from '../components/StatRow.astro';
 import LayeredCard from '../components/LayeredCard.astro';
-import ConstrainedSection from '../components/ConstrainedSection.astro';
-import SplitScreenSection from '../components/SplitScreenSection.astro';
 import FullBleedSection from '../components/FullBleedSection.astro';
+import ProcessFlow from '../components/ProcessFlow.astro';
 import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 import { imagery } from '../content/imagery';
 
@@ -38,12 +37,13 @@ const industries = [
 	{ label: 'Government', body: 'Municipal, county, federal. Bid-compliant.' },
 ];
 
-const reRoofProcess = [
-	{ n: '01', label: 'Walkthrough', body: 'On-roof survey with the facility manager. Photos, measurements, system options.' },
-	{ n: '02', label: 'Spec + bid', body: 'Written scope, system rec, price. Bonded estimate ready for procurement.' },
-	{ n: '03', label: 'Pre-construction', body: 'Tenant notice plan, staging, dumpster placement, working hours.' },
-	{ n: '04', label: 'Tear-off + install', body: 'Phased on occupied buildings. We work around tenants, not over them.' },
-	{ n: '05', label: 'Closeout', body: 'Final walk, warranty hand-off, manufacturer pass-through paperwork.' },
+const bondingItems = [
+	{ label: 'Bonding capacity (single)', fact: 'Single-project bonding capacity (e.g. $2M). See Founder Input page §3.' },
+	{ label: 'Bonding capacity (aggregate)', fact: 'Aggregate bonding capacity. See Founder Input page §3.' },
+	{ label: 'General liability', fact: 'GL coverage limit per occurrence + aggregate. See Founder Input page §3.' },
+	{ label: 'Umbrella', fact: 'Umbrella policy limit. See Founder Input page §3.' },
+	{ label: "Workers' comp", fact: "Workers' comp carrier name. See Founder Input page §3." },
+	{ label: 'Roofing license #', fact: 'Texas roofing license # and Arkansas equivalent if applicable. See Founder Input page §3.' },
 ];
 ---
 
@@ -53,7 +53,7 @@ const reRoofProcess = [
 	ctaSub="Walkthrough, scope, and pricing within the week."
 	ctaButton="Request consultation"
 >
-	<!-- Hero -->
+	<!-- Hero (unchanged) -->
 	<section class="hero">
 		<div class="hero-photo" aria-hidden="true"></div>
 		<div class="hero-overlay" aria-hidden="true"></div>
@@ -70,193 +70,186 @@ const reRoofProcess = [
 		</div>
 	</section>
 
-	<!-- SplitScreen: commercial focus -->
-	<SplitScreenSection
-		imageSide="right"
-		gradient="linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%)"
-		background="ivory"
-		minHeight="440px"
-	>
-		<p class="ss-eyebrow">For facility managers</p>
-		<h2 class="ss-h">One walkthrough. One bid. One crew.</h2>
-		<p class="ss-body">From spec through installation through warranty. Single-source coordination, bonded estimate ready for procurement, and crews that work around tenants — not over them.</p>
-		<a class="ss-cta" href="/#inspection">Request consultation</a>
-	</SplitScreenSection>
+	<!-- Continuous flow on off-white. Single dark island for systems-detail. -->
+	<div class="flow">
 
-	<!-- Service grid -->
-	<section class="services">
-		<p class="section-eyebrow">What we do</p>
-		<h2 class="section-h">Commercial services.</h2>
-		<p class="section-sub">From walkthrough to warranty, all under one roof.</p>
-		<div class="service-grid">
-			{services.map((s) => <ServiceTile label={s.label} body={s.body} photo={true} gradient={s.gradient} />)}
-		</div>
-	</section>
-
-	<!-- Roof systems EXPANDED -->
-	<section class="systems-detail">
-		<p class="section-eyebrow on-dark">Roof systems</p>
-		<h2 class="section-h on-dark">Six systems. We spec to the building.</h2>
-		<p class="section-sub on-dark">Short read on each. The right system depends on slope, occupancy, climate, and budget — we walk through trade-offs at the inspection.</p>
-		<div class="systems-grid">
-			{systemsDetail.map((s) => (
-				<div class="system-card">
-					<p class="system-name">{s.name}</p>
-					<p class="system-body">{s.body}</p>
+		<!-- Intro: facility-manager focus, photo on right + content + service grid below -->
+		<section class="block intro">
+			<div class="intro-row">
+				<div class="intro-content">
+					<p class="eyebrow">For facility managers</p>
+					<h2 class="block-h">One walkthrough. One bid. One crew.</h2>
+					<p class="block-sub">From spec through installation through warranty. Single-source coordination, bonded estimate ready for procurement, and crews that work around tenants — not over them.</p>
+					<a class="rust-cta" href="/#inspection">Request consultation</a>
 				</div>
-			))}
-		</div>
-		<div class="systems-cert">
-			<HeritagePlaceholder fact="Manufacturer system certifications Heritage holds (e.g. Carlisle SureWeld, Firestone Red Shield, GAF EverGuard, Johns Manville Peak Advantage). Plain-text list. See Founder Input page §2." />
-		</div>
-	</section>
-
-	<!-- Industries served (pill tags + caption rows) -->
-	<section class="industries">
-		<p class="section-eyebrow">Industries served</p>
-		<h2 class="section-h">We've worked the building you're in.</h2>
-		<p class="section-sub">Six common building types. Plenty of less common ones too.</p>
-		<div class="industry-tags">
-			{industries.map((i) => <span class="industry-tag">{i.label}</span>)}
-		</div>
-		<div class="industry-rows">
-			{industries.map((i) => (
-				<div class="industry-row">
-					<span class="industry-row-label">{i.label}</span>
-					<span class="industry-row-body">{i.body}</span>
+				<div class="intro-photo has-zoom-photo" aria-hidden="true">
+					<img src={imagery.metal.hero.url} alt={imagery.metal.hero.alt} loading="lazy" class="zoom-photo" />
 				</div>
-			))}
-		</div>
-	</section>
+			</div>
+			<div class="service-grid">
+				{services.map((s) => <ServiceTile label={s.label} body={s.body} photo={true} gradient={s.gradient} />)}
+			</div>
+		</section>
 
-	<!-- Why Heritage for commercial — LayeredCard -->
-	<section class="why-commercial">
-		<LayeredCard
-			eyebrow="Why Heritage for commercial"
-			heading="Bonded, insured, and on the roof when the bid is awarded."
-			body="Single-source coordination from walkthrough to closeout. We work around tenants, not over them. Procurement-ready paperwork, named system certifications, real bonding capacity — all in plain numbers below."
-			gradient="linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%)"
-			ctaHref="/#inspection"
-			ctaLabel="Request consultation"
-		/>
-	</section>
-
-	<!-- Stat row (commercial) -->
-	<section class="stats">
-		<StatRow stats={[
-			{ label: 'Bonding (single)', placeholderFact: 'Single-project bonding capacity in dollars (e.g. $2M). See Founder Input page §3.' },
-			{ label: 'GL coverage', placeholderFact: 'General liability per-occurrence limit. See Founder Input page §3.' },
-			{ label: 'Years in business', placeholderFact: 'Year Heritage Co. was founded → years in business as of 2026. See Founder Input page §7.' },
-			{ label: 'Sq ft installed', placeholderFact: 'Lifetime commercial sq ft installed. See Founder Input page §5.' },
-		]} />
-	</section>
-
-	<!-- FullBleed cinematic: bonded + insured -->
-	<FullBleedSection
-		gradient="linear-gradient(135deg, #4a4a48 0%, #7d8b9e 50%, #2a3035 100%)"
-		overlayPosition="bottom-left"
-		minHeight="380px"
-		overlayDarken={0.6}
-	>
-		<p class="fb-eyebrow">For procurement</p>
-		<h2 class="fb-h">Bonded. Insured. Bid-ready.</h2>
-	</FullBleedSection>
-
-	<!-- Bonding + insurance callout -->
-	<section class="bonding">
-		<p class="section-eyebrow">Bonding + insurance</p>
-		<h2 class="section-h">The numbers procurement wants.</h2>
-		<p class="section-sub">Plain answers for the bid form. Filled in by the founders.</p>
-		<div class="bonding-grid">
-			<div class="bonding-card">
-				<p class="bonding-label">Bonding capacity (single)</p>
-				<HeritagePlaceholder fact="Single-project bonding capacity (e.g. $2M). See Founder Input page §3." />
+		<!-- Industries — pill tags + compact rows on same bg, no break -->
+		<section class="block industries">
+			<p class="eyebrow">Industries served</p>
+			<h2 class="block-h">We've worked the building you're in.</h2>
+			<p class="block-sub">Six common building types. Plenty of less common ones too.</p>
+			<div class="industry-tags">
+				{industries.map((i) => <span class="industry-tag">{i.label}</span>)}
 			</div>
-			<div class="bonding-card">
-				<p class="bonding-label">Bonding capacity (aggregate)</p>
-				<HeritagePlaceholder fact="Aggregate bonding capacity. See Founder Input page §3." />
-			</div>
-			<div class="bonding-card">
-				<p class="bonding-label">General liability</p>
-				<HeritagePlaceholder fact="GL coverage limit per occurrence + aggregate. See Founder Input page §3." />
-			</div>
-			<div class="bonding-card">
-				<p class="bonding-label">Umbrella</p>
-				<HeritagePlaceholder fact="Umbrella policy limit. See Founder Input page §3." />
-			</div>
-			<div class="bonding-card">
-				<p class="bonding-label">Workers' comp</p>
-				<HeritagePlaceholder fact="Workers' comp carrier name. See Founder Input page §3." />
-			</div>
-			<div class="bonding-card">
-				<p class="bonding-label">Roofing license #</p>
-				<HeritagePlaceholder fact="Texas roofing license # and Arkansas equivalent if applicable. See Founder Input page §3." />
-			</div>
-		</div>
-	</section>
-
-	<!-- Re-roof process / tenant disruption -->
-	<section class="reroof">
-		<p class="section-eyebrow on-dark">How a re-roof runs</p>
-		<h2 class="section-h on-dark">Five phases on an occupied building.</h2>
-		<p class="section-sub on-dark">We tell tenants what to expect before we tell them to expect it.</p>
-		<ol class="reroof-list">
-			{reRoofProcess.map((p) => (
-				<li class="reroof-step">
-					<span class="reroof-n">{p.n}</span>
-					<div class="reroof-body">
-						<p class="reroof-label">{p.label}</p>
-						<p class="reroof-text">{p.body}</p>
+			<div class="industry-rows">
+				{industries.map((i) => (
+					<div class="industry-row">
+						<span class="industry-row-label">{i.label}</span>
+						<span class="industry-row-body">{i.body}</span>
 					</div>
-				</li>
-			))}
-		</ol>
-	</section>
+				))}
+			</div>
+		</section>
+	</div>
 
-	<!-- Named projects (FilterableProjectGrid — interactive) -->
-	<section class="projects">
-		<p class="section-eyebrow">Past projects</p>
-		<h2 class="section-h">Buildings we've roofed.</h2>
-		<p class="section-sub">Filter by industry. Specific named projects fill in as the founders confirm permission to publish.</p>
-		<FilterableProjectGrid
-			filters={[
-				{ key: 'all', label: 'All' },
-				{ key: 'schools', label: 'Schools' },
-				{ key: 'healthcare', label: 'Healthcare' },
-				{ key: 'retail', label: 'Retail' },
-				{ key: 'industrial', label: 'Industrial' },
-				{ key: 'office', label: 'Office' },
-			]}
-			projects={[
-				{ industry: 'Schools', industryKey: 'schools', imageSrc: imagery.projectGallery[0].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named school project (district, building, city, year, system, sq ft). See Founder Input §5.' },
-				{ industry: 'Healthcare', industryKey: 'healthcare', imageSrc: imagery.projectGallery[1].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named healthcare project. See Founder Input §5.' },
-				{ industry: 'Retail', industryKey: 'retail', imageSrc: imagery.projectGallery[2].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named retail project. See Founder Input §5.' },
-				{ industry: 'Industrial', industryKey: 'industrial', imageSrc: imagery.projectGallery[3].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named industrial project. See Founder Input §5.' },
-				{ industry: 'Office', industryKey: 'office', imageSrc: imagery.projectGallery[4].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named office project. See Founder Input §5.' },
-				{ industry: 'Schools', industryKey: 'schools', imageSrc: imagery.projectGallery[5].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with second named school project. See Founder Input §5.' },
-			]}
-		/>
-		<div class="projects-stats">
-			<HeritagePlaceholder fact="Lifetime sq ft of commercial roof installed (number). Oldest active commercial roof Heritage installed (year + city). See Founder Input page §5." />
+	<!-- One darker island for the systems detail — feels like a "spec" section, not a bg swap -->
+	<section class="systems-island">
+		<div class="block-inner">
+			<div class="systems-row">
+				<div class="systems-content">
+					<p class="eyebrow on-dark">Roof systems</p>
+					<h2 class="block-h on-dark">Six systems. We spec to the building.</h2>
+					<p class="block-sub on-dark">The right system depends on slope, occupancy, climate, and budget — we walk through trade-offs at the inspection.</p>
+				</div>
+				<div class="systems-photo has-zoom-photo" aria-hidden="true">
+					<img src={imagery.metal.secondary.url} alt={imagery.metal.secondary.alt} loading="lazy" class="zoom-photo" />
+				</div>
+			</div>
+			<div class="systems-grid">
+				{systemsDetail.map((s) => (
+					<div class="system-card">
+						<p class="system-name">{s.name}</p>
+						<p class="system-body">{s.body}</p>
+					</div>
+				))}
+			</div>
+			<div class="systems-cert">
+				<HeritagePlaceholder fact="Manufacturer system certifications Heritage holds (e.g. Carlisle SureWeld, Firestone Red Shield, GAF EverGuard, Johns Manville Peak Advantage). Plain-text list. See Founder Input page §2." />
+			</div>
 		</div>
 	</section>
 
-	<!-- Constrained narrative before maintenance -->
-	<ConstrainedSection background="ivory" paddingY="md">
-		<p class="cs-eyebrow">After the install</p>
-		<h2 class="cs-h">Maintenance contracts that catch problems early.</h2>
-		<p class="cs-body">Most commercial roof failures start small: a worn flashing detail, a clogged drain, a torn cap on a curb. Scheduled inspections find them before they become claims.</p>
-	</ConstrainedSection>
+	<!-- Resume continuous flow on off-white -->
+	<div class="flow">
 
-	<!-- Maintenance contracts -->
-	<section class="maintenance">
-		<p class="section-eyebrow">Maintenance contracts</p>
-		<h2 class="section-h">Caught small beats fixed expensive.</h2>
-		<p class="section-sub">Scheduled inspections, small repairs, and a documented roof history. Quoted by building.</p>
-		<HeritagePlaceholder fact="Maintenance contract structure: typical visit frequency (semi-annual / quarterly), what's included, typical price band. See Founder Input page §5." />
-	</section>
+		<!-- Why Heritage for commercial — LayeredCard + StatRow combined -->
+		<section class="block why-commercial">
+			<LayeredCard
+				eyebrow="Why Heritage for commercial"
+				heading="Bonded, insured, and on the roof when the bid is awarded."
+				body="Single-source coordination from walkthrough to closeout. We work around tenants, not over them. Procurement-ready paperwork below."
+				gradient="linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%)"
+				ctaHref="/#inspection"
+				ctaLabel="Request consultation"
+			/>
+			<div class="stats-inline">
+				<StatRow stats={[
+					{ label: 'Bonding (single)', placeholderFact: 'Single-project bonding capacity in dollars. See Founder Input page §3.' },
+					{ label: 'GL coverage', placeholderFact: 'General liability per-occurrence limit. See Founder Input page §3.' },
+					{ label: 'Years in business', placeholderFact: 'Year Heritage Co. was founded → years in business as of 2026. See Founder Input page §7.' },
+					{ label: 'Sq ft installed', placeholderFact: 'Lifetime commercial sq ft installed. See Founder Input page §5.' },
+				]} />
+			</div>
+		</section>
 
-	<TrustStrip items={["Bonded and insured", "All major systems", "Locally owned"]} />
+		<!-- Bonding + insurance — flat list, no headline (heading was already done above) -->
+		<section class="block bonding">
+			<p class="eyebrow eyebrow-soft">The numbers procurement wants</p>
+			<div class="bonding-grid">
+				{bondingItems.map((b) => (
+					<div class="bonding-card">
+						<p class="bonding-label">{b.label}</p>
+						<HeritagePlaceholder fact={b.fact} />
+					</div>
+				))}
+			</div>
+		</section>
+
+		<!-- Re-roof process — photo + ProcessFlow -->
+		<section class="block reroof">
+			<div class="reroof-row">
+				<div class="reroof-photo has-zoom-photo" aria-hidden="true">
+					<img src={imagery.projectGallery[3].url} alt={imagery.projectGallery[3].alt} loading="lazy" class="zoom-photo" />
+				</div>
+				<div class="reroof-content">
+					<p class="eyebrow">How a re-roof runs</p>
+					<h2 class="block-h">Five phases on an occupied building.</h2>
+					<p class="block-sub">We tell tenants what to expect before we tell them to expect it.</p>
+				</div>
+			</div>
+			<div class="reroof-flow">
+				<ProcessFlow steps={[
+					{ label: 'Walkthrough', caption: 'On-roof survey with the facility manager.' },
+					{ label: 'Spec + bid', caption: 'Written scope, system rec, bonded estimate.' },
+					{ label: 'Pre-construction', caption: 'Tenant notice plan, staging, working hours.' },
+					{ label: 'Tear-off + install', caption: 'Phased on occupied buildings.' },
+					{ label: 'Closeout', caption: 'Final walk, warranty hand-off, paperwork.' },
+				]} />
+			</div>
+		</section>
+
+		<!-- Project gallery — FilterableProjectGrid with lightbox triggers -->
+		<section class="block projects">
+			<p class="eyebrow">Past projects</p>
+			<h2 class="block-h">Buildings we've roofed.</h2>
+			<p class="block-sub">Filter by industry. Click a card to view full size. Specific named projects fill in as the founders confirm permission to publish.</p>
+			<FilterableProjectGrid
+				filters={[
+					{ key: 'all', label: 'All' },
+					{ key: 'schools', label: 'Schools' },
+					{ key: 'healthcare', label: 'Healthcare' },
+					{ key: 'retail', label: 'Retail' },
+					{ key: 'industrial', label: 'Industrial' },
+					{ key: 'office', label: 'Office' },
+				]}
+				projects={[
+					{ industry: 'Schools', industryKey: 'schools', imageSrc: imagery.projectGallery[0].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named school project (district, building, city, year, system, sq ft). See Founder Input §5.' },
+					{ industry: 'Healthcare', industryKey: 'healthcare', imageSrc: imagery.projectGallery[1].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named healthcare project. See Founder Input §5.' },
+					{ industry: 'Retail', industryKey: 'retail', imageSrc: imagery.projectGallery[2].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named retail project. See Founder Input §5.' },
+					{ industry: 'Industrial', industryKey: 'industrial', imageSrc: imagery.projectGallery[3].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named industrial project. See Founder Input §5.' },
+					{ industry: 'Office', industryKey: 'office', imageSrc: imagery.projectGallery[4].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named office project. See Founder Input §5.' },
+					{ industry: 'Schools', industryKey: 'schools', imageSrc: imagery.projectGallery[5].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with second named school project. See Founder Input §5.' },
+				]}
+			/>
+			<div class="projects-stats">
+				<HeritagePlaceholder fact="Lifetime sq ft of commercial roof installed. Oldest active commercial roof Heritage installed. See Founder Input page §5." />
+			</div>
+		</section>
+
+		<!-- Maintenance contracts — same flow, no separate band -->
+		<section class="block maintenance">
+			<p class="eyebrow">Maintenance contracts</p>
+			<h2 class="block-h">Caught small beats fixed expensive.</h2>
+			<p class="block-sub">Scheduled inspections, small repairs, and a documented roof history. Quoted by building.</p>
+			<HeritagePlaceholder fact="Maintenance contract structure: typical visit frequency (semi-annual / quarterly), what's included, typical price band. See Founder Input page §5." />
+			<div class="trust-inline">
+				<TrustStrip items={["Bonded and insured", "All major systems", "Locally owned"]} />
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Page-end CTA -->
+	<FullBleedSection
+		imageSrc={imagery.heroCandidates.residentialRoofC.url}
+		imageAlt="Aerial view of a commercial roof"
+		overlayPosition="center"
+		minHeight="440px"
+		overlayDarken={0.65}
+	>
+		<p class="end-cta-eyebrow">Bid-ready</p>
+		<h2 class="end-cta-h">Walkthrough, scope, and pricing within the week.</h2>
+		<p class="end-cta-sub">Send a building address. We send a roofer.</p>
+		<a class="end-cta-button" href="/#inspection">Request consultation</a>
+	</FullBleedSection>
 </BaseLayout>
 
 <style>
@@ -301,54 +294,71 @@ const reRoofProcess = [
 	}
 	.cta-secondary:hover { background: #faf8f4; color: #1a1a1a; }
 
-	.section-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		text-align: center; margin: 0 0 16px;
-		letter-spacing: 1px; text-transform: uppercase;
+	/* Continuous flow */
+	.flow { background: var(--off-white); }
+	.block {
+		padding: 80px 48px;
+		max-width: 1200px;
+		margin: 0 auto;
 	}
-	.section-eyebrow.on-dark { color: #b54620; }
-	.section-h {
-		color: #1a1a1a; font-size: 40px; font-weight: 600;
-		text-align: center; margin: 0 0 16px;
-		letter-spacing: -1px; line-height: 1.1;
-	}
-	.section-h.on-dark { color: #faf8f4; }
-	.section-sub {
-		color: #5a5347; font-size: 16px; text-align: center;
-		margin: 0 auto 56px; max-width: 600px;
-	}
-	.section-sub.on-dark { color: #d8d2c2; }
+	.block + .block { border-top: 1px solid var(--border); }
 
-	/* Services */
-	.services { padding: 96px 48px; background: #faf8f4; }
+	.eyebrow {
+		color: var(--rust);
+		font-size: 13px; font-weight: 500;
+		letter-spacing: 1px; text-transform: uppercase;
+		margin: 0 0 16px;
+	}
+	.eyebrow.on-dark { color: var(--rust); }
+	.eyebrow-soft { color: var(--charcoal); opacity: 0.65; margin-bottom: 20px; }
+	.block-h {
+		color: var(--charcoal);
+		font-size: 36px; font-weight: 600;
+		letter-spacing: -0.8px; line-height: 1.15;
+		margin: 0 0 16px;
+	}
+	.block-h.on-dark { color: var(--off-white); }
+	.block-sub {
+		color: var(--warm-gray);
+		font-size: 17px; line-height: 1.6;
+		margin: 0 0 32px;
+		max-width: 580px;
+	}
+	.block-sub.on-dark { color: var(--subhead-dark); }
+	.rust-cta {
+		display: inline-flex; align-items: center;
+		padding: 14px 28px;
+		background: var(--rust); color: var(--off-white);
+		font-size: 15px; font-weight: 500;
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, box-shadow 150ms ease;
+	}
+	.rust-cta:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
+
+	/* Intro row */
+	.intro-row {
+		display: grid;
+		grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+		gap: 56px;
+		align-items: center;
+		margin-bottom: 56px;
+	}
+	.intro-photo {
+		aspect-ratio: 4 / 3;
+		border-radius: var(--radius-large);
+		box-shadow: var(--shadow-subtle);
+		overflow: hidden;
+	}
+	.intro-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 	.service-grid {
 		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px; max-width: 1100px; margin: 0 auto;
+		gap: 24px;
 	}
-
-	/* Systems detail (dark) */
-	.systems-detail { background: #1a1a1a; padding: 96px 48px; }
-	.systems-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px; max-width: 1100px; margin: 0 auto;
-	}
-	.system-card {
-		padding: 28px;
-		background: rgba(250,248,244,0.04);
-		border: 1px solid rgba(250,248,244,0.12);
-	}
-	.system-name {
-		color: #faf8f4; font-size: 20px; font-weight: 600;
-		margin: 0 0 12px; letter-spacing: -0.3px;
-	}
-	.system-body { color: #c4c1ba; font-size: 14px; line-height: 1.6; margin: 0; }
-	.systems-cert { max-width: 1100px; margin: 28px auto 0; }
 
 	/* Industries */
-	.industries { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
 	.industry-tags {
 		display: flex; flex-wrap: wrap; gap: 10px;
-		justify-content: center; max-width: 800px; margin: 0 auto 40px;
+		margin-bottom: 32px;
 	}
 	.industry-tag {
 		display: inline-flex; padding: 10px 22px;
@@ -358,73 +368,127 @@ const reRoofProcess = [
 	}
 	.industry-rows {
 		display: grid; grid-template-columns: 1fr 1fr;
-		gap: 14px 56px; max-width: 1000px; margin: 0 auto;
+		gap: 14px 56px; max-width: 1000px;
 	}
 	.industry-row {
 		display: grid; grid-template-columns: 130px 1fr;
 		gap: 16px; padding: 14px 0;
 		border-bottom: 1px solid var(--border);
 	}
-	.industry-row-label { color: var(--charcoal); font-size: 14px; font-weight: 600; letter-spacing: -0.1px; }
+	.industry-row-label { color: var(--charcoal); font-size: 14px; font-weight: 600; }
 	.industry-row-body { color: var(--warm-gray); font-size: 14px; line-height: 1.5; }
 
-	.why-commercial { padding: 96px 48px; background: var(--ivory-tint); border-top: 1px solid #ece7de; }
-	.stats { padding: 64px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
-
-	/* Plan 006 helpers */
-	.ss-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
-	.ss-h { color: var(--charcoal); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 16px; }
-	.ss-body { color: var(--warm-gray); font-size: 17px; line-height: 1.6; margin: 0 0 24px; }
-	.ss-cta { display: inline-flex; padding: 14px 28px; background: var(--rust); color: var(--off-white); font-size: 15px; font-weight: 500; border-radius: var(--radius-pill); transition: background 150ms ease; }
-	.ss-cta:hover { background: #9d3a1a; }
-	.fb-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
-	.fb-h { color: var(--off-white); font-size: 40px; font-weight: 600; letter-spacing: -1px; line-height: 1.15; margin: 0; max-width: 580px; }
-	.cs-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 14px; text-align: center; }
-	.cs-h { color: var(--charcoal); font-size: 32px; font-weight: 600; letter-spacing: -0.6px; line-height: 1.2; margin: 0 0 16px; text-align: center; }
-	.cs-body { color: var(--warm-gray); font-size: 15px; line-height: 1.65; margin: 0 auto; text-align: center; max-width: 600px; }
-
-	/* Bonding */
-	.bonding { padding: 96px 48px; background: #faf8f4; }
-	.bonding-grid {
+	/* Systems island (one dark stretch) */
+	.systems-island { background: var(--charcoal); padding: 96px 48px; }
+	.block-inner { max-width: 1200px; margin: 0 auto; }
+	.systems-row {
+		display: grid;
+		grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+		gap: 56px;
+		align-items: center;
+		margin-bottom: 56px;
+	}
+	.systems-photo {
+		aspect-ratio: 4 / 3;
+		border-radius: var(--radius-large);
+		overflow: hidden;
+		box-shadow: var(--shadow-active);
+	}
+	.systems-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+	.systems-grid {
 		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px; max-width: 1100px; margin: 0 auto;
+		gap: 24px;
 	}
-	.bonding-card { padding: 24px; background: #ffffff; border: 1px solid #ece7de; }
-	.bonding-label {
-		color: #1a1a1a; font-size: 14px; font-weight: 600;
-		margin: 0 0 12px; letter-spacing: -0.2px;
-	}
-
-	/* Re-roof process (dark) */
-	.reroof { background: #1a1a1a; padding: 96px 48px; }
-	.reroof-list {
-		max-width: 800px; margin: 0 auto; padding: 0; list-style: none;
-		display: flex; flex-direction: column; gap: 20px;
-	}
-	.reroof-step {
-		display: grid; grid-template-columns: 56px 1fr; gap: 20px;
-		padding: 24px 28px;
+	.system-card {
+		padding: 28px;
 		background: rgba(250,248,244,0.04);
 		border: 1px solid rgba(250,248,244,0.12);
+		border-radius: var(--radius-card);
 	}
-	.reroof-n {
-		display: inline-flex; align-items: center; justify-content: center;
-		width: 40px; height: 40px;
-		background: #b54620; color: #faf8f4;
-		font-size: 14px; font-weight: 600;
+	.system-name {
+		color: var(--off-white); font-size: 20px; font-weight: 600;
+		margin: 0 0 12px; letter-spacing: -0.3px;
 	}
-	.reroof-label { color: #faf8f4; font-size: 18px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.2px; }
-	.reroof-text { color: #c4c1ba; font-size: 15px; line-height: 1.6; margin: 0; }
+	.system-body { color: var(--body-dark); font-size: 14px; line-height: 1.6; margin: 0; }
+	.systems-cert { margin-top: 28px; }
+
+	/* Why commercial — LayeredCard + StatRow */
+	.stats-inline { margin-top: 56px; }
+
+	/* Bonding */
+	.bonding-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+	}
+	.bonding-card {
+		padding: 24px;
+		background: #ffffff;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-subtle);
+	}
+	.bonding-label {
+		color: var(--charcoal); font-size: 14px; font-weight: 600;
+		margin: 0 0 12px;
+	}
+
+	/* Re-roof row */
+	.reroof-row {
+		display: grid;
+		grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+		gap: 56px;
+		align-items: center;
+		margin-bottom: 48px;
+	}
+	.reroof-photo {
+		aspect-ratio: 4 / 3;
+		border-radius: var(--radius-large);
+		box-shadow: var(--shadow-subtle);
+		overflow: hidden;
+	}
+	.reroof-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+	.reroof-flow { --cols: 5; }
 
 	/* Projects */
-	.projects { padding: 96px 48px; background: #faf8f4; }
-	.projects-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px; max-width: 1100px; margin: 0 auto;
-	}
 	.projects-stats { max-width: 1100px; margin: 32px auto 0; }
 
 	/* Maintenance */
-	.maintenance { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
-	.maintenance > :global(.placeholder) { max-width: 800px; margin-left: auto; margin-right: auto; }
+	.trust-inline { margin-top: 32px; }
+	.trust-inline > :global(.trust) {
+		background: transparent;
+		border-top: 0;
+		border-bottom: 0;
+		padding: 0;
+	}
+
+	/* End CTA */
+	.end-cta-eyebrow {
+		color: var(--rust);
+		font-size: 13px; font-weight: 500;
+		letter-spacing: 1px; text-transform: uppercase;
+		margin: 0 0 16px;
+	}
+	.end-cta-h {
+		color: var(--off-white);
+		font-size: 44px; font-weight: 600;
+		letter-spacing: -1px; line-height: 1.1;
+		margin: 0 0 14px;
+		max-width: 640px;
+	}
+	.end-cta-sub {
+		color: var(--subhead-dark);
+		font-size: 17px; line-height: 1.55;
+		margin: 0 0 28px;
+		max-width: 580px;
+	}
+	.end-cta-button {
+		display: inline-flex; align-items: center;
+		padding: 18px 36px;
+		background: var(--rust); color: var(--off-white);
+		font-size: 16px; font-weight: 500;
+		border-radius: var(--radius-pill);
+		box-shadow: var(--shadow-active);
+		transition: background 150ms ease, transform 200ms ease;
+	}
+	.end-cta-button:hover { background: #9d3a1a; transform: translateY(-1px); }
 </style>
