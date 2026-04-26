@@ -2,9 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceTile from '../components/ServiceTile.astro';
 import TrustStrip from '../components/TrustStrip.astro';
-import NamedProjectCard from '../components/NamedProjectCard.astro';
+import FilterableProjectGrid from '../components/FilterableProjectGrid.astro';
 import StatRow from '../components/StatRow.astro';
 import LayeredCard from '../components/LayeredCard.astro';
+import ConstrainedSection from '../components/ConstrainedSection.astro';
+import SplitScreenSection from '../components/SplitScreenSection.astro';
+import FullBleedSection from '../components/FullBleedSection.astro';
 import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 
 const services = [
@@ -65,6 +68,19 @@ const reRoofProcess = [
 			</div>
 		</div>
 	</section>
+
+	<!-- SplitScreen: commercial focus -->
+	<SplitScreenSection
+		imageSide="right"
+		gradient="linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%)"
+		background="ivory"
+		minHeight="440px"
+	>
+		<p class="ss-eyebrow">For facility managers</p>
+		<h2 class="ss-h">One walkthrough. One bid. One crew.</h2>
+		<p class="ss-body">From spec through installation through warranty. Single-source coordination, bonded estimate ready for procurement, and crews that work around tenants — not over them.</p>
+		<a class="ss-cta" href="/#inspection">Request consultation</a>
+	</SplitScreenSection>
 
 	<!-- Service grid -->
 	<section class="services">
@@ -134,6 +150,17 @@ const reRoofProcess = [
 		]} />
 	</section>
 
+	<!-- FullBleed cinematic: bonded + insured -->
+	<FullBleedSection
+		gradient="linear-gradient(135deg, #4a4a48 0%, #7d8b9e 50%, #2a3035 100%)"
+		overlayPosition="bottom-left"
+		minHeight="380px"
+		overlayDarken={0.6}
+	>
+		<p class="fb-eyebrow">For procurement</p>
+		<h2 class="fb-h">Bonded. Insured. Bid-ready.</h2>
+	</FullBleedSection>
+
 	<!-- Bonding + insurance callout -->
 	<section class="bonding">
 		<p class="section-eyebrow">Bonding + insurance</p>
@@ -185,22 +212,40 @@ const reRoofProcess = [
 		</ol>
 	</section>
 
-	<!-- Named projects -->
+	<!-- Named projects (FilterableProjectGrid — interactive) -->
 	<section class="projects">
 		<p class="section-eyebrow">Past projects</p>
 		<h2 class="section-h">Buildings we've roofed.</h2>
-		<p class="section-sub">Specific named projects with permission to publish go below. Until they are filled in, the placeholders show what's coming.</p>
-		<div class="projects-grid">
-			<NamedProjectCard placeholderFact="Named commercial project #1 — building or owner name, city, year, roof system, sq ft, industry. Permission required. See Founder Input page §5." />
-			<NamedProjectCard placeholderFact="Named commercial project #2 — building or owner name, city, year, roof system, sq ft, industry. See Founder Input page §5." />
-			<NamedProjectCard placeholderFact="Named commercial project #3 — building or owner name, city, year, roof system, sq ft, industry. See Founder Input page §5." />
-			<NamedProjectCard placeholderFact="Named commercial project #4 — building or owner name, city, year, roof system, sq ft, industry. See Founder Input page §5." />
-			<NamedProjectCard placeholderFact="Named commercial project #5 — building or owner name, city, year, roof system, sq ft, industry. See Founder Input page §5." />
-		</div>
+		<p class="section-sub">Filter by industry. Specific named projects fill in as the founders confirm permission to publish.</p>
+		<FilterableProjectGrid
+			filters={[
+				{ key: 'all', label: 'All' },
+				{ key: 'schools', label: 'Schools' },
+				{ key: 'healthcare', label: 'Healthcare' },
+				{ key: 'retail', label: 'Retail' },
+				{ key: 'industrial', label: 'Industrial' },
+				{ key: 'office', label: 'Office' },
+			]}
+			projects={[
+				{ industry: 'Schools', industryKey: 'schools', placeholderFact: 'Named school project — district, building, city, year, roof system, sq ft. See Founder Input §5.' },
+				{ industry: 'Healthcare', industryKey: 'healthcare', placeholderFact: 'Named healthcare project — clinic / MOB / hospital, city, year, roof system, sq ft. See Founder Input §5.' },
+				{ industry: 'Retail', industryKey: 'retail', placeholderFact: 'Named retail project — center, city, year, system, sq ft. See Founder Input §5.' },
+				{ industry: 'Industrial', industryKey: 'industrial', placeholderFact: 'Named industrial project — warehouse / manufacturing, city, year, system, sq ft. See Founder Input §5.' },
+				{ industry: 'Office', industryKey: 'office', placeholderFact: 'Named office project — building, city, year, system, sq ft. See Founder Input §5.' },
+				{ industry: 'Schools', industryKey: 'schools', placeholderFact: 'Second named school project. See Founder Input §5.' },
+			]}
+		/>
 		<div class="projects-stats">
 			<HeritagePlaceholder fact="Lifetime sq ft of commercial roof installed (number). Oldest active commercial roof Heritage installed (year + city). See Founder Input page §5." />
 		</div>
 	</section>
+
+	<!-- Constrained narrative before maintenance -->
+	<ConstrainedSection background="ivory" paddingY="md">
+		<p class="cs-eyebrow">After the install</p>
+		<h2 class="cs-h">Maintenance contracts that catch problems early.</h2>
+		<p class="cs-body">Most commercial roof failures start small: a worn flashing detail, a clogged drain, a torn cap on a curb. Scheduled inspections find them before they become claims.</p>
+	</ConstrainedSection>
 
 	<!-- Maintenance contracts -->
 	<section class="maintenance">
@@ -324,6 +369,18 @@ const reRoofProcess = [
 
 	.why-commercial { padding: 96px 48px; background: var(--ivory-tint); border-top: 1px solid #ece7de; }
 	.stats { padding: 64px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
+
+	/* Plan 006 helpers */
+	.ss-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
+	.ss-h { color: var(--charcoal); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 16px; }
+	.ss-body { color: var(--warm-gray); font-size: 17px; line-height: 1.6; margin: 0 0 24px; }
+	.ss-cta { display: inline-flex; padding: 14px 28px; background: var(--rust); color: var(--off-white); font-size: 15px; font-weight: 500; border-radius: var(--radius-pill); transition: background 150ms ease; }
+	.ss-cta:hover { background: #9d3a1a; }
+	.fb-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
+	.fb-h { color: var(--off-white); font-size: 40px; font-weight: 600; letter-spacing: -1px; line-height: 1.15; margin: 0; max-width: 580px; }
+	.cs-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 14px; text-align: center; }
+	.cs-h { color: var(--charcoal); font-size: 32px; font-weight: 600; letter-spacing: -0.6px; line-height: 1.2; margin: 0 0 16px; text-align: center; }
+	.cs-body { color: var(--warm-gray); font-size: 15px; line-height: 1.65; margin: 0 auto; text-align: center; max-width: 600px; }
 
 	/* Bonding */
 	.bonding { padding: 96px 48px; background: #faf8f4; }
