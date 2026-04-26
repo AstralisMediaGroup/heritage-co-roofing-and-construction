@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FAQItem from '../../components/FAQItem.astro';
 import TrustStrip from '../../components/TrustStrip.astro';
+import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
 
 const insuranceSteps = [
 	{
@@ -28,22 +29,52 @@ const damageTypes = [
 	{ label: 'Water intrusion', body: 'Stained ceilings, attic moisture, soft decking. We trace it to the source.' },
 ];
 
+const timelineSteps = [
+	{ n: '1', label: 'You call', body: 'You reach a person on the line. We schedule the inspection.' },
+	{ n: '2', label: 'We inspect', body: 'On the roof, in the attic, around the eaves. Photos and a written report.' },
+	{ n: '3', label: 'You file the claim', body: 'You give your adjuster our report. We are available if they have questions.' },
+	{ n: '4', label: 'Adjuster visit', body: 'Adjuster comes out. We meet them on the roof when scheduling allows.' },
+	{ n: '5', label: 'Scope agreed', body: 'Carrier approves a scope of work. You sign with us. Deductible is the only out-of-pocket on most jobs.' },
+	{ n: '6', label: 'Install', body: 'Most residential roofs install in one day. Yard cleaned, magnets run for nails, debris hauled.' },
+	{ n: '7', label: 'Warranty hand-off', body: 'You get the workmanship warranty paperwork and the manufacturer pass-through.' },
+];
+
 const faqs = [
 	{
 		q: 'Will my premium go up if I file a claim?',
-		a: 'Storm damage claims typically do not raise rates the way at-fault claims do — most carriers treat hail and wind as acts of nature. Your specific policy is what matters. We can review the relevant section with you before you decide.',
+		a: 'Storm damage claims typically do not raise rates the way at-fault claims do — most carriers treat hail and wind as acts of nature. Your specific policy is what matters. We can read the relevant section with you before you decide.',
 	},
 	{
 		q: 'Do I pay anything upfront?',
-		a: 'No. Free inspection. The only out-of-pocket cost on most insurance jobs is your deductible, due when work begins. We will walk you through every line item before you sign.',
+		a: 'No. The inspection is free. The only out-of-pocket cost on most insurance jobs is your deductible, due when work begins. We walk you through every line item before you sign.',
 	},
 	{
 		q: 'How long does the process take?',
-		a: 'Inspection is same-day or next-day. Adjuster meeting usually within a week. Once the claim is approved, most residential roofs install in one day. Total timeline: typically 2–4 weeks start to finish.',
+		a: 'Inspection turnaround and total timeline depend on the carrier and the scope. Most residential roofs install in one day once the claim is approved. The full start-to-finish window is in the placeholder below — we do not want to quote a number we cannot stand behind.',
+		placeholderFact: 'Heritage typical timelines, plain numbers: free inspection turnaround SLA, days from inspection to adjuster meeting, days from claim approval to install. See Founder Input page §8.',
 	},
 	{
 		q: 'What if my claim is denied?',
-		a: 'It happens. Sometimes the adjuster misses damage, sometimes the policy genuinely does not cover it. If we believe damage was missed, we will help you request a re-inspection. If the denial sticks, you owe us nothing for the original inspection.',
+		a: 'It happens. Sometimes the adjuster misses damage; sometimes the policy genuinely does not cover it. If we believe damage was missed, we help you request a re-inspection. If the denial sticks, you owe us nothing for the original inspection.',
+	},
+	{
+		q: 'Will I get the same warranty on a storm job as a regular install?',
+		a: 'The workmanship and manufacturer pass-through warranties are the same. A claim job is the same install — same crew, same materials, same paperwork.',
+		placeholderFact: 'Confirm: storm-damage roof warranty is identical to a standard install (workmanship length + manufacturer pass-through length + transferability). See Founder Input page §1.',
+	},
+	{
+		q: 'What insurance carriers do you work with?',
+		a: 'We work with most major Texas and Arkansas carriers. The list of carriers we file claims with most often is in the placeholder below.',
+		placeholderFact: 'Carriers Heritage works with most often (State Farm, Allstate, USAA, Farmers, Texas Farm Bureau, Liberty Mutual, etc.) — list 6–10. See Founder Input page §8.',
+	},
+	{
+		q: 'Do I need to be home during the inspection or the install?',
+		a: 'For the inspection, no — we work from outside and the attic when accessible. For the install, you do not have to be home, but it helps if we can reach you for any judgment call. Either way we coordinate access in advance.',
+	},
+	{
+		q: 'Can I pay my deductible over time?',
+		a: 'Deductible payment options vary. The detail is in the placeholder below.',
+		placeholderFact: 'Whether Heritage accepts payment plans on the homeowner deductible (Y/N + terms). See Founder Input page §4 + §8.',
 	},
 ];
 ---
@@ -57,7 +88,7 @@ const faqs = [
 			<p class="hero-eyebrow">Residential · Storm damage</p>
 			<h1 class="hero-h1">Storm damage?<br />We handle the whole roof.</h1>
 			<p class="hero-sub">
-				Hail, wind, tree fall, water intrusion. We inspect, document, and work directly with your insurance adjuster — so you do not get stuck in the middle.
+				Hail, wind, tree fall, water intrusion. We inspect, document, and work directly with your insurance adjuster. You stay out of the back-and-forth.
 			</p>
 			<div class="hero-cta-row">
 				<a class="cta-primary" href="/#inspection">Get my free inspection</a>
@@ -98,6 +129,53 @@ const faqs = [
 		</div>
 	</section>
 
+	<!-- What to expect timeline -->
+	<section class="timeline">
+		<p class="section-eyebrow">What to expect</p>
+		<h2 class="section-h">From your call to a new roof.</h2>
+		<p class="section-sub">Seven steps. We tell you where you are at each one.</p>
+		<ol class="timeline-list">
+			{timelineSteps.map((s) => (
+				<li class="timeline-step">
+					<span class="timeline-n">{s.n}</span>
+					<div class="timeline-body">
+						<p class="timeline-label">{s.label}</p>
+						<p class="timeline-text">{s.body}</p>
+					</div>
+				</li>
+			))}
+		</ol>
+		<div class="timeline-sla">
+			<p class="timeline-sla-label">Heritage SLA — fill in for the live page</p>
+			<HeritagePlaceholder fact="Free-inspection turnaround in plain words (e.g. 'same-day or next-day') and total typical timeline from inspection to install on an approved claim. See Founder Input page §8." />
+		</div>
+	</section>
+
+	<!-- Insurance carriers -->
+	<section class="carriers">
+		<p class="section-eyebrow">Carriers we work with</p>
+		<h2 class="section-h">We file with most major Texas + Arkansas carriers.</h2>
+		<p class="section-sub">Specific carriers Heritage handles most often go below. If you do not see yours, call — we can usually still help.</p>
+		<HeritagePlaceholder fact="6–10 carriers Heritage files with most often (State Farm, Allstate, USAA, Farmers, Texas Farm Bureau, Liberty Mutual, etc.). Listed as plain text. See Founder Input page §8." />
+	</section>
+
+	<!-- Warranty on storm jobs -->
+	<section class="warranty">
+		<p class="section-eyebrow on-dark">Warranty</p>
+		<h2 class="section-h on-dark">A storm roof gets the same warranty as a regular install.</h2>
+		<p class="warranty-body">Same workmanship warranty. Same manufacturer pass-through. Same crew on a callback. The warranty terms are filled in below.</p>
+		<div class="warranty-grid">
+			<div class="warranty-card">
+				<p class="warranty-label">Workmanship</p>
+				<HeritagePlaceholder fact="Workmanship warranty length on residential storm jobs (years). See Founder Input page §1." />
+			</div>
+			<div class="warranty-card">
+				<p class="warranty-label">Manufacturer pass-through</p>
+				<HeritagePlaceholder fact="Manufacturer warranty pass-through (which manufacturer, how long, transferable Y/N). See Founder Input page §1." />
+			</div>
+		</div>
+	</section>
+
 	<TrustStrip items={["Insurance accepted", "Workmanship warranty", "Locally owned"]} />
 
 	<!-- FAQ -->
@@ -105,7 +183,16 @@ const faqs = [
 		<p class="section-eyebrow">Common questions</p>
 		<h2 class="section-h">What homeowners ask us.</h2>
 		<div class="faq-list">
-			{faqs.map((f) => <FAQItem question={f.q} answer={f.a} />)}
+			{faqs.map((f) => (
+				<div class="faq-wrap">
+					<FAQItem question={f.q} answer={f.a} />
+					{f.placeholderFact && (
+						<div class="faq-placeholder">
+							<HeritagePlaceholder fact={f.placeholderFact} />
+						</div>
+					)}
+				</div>
+			))}
 		</div>
 	</section>
 </BaseLayout>
@@ -146,7 +233,6 @@ const faqs = [
 		border-bottom: 2px solid #faf8f4;
 	}
 
-	/* Section labels */
 	.section-eyebrow {
 		color: #b54620; font-size: 13px; font-weight: 500;
 		text-align: center; margin: 0 0 16px;
@@ -161,7 +247,7 @@ const faqs = [
 	.section-h.on-dark { color: #faf8f4; }
 	.section-sub {
 		color: #5a5347; font-size: 16px; text-align: center;
-		margin: 0 0 56px;
+		margin: 0 auto 56px; max-width: 600px;
 	}
 	.section-sub.on-dark { color: #d8d2c2; }
 
@@ -171,19 +257,9 @@ const faqs = [
 		display: grid; grid-template-columns: repeat(3, 1fr);
 		gap: 40px; max-width: 1100px; margin: 0 auto;
 	}
-	.claim-step {
-		padding: 36px;
-		background: #ffffff;
-		border: 1px solid #ece7de;
-	}
-	.claim-num {
-		color: #b54620; font-size: 12px; font-weight: 500;
-		margin: 0 0 16px; letter-spacing: 1.5px;
-	}
-	.claim-h {
-		color: #1a1a1a; font-size: 22px; font-weight: 600;
-		margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2;
-	}
+	.claim-step { padding: 36px; background: #ffffff; border: 1px solid #ece7de; }
+	.claim-num { color: #b54620; font-size: 12px; font-weight: 500; margin: 0 0 16px; letter-spacing: 1.5px; }
+	.claim-h { color: #1a1a1a; font-size: 22px; font-weight: 600; margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2; }
 	.claim-body { color: #5a5347; font-size: 15px; line-height: 1.6; margin: 0; }
 
 	/* Damage */
@@ -198,13 +274,55 @@ const faqs = [
 		background: linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%);
 		margin-bottom: 20px;
 	}
-	.damage-label {
-		color: #faf8f4; font-size: 22px; font-weight: 600;
-		margin: 0 0 10px; letter-spacing: -0.3px; line-height: 1.2;
-	}
+	.damage-label { color: #faf8f4; font-size: 22px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.3px; line-height: 1.2; }
 	.damage-body { color: #c4c1ba; font-size: 14px; line-height: 1.6; margin: 0; }
+
+	/* Timeline */
+	.timeline { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
+	.timeline-list {
+		max-width: 800px; margin: 0 auto; padding: 0; list-style: none;
+		display: flex; flex-direction: column; gap: 20px;
+	}
+	.timeline-step {
+		display: grid; grid-template-columns: 56px 1fr; gap: 20px;
+		padding: 24px 28px; background: #faf8f4; border: 1px solid #ece7de;
+	}
+	.timeline-n {
+		display: inline-flex; align-items: center; justify-content: center;
+		width: 40px; height: 40px;
+		background: #1a1a1a; color: #faf8f4;
+		font-size: 16px; font-weight: 600;
+	}
+	.timeline-body {}
+	.timeline-label { color: #1a1a1a; font-size: 18px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.2px; }
+	.timeline-text { color: #5a5347; font-size: 15px; line-height: 1.6; margin: 0; }
+	.timeline-sla { max-width: 800px; margin: 28px auto 0; }
+	.timeline-sla-label { color: #5a5347; font-size: 13px; font-weight: 500; margin: 0 0 8px; letter-spacing: 0.3px; text-transform: uppercase; }
+
+	/* Carriers */
+	.carriers { padding: 96px 48px; background: #faf8f4; }
+	.carriers > :global(.placeholder) { max-width: 800px; margin-left: auto; margin-right: auto; }
+
+	/* Warranty (dark) */
+	.warranty { background: #1a1a1a; padding: 96px 48px; }
+	.warranty-body {
+		color: #d8d2c2; font-size: 16px; line-height: 1.6;
+		max-width: 720px; margin: 0 auto 40px; text-align: center;
+	}
+	.warranty-grid {
+		display: grid; grid-template-columns: repeat(2, 1fr);
+		gap: 24px; max-width: 800px; margin: 0 auto;
+	}
+	.warranty-card {
+		padding: 28px;
+		background: rgba(250,248,244,0.04);
+		border: 1px solid rgba(250,248,244,0.12);
+	}
+	.warranty-label { color: #b54620; font-size: 12px; font-weight: 500; margin: 0 0 14px; letter-spacing: 1.5px; text-transform: uppercase; }
 
 	/* FAQ */
 	.faq { background: #faf8f4; padding: 96px 48px; }
 	.faq-list { max-width: 800px; margin: 0 auto; }
+	.faq-wrap {}
+	.faq-placeholder { margin: 0 0 12px; padding: 0 0 16px; border-bottom: 1px solid #ece7de; }
 </style>
