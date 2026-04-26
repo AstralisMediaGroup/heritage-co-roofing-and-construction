@@ -108,9 +108,19 @@ const { materials } = Astro.props;
 	.tab-panel { padding: 32px 0; border-bottom: 1px solid var(--border); }
 	.tab-panel:last-child { border-bottom: 0; }
 
-	/* JS-enabled state: only active panel visible */
+	/* JS-enabled state: only active panel visible, fade-in on switch */
 	.tabs.js-enabled .tab-panel { display: none; padding: 0; border-bottom: 0; }
-	.tabs.js-enabled .tab-panel.is-active { display: block; }
+	.tabs.js-enabled .tab-panel.is-active {
+		display: block;
+		animation: tab-fade-in 200ms ease-out;
+	}
+	@keyframes tab-fade-in {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.tabs.js-enabled .tab-panel.is-active { animation: none; }
+	}
 
 	.tab-grid {
 		display: grid;

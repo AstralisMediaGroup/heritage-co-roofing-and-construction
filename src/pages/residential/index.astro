@@ -13,6 +13,7 @@ import ConstrainedSection from '../../components/ConstrainedSection.astro';
 import SplitScreenSection from '../../components/SplitScreenSection.astro';
 import FullBleedSection from '../../components/FullBleedSection.astro';
 import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
+import { imagery } from '../../content/imagery';
 
 const services = [
 	{ label: 'Roof replacement', body: 'Full tear-off and install. Asphalt, metal, synthetic. Workmanship and material warranties.', gradient: 'linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)' },
@@ -29,6 +30,8 @@ const materials = [
 		name: 'Asphalt shingle',
 		intro: 'The standard for East Texas residential. Lower up-front cost, wide color range, replaceable shingle-by-shingle on repairs.',
 		gradient: 'linear-gradient(135deg, #8a6f54 0%, #5a4836 60%, #2a2a28 100%)',
+		imageSrc: imagery.asphalt.hero.url,
+		imageAlt: imagery.asphalt.hero.alt,
 		specs: [
 			{ label: 'Service life', value: '20–30 years (architectural / dimensional)' },
 			{ label: 'Hail rating', value: 'Class 3 or Class 4 impact-resistant available' },
@@ -42,6 +45,8 @@ const materials = [
 		name: 'Metal',
 		intro: 'Longer service life, better in hail. Higher up-front. Standing seam or stamped-profile panel.',
 		gradient: 'linear-gradient(135deg, #7d8b9e 0%, #4a5566 60%, #2a3035 100%)',
+		imageSrc: imagery.metal.hero.url,
+		imageAlt: imagery.metal.hero.alt,
 		specs: [
 			{ label: 'Service life', value: '40–60 years' },
 			{ label: 'Hail rating', value: 'Standing seam: Class 4 standard' },
@@ -55,6 +60,8 @@ const materials = [
 		name: 'Tile',
 		intro: 'Slate-look, tile-look, or real concrete tile. Niche but worth the conversation if the roof line and the budget are right.',
 		gradient: 'linear-gradient(135deg, #b8a78c 0%, #8a7d63 60%, #4a4239 100%)',
+		imageSrc: imagery.tile.hero.url,
+		imageAlt: imagery.tile.hero.alt,
 		specs: [
 			{ label: 'Service life', value: '40–50 years (synthetic); 50+ (real tile)' },
 			{ label: 'Hail rating', value: 'Synthetic: Class 4 standard. Real tile varies.' },
