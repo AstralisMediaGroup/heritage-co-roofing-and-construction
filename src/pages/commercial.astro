@@ -8,6 +8,7 @@ import LayeredCard from '../components/LayeredCard.astro';
 import FullBleedSection from '../components/FullBleedSection.astro';
 import ProcessFlow from '../components/ProcessFlow.astro';
 import MaterialTabs from '../components/MaterialTabs.astro';
+import TechnicalFeatures from '../components/TechnicalFeatures.astro';
 import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 import { imagery } from '../content/imagery';
 
@@ -192,6 +193,24 @@ const bondingItems = [
 			<div class="systems-cert">
 				<HeritagePlaceholder fact="Heritage's system-level manufacturer certifications (Carlisle SureWeld, Firestone Red Shield, GAF EverGuard, Johns Manville Peak Advantage, etc.). Plain-text list. See Founder Input page §2." />
 			</div>
+		</section>
+
+		<!-- Technical block: what's actually on every Heritage commercial roof -->
+		<section class="block tech-block">
+			<TechnicalFeatures
+				eyebrow="What's under the membrane"
+				heading="The details that decide whether a 25-year roof actually lasts 25 years."
+				sub="The seams, the flashings, the drainage — that's where commercial roofs fail. Spec each one right and the roof outlasts the warranty."
+				columns={3}
+				features={[
+					{ icon: 'flame', title: 'Heat-welded seams on every TPO + PVC install', body: 'A robotic welder runs the seam at 1,100°F to fuse the membrane into one continuous sheet. Cold-glued seams are the #1 commercial roof failure point — we do not use them.' },
+					{ icon: 'wind', title: '110+ mph wind uplift rating', body: 'Mechanically fastened systems carry FM 4471 ratings up to 1-90 (110 mph design). Adhered systems run higher. We spec the rating that matches the building location, not the cheapest path.' },
+					{ icon: 'water', title: 'Tapered insulation for positive drainage', body: 'Flat roofs are not actually flat — they need a slope to the drains. We spec tapered ISO insulation in 1/4-inch / 1/2-inch profiles to push water off the roof, not pond on it.' },
+					{ icon: 'shield', title: 'Walkway pads at every roof-access point', body: 'HVAC techs and building maintenance walk the roof. Walkway pads protect the membrane at access points and around units. Skipping them is how a 20-year roof dies in 8.' },
+					{ icon: 'layers', title: 'Cover board over the insulation', body: 'A 1/4-inch high-density cover board between insulation and membrane. Improves wind uplift, walkability, and impact resistance — and is the spec the manufacturer warranty assumes.' },
+					{ icon: 'gauge', title: 'Annual maintenance inspection included', body: 'Every install ships with a year-one inspection. Caulks reseated, seams checked, drains cleared. Most commercial roof problems are caught before they become claims.' },
+				]}
+			/>
 		</section>
 
 		<!-- Why Heritage for commercial — LayeredCard + StatRow combined -->
