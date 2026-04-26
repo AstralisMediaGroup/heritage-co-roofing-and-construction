@@ -1,0 +1,207 @@
+---
+import HeritagePlaceholder from './HeritagePlaceholder.astro';
+import { eastTexas, centralArkansas } from '../content/cities';
+
+interface Props {
+	caption?: string;
+	expandable?: boolean;
+}
+
+const {
+	caption = 'Crews in both states. Free inspection turnaround within the placeholder SLA below.',
+	expandable = true,
+} = Astro.props;
+
+// Pin coordinates — abstract layout, geographically suggestive
+// East Texas cluster: bottom-left; Central Arkansas cluster: top-right
+// Coordinates are within a 1000×600 viewBox
+const eastTexasPins = [
+	{ name: 'Longview', x: 290, y: 380, hq: true },
+	{ name: 'Tyler', x: 200, y: 360 },
+	{ name: 'Marshall', x: 360, y: 360 },
+	{ name: 'Mt. Pleasant', x: 320, y: 290 },
+	{ name: 'Nacogdoches', x: 230, y: 460 },
+	{ name: 'Palestine', x: 130, y: 410 },
+	{ name: 'Kilgore', x: 270, y: 395 },
+	{ name: 'Henderson', x: 245, y: 425 },
+	{ name: 'Gladewater', x: 250, y: 365 },
+	{ name: 'Gilmer', x: 270, y: 330 },
+];
+const centralArkansasPins = [
+	{ name: 'Little Rock', x: 720, y: 230 },
+	{ name: 'Conway', x: 680, y: 195 },
+	{ name: 'Russellville', x: 600, y: 180 },
+	{ name: 'Clarksville', x: 555, y: 200 },
+];
+---
+
+<div class="map-wrap">
+	<div class="map-frame">
+		<svg viewBox="0 0 1000 600" class="map-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="East Texas and Central Arkansas service area">
+			<!-- East Texas abstract region -->
+			<path
+				d="M 60 280
+				   Q 80 220, 160 215
+				   Q 260 200, 360 235
+				   Q 430 260, 440 340
+				   Q 430 440, 350 490
+				   Q 240 530, 150 510
+				   Q 70 480, 55 400
+				   Z"
+				fill="rgba(181, 70, 32, 0.10)"
+				stroke="rgba(181, 70, 32, 0.45)"
+				stroke-width="1.5"
+				stroke-dasharray="4 6"
+			/>
+			<text x="135" y="525" class="map-region-label">East Texas</text>
+
+			<!-- Central Arkansas abstract region -->
+			<path
+				d="M 510 175
+				   Q 540 130, 620 130
+				   Q 720 130, 790 165
+				   Q 830 195, 815 245
+				   Q 790 290, 720 295
+				   Q 620 300, 555 280
+				   Q 510 260, 510 220
+				   Z"
+				fill="rgba(181, 70, 32, 0.10)"
+				stroke="rgba(181, 70, 32, 0.45)"
+				stroke-width="1.5"
+				stroke-dasharray="4 6"
+			/>
+			<text x="595" y="320" class="map-region-label">Central Arkansas</text>
+
+			<!-- Connecting line between regions -->
+			<line x1="430" y1="320" x2="540" y2="225" stroke="rgba(196, 193, 186, 0.25)" stroke-width="1" stroke-dasharray="2 4" />
+
+			<!-- Pins: East Texas -->
+			{eastTexasPins.map((p) => (
+				<g class={`pin ${p.hq ? 'pin-hq' : ''}`}>
+					<circle cx={p.x} cy={p.y} r={p.hq ? 9 : 6} class="pin-dot" />
+					{p.hq && <circle cx={p.x} cy={p.y} r={16} class="pin-ring" />}
+					<text x={p.x + (p.hq ? 18 : 12)} y={p.y + 4} class={`pin-label ${p.hq ? 'pin-label-hq' : ''}`}>
+						{p.name}{p.hq ? ' · HQ' : ''}
+					</text>
+				</g>
+			))}
+
+			<!-- Pins: Central Arkansas -->
+			{centralArkansasPins.map((p) => (
+				<g class="pin">
+					<circle cx={p.x} cy={p.y} r="6" class="pin-dot" />
+					<text x={p.x + 12} y={p.y + 4} class="pin-label">{p.name}</text>
+				</g>
+			))}
+		</svg>
+		<p class="map-caption">{caption}</p>
+		<div class="map-sla">
+			<HeritagePlaceholder fact="Free-inspection turnaround SLA in plain words (e.g. 'same-day or next-day'), and any difference in response between East TX and Central AR. See Founder Input page §8 + §9." />
+		</div>
+	</div>
+
+	{expandable && (
+		<details class="map-list">
+			<summary class="map-list-summary">See the full city list</summary>
+			<div class="map-list-grid">
+				<div>
+					<p class="map-list-region">East Texas</p>
+					<p class="map-list-cities">{eastTexas.join(' · ')}</p>
+					<HeritagePlaceholder fact="Full East Texas city list (replaces the '+ 25 more cities' hedge from Build Pack §6). See Founder Input page §9." />
+				</div>
+				<div>
+					<p class="map-list-region">Central Arkansas</p>
+					<p class="map-list-cities">{centralArkansas.join(' · ')}</p>
+					<HeritagePlaceholder fact="Full Central Arkansas city list. See Founder Input page §9." />
+				</div>
+			</div>
+		</details>
+	)}
+</div>
+
+<style>
+	.map-wrap { max-width: 1100px; margin: 0 auto; }
+	.map-frame {
+		background: var(--charcoal-deep);
+		border-radius: var(--radius-large);
+		padding: 36px 36px 28px;
+		box-shadow: var(--shadow-active);
+	}
+	.map-svg {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+	.map-region-label {
+		font-family: 'Inter', sans-serif;
+		font-size: 14px;
+		font-weight: 500;
+		fill: rgba(196, 193, 186, 0.55);
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+	}
+	.pin-dot {
+		fill: var(--off-white);
+		stroke: var(--charcoal);
+		stroke-width: 2;
+	}
+	.pin-hq .pin-dot { fill: var(--rust); stroke: var(--off-white); }
+	.pin-ring {
+		fill: none;
+		stroke: var(--rust);
+		stroke-width: 1.5;
+		opacity: 0.4;
+	}
+	.pin-label {
+		font-family: 'Inter', sans-serif;
+		font-size: 12px;
+		font-weight: 500;
+		fill: var(--off-white);
+	}
+	.pin-label-hq { font-weight: 600; fill: var(--rust); }
+	.map-caption {
+		color: var(--body-dark);
+		font-size: 14px;
+		line-height: 1.5;
+		margin: 24px 0 0;
+		text-align: center;
+	}
+	.map-sla { margin-top: 16px; }
+
+	.map-list { margin-top: 24px; max-width: 800px; margin-left: auto; margin-right: auto; }
+	.map-list-summary {
+		cursor: pointer;
+		color: var(--charcoal);
+		font-size: 14px;
+		font-weight: 500;
+		text-align: center;
+		padding: 12px 20px;
+		background: #ffffff;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-pill);
+		display: inline-block;
+		margin: 0 auto;
+		list-style: none;
+	}
+	.map-list[open] .map-list-summary::after { content: ' ▴'; }
+	.map-list:not([open]) .map-list-summary::after { content: ' ▾'; }
+	.map-list-summary::-webkit-details-marker { display: none; }
+	.map-list-grid {
+		display: grid; grid-template-columns: 1fr 1fr;
+		gap: 56px; padding: 32px 0;
+	}
+	.map-list-region {
+		color: var(--charcoal); font-size: 18px; font-weight: 600;
+		margin: 0 0 12px; padding-bottom: 8px;
+		border-bottom: 2px solid var(--charcoal); letter-spacing: -0.2px;
+	}
+	.map-list-cities {
+		color: var(--warm-gray);
+		font-size: 14px; line-height: 1.85;
+		margin: 0 0 12px;
+	}
+
+	/* Centered details summary fallback */
+	.map-list { text-align: center; }
+	.map-list-grid { text-align: left; }
+</style>
