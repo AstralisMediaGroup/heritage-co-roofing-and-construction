@@ -1,0 +1,73 @@
+---
+import HeritagePlaceholder from './HeritagePlaceholder.astro';
+
+interface Stat {
+	value?: string;
+	label: string;
+	placeholderFact?: string;
+}
+
+interface Props {
+	stats: Stat[];
+	theme?: 'light' | 'dark';
+}
+
+const { stats, theme = 'light' } = Astro.props;
+---
+
+<div class={`stats stats-${theme}`}>
+	{stats.map((s) => (
+		<div class="stat">
+			{s.value ? (
+				<p class="stat-value">{s.value}</p>
+			) : (
+				<div class="stat-placeholder">
+					<HeritagePlaceholder fact={s.placeholderFact || `Real number for ${s.label}. See Founder Input page.`} />
+				</div>
+			)}
+			<p class="stat-label">{s.label}</p>
+		</div>
+	))}
+</div>
+
+<style>
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 16px;
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+	.stat {
+		padding: 32px 24px;
+		background: #ffffff;
+		border: 1px solid #ece7de;
+		border-radius: var(--radius-card);
+		text-align: center;
+	}
+	.stat-value {
+		color: #1a1a1a;
+		font-size: 56px;
+		font-weight: 600;
+		line-height: 1;
+		letter-spacing: -1.5px;
+		margin: 0 0 8px;
+		font-feature-settings: 'tnum';
+	}
+	.stat-placeholder { margin: 0 0 12px; }
+	.stat-label {
+		color: #5a5347;
+		font-size: 12px;
+		font-weight: 500;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+		margin: 0;
+	}
+
+	.stats-dark .stat {
+		background: rgba(250,248,244,0.04);
+		border-color: rgba(250,248,244,0.12);
+	}
+	.stats-dark .stat-value { color: var(--off-white); }
+	.stats-dark .stat-label { color: var(--body-dark); }
+</style>

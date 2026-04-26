@@ -1,0 +1,97 @@
+---
+interface Step {
+	label: string;
+	caption?: string;
+}
+
+interface Props {
+	steps: Step[];
+	theme?: 'light' | 'dark';
+}
+
+const { steps, theme = 'light' } = Astro.props;
+---
+
+<div class={`flow flow-${theme}`}>
+	{steps.map((s, i) => (
+		<div class="flow-step">
+			<div class="flow-circle-wrap">
+				{i > 0 && <div class="flow-line" aria-hidden="true"></div>}
+				<div class="flow-circle">
+					<span class="flow-num">{(i + 1).toString().padStart(2, '0')}</span>
+				</div>
+			</div>
+			<p class="flow-label">{s.label}</p>
+			{s.caption && <p class="flow-caption">{s.caption}</p>}
+		</div>
+	))}
+</div>
+
+<style>
+	.flow {
+		display: grid;
+		grid-template-columns: repeat(var(--cols, 4), 1fr);
+		max-width: 1100px;
+		margin: 0 auto;
+		gap: 0;
+	}
+	.flow-step {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 14px;
+	}
+	.flow-circle-wrap {
+		position: relative;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 56px;
+	}
+	.flow-line {
+		position: absolute;
+		left: 0;
+		right: 50%;
+		top: 50%;
+		height: 2px;
+		background: var(--charcoal);
+		opacity: 0.4;
+		margin-right: 28px;
+	}
+	.flow-circle {
+		width: 56px; height: 56px;
+		border-radius: var(--radius-pill);
+		background: var(--charcoal);
+		color: var(--rust);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 18px;
+		font-weight: 600;
+		letter-spacing: -0.3px;
+		position: relative;
+		z-index: 1;
+	}
+	.flow-num { font-feature-settings: 'tnum'; }
+	.flow-label {
+		color: #1a1a1a;
+		font-size: 17px;
+		font-weight: 600;
+		margin: 0;
+		letter-spacing: -0.2px;
+	}
+	.flow-caption {
+		color: #5a5347;
+		font-size: 13px;
+		margin: 0;
+		line-height: 1.5;
+		max-width: 200px;
+	}
+
+	.flow-dark .flow-line { background: var(--off-white); opacity: 0.35; }
+	.flow-dark .flow-circle { background: var(--off-white); color: var(--rust); }
+	.flow-dark .flow-label { color: var(--off-white); }
+	.flow-dark .flow-caption { color: var(--body-dark); }
+</style>

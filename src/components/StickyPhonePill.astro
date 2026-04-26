@@ -1,0 +1,80 @@
+---
+interface Props {
+	phone?: string;
+	display?: string;
+}
+
+const {
+	phone = '9032428102',
+	display = 'Call 903-242-8102',
+} = Astro.props;
+---
+
+<a href={`tel:${phone}`} class="sticky-pill" aria-label={display} data-sticky-pill>
+	<svg class="sticky-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+		<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+	</svg>
+	<span class="sticky-text">{display}</span>
+</a>
+
+<style>
+	.sticky-pill {
+		position: fixed;
+		right: 24px;
+		bottom: 24px;
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		padding: 14px 22px;
+		background: var(--charcoal);
+		color: var(--off-white);
+		font-size: 14px;
+		font-weight: 500;
+		letter-spacing: -0.1px;
+		border-radius: var(--radius-pill);
+		box-shadow: var(--shadow-active);
+		z-index: 90;
+		opacity: 0;
+		transform: translateY(8px);
+		pointer-events: none;
+		transition: opacity 200ms ease, transform 200ms ease, background 150ms ease;
+		text-decoration: none;
+	}
+	.sticky-pill.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+	.sticky-pill:hover { background: var(--rust); }
+	.sticky-icon { color: var(--rust); flex-shrink: 0; }
+	.sticky-pill:hover .sticky-icon { color: var(--off-white); }
+	.sticky-text { white-space: nowrap; }
+
+	@media (max-width: 700px) {
+		.sticky-pill {
+			right: 16px;
+			left: 16px;
+			bottom: 16px;
+			justify-content: center;
+			padding: 16px 22px;
+		}
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		const pill = document.querySelector('[data-sticky-pill]');
+		if (!pill) return;
+		const update = () => {
+			const threshold = window.innerHeight; // hide over the first 100vh of any page
+			if (window.scrollY > threshold - 100) {
+				pill.classList.add('is-visible');
+			} else {
+				pill.classList.remove('is-visible');
+			}
+		};
+		update();
+		window.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('resize', update, { passive: true });
+	})();
+</script>
