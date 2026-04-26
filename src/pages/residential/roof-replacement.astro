@@ -1,0 +1,120 @@
+---
+import ServiceDetailLayout from '../../layouts/ServiceDetailLayout.astro';
+import MaterialTabs from '../../components/MaterialTabs.astro';
+import ColorSwatchGrid from '../../components/ColorSwatchGrid.astro';
+import { imagery } from '../../content/imagery';
+
+const materials = [
+	{
+		id: 'asphalt',
+		name: 'Asphalt shingle',
+		intro: 'The standard for East Texas residential. Lower up-front cost, wide color range, replaceable shingle-by-shingle.',
+		gradient: 'linear-gradient(135deg, #8a6f54 0%, #5a4836 60%, #2a2a28 100%)',
+		imageSrc: imagery.asphalt.hero.url,
+		imageAlt: imagery.asphalt.hero.alt,
+		specs: [
+			{ label: 'Service life', value: '20–30 years (architectural / dimensional)' },
+			{ label: 'Hail rating', value: 'Class 3 or Class 4 impact-resistant available' },
+			{ label: 'Wind warranty', value: 'Up to 130 mph on architectural lines' },
+			{ label: 'Cost band', value: 'Lowest of the three. Standard for insurance jobs.' },
+		],
+		manufacturerPlaceholder: 'Preferred asphalt manufacturer Heritage stocks (e.g. GAF Timberline HDZ, Owens Corning Duration). See Founder Input page §2.',
+	},
+	{
+		id: 'metal',
+		name: 'Metal',
+		intro: 'Longer service life, better in hail. Higher up-front cost. Standing seam or stamped-profile panel.',
+		gradient: 'linear-gradient(135deg, #7d8b9e 0%, #4a5566 60%, #2a3035 100%)',
+		imageSrc: imagery.metal.hero.url,
+		imageAlt: imagery.metal.hero.alt,
+		specs: [
+			{ label: 'Service life', value: '40–60 years' },
+			{ label: 'Hail rating', value: 'Standing seam: Class 4 standard' },
+			{ label: 'Wind rating', value: 'UL 580 / FM 4471 standard' },
+			{ label: 'Cost band', value: 'Roughly 2–3× asphalt up-front. Lower lifetime cost.' },
+		],
+		manufacturerPlaceholder: 'Metal panel brand Heritage installs most often. See Founder Input page §2.',
+	},
+	{
+		id: 'tile',
+		name: 'Tile',
+		intro: 'Slate-look or real concrete tile. Niche but worth it on the right roof line.',
+		gradient: 'linear-gradient(135deg, #b8a78c 0%, #8a7d63 60%, #4a4239 100%)',
+		imageSrc: imagery.tile.hero.url,
+		imageAlt: imagery.tile.hero.alt,
+		specs: [
+			{ label: 'Service life', value: '40–50 years (synthetic); 50+ (real tile)' },
+			{ label: 'Hail rating', value: 'Synthetic: Class 4 standard' },
+			{ label: 'Repair', value: 'Tile-by-tile or panel; specialty install' },
+			{ label: 'Cost band', value: '3–5× asphalt up-front' },
+		],
+		manufacturerPlaceholder: 'Synthetic-tile brand Heritage installs (e.g. DaVinci, Brava). See Founder Input page §2.',
+	},
+];
+
+const faqs = [
+	{ q: 'Should I repair my roof or replace it?', a: 'If the roof is under 12 years old and the damage is isolated, repair is almost always the right call. Past 18 years, with multiple repairs already on the same roof, replacement usually pencils out — the next leak is rarely the last leak. We tell you straight at the inspection.' },
+	{ q: 'How long does a roof install take?', a: 'Most residential roofs install in one day. Larger or steeper roofs can run two. Weather can stretch the schedule by a day; we tell you before we start, not after.' },
+	{ q: 'Do you remove the old roof?', a: 'Almost always. Texas allows up to two layers in some cases, but installing over a failing roof inherits its problems. We tear off to deck, inspect the decking, replace any rot, then build up from clean wood.' },
+	{ q: 'What about my landscaping?', a: 'We tarp shrubs and mulch beds before we start. A magnet sweep runs around the perimeter at end of day to catch nails. We do not park trailers on grass without permission.' },
+	{ q: 'How long does a new roof actually last?', a: 'Architectural asphalt with proper ventilation and a clean install runs 25–30 years in East Texas. Metal runs 40–60. Tile 50+. The number on the manufacturer warranty assumes both proper install and proper ventilation — we deliver both.' },
+	{ q: 'What about ventilation?', a: 'A roof that cannot breathe cooks the deck and shortens shingle life. We balance intake at the soffit with exhaust at the ridge on every install. Math, not guesswork.' },
+	{ q: 'Do you offer financing?', a: 'Financing options vary by job. Specifics below.', placeholderFact: 'Financing partners (GreenSky, Service Finance, Hearth, in-house, none). Typical promo terms. See Founder Input page §4.' },
+];
+---
+
+<ServiceDetailLayout
+	title="Roof Replacement — Heritage Co."
+	heroEyebrow="Residential · Roof replacement"
+	heroH1="Full roof replacement, done in a day."
+	heroSub="Tear-off, decking inspection, new install. Asphalt, metal, or tile. Same crew on the install and the warranty visit."
+	heroPhoto={imagery.heroCandidates.residentialRoofA.url}
+	heroPhotoAlt="Residential roof"
+	whatWeMeanHeading="When the roof is past patching."
+	whatWeMeanParagraphs={[
+		'A replacement is a full tear-off down to the decking, inspection of the wood underneath, and a new build-up from underlayment to ridge. It is the right call when your roof is 20+ years old, has multiple repairs already, or storm-damaged enough that patching costs more than starting over.',
+		'We replace the underlayment, the drip edge, the flashings around penetrations, and the ridge cap — all of it. Not just the shingles. The roof system is what fails or holds, not the top layer alone.',
+	]}
+	whenYouNeedHeading="The signs you need a replacement, not a repair."
+	whenYouNeedItems={[
+		{ title: 'Curling, cracking, or balding shingles', body: 'Asphalt loses granules as it ages. When you see the dark mat underneath through a wide section, the roof is at end of life.' },
+		{ title: 'Granules in the gutters', body: 'A handful is normal. Cups full means the protective surface has worn off and UV is now hitting the asphalt directly.' },
+		{ title: 'Daylight visible in the attic', body: 'Light through the decking means active gaps. Water is following the same path.' },
+		{ title: 'Multiple leaks in the same year', body: 'One leak fixed twice is usually a system failure, not a spot problem. Patching has a ceiling.' },
+		{ title: 'Roof age 20+ years', body: 'East Texas heat shortens shingle life. A 25-year shingle here often performs like a 20-year shingle. If the install is from the 90s, plan replacement.' },
+		{ title: 'After a structural storm event', body: 'Wind damage that lifted whole sections, hail that bruised the field, or impact from tree fall — the insurance claim usually triggers a replacement, not a repair.' },
+	]}
+	processHeading="Four steps. No surprises."
+	processSteps={[
+		{ label: 'Inspect', caption: 'Free. We climb the roof, the attic, and document everything.' },
+		{ label: 'Quote', caption: 'Clear scope, clear pricing. No surprise line items.' },
+		{ label: 'Install', caption: 'Most replacements done in one day. Crews in your area.' },
+		{ label: 'Stand by', caption: 'Workmanship + material warranties. Owner-direct line.' },
+	]}
+	materialsHeading="Three materials. We talk through fit at the inspection."
+	materialsSub="Each has a different lifespan, hail rating, and price. The right one depends on your roof line, your budget, and how long you plan to own the home."
+	costHeading="Replacement cost is a band, not a number."
+	costPriceBandFact="Typical residential replacement price band in dollars per square ft, with a low-end (basic 3-tab) and high-end (premium architectural with full upgrades). See Founder Input page §4."
+	costFactors={[
+		'Square footage and roof pitch (steeper = slower install)',
+		'Number of layers to tear off (one layer vs two)',
+		'Decking condition once we tear off (rot replacement)',
+		'Material choice (asphalt < metal < tile)',
+		'Penetration count (skylights, vents, chimneys)',
+		'Edge metal, flashing, and ridge upgrades included or extra',
+	]}
+	warrantyHeading="Two warranties on every replacement."
+	faqItems={faqs}
+	endCtaPhoto={imagery.heroCandidates.residentialRoofC.url}
+	endCtaHeading="Free inspection. We climb the roof, you get a written report."
+	endCtaSub="Same-day or next-day. No obligation. The four founders are the four people on the line."
+	endCtaLabel="Get my free inspection"
+	endCtaHref="/free-inspection"
+>
+	<div slot="materials">
+		<MaterialTabs materials={materials} />
+		<div style="margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border);">
+			<ColorSwatchGrid />
+		</div>
+	</div>
+</ServiceDetailLayout>

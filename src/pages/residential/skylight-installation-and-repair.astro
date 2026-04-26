@@ -1,0 +1,95 @@
+---
+import ServiceDetailLayout from '../../layouts/ServiceDetailLayout.astro';
+import { imagery } from '../../content/imagery';
+
+const skylightTypes = [
+	{ title: 'Fixed', body: 'Sealed glass unit. No opening, no moving parts. The longest-lived option — 25–30 years easy.' },
+	{ title: 'Vented (manual)', body: 'Crank-open for ventilation. Same lifespan as fixed but with a moving frame to maintain.' },
+	{ title: 'Vented (motorized)', body: 'Remote or wall-switch open/close. Rain sensor closes automatically. More to go wrong but more useful.' },
+	{ title: 'Tubular daylight devices', body: '10–14" reflective tube from roof to ceiling. Bright daylight in hallways and closets without a full skylight cut.' },
+	{ title: 'Glazing options', body: 'Clear, bronze-tint, low-E coated. Low-E reduces heat gain by \\~50% over clear in East Texas summers.' },
+	{ title: 'Flashing kits (the leak fix)', body: 'When a skylight leaks, the glass is almost never the cause. The flashing kit around the perimeter is. Replacing the kit fixes 90% of leak calls.' },
+];
+
+const faqs = [
+	{ q: 'How often do skylights leak?', a: 'A correctly installed skylight rarely leaks until the flashing kit ages out — typically year 15–20. Cheap installs leak much earlier. The fix is almost always re-flashing, not replacing the skylight itself.' },
+	{ q: 'Why does my skylight leak when there\'s no rain?', a: 'Condensation. Warm humid interior air hits the cold glass surface and water collects on the inside. Looks like a leak. Fix is ventilation in the room below, not skylight replacement.' },
+	{ q: 'Can you cut a new opening for a skylight?', a: 'Yes. We coordinate with the homeowner on rafter spacing and interior trim. The opening cut + framing + flashing + skylight unit is typically a one- or two-day job depending on interior finish work.' },
+	{ q: 'Are skylights energy-efficient now?', a: 'Modern low-E glazed skylights are within \\~10% of a high-quality wall window for energy. The upgrade from a 1990s skylight to a current low-E unit is significant — we have seen 20% summer cooling reductions.' },
+	{ q: 'How long does install take?', a: 'Replacement of an existing skylight: 4–6 hours. New cut + install: 1–2 days depending on interior trim. Vented motorized: add a half-day for wiring.' },
+	{ q: 'Will it disrupt my interior?', a: 'New cuts disrupt the ceiling below for a day. We cover floors and furniture. Replacement of an existing skylight on the same opening usually has zero interior impact.' },
+];
+---
+
+<ServiceDetailLayout
+	title="Skylight Installation + Repair — Heritage Co."
+	heroEyebrow="Residential · Skylights"
+	heroH1="New skylights, or fixing the one that leaks."
+	heroSub="Fixed, vented, motorized. Plus tubular daylight devices for hallways and closets. The leak is almost always the flashing — not the skylight."
+	heroPhoto={imagery.heroCandidates.residentialRoofA.url}
+	heroPhotoAlt="Residential roof"
+	whatWeMeanHeading="Two services. Two different jobs."
+	whatWeMeanParagraphs={[
+		'Skylight work splits into two: new installation and leak repair. New installation is a coordinated job — we cut the roof opening, frame the curb, install the unit, flash it, and connect interior trim. Leak repair is almost always re-flashing the perimeter of an existing skylight, not replacing the unit itself.',
+		'A skylight that leaks does not usually leak through the glass. It leaks through the flashing kit at the perimeter, where the metal meets the shingle. Aging sealant, lifted flashing, or a poor original install — the fix is the same: pull it apart, re-flash, seal.',
+	]}
+	whenYouNeedHeading="When skylights need work."
+	whenYouNeedItems={[
+		{ title: 'New install for natural light', body: 'A dark hallway, a closet without a window, a vaulted ceiling that needs to feel bigger. Most residential skylights are added, not original.' },
+		{ title: 'Leak around an existing skylight', body: 'Stain on the drywall under the skylight, or active drip during rain. 90% of these are flashing — not the skylight.' },
+		{ title: 'Foggy or cracked glass', body: 'Failed seal between the glass panes. The unit cannot be repaired — the glazing is replaced.' },
+		{ title: 'Condensation on the inside', body: 'Looks like a leak but is humidity-driven. Often fixed by ventilation in the room below or upgrading to low-E glazing.' },
+		{ title: 'Manual to motorized upgrade', body: 'Existing crank-open vented skylight that the homeowner is tired of operating. Add a motor + rain sensor.' },
+		{ title: 'Old skylight replacement', body: 'Skylights past 20 years are usually due. The frame seal, the flashing kit, and the glazing all age together.' },
+	]}
+	processHeading="Four steps. Most jobs done in a day."
+	processSteps={[
+		{ label: 'Inspect', caption: 'Free. We diagnose new install vs repair vs replacement.' },
+		{ label: 'Quote', caption: 'Per-skylight pricing. Wiring extra for motorized.' },
+		{ label: 'Install', caption: 'New cut: 1–2 days. Replacement: 4–6 hours.' },
+		{ label: 'Stand by', caption: 'Workmanship + manufacturer pass-through.' },
+	]}
+	materialsHeading="Skylight types + glazing options."
+	materialsSub="Six choices, from fixed to tubular. We spec the right one for the room below."
+	costHeading="Per-skylight pricing."
+	costPriceBandFact="Typical per-skylight install cost — fixed unit (low end) vs motorized vented with wiring (high end). Plus a separate band for repair-vs-replace flashing-only repairs. See Founder Input page §4."
+	costFactors={[
+		'New cut vs replacement on existing opening',
+		'Fixed / vented manual / vented motorized',
+		'Glazing (clear < bronze-tint < low-E)',
+		'Wiring run for motorized units',
+		'Interior trim / drywall finish work',
+		'Roof access difficulty (single-story vs cathedral)',
+	]}
+	warrantyHeading="Workmanship + manufacturer warranty."
+	warrantyRows={[
+		{ label: 'Workmanship on flashing + install', fact: 'Workmanship warranty length on skylight installs (years). See Founder Input page §1.' },
+		{ label: 'Manufacturer pass-through', fact: 'Skylight manufacturer warranty pass-through (Velux, Fakro, etc.) — confirm primary brand and warranty length. See Founder Input page §2.' },
+	]}
+	faqItems={faqs}
+	endCtaPhoto={imagery.heroCandidates.residentialRoofC.url}
+	endCtaHeading="Free skylight inspection."
+	endCtaSub="We tell you whether it's a flashing fix or a full replacement."
+	endCtaLabel="Get my free inspection"
+	endCtaHref="/free-inspection"
+>
+	<div slot="materials">
+		<div class="sk-grid">
+			{skylightTypes.map((s) => (
+				<div class="sk-item">
+					<p class="sk-title">{s.title}</p>
+					<p class="sk-body">{s.body}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</ServiceDetailLayout>
+
+<style>
+	.sk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--border); }
+	.sk-item { padding: 24px 28px 0 0; }
+	.sk-item + .sk-item { padding-left: 28px; border-left: 1px solid var(--border); }
+	.sk-item:nth-child(n+4) { padding-top: 24px; border-top: 1px solid var(--border); margin-top: 24px; }
+	.sk-title { color: var(--charcoal); font-size: 16px; font-weight: 600; margin: 0 0 8px; }
+	.sk-body { color: var(--warm-gray); font-size: 14px; line-height: 1.55; margin: 0; }
+</style>
