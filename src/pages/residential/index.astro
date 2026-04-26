@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ServiceTile from '../../components/ServiceTile.astro';
-import LocalItem from '../../components/LocalItem.astro';
 import WarrantyBlock from '../../components/WarrantyBlock.astro';
 import ReviewCard from '../../components/ReviewCard.astro';
 import MaterialTabs from '../../components/MaterialTabs.astro';
@@ -10,6 +9,7 @@ import ColorSwatchGrid from '../../components/ColorSwatchGrid.astro';
 import ProcessFlow from '../../components/ProcessFlow.astro';
 import LayeredCard from '../../components/LayeredCard.astro';
 import FullBleedSection from '../../components/FullBleedSection.astro';
+import TechnicalFeatures from '../../components/TechnicalFeatures.astro';
 import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
 import { imagery } from '../../content/imagery';
 
@@ -135,7 +135,7 @@ const faqs = [
 			</div>
 		</section>
 
-		<!-- Why local: photo-right + content-left. No charcoal band — the photo carries the visual weight. -->
+		<!-- Why local: photo-right + content-left + 3 flat columns (no LocalItem cards) -->
 		<section class="block why-local">
 			<div class="why-row">
 				<div class="why-content">
@@ -147,11 +147,38 @@ const faqs = [
 					<img src={imagery.heroCandidates.residentialRoofC.url} alt={imagery.heroCandidates.residentialRoofC.alt} loading="lazy" class="zoom-photo" />
 				</div>
 			</div>
-			<div class="local-grid">
-				<LocalItem heading="We live here." body="Heritage Co. is locally owned and operated. Our crews live in your area, work in your area, send their kids to school in your area." />
-				<LocalItem heading="We answer the phone." body="When you call, you get us. Not a 1-800 number routing through three states to a script-reader." />
-				<LocalItem heading="We're around if you need us." body="After the install, we're not gone. We're 30 minutes away if something needs attention. Call the owner direct." />
+			<div class="why-points">
+				<div class="why-point">
+					<p class="why-point-h">We live here.</p>
+					<p class="why-point-body">Crews live in your area, work in your area, send their kids to school in your area.</p>
+				</div>
+				<div class="why-point">
+					<p class="why-point-h">We answer the phone.</p>
+					<p class="why-point-body">When you call, you get us. Not a 1-800 number routing through three states to a script-reader.</p>
+				</div>
+				<div class="why-point">
+					<p class="why-point-h">We're 30 minutes away.</p>
+					<p class="why-point-body">After the install, we're not gone. Call the owner direct if something needs attention.</p>
+				</div>
 			</div>
+		</section>
+
+		<!-- Technical block: what's actually on every Heritage Co. residential roof -->
+		<section class="block tech-block">
+			<TechnicalFeatures
+				eyebrow="On every roof we install"
+				heading="Six things that go on the deck before the shingle does."
+				sub="A roof is more than the top layer. The details below are what separates a roof that lasts 25 years from one that lasts 12."
+				columns={3}
+				features={[
+					{ icon: 'shield', title: 'Class 4 impact rating available', body: 'Hail-rated shingles take a 2-inch ice ball at 90 mph without splitting. Your insurer may discount premiums on a Class 4 install — most do in Texas.' },
+					{ icon: 'water', title: 'Ice & water shield at the eaves + valleys', body: 'A self-sealing membrane runs the bottom 3 feet and through every valley. Stops wind-driven rain from getting under shingles when storms blow sideways.' },
+					{ icon: 'wind', title: '130 mph wind warranty on architectural', body: 'Architectural shingles hand-nailed to the spec carry a 130 mph wind warranty from the manufacturer. We sealed-strip the perimeter for the extra grip during East Texas spring storms.' },
+					{ icon: 'layers', title: 'Synthetic underlayment, not 15-lb felt', body: 'Tear-resistant, walks dry, and sheds water on its own if a tarp ever has to come off mid-job. Felt cracks in cold and pulls on nails — we do not use it.' },
+					{ icon: 'flame', title: 'Drip edge on every eave + rake', body: 'A bent metal flashing under the shingle that directs water into the gutter, not behind the fascia. Standard on us, not on every quote you will see in East Texas.' },
+					{ icon: 'gauge', title: 'Ridge + soffit ventilation balanced', body: 'A roof that cannot breathe cooks the deck and shortens the shingle life. We balance intake at the soffit with exhaust at the ridge. Math, not guesswork.' },
+				]}
+			/>
 		</section>
 
 		<!-- Process: ProcessFlow with a photo flush to one side (asymmetric rhythm) -->
@@ -182,13 +209,20 @@ const faqs = [
 			<LayeredCard
 				eyebrow="The guarantee"
 				heading="Every Heritage Co. roof comes with a written guarantee."
-				body="Workmanship from us. Manufacturer pass-through on the materials. Specific years and any branded guarantee phrase below."
+				body="Workmanship from us. Manufacturer pass-through on the materials. The two warranty terms are listed below; named-guarantee phrase and money-back conditions get filled in by the founders."
 				gradient="linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)"
 				ctaHref="/about"
 				ctaLabel="See full warranty terms"
 			/>
 			<div class="warranty-inline">
-				<WarrantyBlock theme="light" />
+				<WarrantyBlock
+					theme="light"
+					heading=""
+					cards={[
+						{ label: 'Workmanship warranty', fact: 'Workmanship warranty length on residential installs (years). State as a single sentence. See Founder Input page §1.' },
+						{ label: 'Material pass-through', fact: 'Manufacturer pass-through warranty (which manufacturer, how long, transferable on home sale Y/N). See Founder Input page §1.' },
+					]}
+				/>
 			</div>
 			<div class="financing-inline">
 				<p class="eyebrow eyebrow-soft">Paying for it</p>
@@ -389,11 +423,36 @@ const faqs = [
 		overflow: hidden;
 	}
 	.why-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-	.local-grid {
+
+	/* Flat 3-column "why local" points — no card containers */
+	.why-points {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 32px;
+		gap: 0;
+		border-top: 1px solid var(--border);
 	}
+	.why-point {
+		padding: 32px 28px 0 0;
+		position: relative;
+	}
+	.why-point + .why-point {
+		padding-left: 32px;
+		border-left: 1px solid var(--border);
+	}
+	.why-point-h {
+		color: var(--charcoal);
+		font-size: 20px; font-weight: 600;
+		letter-spacing: -0.3px; line-height: 1.2;
+		margin: 0 0 10px;
+	}
+	.why-point-body {
+		color: var(--warm-gray);
+		font-size: 15px; line-height: 1.6;
+		margin: 0;
+	}
+
+	/* Technical features block */
+	.tech-block {}
 
 	/* Process row */
 	.process-row {

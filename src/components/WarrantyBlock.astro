@@ -31,8 +31,12 @@ const {
 ---
 
 <section class={`warranty warranty-${theme}`}>
-	<p class={`section-eyebrow ${theme === 'dark' ? 'on-dark' : ''}`}>The warranty</p>
-	<h2 class={`section-h ${theme === 'dark' ? 'on-dark' : ''}`}>{heading}</h2>
+	{heading && (
+		<>
+			<p class={`section-eyebrow ${theme === 'dark' ? 'on-dark' : ''}`}>The warranty</p>
+			<h2 class={`section-h ${theme === 'dark' ? 'on-dark' : ''}`}>{heading}</h2>
+		</>
+	)}
 	{sub && <p class={`section-sub ${theme === 'dark' ? 'on-dark' : ''}`}>{sub}</p>}
 
 	{flat ? (
