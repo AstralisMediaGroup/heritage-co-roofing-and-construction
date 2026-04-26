@@ -5,6 +5,9 @@ import AsymmetricRow from '../components/AsymmetricRow.astro';
 import StatRow from '../components/StatRow.astro';
 import ServiceAreaMap from '../components/ServiceAreaMap.astro';
 import ReviewCard from '../components/ReviewCard.astro';
+import FullBleedSection from '../components/FullBleedSection.astro';
+import ConstrainedSection from '../components/ConstrainedSection.astro';
+import BleedingImage from '../components/BleedingImage.astro';
 import { founders } from '../content/founders';
 ---
 
@@ -83,6 +86,17 @@ import { founders } from '../content/founders';
 		/>
 	</section>
 
+	<!-- Cinematic transition (FullBleedSection) -->
+	<FullBleedSection
+		gradient="linear-gradient(135deg, #4a4a48 0%, #6b5d4a 50%, #2a2a28 100%)"
+		overlayPosition="bottom-left"
+		minHeight="420px"
+		overlayDarken={0.65}
+	>
+		<p class="fb-eyebrow">Built to last</p>
+		<h2 class="fb-h">Call about a question in 2030. Same shop. Same number.</h2>
+	</FullBleedSection>
+
 	<!-- Founders -->
 	<section class="founders">
 		<p class="section-eyebrow">Meet the team</p>
@@ -98,16 +112,20 @@ import { founders } from '../content/founders';
 		</p>
 	</section>
 
-	<!-- Stats -->
-	<section class="stats-section">
-		<StatRow stats={[
-			{ label: 'Combined years', placeholderFact: 'Real total years roofing across the four founders. Build Pack §1 hedges with \"30+ combined years\"; we want the actual number. See Founder Input page §7.' },
-			{ label: 'Roofs installed', placeholderFact: 'Lifetime residential roof count. See Founder Input page §5.' },
-			{ value: 'A+', label: 'BBB rating', placeholderFact: 'Confirm BBB rating + accreditation start year. See Founder Input page §2.' },
-			{ value: 'TX + AR', label: 'Service area' },
-		]} />
-		<p class="stats-note">Numbers above are HeritagePlaceholders until the founders confirm. \"A+\" is a default — replace if different.</p>
-	</section>
+	<!-- Stats (constrained narrative) -->
+	<ConstrainedSection background="light" paddingY="md">
+		<p class="cs-eyebrow">By the numbers</p>
+		<h2 class="cs-h">A regional shop with the receipts.</h2>
+		<p class="cs-body">Four numbers below. Two we have, two are filled in by the founders. We list them as placeholders until they confirm — no inflated stat lands on the page.</p>
+		<div class="cs-stats">
+			<StatRow stats={[
+				{ label: 'Combined years', placeholderFact: 'Real total years roofing across the four founders. Build Pack §1 hedges with 30+ combined years; we want the actual number. See Founder Input page §7.' },
+				{ label: 'Roofs installed', placeholderFact: 'Lifetime residential roof count. See Founder Input page §5.' },
+				{ value: 'A+', label: 'BBB rating', placeholderFact: 'Confirm BBB rating + accreditation start year. See Founder Input page §2.' },
+				{ value: 'TX + AR', label: 'Service area' },
+			]} />
+		</div>
+	</ConstrainedSection>
 
 	<!-- Service area map -->
 	<section class="area-map">
@@ -115,6 +133,16 @@ import { founders } from '../content/founders';
 		<h2 class="section-h">East Texas + Central Arkansas.</h2>
 		<p class="section-sub">Headquartered in Longview. Crews across two states.</p>
 		<ServiceAreaMap />
+	</section>
+
+	<!-- Bleeding image transition -->
+	<section class="bleed-section">
+		<BleedingImage
+			gradient="linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)"
+			aspect="21 / 9"
+			bleed={100}
+			maxWidth="1000px"
+		/>
 	</section>
 
 	<!-- Reviews -->
@@ -247,15 +275,46 @@ import { founders } from '../content/founders';
 	.founders-link { text-align: center; margin: 32px 0 0; font-size: 14px; }
 	.text-link { color: #1a1a1a; font-weight: 500; border-bottom: 2px solid #1a1a1a; padding-bottom: 3px; }
 
-	/* Stats */
-	.stats-section { background: #ffffff; padding: 80px 48px; border-top: 1px solid #ece7de; }
-	.stats-note {
+	/* FullBleed transition */
+	.fb-eyebrow {
+		color: var(--rust);
+		font-size: 13px; font-weight: 500;
+		letter-spacing: 1px; text-transform: uppercase;
+		margin: 0 0 16px;
+	}
+	.fb-h {
+		color: var(--off-white);
+		font-size: 40px; font-weight: 600;
+		letter-spacing: -1px; line-height: 1.15;
+		margin: 0; max-width: 580px;
+	}
+
+	/* Constrained-section internal helpers */
+	.cs-eyebrow {
+		color: var(--rust);
+		font-size: 13px; font-weight: 500;
+		letter-spacing: 1px; text-transform: uppercase;
+		margin: 0 0 14px; text-align: center;
+	}
+	.cs-h {
+		color: var(--charcoal);
+		font-size: 36px; font-weight: 600;
+		letter-spacing: -0.8px; line-height: 1.15;
+		margin: 0 0 16px; text-align: center;
+	}
+	.cs-body {
 		color: var(--warm-gray);
-		font-size: 12px;
-		text-align: center;
-		margin: 24px auto 0;
-		max-width: 700px;
-		font-style: normal;
+		font-size: 15px; line-height: 1.65;
+		margin: 0 auto 40px; text-align: center; max-width: 640px;
+	}
+	.cs-stats { width: 100%; }
+
+	/* Bleeding-image section */
+	.bleed-section {
+		padding: 0 48px;
+		background: var(--ivory-tint);
+		position: relative;
+		z-index: 1;
 	}
 
 	/* Service area */
