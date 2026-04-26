@@ -1,0 +1,154 @@
+{
+  "$schema": "Heritage Co. imagery manifest — Plan 006.2",
+  "lastUpdated": "2026-04-26",
+  "rules": [
+    "Every image file under public/imagery/ MUST have an entry here.",
+    "If license is 'pending' or 'unconfirmed', the page consumer must wrap the image with a HeritagePlaceholder note OR the file must not yet exist (manifest entry is the placeholder).",
+    "Manufacturer product images: dealer-portal / press-kit / authorized-resource only. Public website images are NOT licensed for third-party commercial use without a manufacturer agreement.",
+    "Heritage job photography: only used after explicit homeowner permission (Founder Input page §10).",
+    "Unsplash: free for commercial use under the Unsplash License. Attribution recommended, not required."
+  ],
+  "categories": {
+    "manufacturer": "Product photography from material manufacturers",
+    "lifestyle": "Stock or licensed lifestyle/contextual roofing photography",
+    "heritage": "Real Heritage Co. job photography (founder-supplied)"
+  },
+  "files": {
+    "manufacturer/asphalt-gaf-timberline-hdz.jpg": {
+      "status": "pending-license",
+      "intendedSource": "GAF certified-contractor dealer portal (gaf.com/en-us/professionals)",
+      "intendedSubject": "GAF Timberline HDZ asphalt shingle close-up + installed roof",
+      "intendedUse": "Residential MaterialTabs — Asphalt panel hero photo",
+      "license": "Requires Heritage's GAF Master Elite or contractor account; press-kit usage typically requires written permission",
+      "attribution": "Photo: GAF Materials Corp.",
+      "fallback": "Use lifestyle/asphalt-roof-1.jpg (Unsplash) with HeritagePlaceholder noting 'illustrative — replace with licensed GAF asset before launch'"
+    },
+    "manufacturer/asphalt-owens-corning-duration.jpg": {
+      "status": "pending-license",
+      "intendedSource": "Owens Corning Roofing Trade Resources (owenscorning.com/roofing/contractor)",
+      "intendedSubject": "Owens Corning Duration shingle close-up",
+      "intendedUse": "Residential MaterialTabs — Asphalt panel secondary photo",
+      "license": "Owens Corning Platinum partner agreement required",
+      "attribution": "Photo: Owens Corning",
+      "fallback": "Use lifestyle/asphalt-roof-2.jpg with HeritagePlaceholder"
+    },
+    "manufacturer/asphalt-certainteed-landmark.jpg": {
+      "status": "pending-license",
+      "intendedSource": "CertainTeed contractor portal (certainteed.com/professionals/roofing)",
+      "intendedSubject": "CertainTeed Landmark architectural shingle close-up",
+      "intendedUse": "Residential MaterialTabs — Asphalt panel tertiary photo",
+      "license": "CertainTeed credentialed contractor account",
+      "attribution": "Photo: CertainTeed Corporation",
+      "fallback": "Gradient placeholder"
+    },
+    "manufacturer/metal-drexel-standing-seam.jpg": {
+      "status": "pending-license",
+      "intendedSource": "Drexel Metals dealer resources (drexmet.com)",
+      "intendedSubject": "Drexel Metals standing seam panel installed",
+      "intendedUse": "Residential MaterialTabs — Metal panel hero photo",
+      "license": "Drexel dealer agreement",
+      "attribution": "Photo: Drexel Metals",
+      "fallback": "lifestyle/metal-roof-1.jpg"
+    },
+    "manufacturer/metal-mcelroy-mesa.jpg": {
+      "status": "pending-license",
+      "intendedSource": "McElroy Metal contractor portal (mcelroymetal.com)",
+      "intendedSubject": "McElroy Mesa or Maxima panel installed",
+      "intendedUse": "Residential MaterialTabs — Metal panel secondary photo",
+      "license": "McElroy contractor account",
+      "attribution": "Photo: McElroy Metal",
+      "fallback": "Gradient placeholder"
+    },
+    "manufacturer/tile-boral-clay.jpg": {
+      "status": "pending-license",
+      "intendedSource": "Boral Roofing professional resources (boralroof.com)",
+      "intendedSubject": "Boral clay or concrete tile installed",
+      "intendedUse": "Residential MaterialTabs — Tile panel hero photo",
+      "license": "Boral pro account / press kit",
+      "attribution": "Photo: Boral Roofing",
+      "fallback": "lifestyle/tile-roof-1.jpg"
+    },
+    "manufacturer/tile-eagle-roofing.jpg": {
+      "status": "pending-license",
+      "intendedSource": "Eagle Roofing Products contractor portal (eagleroofing.com)",
+      "intendedSubject": "Eagle concrete tile installed close-up",
+      "intendedUse": "Residential MaterialTabs — Tile panel secondary photo",
+      "license": "Eagle contractor account",
+      "attribution": "Photo: Eagle Roofing Products",
+      "fallback": "Gradient placeholder"
+    },
+
+    "lifestyle/residential-hero-1.jpg": {
+      "status": "candidate-pending-download",
+      "intendedSource": "unsplash.com — search 'residential roof east texas'",
+      "intendedSubject": "Wide shot of finished residential roof with sky visible",
+      "intendedUse": "Homepage hero replacement candidate (NOT wired into hero in Plan 006 per locked constraint)",
+      "license": "Unsplash License (free for commercial use, attribution recommended)",
+      "attribution": "Photo: <photographer name> on Unsplash",
+      "fallback": "Current gradient placeholder — homepage hero unchanged in Plan 006"
+    },
+    "lifestyle/asphalt-roof-1.jpg": {
+      "status": "candidate-pending-download",
+      "intendedSource": "unsplash.com — search 'asphalt shingle roof'",
+      "intendedSubject": "Close-up of asphalt shingle roof in good light",
+      "intendedUse": "Residential MaterialTabs Asphalt panel — fallback if manufacturer images unlicensed",
+      "license": "Unsplash License",
+      "attribution": "Photo: <photographer name> on Unsplash",
+      "fallback": "Gradient placeholder"
+    },
+    "lifestyle/metal-roof-1.jpg": {
+      "status": "candidate-pending-download",
+      "intendedSource": "unsplash.com — search 'metal roof standing seam'",
+      "intendedSubject": "Standing seam metal roof in daylight",
+      "intendedUse": "Residential MaterialTabs Metal panel fallback",
+      "license": "Unsplash License",
+      "attribution": "Photo: <photographer name> on Unsplash",
+      "fallback": "Gradient placeholder"
+    },
+    "lifestyle/tile-roof-1.jpg": {
+      "status": "candidate-pending-download",
+      "intendedSource": "unsplash.com — search 'tile roof terracotta'",
+      "intendedSubject": "Tile roof close-up",
+      "intendedUse": "Residential MaterialTabs Tile panel fallback",
+      "license": "Unsplash License",
+      "attribution": "Photo: <photographer name> on Unsplash",
+      "fallback": "Gradient placeholder"
+    },
+    "lifestyle/storm-damage-1.jpg": {
+      "status": "candidate-pending-download",
+      "intendedSource": "unsplash.com — search 'roof storm damage' or 'hail damage roof'",
+      "intendedSubject": "Roof showing visible storm damage (hail or wind)",
+      "intendedUse": "Storm Damage page — Before image in BeforeAfterSlider examples",
+      "license": "Unsplash License",
+      "attribution": "Photo: <photographer name> on Unsplash + tagged 'Illustrative — not a Heritage job' per the no-invented-facts rule",
+      "fallback": "Gradient placeholder"
+    },
+    "lifestyle/finished-roof-1.jpg": {
+      "status": "candidate-pending-download",
+      "intendedSource": "unsplash.com — search 'new asphalt shingle roof'",
+      "intendedSubject": "Recently installed clean residential roof",
+      "intendedUse": "Storm Damage page — After image in BeforeAfterSlider examples + Homepage AsymmetricRow photos",
+      "license": "Unsplash License",
+      "attribution": "Photo: <photographer name> on Unsplash + tagged 'Illustrative'",
+      "fallback": "Gradient placeholder"
+    },
+
+    "heritage/_placeholder.txt": {
+      "status": "empty-by-design",
+      "intendedSource": "Real Heritage Co. job photography",
+      "intendedUse": "Replaces all 'illustrative' lifestyle images once founders deliver",
+      "license": "Founder-supplied with explicit homeowner permission (Founder Input §10)",
+      "attribution": "Photo: Heritage Co. Roofing & Construction",
+      "fallback": "lifestyle/* images with 'Illustrative' tag"
+    }
+  },
+  "attribution_line": {
+    "footer": "Imagery: GAF, Owens Corning, CertainTeed (product); Unsplash contributors (lifestyle).",
+    "materials_section": "Product photography courtesy of GAF, Owens Corning, CertainTeed."
+  },
+  "openItems": [
+    "Verify Heritage's manufacturer relationships (GAF Master Elite Y/N? Owens Corning Platinum Y/N? CertainTeed credentialed Y/N?). Founder Input §2.",
+    "Until manufacturer licenses are confirmed, every manufacturer/* file path stays empty and consumers fall back to lifestyle/* + a HeritagePlaceholder.",
+    "Consider contracting a roofing photographer for 4-6 East Texas job shoots once 3-5 customers grant photo permission."
+  ]
+}
