@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import RegionColumns from '../components/RegionColumns.astro';
+import ServiceAreaMap from '../components/ServiceAreaMap.astro';
 import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 ---
 
@@ -18,48 +18,84 @@ import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 		</div>
 	</section>
 
-	<!-- Map -->
-	<section class="map">
-		<div class="map-placeholder" aria-hidden="true"></div>
-		<HeritagePlaceholder fact="Static map asset (East Texas + Central Arkansas with HQ pin on Longview and any satellite-office pins). PNG/SVG, ~1100×360. See Founder Input page §10." />
+	<!-- Map (centerpiece) -->
+	<section class="map-section">
+		<ServiceAreaMap />
 	</section>
 
-	<!-- Regions -->
+	<!-- Per-region info cards -->
 	<section class="regions">
-		<p class="section-eyebrow">Where we work</p>
-		<h2 class="section-h">Cities and towns we serve.</h2>
-		<p class="section-sub">If your town is not on the list and you are nearby, call us anyway. We probably go there too.</p>
-		<RegionColumns />
+		<p class="section-eyebrow">By region</p>
+		<h2 class="section-h">Crews where the work is.</h2>
+		<p class="section-sub">Two regions, one shop. Each region's response time and roof count goes below as the founders confirm.</p>
+		<div class="region-grid">
+			<article class="region-card">
+				<p class="region-label">East Texas</p>
+				<h3 class="region-h">Headquartered in Longview.</h3>
+				<dl class="region-stats">
+					<div class="region-stat-row">
+						<dt class="region-stat-label">Crews based in</dt>
+						<dd class="region-stat-value">
+							<HeritagePlaceholder inline={true} fact="cities crews live in across East TX (vs. drive to). See Founder Input §6." />
+						</dd>
+					</div>
+					<div class="region-stat-row">
+						<dt class="region-stat-label">Typical response</dt>
+						<dd class="region-stat-value">
+							<HeritagePlaceholder inline={true} fact="Free-inspection turnaround in plain words. See Founder Input §8." />
+						</dd>
+					</div>
+					<div class="region-stat-row">
+						<dt class="region-stat-label">Roofs installed in region</dt>
+						<dd class="region-stat-value">
+							<HeritagePlaceholder inline={true} fact="Lifetime East TX roof count if tracked. See Founder Input §5." />
+						</dd>
+					</div>
+				</dl>
+			</article>
+			<article class="region-card">
+				<p class="region-label">Central Arkansas</p>
+				<h3 class="region-h">Crews across the I-40 corridor.</h3>
+				<dl class="region-stats">
+					<div class="region-stat-row">
+						<dt class="region-stat-label">Crews based in</dt>
+						<dd class="region-stat-value">
+							<HeritagePlaceholder inline={true} fact="Cities crews live in across Central AR (or whether they drive from East TX). See Founder Input §6." />
+						</dd>
+					</div>
+					<div class="region-stat-row">
+						<dt class="region-stat-label">Typical response</dt>
+						<dd class="region-stat-value">
+							<HeritagePlaceholder inline={true} fact="Free-inspection turnaround for AR specifically. Same as TX, or different? See Founder Input §9." />
+						</dd>
+					</div>
+					<div class="region-stat-row">
+						<dt class="region-stat-label">Roofs installed in region</dt>
+						<dd class="region-stat-value">
+							<HeritagePlaceholder inline={true} fact="Lifetime AR roof count if tracked. See Founder Input §5." />
+						</dd>
+					</div>
+				</dl>
+			</article>
+		</div>
 	</section>
 
-	<!-- Coverage + response time -->
+	<!-- Coverage details -->
 	<section class="coverage">
-		<p class="section-eyebrow">How fast we get there</p>
-		<h2 class="section-h">Response times and how we cover the footprint.</h2>
+		<p class="section-eyebrow">Coverage details</p>
+		<h2 class="section-h">The fine print on how we cover the footprint.</h2>
 		<div class="coverage-grid">
 			<div class="coverage-item">
-				<p class="coverage-label">Free inspection turnaround</p>
-				<HeritagePlaceholder fact="Free-inspection SLA in plain words: same-day or next-day? 24 hours? Different by zip? See Founder Input page §8." />
-			</div>
-			<div class="coverage-item">
-				<p class="coverage-label">Where the crews live</p>
-				<HeritagePlaceholder fact="Cities crews actually live in (vs. cities crews drive to). Supports the 'crews live in your area' claim from the homepage. See Founder Input page §6." />
-			</div>
-			<div class="coverage-item">
 				<p class="coverage-label">Travel charge / drive radius</p>
-				<HeritagePlaceholder fact="Maximum drive radius before a travel charge kicks in (miles). Yes/no on travel charge for inside-footprint jobs. See Founder Input page §9." />
+				<HeritagePlaceholder fact="Max drive radius before a travel charge kicks in (miles). Yes/no on travel charge for inside-footprint jobs. See Founder Input §9." />
 			</div>
 			<div class="coverage-item">
 				<p class="coverage-label">Satellite offices</p>
-				<HeritagePlaceholder fact="Offices besides the Longview HQ — addresses if any. (Schulte has 5; Heritage has?) See Founder Input page §9." />
-			</div>
-			<div class="coverage-item">
-				<p class="coverage-label">East Texas vs. Central Arkansas response</p>
-				<HeritagePlaceholder fact="Same response-time SLA across both states, or different? If Arkansas is slower, what is realistic? See Founder Input page §9." />
+				<HeritagePlaceholder fact="Offices besides the Longview HQ — addresses if any. See Founder Input §9." />
 			</div>
 			<div class="coverage-item">
 				<p class="coverage-label">Emergency / after-hours</p>
-				<HeritagePlaceholder fact="Is 903-242-8102 the emergency line, or different? 24-hour response yes/no. See Founder Input page §11." />
+				<HeritagePlaceholder fact="Is 903-242-8102 the emergency line, or different? 24-hour response yes/no. See Founder Input §11." />
 			</div>
 		</div>
 	</section>
@@ -68,7 +104,7 @@ import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 	<section class="hq">
 		<p class="hq-eyebrow">Headquarters</p>
 		<p class="hq-h">Longview, Texas.</p>
-		<HeritagePlaceholder fact="Full HQ mailing address — for footer, contact page, and Google Business listing. See Founder Input page §11." />
+		<HeritagePlaceholder fact="Full HQ mailing address — for footer, contact page, and Google Business listing. See Founder Input §11." />
 	</section>
 </BaseLayout>
 
@@ -98,54 +134,83 @@ import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 		margin: 0; max-width: 560px;
 	}
 
-	/* Map */
-	.map { background: #faf8f4; padding: 64px 48px 0; }
-	.map-placeholder {
-		max-width: 1100px;
-		margin: 0 auto 16px;
-		height: 360px;
-		background: linear-gradient(135deg, #d8d2c2 0%, #b8a78c 50%, #8fa8c0 100%);
-		border: 1px solid #ece7de;
-	}
-	.map > :global(.placeholder) { max-width: 1100px; margin-left: auto; margin-right: auto; }
-
-	/* Regions */
-	.regions { background: #faf8f4; padding: 96px 48px; }
 	.section-eyebrow {
 		color: #b54620; font-size: 13px; font-weight: 500;
 		text-align: center; margin: 0 0 16px;
 		letter-spacing: 1px; text-transform: uppercase;
 	}
 	.section-h {
-		color: #1a1a1a; font-size: 40px; font-weight: 600;
+		color: #1a1a1a; font-size: 36px; font-weight: 600;
 		text-align: center; margin: 0 0 16px;
-		letter-spacing: -1px; line-height: 1.1;
+		letter-spacing: -0.8px; line-height: 1.1;
 	}
 	.section-sub {
 		color: #5a5347; font-size: 16px; text-align: center;
 		margin: 0 auto 56px; max-width: 600px;
 	}
 
-	/* Coverage */
-	.coverage { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
-	.coverage-grid {
-		display: grid; grid-template-columns: repeat(2, 1fr);
-		gap: 28px; max-width: 960px; margin: 0 auto;
+	/* Map */
+	.map-section { background: var(--ivory-tint); padding: 64px 48px; }
+
+	/* Regions */
+	.regions { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
+	.region-grid {
+		display: grid; grid-template-columns: 1fr 1fr;
+		gap: 24px; max-width: 1100px; margin: 0 auto;
 	}
-	.coverage-item { padding: 24px; background: #faf8f4; border: 1px solid #ece7de; }
+	.region-card {
+		padding: 32px;
+		background: #ffffff;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-large);
+		box-shadow: var(--shadow-subtle);
+	}
+	.region-label {
+		color: var(--rust); font-size: 12px; font-weight: 500;
+		margin: 0 0 12px; letter-spacing: 1.5px; text-transform: uppercase;
+	}
+	.region-h {
+		color: var(--charcoal); font-size: 24px; font-weight: 600;
+		margin: 0 0 24px; letter-spacing: -0.4px; line-height: 1.2;
+	}
+	.region-stats { display: flex; flex-direction: column; gap: 0; margin: 0; }
+	.region-stat-row {
+		display: grid; grid-template-columns: 1fr;
+		gap: 6px; padding: 12px 0;
+		border-top: 1px solid var(--border);
+	}
+	.region-stat-label {
+		color: var(--charcoal); font-size: 12px; font-weight: 600;
+		letter-spacing: 1px; text-transform: uppercase;
+	}
+	.region-stat-value { color: var(--warm-gray); font-size: 14px; line-height: 1.5; margin: 0; }
+
+	/* Coverage */
+	.coverage { background: var(--ivory-tint); padding: 96px 48px; border-top: 1px solid #ece7de; }
+	.coverage-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 24px; max-width: 1100px; margin: 0 auto;
+	}
+	.coverage-item {
+		padding: 24px;
+		background: #ffffff;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-subtle);
+	}
 	.coverage-label {
-		color: #1a1a1a; font-size: 14px; font-weight: 600;
+		color: var(--charcoal); font-size: 14px; font-weight: 600;
 		margin: 0 0 12px; letter-spacing: -0.2px;
 	}
 
 	/* HQ */
-	.hq { background: #1a1a1a; padding: 72px 48px; text-align: center; }
+	.hq { background: var(--charcoal); padding: 72px 48px; text-align: center; }
 	.hq-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
+		color: var(--rust); font-size: 13px; font-weight: 500;
 		margin: 0 0 12px; letter-spacing: 1px; text-transform: uppercase;
 	}
 	.hq-h {
-		color: #faf8f4; font-size: 32px; font-weight: 600;
+		color: var(--off-white); font-size: 32px; font-weight: 600;
 		margin: 0 auto 20px; letter-spacing: -0.5px; max-width: 600px;
 	}
 	.hq > :global(.placeholder) { max-width: 600px; margin-left: auto; margin-right: auto; }
