@@ -1,23 +1,276 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const founders = [
+	{ name: 'Jordy', role: 'Operator', cred: '15 years roofing.<br>East Texas.' },
+	{ name: 'Peyton', role: 'Commercial PM', cred: 'Network of trusted craftsmen.' },
+	{ name: 'Nishil', role: 'Managing partner', cred: 'Operations and customer care.' },
+	{ name: 'Vivek', role: 'Finance', cred: 'Pricing fair, terms clear.' },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Heritage Co. Roofing & Construction</title>
-	</head>
-	<body class="bg-slate-50 text-slate-900 min-h-screen flex items-center justify-center">
-		<main class="text-center p-8">
-			<h1 class="text-4xl font-bold tracking-tight sm:text-6xl">
-				Heritage Co. Roofing & Construction
-			</h1>
-			<p class="mt-4 text-lg text-slate-600">
-				Astro + Tailwind starter — site coming soon.
+<BaseLayout title="Heritage Co. Roofing & Construction — East Texas + Central Arkansas">
+	<!-- Hero -->
+	<section class="hero">
+		<div class="hero-photo" aria-hidden="true"></div>
+		<div class="hero-overlay" aria-hidden="true"></div>
+		<div class="hero-content">
+			<h1 class="hero-h1">Roofing done right.<br />Built to last.</h1>
+			<p class="hero-sub">
+				Heritage Co. is locally owned and operated in East Texas and Central Arkansas. When you call us, you get us — not a national call center.
 			</p>
-		</main>
-	</body>
-</html>
+			<div class="hero-bullets">
+				<div><span class="checkmark">✓</span> Free roof inspections</div>
+				<div><span class="checkmark">✓</span> Same-day or next-day quotes</div>
+				<div><span class="checkmark">✓</span> Workmanship and material warranties</div>
+			</div>
+			<div class="hero-cta-row">
+				<a class="cta-primary" href="/#inspection">Get my free inspection</a>
+				<a class="cta-secondary" href="tel:9032428102">Call 903-242-8102</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Audience cards -->
+	<section class="audience">
+		<h2 class="audience-h">What kind of roof do you need?</h2>
+		<p class="audience-sub">We do both. The work is different for each.</p>
+		<div class="cards">
+			<a class="card" href="/residential">
+				<div class="card-photo" aria-hidden="true"></div>
+				<div class="card-body-pad">
+					<p class="card-label">For homeowners</p>
+					<h3 class="card-h">Roofs for your home.</h3>
+					<p class="card-body">Replacement, repair, and storm damage. Insurance accepted. Free inspections, fast quotes.</p>
+					<span class="card-cta">Free inspection →</span>
+				</div>
+			</a>
+			<a class="card" href="/commercial">
+				<div class="card-photo commercial" aria-hidden="true"></div>
+				<div class="card-body-pad">
+					<p class="card-label">For businesses</p>
+					<h3 class="card-h">Roofs for your business.</h3>
+					<p class="card-body">New construction, re-roofs, maintenance. Bonded and insured. All major systems.</p>
+					<span class="card-cta">Request quote →</span>
+				</div>
+			</a>
+		</div>
+	</section>
+
+	<!-- Why local matters -->
+	<section class="local">
+		<p class="local-eyebrow">Why local matters</p>
+		<h2 class="local-h">We're not a national chain.</h2>
+		<p class="local-sub">When the big roofing companies finish a job, they're gone. We don't go anywhere.</p>
+		<div class="local-grid">
+			<div>
+				<div class="local-item-photo" aria-hidden="true"></div>
+				<p class="local-item-h">We live here.</p>
+				<p class="local-item-body">Heritage Co. is locally owned and operated. Our crews live in your area, work in your area, send their kids to school in your area.</p>
+			</div>
+			<div>
+				<div class="local-item-photo" aria-hidden="true"></div>
+				<p class="local-item-h">We answer the phone.</p>
+				<p class="local-item-body">When you call, you get us. Not a 1-800 number routing through three states to a script-reader.</p>
+			</div>
+			<div>
+				<div class="local-item-photo" aria-hidden="true"></div>
+				<p class="local-item-h">We're around if you need us.</p>
+				<p class="local-item-body">After the install, we're not gone. We're 30 minutes away if something needs attention. Call the owner direct.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Founders -->
+	<section class="founders">
+		<p class="founders-eyebrow">Meet the team</p>
+		<h2 class="founders-h">The people answering your call.</h2>
+		<p class="founders-sub">30+ combined years of roofing. Locally owned and operated.</p>
+		<div class="founders-grid">
+			{founders.map((f) => (
+				<div class="founder">
+					<div class="founder-photo" aria-hidden="true"></div>
+					<p class="founder-name">{f.name}</p>
+					<p class="founder-role">{f.role}</p>
+					<p class="founder-cred" set:html={f.cred}></p>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<!-- Service area -->
+	<section class="area">
+		<p class="area-eyebrow">Service area</p>
+		<h2 class="area-h">East Texas + Central Arkansas.</h2>
+		<p class="area-sub">Headquartered in Longview. Crews across two states.</p>
+		<div class="area-grid">
+			<div>
+				<p class="area-region-h">East Texas</p>
+				<p class="area-region-cities">Longview · Tyler · Marshall · Mt. Pleasant · Nacogdoches · Palestine · Kilgore · Henderson · Gladewater · Gilmer · + 25 more cities</p>
+			</div>
+			<div>
+				<p class="area-region-h">Central Arkansas</p>
+				<p class="area-region-cities">Little Rock · Conway · Russellville · Clarksville</p>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	/* Hero */
+	.hero { position: relative; min-height: 620px; background: #1a1a1a; }
+	.hero-photo {
+		position: absolute; inset: 0;
+		background: linear-gradient(180deg, #6b8aa8 0%, #8fa8c0 38%, #ece7de 38%, #b8a78c 70%, #6b5d4a 100%);
+		opacity: 0.92;
+	}
+	.hero-overlay {
+		position: absolute; inset: 0;
+		background: linear-gradient(90deg, rgba(26,26,26,0.78) 0%, rgba(26,26,26,0.35) 60%, rgba(26,26,26,0.1) 100%);
+	}
+	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
+	.hero-h1 {
+		color: #faf8f4;
+		font-size: 64px;
+		font-weight: 600;
+		line-height: 1.0;
+		margin: 0 0 24px;
+		letter-spacing: -2px;
+	}
+	.hero-sub {
+		color: #d8d2c2;
+		font-size: 17px;
+		line-height: 1.55;
+		margin: 0 0 32px;
+		max-width: 540px;
+	}
+	.hero-bullets { color: #faf8f4; font-size: 15px; line-height: 2.0; margin: 0 0 36px; }
+	.hero-bullets div { display: flex; align-items: center; gap: 14px; }
+	.checkmark { color: #b54620; font-weight: 600; font-size: 18px; }
+	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
+	.cta-primary {
+		background: #b54620;
+		color: #faf8f4;
+		padding: 16px 32px;
+		font-size: 15px;
+		font-weight: 500;
+	}
+	.cta-secondary {
+		color: #faf8f4;
+		padding: 16px 0;
+		font-size: 15px;
+		font-weight: 500;
+		border-bottom: 2px solid #faf8f4;
+	}
+
+	/* Audience */
+	.audience { padding: 96px 48px; background: #faf8f4; }
+	.audience-h {
+		font-size: 40px; font-weight: 600; color: #1a1a1a;
+		text-align: center; margin: 0 0 12px; letter-spacing: -1px; line-height: 1.1;
+	}
+	.audience-sub { color: #5a5347; font-size: 16px; text-align: center; margin: 0 0 56px; }
+	.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 0 auto; }
+	.card { background: #ffffff; overflow: hidden; display: block; }
+	.card-photo {
+		height: 280px;
+		background: linear-gradient(180deg, #8fa8c0 0%, #c4b89e 50%, #8a6f54 100%);
+	}
+	.card-photo.commercial {
+		background: linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%);
+	}
+	.card-body-pad { padding: 36px; }
+	.card-label {
+		color: #b54620; font-size: 12px; font-weight: 500; margin: 0 0 12px;
+		letter-spacing: 1.5px; text-transform: uppercase;
+	}
+	.card-h {
+		color: #1a1a1a; font-size: 32px; font-weight: 600;
+		line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.5px;
+	}
+	.card-body { color: #5a5347; font-size: 15px; line-height: 1.6; margin: 0 0 24px; }
+	.card-cta {
+		color: #1a1a1a; font-size: 14px; font-weight: 500;
+		border-bottom: 2px solid #1a1a1a; padding-bottom: 4px;
+	}
+
+	/* Why local */
+	.local { padding: 120px 48px; background: #1a1a1a; }
+	.local-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		text-align: center; margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
+	}
+	.local-h {
+		color: #faf8f4; font-size: 48px; font-weight: 600;
+		text-align: center; line-height: 1.05; margin: 0 auto 24px;
+		letter-spacing: -1.5px; max-width: 720px;
+	}
+	.local-sub {
+		color: #d8d2c2; font-size: 17px; text-align: center;
+		max-width: 600px; margin: 0 auto 64px; line-height: 1.6;
+	}
+	.local-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 40px; max-width: 1100px; margin: 0 auto;
+	}
+	.local-item-photo {
+		height: 200px;
+		background: linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%);
+		margin-bottom: 24px;
+	}
+	.local-item-h {
+		color: #faf8f4; font-size: 22px; font-weight: 600;
+		margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2;
+	}
+	.local-item-body { color: #c4c1ba; font-size: 15px; line-height: 1.6; margin: 0; }
+
+	/* Founders */
+	.founders { background: #faf8f4; padding: 96px 48px; }
+	.founders-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		text-align: center; margin: 0 0 16px; letter-spacing: 1px; text-transform: uppercase;
+	}
+	.founders-h {
+		color: #1a1a1a; font-size: 40px; font-weight: 600;
+		text-align: center; margin: 0 0 16px; letter-spacing: -1px; line-height: 1.1;
+	}
+	.founders-sub { color: #5a5347; font-size: 16px; text-align: center; margin: 0 0 56px; }
+	.founders-grid {
+		display: grid; grid-template-columns: repeat(4, 1fr);
+		gap: 24px; max-width: 960px; margin: 0 auto;
+	}
+	.founder { text-align: center; }
+	.founder-photo {
+		width: 100%; aspect-ratio: 1;
+		background: linear-gradient(135deg, #6b5d4a 0%, #4a4239 100%);
+		margin-bottom: 18px;
+	}
+	.founder-name {
+		color: #1a1a1a; font-size: 19px; font-weight: 600;
+		margin: 0 0 4px; line-height: 1.2;
+	}
+	.founder-role { color: #5a5347; font-size: 14px; margin: 0 0 8px; }
+	.founder-cred { color: #5a5347; font-size: 13px; line-height: 1.5; margin: 0; }
+
+	/* Service area */
+	.area { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
+	.area-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		text-align: center; margin: 0 0 16px; letter-spacing: 1px; text-transform: uppercase;
+	}
+	.area-h {
+		color: #1a1a1a; font-size: 40px; font-weight: 600;
+		text-align: center; margin: 0 0 16px; letter-spacing: -1px; line-height: 1.1;
+	}
+	.area-sub { color: #5a5347; font-size: 16px; text-align: center; margin: 0 0 56px; }
+	.area-grid {
+		display: grid; grid-template-columns: 1fr 1fr;
+		gap: 56px; max-width: 800px; margin: 0 auto;
+	}
+	.area-region-h {
+		color: #1a1a1a; font-size: 22px; font-weight: 600;
+		margin: 0 0 16px; padding-bottom: 12px;
+		border-bottom: 2px solid #1a1a1a; letter-spacing: -0.3px;
+	}
+	.area-region-cities { color: #5a5347; font-size: 15px; line-height: 1.85; }
+</style>

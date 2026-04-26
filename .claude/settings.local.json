@@ -16,7 +16,10 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git remote *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "mcp__188c0f74-b512-44de-8f93-fe263605e24b__notion-fetch",
+      "mcp__188c0f74-b512-44de-8f93-fe263605e24b__notion-create-pages",
+      "mcp__188c0f74-b512-44de-8f93-fe263605e24b__notion-update-page"
     ]
   }
 }
