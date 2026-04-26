@@ -1,15 +1,72 @@
 ---
+const residentialServices = [
+	{ label: 'Roof replacement', href: '/residential/roof-replacement' },
+	{ label: 'Roof repair', href: '/residential/roof-repair' },
+	{ label: 'Roof inspection', href: '/residential/roof-inspection' },
+	{ label: 'Storm damage', href: '/residential/storm-damage-roofing' },
+	{ label: 'Gutter installation + repair', href: '/residential/gutter-installation-and-repair' },
+	{ label: 'Skylight installation + repair', href: '/residential/skylight-installation-and-repair' },
+	{ label: 'Attic ventilation', href: '/residential/attic-ventilation' },
+	{ label: 'Chimney flashing + repair', href: '/residential/chimney-flashing-and-repair' },
+];
+
+const commercialSystems = [
+	{ label: 'TPO', href: '/commercial/tpo-roofing' },
+	{ label: 'EPDM', href: '/commercial/epdm-roofing' },
+	{ label: 'Modified bitumen', href: '/commercial/modified-bitumen-roofing' },
+	{ label: 'Metal', href: '/commercial/metal-roofing' },
+	{ label: 'Built-up (BUR)', href: '/commercial/built-up-roofing' },
+	{ label: 'Coatings + restorations', href: '/commercial/roof-coatings-and-restorations' },
+];
+
+const commercialPrograms = [
+	{ label: 'Maintenance programs', href: '/commercial/maintenance-programs' },
+	{ label: 'All commercial', href: '/commercial' },
+];
 ---
 
 <div class="nav" data-nav>
 	<a class="nav-logo" href="/">HERITAGE Co. ROOFING</a>
-	<div class="nav-links">
-		<a href="/residential">Residential</a>
-		<a href="/commercial">Commercial</a>
+	<nav class="nav-links" aria-label="Primary">
+		<div class="nav-item has-dropdown">
+			<a href="/residential" class="nav-trigger">Residential</a>
+			<div class="dropdown dropdown-1col" role="menu">
+				<div class="dropdown-col">
+					<p class="dropdown-h">Residential services</p>
+					<ul>
+						{residentialServices.map((s) => (
+							<li><a href={s.href} role="menuitem">{s.label}</a></li>
+						))}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="nav-item has-dropdown">
+			<a href="/commercial" class="nav-trigger">Commercial</a>
+			<div class="dropdown dropdown-2col" role="menu">
+				<div class="dropdown-col">
+					<p class="dropdown-h">Systems</p>
+					<ul>
+						{commercialSystems.map((s) => (
+							<li><a href={s.href} role="menuitem">{s.label}</a></li>
+						))}
+					</ul>
+				</div>
+				<div class="dropdown-col">
+					<p class="dropdown-h">Programs</p>
+					<ul>
+						{commercialPrograms.map((s) => (
+							<li><a href={s.href} role="menuitem">{s.label}</a></li>
+						))}
+					</ul>
+				</div>
+			</div>
+		</div>
 		<a href="/service-areas">Service area</a>
 		<a href="/about">About</a>
-		<a class="nav-cta" href="/#inspection">Free inspection</a>
-	</div>
+		<a href="/reviews">Reviews</a>
+		<a class="nav-cta" href="/free-inspection">Free inspection</a>
+	</nav>
 </div>
 
 <style>
@@ -21,6 +78,8 @@
 		align-items: center;
 		border-bottom: 1px solid #ece7de;
 		transition: padding 250ms ease, background 250ms ease, box-shadow 250ms ease;
+		position: relative;
+		z-index: 50;
 	}
 	.nav.is-scrolled {
 		padding: 14px 48px;
@@ -37,12 +96,80 @@
 	}
 	.nav-links {
 		display: flex;
-		gap: 36px;
+		gap: 28px;
 		align-items: center;
 		font-size: 14px;
 		color: #1a1a1a;
 		font-weight: 500;
 	}
+	.nav-links a { color: inherit; text-decoration: none; }
+	.nav-item.has-dropdown { position: relative; }
+	.nav-trigger {
+		cursor: default;
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+	}
+	.nav-trigger::after {
+		content: '';
+		width: 6px; height: 6px;
+		border-right: 1.5px solid currentColor;
+		border-bottom: 1.5px solid currentColor;
+		transform: translateY(-2px) rotate(45deg);
+		transition: transform 200ms ease;
+	}
+	.has-dropdown:hover .nav-trigger::after,
+	.has-dropdown:focus-within .nav-trigger::after {
+		transform: translateY(0) rotate(225deg);
+	}
+
+	.dropdown {
+		position: absolute;
+		top: calc(100% + 14px);
+		left: -16px;
+		background: #ffffff;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-large);
+		box-shadow: var(--shadow-active);
+		padding: 24px 28px;
+		display: grid;
+		gap: 32px;
+		opacity: 0;
+		transform: translateY(-6px);
+		pointer-events: none;
+		transition: opacity 180ms ease, transform 180ms ease;
+		min-width: 280px;
+	}
+	.dropdown-1col { grid-template-columns: 1fr; }
+	.dropdown-2col { grid-template-columns: 1fr 1fr; min-width: 480px; }
+	.has-dropdown:hover .dropdown,
+	.has-dropdown:focus-within .dropdown {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+	.dropdown-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+	.dropdown-col li {}
+	.dropdown-col a {
+		display: block;
+		padding: 8px 12px;
+		font-size: 14px;
+		color: var(--charcoal);
+		border-radius: var(--radius-card);
+		transition: background 120ms ease;
+		white-space: nowrap;
+	}
+	.dropdown-col a:hover { background: var(--ivory-tint); }
+	.dropdown-h {
+		color: var(--rust);
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+		margin: 0 0 8px;
+		padding: 0 12px;
+	}
+
 	.nav-cta {
 		background: #1a1a1a;
 		color: #faf8f4;
@@ -53,6 +180,12 @@
 		transition: background 150ms ease;
 	}
 	.nav-cta:hover { background: #b54620; }
+
+	/* Mobile: dropdowns become inline accordions */
+	@media (max-width: 880px) {
+		.nav { padding: 16px 24px; }
+		.nav-links { display: none; }
+	}
 </style>
 
 <script is:inline>
