@@ -31,7 +31,14 @@
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+html {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+}
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -50,6 +57,29 @@ body {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(26,26,26,0.08);
+}
+
+/* Plan 007.1 — marquee keyframes (used by MarqueeStrip) */
+@keyframes marquee-scroll {
+	from { transform: translateX(0); }
+	to { transform: translateX(-50%); }
+}
+
+/* Plan 007.1 — gentle photo zoom inside cards on hover (cards opt in via .has-zoom-photo) */
+.has-zoom-photo .zoom-photo,
+.has-zoom-photo img,
+.has-zoom-photo .zoom-photo-bg {
+	transition: transform 350ms ease-out;
+}
+.has-zoom-photo:hover .zoom-photo,
+.has-zoom-photo:hover img,
+.has-zoom-photo:hover .zoom-photo-bg {
+	transform: scale(1.05);
+}
+@media (prefers-reduced-motion: reduce) {
+	.has-zoom-photo:hover .zoom-photo,
+	.has-zoom-photo:hover img,
+	.has-zoom-photo:hover .zoom-photo-bg { transform: none; }
 }
 
 a { color: inherit; text-decoration: none; }

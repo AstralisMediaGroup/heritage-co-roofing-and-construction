@@ -1,7 +1,7 @@
 ---
 ---
 
-<div class="nav">
+<div class="nav" data-nav>
 	<a class="nav-logo" href="/">HERITAGE Co. ROOFING</a>
 	<div class="nav-links">
 		<a href="/residential">Residential</a>
@@ -20,6 +20,14 @@
 		justify-content: space-between;
 		align-items: center;
 		border-bottom: 1px solid #ece7de;
+		transition: padding 250ms ease, background 250ms ease, box-shadow 250ms ease;
+	}
+	.nav.is-scrolled {
+		padding: 14px 48px;
+		background: rgba(250, 248, 244, 0.92);
+		backdrop-filter: saturate(160%) blur(8px);
+		-webkit-backdrop-filter: saturate(160%) blur(8px);
+		box-shadow: var(--shadow-subtle);
 	}
 	.nav-logo {
 		color: #1a1a1a;
@@ -46,3 +54,16 @@
 	}
 	.nav-cta:hover { background: #b54620; }
 </style>
+
+<script is:inline>
+	(function () {
+		const nav = document.querySelector('[data-nav]');
+		if (!nav) return;
+		const update = () => {
+			if (window.scrollY > 200) nav.classList.add('is-scrolled');
+			else nav.classList.remove('is-scrolled');
+		};
+		update();
+		window.addEventListener('scroll', update, { passive: true });
+	})();
+</script>
