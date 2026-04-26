@@ -1,0 +1,100 @@
+---
+import MaterialDetailLayout from '../../layouts/MaterialDetailLayout.astro';
+import { imagery } from '../../content/imagery';
+
+const benefits = [
+	{ icon: 'gauge' as const, title: '50+ year service life', body: 'Concrete tile and clay tile both run 50+ years on a properly built install. The roof typically outlasts the home it sits on. The longest-lifespan residential roofing material available — measurably longer than metal.' },
+	{ icon: 'flame' as const, title: 'Class A fire rating', body: 'Concrete and clay tile carry Class A fire ratings — the highest UL rating — without any underlayment dependency. The tile material itself is non-combustible. Standard on every install.' },
+	{ icon: 'wind' as const, title: 'Miami-Dade tested to 180 mph', body: 'Eagle Roofing concrete tile is tested under Miami-Dade approval to sustained winds of 180 mph. Highest wind rating in residential roofing. Critical near storm-corridor zones.' },
+	{ icon: 'shield' as const, title: 'Class 4 hail rating on flat profiles', body: 'Flat-profile concrete tiles take 2-inch hail without splitting — Class 4 impact rating, the highest UL standard. High-profile barrel tiles are more vulnerable; flat profiles are the East Texas spec.' },
+	{ icon: 'sun' as const, title: 'Color-through, never fades', body: 'Concrete and clay tile are colored throughout the body of the tile, not surface-painted. The color does not fade or chalk over time. A 30-year-old tile roof looks like a new tile roof.' },
+	{ icon: 'check' as const, title: 'Synthetic options at 1/3 the weight', body: 'Synthetic tile (DaVinci Roofscapes, Brava Roof Tile) replicates slate or shake at a fraction of real-tile weight. Class 4 impact, Class A fire, 50-year warranties. The right call when the roof structure can\'t handle real-tile loading.' },
+];
+
+const colorSwatches = [
+	{ name: 'Tapered Slate', imageSrc: imagery.tile.hero.url! },
+	{ name: 'Copper Series', imageSrc: imagery.tile.secondary.url! },
+	{ name: 'Light Gray Range', imageSrc: imagery.tile.swatchA.url! },
+	{ name: 'Walnut Creek Blend', imageSrc: imagery.tile.swatchB.url! },
+	{ name: 'Kings Canyon Blend', imageSrc: imagery.tile.swatchC.url! },
+	{ name: 'Spanish Red' },
+	{ name: 'Terracotta' },
+	{ name: 'Charcoal Slate' },
+];
+
+const specRows = [
+	{ label: 'Service life', value: '50+ years (concrete); 50+ years (clay); 40–50 years (synthetic)' },
+	{ label: 'Profiles', value: 'Flat / low-profile / medium-profile / high-profile (barrel)' },
+	{ label: 'Material options', value: 'Concrete (default), clay, synthetic (slate-look or shake-look)' },
+	{ label: 'Fire rating', value: 'Class A — highest UL rating, material itself is non-combustible' },
+	{ label: 'Wind rating', value: 'Tested to 180 mph (Miami-Dade approval) on flat profiles' },
+	{ label: 'Hail rating', value: 'Class 4 on flat profiles (2" hail); barrel profiles more vulnerable' },
+	{ label: 'Weight', value: '900–1,200 lbs per square (real tile); 250–350 lbs per square (synthetic)' },
+	{ label: 'Color permanence', value: 'Color-through body — does not fade or chalk' },
+	{ label: 'Manufacturer warranty', value: '50-year limited (transferable on home sale, typically 1–2 transfers)' },
+];
+
+const tradeoffs = [
+	{ kind: 'pro' as const, body: 'Longest-lifespan residential roofing — 50+ years' },
+	{ kind: 'pro' as const, body: 'Class A fire + Class 4 hail + 180 mph wind = lowest insurance risk' },
+	{ kind: 'pro' as const, body: 'Color-through body — never fades' },
+	{ kind: 'pro' as const, body: 'Architectural distinction — slate, Spanish, Mediterranean looks' },
+	{ kind: 'pro' as const, body: 'Synthetic options at 1/3 the weight when structure is the limit' },
+	{ kind: 'con' as const, body: '3–5× the up-front cost of architectural asphalt' },
+	{ kind: 'con' as const, body: 'Real-tile weight (900–1,200 lbs/sq) requires structural verification' },
+	{ kind: 'con' as const, body: 'Specialty install — fewer crews qualified vs asphalt' },
+	{ kind: 'con' as const, body: 'Tile-by-tile repair needed for damage; not shingle-easy' },
+	{ kind: 'con' as const, body: 'Niche aesthetic — works on right roof line, looks wrong on others' },
+];
+
+const faqs = [
+	{ q: 'Is my house structurally rated for real tile?', a: 'Probably not without verification. Real concrete or clay tile runs 900–1,200 lbs per square (100 sq ft). Most East Texas homes built for asphalt shingle (250–400 lbs/sq) need a structural engineer\'s assessment before a real-tile install. Synthetic tile at 250–350 lbs/sq drops in like asphalt — no structural change needed.' },
+	{ q: 'Concrete tile vs clay tile?', a: 'Concrete is the modern default — cheaper, more color options, equivalent lifespan, less brittle. Clay is the traditional Spanish or Mediterranean spec, more expensive, more color-true terracotta, slightly more brittle in hail. For East Texas residential, concrete makes sense 90% of the time. Clay is for architectural-specific cases.' },
+	{ q: 'Synthetic tile — is it as good as real tile?', a: 'Different tradeoffs. Synthetic (DaVinci Roofscapes, Brava Roof Tile) carries Class 4 hail + Class A fire + 50-year warranty at 1/3 the weight. Lifespan is shorter than real tile (40–50 vs 50+). The advantage is structural drop-in compatibility — no engineer verification needed. The right call when the home wasn\'t built for real-tile loading.' },
+	{ q: 'How does tile compare on hail?', a: 'Flat-profile tile is Class 4 — the highest UL impact rating, comparable to standing seam metal. High-profile barrel tile (Spanish-style) is more vulnerable to hail and not commonly specced for storm-corridor zones. For East Texas hail performance, flat profile is the answer.' },
+	{ q: 'Can I get tile on a low-slope roof?', a: 'Generally no. Tile requires minimum 2.5:12 pitch to shed water properly. Low-slope sections of a home (porches, additions) typically use a different material — modified bitumen or single-ply membrane — even if the main roof is tile.' },
+	{ q: 'How do tile repairs work?', a: 'Tile-by-tile. A damaged tile lifts out; a fresh tile slides in. The roof underlayment underneath is the actual waterproof layer; the tile is the weather + UV + impact protection. Most repairs are individual-tile replacements with matching stock from the manufacturer.' },
+	{ q: 'What manufacturer do you install?', a: 'Eagle Roofing for concrete tile (the West Coast default that has expanded into Texas), Boral Roofing for both concrete and clay, DaVinci Roofscapes and Brava Roof Tile for synthetic. Heritage\'s primary stocked brand is below.', placeholderFact: 'Heritage\'s primary stocked tile manufacturer + profile + color line. See Founder Input page §2.' },
+	{ q: 'How long does a tile install take?', a: 'Longer than asphalt or metal. A typical residential tile install runs 5–10 working days vs 1 day for asphalt. The roof has to come off, decking inspected, batten installed, underlayment, then tile placed and fastened individually. The slower install is the tradeoff for the 50+ year service life.' },
+];
+---
+
+<MaterialDetailLayout
+	title="Tile Roofs — Heritage Co. Residential"
+	heroEyebrow="Residential · Tile roofs"
+	heroH1="Tile. The 50-year residential roof."
+	heroSub="Concrete, clay, or synthetic. Class A fire, Class 4 hail, and tested to 180 mph wind. The longest-lifespan residential roofing material — and the right call on the right roof line."
+	heroPhoto={imagery.tile.hero.url!}
+	heroPhotoAlt="Concrete tile residential roof"
+	whatItIsHeading="Individual tiles, mechanically fastened, color-through body."
+	whatItIsParagraphs={[
+		'A tile roof is hundreds of individual concrete, clay, or synthetic tiles mechanically fastened to wooden battens over the roof deck. The underlayment beneath the tiles is the actual waterproof layer; the tiles themselves handle weather, UV, impact, and architectural distinction. Done right, a tile roof outlasts the home it sits on.',
+		'Tile is niche in East Texas — the up-front cost is 3–5× a comparable asphalt install, and most homes need structural verification before a real-tile install. But on Mediterranean, Spanish-revival, or high-end custom homes where the roof line was built for it, tile is the spec that nothing else replaces. Synthetic options drop in at 1/3 the weight when the structure is the limit.',
+	]}
+	benefitsHeading="Six things that make tile the longest-lifespan residential roof."
+	benefitsSub="Industry-generic specs — these apply to any quality concrete tile install from Eagle, Boral, or comparable manufacturers."
+	benefits={benefits}
+	colorsHeading="Color and profile families."
+	colorsSub="Concrete tile comes in flat, low, medium, and barrel profiles. Color is throughout the body of the tile and never fades. The eight families below cover what is available; the first five photos are real Eagle Roofing color lines."
+	colorSwatches={colorSwatches}
+	colorsPlaceholder="Confirm Heritage's primary stocked tile brand + profile + color line. Plus whether Heritage carries DaVinci or Brava synthetic for structural-limit homes. See Founder Input page §2."
+	specsHeading="Tile roof specs at a glance."
+	specRows={specRows}
+	manufacturerPlaceholder="Heritage's primary stocked tile manufacturer (Eagle Roofing, Boral, DaVinci Roofscapes for synthetic, Brava Roof Tile for synthetic). See Founder Input page §2."
+	costPriceBandFact="Typical residential tile install price band — synthetic tile on the low end, premium real concrete or clay tile on the high end, dollars per square (100 sq ft). Roughly 3-5× the cost of architectural asphalt. See Founder Input page §4."
+	costFactors={[
+		'Material (synthetic < concrete < clay)',
+		'Profile (flat < low < medium < high-profile barrel)',
+		'Structural verification cost (real tile only — synthetic skips this)',
+		'Color line (standard < blended < custom)',
+		'Roof complexity (penetrations, valleys, hips drive specialty flashing)',
+		'Tear-off + decking + batten install',
+		'Underlayment spec (synthetic vs felt; ice & water shield extent)',
+	]}
+	tradeoffsHeading="Where tile shines, where it doesn't."
+	tradeoffs={tradeoffs}
+	faqItems={faqs}
+	endCtaPhoto={imagery.tile.secondary.url!}
+	endCtaHeading="Free inspection. We tell you whether tile is the right call."
+	endCtaSub="Structural feasibility, profile choice, color match. Honest — not every house should have tile."
+/>
