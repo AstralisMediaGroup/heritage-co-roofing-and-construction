@@ -1,11 +1,22 @@
 ---
+interface Props {
+	ctaHeading?: string;
+	ctaSub?: string;
+	ctaButton?: string;
+}
+
+const {
+	ctaHeading = 'Ready for a free roof inspection?',
+	ctaSub = 'No obligation. Same-day or next-day quote.',
+	ctaButton = 'Schedule online',
+} = Astro.props;
 ---
 
 <div class="footer-cta" id="inspection">
-	<h2 class="footer-cta-h">Ready for a free roof inspection?</h2>
-	<p class="footer-cta-sub">No obligation. Same-day or next-day quote.</p>
+	<h2 class="footer-cta-h">{ctaHeading}</h2>
+	<p class="footer-cta-sub">{ctaSub}</p>
 	<div class="footer-cta-row">
-		<button class="footer-cta-btn" type="button">Schedule online</button>
+		<button class="footer-cta-btn" type="button">{ctaButton}</button>
 		<a class="footer-phone-btn" href="tel:9032428102">Call 903-242-8102</a>
 	</div>
 </div>

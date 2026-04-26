@@ -6,9 +6,17 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
 	title?: string;
+	ctaHeading?: string;
+	ctaSub?: string;
+	ctaButton?: string;
 }
 
-const { title = 'Heritage Co. Roofing & Construction' } = Astro.props;
+const {
+	title = 'Heritage Co. Roofing & Construction',
+	ctaHeading,
+	ctaSub,
+	ctaButton,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -28,7 +36,7 @@ const { title = 'Heritage Co. Roofing & Construction' } = Astro.props;
 			<TopBar />
 			<Nav />
 			<slot />
-			<Footer />
+			<Footer ctaHeading={ctaHeading} ctaSub={ctaSub} ctaButton={ctaButton} />
 		</div>
 	</body>
 </html>

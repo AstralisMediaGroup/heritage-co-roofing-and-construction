@@ -1,0 +1,34 @@
+---
+interface Props {
+	items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="trust">
+	<div class="trust-row">
+		{items.map((item, i) => (
+			<>
+				{i > 0 && <span class="trust-dot">·</span>}
+				<span>{item}</span>
+			</>
+		))}
+	</div>
+</section>
+
+<style>
+	.trust {
+		background: #ffffff;
+		padding: 36px 48px;
+		border-top: 1px solid #ece7de;
+		border-bottom: 1px solid #ece7de;
+	}
+	.trust-row {
+		display: flex; gap: 18px; justify-content: center;
+		align-items: center; color: #1a1a1a;
+		font-size: 14px; font-weight: 500;
+		letter-spacing: 0.3px; flex-wrap: wrap;
+	}
+	.trust-dot { color: #b54620; }
+</style>

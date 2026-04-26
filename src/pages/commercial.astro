@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceTile from '../components/ServiceTile.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+
+const services = [
+	{ label: 'New construction', body: 'Single-source coordination from deck-up. Ground-up builds, on schedule.' },
+	{ label: 'Re-roofs', body: 'Tear-off and replacement on existing buildings. Minimum tenant disruption.' },
+	{ label: 'Maintenance', body: 'Scheduled inspections and small repairs. Stops the leak before it starts.' },
+	{ label: 'Repairs', body: 'Targeted fixes for known issues. Same-week response for active leaks.' },
+	{ label: 'Roof systems', body: 'TPO, EPDM, modified bitumen, metal, built-up, coatings. We spec to the building.' },
+	{ label: 'Project portfolio', body: 'Past commercial work across schools, retail, healthcare, and industrial.' },
+];
+
+const systems = ['TPO', 'EPDM', 'Modified bitumen', 'Metal', 'Built-up', 'Coatings'];
+const industries = [
+	{ label: 'Schools', body: 'Districts and private. Summer-window installs.' },
+	{ label: 'Healthcare', body: 'Clinics, MOBs, hospitals. Negative-pressure-aware.' },
+	{ label: 'Retail', body: 'Strip centers, big-box, mixed-use.' },
+	{ label: 'Industrial', body: 'Warehouses, manufacturing, distribution.' },
+	{ label: 'Office', body: 'Class A, B, multi-tenant.' },
+	{ label: 'Government', body: 'Municipal, county, federal — all bid-compliant.' },
+];
+---
+
+<BaseLayout
+	title="Commercial Roofing — Heritage Co."
+	ctaHeading="Need a quote on a commercial roof?"
+	ctaSub="Walkthrough, scope, and pricing within the week."
+	ctaButton="Request consultation"
+>
+	<!-- Hero -->
+	<section class="hero">
+		<div class="hero-photo" aria-hidden="true"></div>
+		<div class="hero-overlay" aria-hidden="true"></div>
+		<div class="hero-content">
+			<p class="hero-eyebrow">For businesses</p>
+			<h1 class="hero-h1">Roofs for your business.</h1>
+			<p class="hero-sub">
+				New construction, re-roofs, maintenance. Bonded and insured. All major roof systems, spec'd to the building and the budget.
+			</p>
+			<div class="hero-cta-row">
+				<a class="cta-primary" href="/#inspection">Request quote</a>
+				<a class="cta-secondary" href="tel:9032428102">Call 903-242-8102</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Service grid -->
+	<section class="services">
+		<p class="section-eyebrow">What we do</p>
+		<h2 class="section-h">Commercial services.</h2>
+		<p class="section-sub">From walkthrough to warranty, all under one roof.</p>
+		<div class="service-grid">
+			{services.map((s) => <ServiceTile label={s.label} body={s.body} />)}
+		</div>
+	</section>
+
+	<!-- Roof systems strip -->
+	<section class="systems">
+		<p class="systems-eyebrow">Roof systems we install</p>
+		<div class="systems-row">
+			{systems.map((s, i) => (
+				<>
+					{i > 0 && <span class="systems-dot">·</span>}
+					<span class="systems-item">{s}</span>
+				</>
+			))}
+		</div>
+	</section>
+
+	<!-- Industries served -->
+	<section class="industries">
+		<p class="section-eyebrow">Industries served</p>
+		<h2 class="section-h">We've worked the building you're in.</h2>
+		<p class="section-sub">Six common building types. Plenty of less common ones too.</p>
+		<div class="industry-grid">
+			{industries.map((i) => <ServiceTile label={i.label} body={i.body} />)}
+		</div>
+	</section>
+
+	<TrustStrip items={["Bonded and insured", "All major systems", "Locally owned"]} />
+</BaseLayout>
+
+<style>
+	/* Hero */
+	.hero { position: relative; min-height: 540px; background: #1a1a1a; }
+	.hero-photo {
+		position: absolute; inset: 0;
+		background: linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%);
+		opacity: 0.92;
+	}
+	.hero-overlay {
+		position: absolute; inset: 0;
+		background: linear-gradient(90deg, rgba(26,26,26,0.78) 0%, rgba(26,26,26,0.35) 60%, rgba(26,26,26,0.1) 100%);
+	}
+	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
+	.hero-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
+	}
+	.hero-h1 {
+		color: #faf8f4; font-size: 56px; font-weight: 600;
+		line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px;
+	}
+	.hero-sub {
+		color: #d8d2c2; font-size: 17px; line-height: 1.55;
+		margin: 0 0 32px; max-width: 560px;
+	}
+	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
+	.cta-primary {
+		background: #b54620; color: #faf8f4;
+		padding: 16px 32px; font-size: 15px; font-weight: 500;
+	}
+	.cta-secondary {
+		color: #faf8f4; padding: 16px 0;
+		font-size: 15px; font-weight: 500;
+		border-bottom: 2px solid #faf8f4;
+	}
+
+	/* Section labels */
+	.section-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		text-align: center; margin: 0 0 16px;
+		letter-spacing: 1px; text-transform: uppercase;
+	}
+	.section-h {
+		color: #1a1a1a; font-size: 40px; font-weight: 600;
+		text-align: center; margin: 0 0 16px;
+		letter-spacing: -1px; line-height: 1.1;
+	}
+	.section-sub {
+		color: #5a5347; font-size: 16px; text-align: center;
+		margin: 0 0 56px;
+	}
+
+	/* Services */
+	.services { padding: 96px 48px; background: #faf8f4; }
+	.service-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 24px; max-width: 1100px; margin: 0 auto;
+	}
+
+	/* Systems strip */
+	.systems {
+		background: #1a1a1a;
+		padding: 48px 48px;
+		text-align: center;
+	}
+	.systems-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		margin: 0 0 18px; letter-spacing: 1px; text-transform: uppercase;
+	}
+	.systems-row {
+		display: flex; gap: 16px; justify-content: center;
+		align-items: center; color: #faf8f4;
+		font-size: 16px; font-weight: 500;
+		letter-spacing: 0.2px; flex-wrap: wrap;
+	}
+	.systems-dot { color: #b54620; }
+
+	/* Industries */
+	.industries { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
+	.industry-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 24px; max-width: 1100px; margin: 0 auto;
+	}
+</style>
