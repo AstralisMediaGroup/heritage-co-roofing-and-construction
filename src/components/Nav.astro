@@ -10,6 +10,12 @@ const residentialServices = [
 	{ label: 'Chimney flashing + repair', href: '/residential/chimney-flashing-and-repair' },
 ];
 
+const residentialMaterials = [
+	{ label: 'Asphalt shingle roofs', href: '/residential/asphalt-shingle-roofs' },
+	{ label: 'Metal roofs', href: '/residential/metal-roofs' },
+	{ label: 'Tile roofs', href: '/residential/tile-roofs' },
+];
+
 const commercialSystems = [
 	{ label: 'TPO', href: '/commercial/tpo-roofing' },
 	{ label: 'EPDM', href: '/commercial/epdm-roofing' },
@@ -30,11 +36,19 @@ const commercialPrograms = [
 	<nav class="nav-links" aria-label="Primary">
 		<div class="nav-item has-dropdown">
 			<a href="/residential" class="nav-trigger">Residential</a>
-			<div class="dropdown dropdown-1col" role="menu">
+			<div class="dropdown dropdown-2col" role="menu">
 				<div class="dropdown-col">
-					<p class="dropdown-h">Residential services</p>
+					<p class="dropdown-h">Services</p>
 					<ul>
 						{residentialServices.map((s) => (
+							<li><a href={s.href} role="menuitem">{s.label}</a></li>
+						))}
+					</ul>
+				</div>
+				<div class="dropdown-col">
+					<p class="dropdown-h">Materials</p>
+					<ul>
+						{residentialMaterials.map((s) => (
 							<li><a href={s.href} role="menuitem">{s.label}</a></li>
 						))}
 					</ul>

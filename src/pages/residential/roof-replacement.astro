@@ -113,8 +113,48 @@ const faqs = [
 >
 	<div slot="materials">
 		<MaterialTabs materials={materials} />
+		<div class="material-links">
+			<p class="material-links-h">See the full breakdown on each material:</p>
+			<div class="material-links-row">
+				<a class="material-link" href="/residential/asphalt-shingle-roofs">Asphalt shingle roofs →</a>
+				<a class="material-link" href="/residential/metal-roofs">Metal roofs →</a>
+				<a class="material-link" href="/residential/tile-roofs">Tile roofs →</a>
+			</div>
+		</div>
 		<div style="margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border);">
 			<ColorSwatchGrid />
 		</div>
 	</div>
+
+	<style>
+		.material-links {
+			margin-top: 40px;
+			padding-top: 32px;
+			border-top: 1px solid var(--border);
+		}
+		.material-links-h {
+			color: var(--charcoal);
+			font-size: 14px; font-weight: 600;
+			letter-spacing: 0.5px;
+			margin: 0 0 16px;
+		}
+		.material-links-row {
+			display: flex; gap: 16px; flex-wrap: wrap;
+		}
+		.material-link {
+			display: inline-flex; align-items: center;
+			padding: 12px 22px;
+			background: #ffffff;
+			border: 1px solid var(--border);
+			border-radius: var(--radius-pill);
+			color: var(--charcoal);
+			font-size: 14px; font-weight: 500;
+			transition: border-color 150ms ease, transform 200ms ease, box-shadow 200ms ease;
+		}
+		.material-link:hover {
+			border-color: var(--charcoal);
+			transform: translateY(-1px);
+			box-shadow: var(--shadow-subtle);
+		}
+	</style>
 </ServiceDetailLayout>
