@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import ProcessFlow from '../components/ProcessFlow.astro';
+import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
+import { imagery } from '../content/imagery';
+
+const inspectionItems = [
+	{ title: 'Roof surface', body: 'Granule loss, curling, missing shingles, sealant gaps.' },
+	{ title: 'Flashings', body: 'Chimney, vents, skylights. The #1 source of leaks.' },
+	{ title: 'Gutters + drainage', body: 'Pitch, blockages, fascia condition.' },
+	{ title: 'Attic decking', body: 'When accessible — rafters, decking, ventilation flow.' },
+];
+---
+
+<BaseLayout title="Free Roof Inspection — Heritage Co.">
+	<!-- Hero -->
+	<section class="fi-hero">
+		<div class="fi-hero-photo" aria-hidden="true">
+			<img src={imagery.heroCandidates.residentialRoofA.url} alt="Residential roof" loading="eager" />
+		</div>
+		<div class="fi-hero-overlay" aria-hidden="true"></div>
+		<div class="fi-hero-content">
+			<p class="fi-hero-eyebrow">Free inspection</p>
+			<h1 class="fi-hero-h1">Free roof inspection.<br />No obligation.</h1>
+			<p class="fi-hero-sub">A real 90-minute inspection — roof, attic, eaves — with photos and a written report. Same-day or next-day on most addresses.</p>
+		</div>
+	</section>
+
+	<div class="flow">
+
+		<!-- Form -->
+		<section class="block fi-form-block">
+			<div class="fi-form-row">
+				<div class="fi-form-content">
+					<p class="eyebrow">Send your details</p>
+					<h2 class="block-h">Tell us about the roof.</h2>
+					<p class="block-sub">We call back the same day on most submissions — usually within an hour during business hours. Or call <a class="inline-link" href="tel:9032428102">903-242-8102</a> directly.</p>
+				</div>
+				<div class="fi-form-side">
+					<ContactForm />
+				</div>
+			</div>
+		</section>
+
+		<!-- What happens after submit -->
+		<section class="block">
+			<p class="eyebrow">After you submit</p>
+			<h2 class="block-h">Four steps. We tell you where you are at each.</h2>
+			<ProcessFlow steps={[
+				{ label: 'We call back', caption: 'Usually within the hour during business hours.' },
+				{ label: 'Schedule', caption: 'Same-day or next-day inspection on most addresses.' },
+				{ label: 'Inspect', caption: 'Roof, attic, eaves. Photos and written report.' },
+				{ label: 'No-pressure read', caption: 'We tell you what we found. No sales pitch.' },
+			]} />
+			<div style="max-width: 1100px; margin: 32px auto 0;">
+				<HeritagePlaceholder fact="Heritage's typical callback time on web-form submissions (e.g. 'within 1 hour during business hours, next morning otherwise'). See Founder Input page §8 + §11." />
+			</div>
+		</section>
+
+		<!-- What we'll inspect -->
+		<section class="block">
+			<p class="eyebrow">What we'll inspect</p>
+			<h2 class="block-h">Four checkpoints on every visit.</h2>
+			<div class="fi-check-grid">
+				{inspectionItems.map((c) => (
+					<div class="fi-check">
+						<p class="fi-check-title">{c.title}</p>
+						<p class="fi-check-body">{c.body}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<!-- Other ways to reach us -->
+		<section class="block">
+			<p class="eyebrow">Other ways to reach us</p>
+			<h2 class="block-h">If you'd rather skip the form.</h2>
+			<dl class="data-list">
+				<div class="data-row">
+					<dt class="data-row-label">Phone</dt>
+					<dd class="data-row-value"><a class="inline-link" href="tel:9032428102">903-242-8102</a></dd>
+				</div>
+				<div class="data-row">
+					<dt class="data-row-label">Email</dt>
+					<dd class="data-row-value"><HeritagePlaceholder inline={true} fact="email address for general inquiries" /></dd>
+				</div>
+				<div class="data-row">
+					<dt class="data-row-label">Hours</dt>
+					<dd class="data-row-value"><HeritagePlaceholder inline={true} fact="business hours / emergency-line policy" /></dd>
+				</div>
+				<div class="data-row">
+					<dt class="data-row-label">HQ</dt>
+					<dd class="data-row-value"><HeritagePlaceholder inline={true} fact="full mailing address — Longview, TX" /></dd>
+				</div>
+			</dl>
+		</section>
+
+	</div>
+</BaseLayout>
+
+<style>
+	.fi-hero { position: relative; min-height: 440px; background: var(--charcoal); overflow: hidden; }
+	.fi-hero-photo { position: absolute; inset: 0; }
+	.fi-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+	.fi-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.55) 50%, rgba(26,26,26,0.25) 100%); }
+	.fi-hero-content { position: relative; padding: 80px 48px 64px; max-width: 720px; }
+	.fi-hero-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase; }
+	.fi-hero-h1 { color: var(--off-white); font-size: 56px; font-weight: 600; line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px; }
+	.fi-hero-sub { color: var(--subhead-dark); font-size: 17px; line-height: 1.55; margin: 0; max-width: 580px; }
+
+	.flow { background: var(--off-white); }
+	.block { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
+	.block + .block { border-top: 1px solid var(--border); }
+	.eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
+	.block-h { color: var(--charcoal); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 16px; }
+	.block-sub { color: var(--warm-gray); font-size: 17px; line-height: 1.6; margin: 0 0 32px; max-width: 580px; }
+
+	.fi-form-row { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 56px; align-items: start; }
+	.fi-form-side {}
+
+	.fi-check-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--border); }
+	.fi-check { padding: 24px 28px 0 0; }
+	.fi-check + .fi-check { padding-left: 28px; border-left: 1px solid var(--border); }
+	.fi-check-title { color: var(--charcoal); font-size: 16px; font-weight: 600; margin: 0 0 8px; }
+	.fi-check-body { color: var(--warm-gray); font-size: 14px; line-height: 1.55; margin: 0; }
+
+	.data-list { max-width: 880px; margin: 0; display: flex; flex-direction: column; gap: 0; }
+	.data-row { display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 16px 0; border-top: 1px solid var(--border); align-items: start; }
+	.data-row:last-child { border-bottom: 1px solid var(--border); }
+	.data-row-label { color: var(--charcoal); font-size: 14px; font-weight: 600; }
+	.data-row-value { color: var(--warm-gray); font-size: 15px; line-height: 1.55; margin: 0; }
+	.inline-link { color: var(--charcoal); border-bottom: 1px solid var(--charcoal); }
+</style>
