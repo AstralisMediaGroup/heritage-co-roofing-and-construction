@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FAQItem from '../../components/FAQItem.astro';
 import TrustStrip from '../../components/TrustStrip.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
 import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
 
 const insuranceSteps = [
@@ -126,6 +127,33 @@ const faqs = [
 					<p class="damage-body">{d.body}</p>
 				</div>
 			))}
+		</div>
+	</section>
+
+	<!-- Before/after proof -->
+	<section class="proof">
+		<div class="proof-photo-overlay" aria-hidden="true"></div>
+		<div class="proof-inner">
+			<p class="section-eyebrow on-dark">Before / after</p>
+			<h2 class="section-h on-dark">Same roof. Same angle. Different story.</h2>
+			<p class="section-sub on-dark">Three storm-damage jobs. Photos pulled from the inspection report and the closeout walk.</p>
+			<div class="proof-grid">
+				<BeforeAfter
+					placeholderFact="Before/after pair #1 — hail-damaged asphalt vs. new install. City + month/year. Permission required. See Founder Input page §10."
+					beforeGradient="linear-gradient(180deg, #4a4a48 0%, #6b5d4a 70%, #2a2a28 100%)"
+					afterGradient="linear-gradient(180deg, #6b8aa8 0%, #8fa8c0 38%, #ece7de 38%, #b8a78c 70%, #6b5d4a 100%)"
+				/>
+				<BeforeAfter
+					placeholderFact="Before/after pair #2 — wind damage vs. new install. City + month/year. See Founder Input page §10."
+					beforeGradient="linear-gradient(180deg, #5a4836 0%, #4a4239 60%, #2a2a28 100%)"
+					afterGradient="linear-gradient(180deg, #7d8b9e 0%, #c4b89e 50%, #8a6f54 100%)"
+				/>
+				<BeforeAfter
+					placeholderFact="Before/after pair #3 — tree-fall or water damage vs. completed re-deck and install. City + month/year. See Founder Input page §10."
+					beforeGradient="linear-gradient(180deg, #4a4a48 0%, #2a2a28 100%)"
+					afterGradient="linear-gradient(180deg, #8fa8c0 0%, #b8a78c 60%, #6b5d4a 100%)"
+				/>
+			</div>
 		</div>
 	</section>
 
@@ -276,6 +304,30 @@ const faqs = [
 	}
 	.damage-label { color: #faf8f4; font-size: 22px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.3px; line-height: 1.2; }
 	.damage-body { color: #c4c1ba; font-size: 14px; line-height: 1.6; margin: 0; }
+
+	/* Proof (charcoal-with-photo-overlay-darkened) */
+	.proof {
+		position: relative;
+		background: var(--charcoal-deep);
+		padding: 96px 48px;
+		overflow: hidden;
+	}
+	.proof-photo-overlay {
+		position: absolute; inset: 0;
+		background:
+			radial-gradient(ellipse at 25% 20%, rgba(181,70,32,0.08) 0%, transparent 50%),
+			radial-gradient(ellipse at 75% 80%, rgba(143,168,192,0.05) 0%, transparent 50%),
+			linear-gradient(180deg, #141413 0%, #1a1a1a 100%);
+		opacity: 1;
+	}
+	.proof-inner { position: relative; max-width: 1200px; margin: 0 auto; }
+	.proof-grid {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		gap: 48px;
+		max-width: 1000px;
+		margin: 56px auto 0;
+	}
 
 	/* Timeline */
 	.timeline { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
