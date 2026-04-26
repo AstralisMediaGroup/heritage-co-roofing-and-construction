@@ -3,15 +3,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceTile from '../components/ServiceTile.astro';
 import TrustStrip from '../components/TrustStrip.astro';
 import NamedProjectCard from '../components/NamedProjectCard.astro';
+import StatRow from '../components/StatRow.astro';
+import LayeredCard from '../components/LayeredCard.astro';
 import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 
 const services = [
-	{ label: 'New construction', body: 'Single-source coordination from deck-up. Ground-up builds, on schedule.' },
-	{ label: 'Re-roofs', body: 'Tear-off and replacement on existing buildings. Minimum tenant disruption.' },
-	{ label: 'Maintenance', body: 'Scheduled inspections and small repairs. Stops the leak before it starts.' },
-	{ label: 'Repairs', body: 'Targeted fixes for known issues. Same-week response for active leaks.' },
-	{ label: 'Roof systems', body: 'TPO, EPDM, modified bitumen, metal, built-up, coatings. We spec to the building.' },
-	{ label: 'Project portfolio', body: 'Past commercial work across schools, retail, healthcare, and industrial.' },
+	{ label: 'New construction', body: 'Single-source coordination from deck-up. Ground-up builds, on schedule.', gradient: 'linear-gradient(180deg, #7d8b9e 0%, #4a5566 100%)' },
+	{ label: 'Re-roofs', body: 'Tear-off and replacement on existing buildings. Minimum tenant disruption.', gradient: 'linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%)' },
+	{ label: 'Maintenance', body: 'Scheduled inspections and small repairs. Stops the leak before it starts.', gradient: 'linear-gradient(180deg, #c4b89e 0%, #8a7d63 100%)' },
+	{ label: 'Repairs', body: 'Targeted fixes for known issues. Same-week response for active leaks.', gradient: 'linear-gradient(180deg, #8a6f54 0%, #5a4836 100%)' },
+	{ label: 'Roof systems', body: 'TPO, EPDM, modified bitumen, metal, built-up, coatings. We spec to the building.', gradient: 'linear-gradient(180deg, #a8a89c 0%, #4a4a48 100%)' },
+	{ label: 'Project portfolio', body: 'Past commercial work across schools, retail, healthcare, and industrial.', gradient: 'linear-gradient(180deg, #6b8aa8 0%, #4a5566 100%)' },
 ];
 
 const systemsDetail = [
@@ -70,7 +72,7 @@ const reRoofProcess = [
 		<h2 class="section-h">Commercial services.</h2>
 		<p class="section-sub">From walkthrough to warranty, all under one roof.</p>
 		<div class="service-grid">
-			{services.map((s) => <ServiceTile label={s.label} body={s.body} />)}
+			{services.map((s) => <ServiceTile label={s.label} body={s.body} photo={true} gradient={s.gradient} />)}
 		</div>
 	</section>
 
@@ -92,14 +94,44 @@ const reRoofProcess = [
 		</div>
 	</section>
 
-	<!-- Industries served -->
+	<!-- Industries served (pill tags + caption rows) -->
 	<section class="industries">
 		<p class="section-eyebrow">Industries served</p>
 		<h2 class="section-h">We've worked the building you're in.</h2>
 		<p class="section-sub">Six common building types. Plenty of less common ones too.</p>
-		<div class="industry-grid">
-			{industries.map((i) => <ServiceTile label={i.label} body={i.body} />)}
+		<div class="industry-tags">
+			{industries.map((i) => <span class="industry-tag">{i.label}</span>)}
 		</div>
+		<div class="industry-rows">
+			{industries.map((i) => (
+				<div class="industry-row">
+					<span class="industry-row-label">{i.label}</span>
+					<span class="industry-row-body">{i.body}</span>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<!-- Why Heritage for commercial — LayeredCard -->
+	<section class="why-commercial">
+		<LayeredCard
+			eyebrow="Why Heritage for commercial"
+			heading="Bonded, insured, and on the roof when the bid is awarded."
+			body="Single-source coordination from walkthrough to closeout. We work around tenants, not over them. Procurement-ready paperwork, named system certifications, real bonding capacity — all in plain numbers below."
+			gradient="linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%)"
+			ctaHref="/#inspection"
+			ctaLabel="Request consultation"
+		/>
+	</section>
+
+	<!-- Stat row (commercial) -->
+	<section class="stats">
+		<StatRow stats={[
+			{ label: 'Bonding (single)', placeholderFact: 'Single-project bonding capacity in dollars (e.g. $2M). See Founder Input page §3.' },
+			{ label: 'GL coverage', placeholderFact: 'General liability per-occurrence limit. See Founder Input page §3.' },
+			{ label: 'Years in business', placeholderFact: 'Year Heritage Co. was founded → years in business as of 2026. See Founder Input page §7.' },
+			{ label: 'Sq ft installed', placeholderFact: 'Lifetime commercial sq ft installed. See Founder Input page §5.' },
+		]} />
 	</section>
 
 	<!-- Bonding + insurance callout -->
@@ -207,8 +239,21 @@ const reRoofProcess = [
 		margin: 0 0 32px; max-width: 560px;
 	}
 	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
-	.cta-primary { background: #b54620; color: #faf8f4; padding: 16px 32px; font-size: 15px; font-weight: 500; }
-	.cta-secondary { color: #faf8f4; padding: 16px 0; font-size: 15px; font-weight: 500; border-bottom: 2px solid #faf8f4; }
+	.cta-primary {
+		background: #b54620; color: #faf8f4;
+		padding: 14px 28px; font-size: 15px; font-weight: 500;
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, box-shadow 150ms ease;
+	}
+	.cta-primary:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
+	.cta-secondary {
+		color: #faf8f4; padding: 12px 26px;
+		font-size: 15px; font-weight: 500;
+		border: 2px solid #faf8f4;
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, color 150ms ease;
+	}
+	.cta-secondary:hover { background: #faf8f4; color: #1a1a1a; }
 
 	.section-eyebrow {
 		color: #b54620; font-size: 13px; font-weight: 500;
@@ -255,10 +300,30 @@ const reRoofProcess = [
 
 	/* Industries */
 	.industries { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
-	.industry-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px; max-width: 1100px; margin: 0 auto;
+	.industry-tags {
+		display: flex; flex-wrap: wrap; gap: 10px;
+		justify-content: center; max-width: 800px; margin: 0 auto 40px;
 	}
+	.industry-tag {
+		display: inline-flex; padding: 10px 22px;
+		background: var(--charcoal); color: var(--off-white);
+		font-size: 14px; font-weight: 500; letter-spacing: 0.2px;
+		border-radius: var(--radius-pill);
+	}
+	.industry-rows {
+		display: grid; grid-template-columns: 1fr 1fr;
+		gap: 14px 56px; max-width: 1000px; margin: 0 auto;
+	}
+	.industry-row {
+		display: grid; grid-template-columns: 130px 1fr;
+		gap: 16px; padding: 14px 0;
+		border-bottom: 1px solid var(--border);
+	}
+	.industry-row-label { color: var(--charcoal); font-size: 14px; font-weight: 600; letter-spacing: -0.1px; }
+	.industry-row-body { color: var(--warm-gray); font-size: 14px; line-height: 1.5; }
+
+	.why-commercial { padding: 96px 48px; background: var(--ivory-tint); border-top: 1px solid #ece7de; }
+	.stats { padding: 64px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
 
 	/* Bonding */
 	.bonding { padding: 96px 48px; background: #faf8f4; }
