@@ -2,8 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FounderCard from '../components/FounderCard.astro';
 import LocalItem from '../components/LocalItem.astro';
+import RegionColumns from '../components/RegionColumns.astro';
 import { founders } from '../content/founders';
-import { eastTexas, eastTexasMore, centralArkansas } from '../content/cities';
 ---
 
 <BaseLayout title="Heritage Co. Roofing & Construction — East Texas + Central Arkansas">
@@ -83,16 +83,7 @@ import { eastTexas, eastTexasMore, centralArkansas } from '../content/cities';
 		<p class="area-eyebrow">Service area</p>
 		<h2 class="area-h">East Texas + Central Arkansas.</h2>
 		<p class="area-sub">Headquartered in Longview. Crews across two states.</p>
-		<div class="area-grid">
-			<div>
-				<p class="area-region-h">East Texas</p>
-				<p class="area-region-cities">{eastTexas.join(' · ')} · {eastTexasMore}</p>
-			</div>
-			<div>
-				<p class="area-region-h">Central Arkansas</p>
-				<p class="area-region-cities">{centralArkansas.join(' · ')}</p>
-			</div>
-		</div>
+		<RegionColumns />
 	</section>
 </BaseLayout>
 
@@ -219,14 +210,4 @@ import { eastTexas, eastTexasMore, centralArkansas } from '../content/cities';
 		text-align: center; margin: 0 0 16px; letter-spacing: -1px; line-height: 1.1;
 	}
 	.area-sub { color: #5a5347; font-size: 16px; text-align: center; margin: 0 0 56px; }
-	.area-grid {
-		display: grid; grid-template-columns: 1fr 1fr;
-		gap: 56px; max-width: 800px; margin: 0 auto;
-	}
-	.area-region-h {
-		color: #1a1a1a; font-size: 22px; font-weight: 600;
-		margin: 0 0 16px; padding-bottom: 12px;
-		border-bottom: 2px solid #1a1a1a; letter-spacing: -0.3px;
-	}
-	.area-region-cities { color: #5a5347; font-size: 15px; line-height: 1.85; }
 </style>
