@@ -1,0 +1,33 @@
+---
+import CityLayout from '../../layouts/CityLayout.astro';
+import { imagery } from '../../content/imagery';
+
+const cityIntroParagraphs = [
+	'Tyler is the largest city in our East Texas footprint — about 30 minutes west of the Longview HQ. The housing stock spans 1970s ranch homes in the older neighborhoods, post-2000 subdivisions on the south and west sides, and the historic Azalea District craftsman homes that need careful, period-appropriate flashing and color-match work.',
+	'Smith County\'s spring storm season — typically March through May — brings hail and straight-line wind. Most insurance claim work in Tyler concentrates in those three months. We schedule inspection capacity around storm events and work directly with homeowners on insurance documentation.',
+];
+
+const localContextParagraphs = [
+	'East Texas humidity and oak/pine cover put two specific demands on Tyler roofs: ridge-and-soffit ventilation has to be balanced (humid attic air shortens shingle life faster than UV), and gutter guards earn their cost back fast against fall pine straw drop.',
+	'Tyler\'s Class 4 impact-rated shingle uptake is high — most insurance carriers in Smith County offer meaningful premium discounts for Class 4 installs after a hail claim. We default to Class 4 on storm-damage replacements unless the homeowner asks otherwise.',
+];
+
+const faqs = [
+	{ q: 'How fast can you get to my house in Tyler?', a: 'Tyler is on the daily route from our Longview HQ. Free inspection turnaround in Tyler is the same as our primary footprint — same-day or next-day on most addresses, with the specific SLA confirmed below.', placeholderFact: 'Tyler-specific free-inspection turnaround SLA. Confirm same-day, next-day, or 48-hour. See Founder Input page §8 + §9.' },
+	{ q: 'Do you serve nearby towns — Lindale, Whitehouse, Bullard, Flint, Hideaway?', a: 'Yes. Anywhere within Smith County and the immediately adjacent counties (Van Zandt, Henderson, Wood, Cherokee). The drive time to outlying addresses adds 15–30 minutes to inspection scheduling but no travel charge inside the footprint.' },
+	{ q: 'Are there Tyler-specific permit requirements?', a: 'Tyler has standard Texas residential permit requirements for full re-roofs. Repairs typically do not require a permit. Heritage handles the permit work as part of the install scope — homeowner does not need to file separately.', placeholderFact: 'Confirm: Heritage pulls Tyler/Smith County residential roofing permits as part of the install scope. Or: homeowner pulls. See Founder Input page §11.' },
+	{ q: 'Do you work with Tyler\'s insurance carriers?', a: 'Most major Texas carriers operate in Smith County — State Farm, Allstate, Texas Farm Bureau, USAA, Farmers, Liberty Mutual. We have filed claims with each. Specific local-adjuster relationships are listed below.', placeholderFact: 'Carriers Heritage has filed Tyler claims with most often. See Founder Input page §8.' },
+	{ q: 'Can you match shingles on a 1970s Azalea District craftsman?', a: 'Probably — most 1970s asphalt shingle lines have current equivalents. Older slate or tile may require sourcing through restoration suppliers; we handle that scope on a case-by-case basis. We tell you up front whether it is a stock match or a special-source job.' },
+];
+---
+
+<CityLayout
+	title="Roofing in Tyler, TX — Heritage Co."
+	cityName="Tyler"
+	stateAbbrev="TX"
+	heroPhoto={imagery.heroCandidates.residentialRoofA.url}
+	cityIntroParagraphs={cityIntroParagraphs}
+	localContextParagraphs={localContextParagraphs}
+	driveTimeFact="Tyler is approximately 30 minutes west of Longview HQ via I-20. Heritage typical drive time to most Tyler addresses. Confirm with founders. See Founder Input page §9."
+	faqItems={faqs}
+/>
