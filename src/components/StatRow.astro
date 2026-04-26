@@ -1,8 +1,12 @@
 ---
 import HeritagePlaceholder from './HeritagePlaceholder.astro';
+import AnimatedCounter from './AnimatedCounter.astro';
 
 interface Stat {
 	value?: string;
+	numericValue?: number;
+	prefix?: string;
+	suffix?: string;
 	label: string;
 	placeholderFact?: string;
 }
@@ -18,7 +22,11 @@ const { stats, theme = 'light' } = Astro.props;
 <div class={`stats stats-${theme}`}>
 	{stats.map((s) => (
 		<div class="stat">
-			{s.value ? (
+			{typeof s.numericValue === 'number' ? (
+				<p class="stat-value">
+					<AnimatedCounter to={s.numericValue} prefix={s.prefix} suffix={s.suffix} />
+				</p>
+			) : s.value ? (
 				<p class="stat-value">{s.value}</p>
 			) : (
 				<div class="stat-placeholder">
