@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import FAQItem from '../../components/FAQItem.astro';
+import Accordion from '../../components/Accordion.astro';
 import TrustStrip from '../../components/TrustStrip.astro';
-import BeforeAfter from '../../components/BeforeAfter.astro';
+import BeforeAfterSlider from '../../components/BeforeAfterSlider.astro';
 import ProcessFlow from '../../components/ProcessFlow.astro';
+import ConstrainedSection from '../../components/ConstrainedSection.astro';
+import FullBleedSection from '../../components/FullBleedSection.astro';
 import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
 
 const insuranceSteps = [
@@ -99,6 +101,13 @@ const faqs = [
 		</div>
 	</section>
 
+	<!-- Constrained narrative intro -->
+	<ConstrainedSection background="ivory" paddingY="md">
+		<p class="cs-eyebrow">If you have storm damage</p>
+		<h2 class="cs-h">Three sentences before the process flow.</h2>
+		<p class="cs-body">Hail and wind are acts of nature. Most carriers do not raise rates for those claims. Filing the right way starts with documentation we put together for the adjuster — that part is on us.</p>
+	</ConstrainedSection>
+
 	<!-- How insurance claims work -->
 	<section class="claims">
 		<p class="section-eyebrow">How it works</p>
@@ -127,6 +136,17 @@ const faqs = [
 		</div>
 	</section>
 
+	<!-- FullBleed cinematic between damage types and proof -->
+	<FullBleedSection
+		gradient="linear-gradient(180deg, #4a4a48 0%, #6b5d4a 60%, #2a2a28 100%)"
+		overlayPosition="bottom-left"
+		minHeight="380px"
+		overlayDarken={0.55}
+	>
+		<p class="fb-eyebrow">If it is on the roof</p>
+		<h2 class="fb-h">We have probably worked it.</h2>
+	</FullBleedSection>
+
 	<!-- Before/after proof -->
 	<section class="proof">
 		<div class="proof-photo-overlay" aria-hidden="true"></div>
@@ -135,17 +155,17 @@ const faqs = [
 			<h2 class="section-h on-dark">Same roof. Same angle. Different story.</h2>
 			<p class="section-sub on-dark">Three storm-damage jobs. Photos pulled from the inspection report and the closeout walk.</p>
 			<div class="proof-grid">
-				<BeforeAfter
+				<BeforeAfterSlider
 					placeholderFact="Before/after pair #1 — hail-damaged asphalt vs. new install. City + month/year. Permission required. See Founder Input page §10."
 					beforeGradient="linear-gradient(180deg, #4a4a48 0%, #6b5d4a 70%, #2a2a28 100%)"
 					afterGradient="linear-gradient(180deg, #6b8aa8 0%, #8fa8c0 38%, #ece7de 38%, #b8a78c 70%, #6b5d4a 100%)"
 				/>
-				<BeforeAfter
+				<BeforeAfterSlider
 					placeholderFact="Before/after pair #2 — wind damage vs. new install. City + month/year. See Founder Input page §10."
 					beforeGradient="linear-gradient(180deg, #5a4836 0%, #4a4239 60%, #2a2a28 100%)"
 					afterGradient="linear-gradient(180deg, #7d8b9e 0%, #c4b89e 50%, #8a6f54 100%)"
 				/>
-				<BeforeAfter
+				<BeforeAfterSlider
 					placeholderFact="Before/after pair #3 — tree-fall or water damage vs. completed re-deck and install. City + month/year. See Founder Input page §10."
 					beforeGradient="linear-gradient(180deg, #4a4a48 0%, #2a2a28 100%)"
 					afterGradient="linear-gradient(180deg, #8fa8c0 0%, #b8a78c 60%, #6b5d4a 100%)"
@@ -175,6 +195,13 @@ const faqs = [
 		</div>
 	</section>
 
+	<!-- Constrained narrative around carriers section -->
+	<ConstrainedSection background="ivory" paddingY="md">
+		<p class="cs-eyebrow">Carrier work</p>
+		<h2 class="cs-h">We file with most major Texas + Arkansas carriers.</h2>
+		<p class="cs-body">If your carrier is not on the list below, call us anyway. The handful we have not worked with directly, we can usually still file with on your behalf.</p>
+	</ConstrainedSection>
+
 	<!-- Insurance carriers -->
 	<section class="carriers">
 		<p class="section-eyebrow">Carriers we work with</p>
@@ -202,26 +229,22 @@ const faqs = [
 
 	<TrustStrip items={["Insurance accepted", "Workmanship warranty", "Locally owned"]} />
 
-	<!-- FAQ -->
+	<!-- FAQ (Accordion — interactive) -->
 	<section class="faq">
 		<p class="section-eyebrow">Common questions</p>
 		<h2 class="section-h">What homeowners ask us.</h2>
-		<div class="faq-list">
-			{faqs.map((f) => (
-				<div class="faq-wrap">
-					<FAQItem question={f.q} answer={f.a} />
-					{f.placeholderFact && (
-						<div class="faq-placeholder">
-							<HeritagePlaceholder fact={f.placeholderFact} />
-						</div>
-					)}
-				</div>
-			))}
-		</div>
+		<Accordion items={faqs} />
 	</section>
 </BaseLayout>
 
 <style>
+	/* Plan 006 helpers */
+	.cs-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 14px; text-align: center; }
+	.cs-h { color: var(--charcoal); font-size: 32px; font-weight: 600; letter-spacing: -0.6px; line-height: 1.2; margin: 0 0 16px; text-align: center; }
+	.cs-body { color: var(--warm-gray); font-size: 15px; line-height: 1.65; margin: 0 auto; text-align: center; max-width: 600px; }
+	.fb-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
+	.fb-h { color: var(--off-white); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0; max-width: 580px; }
+
 	/* Hero */
 	.hero { position: relative; min-height: 540px; background: #1a1a1a; }
 	.hero-photo {
