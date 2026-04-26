@@ -1,0 +1,265 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ProcessFlow from '../components/ProcessFlow.astro';
+import Accordion from '../components/Accordion.astro';
+import WarrantyBlock from '../components/WarrantyBlock.astro';
+import FullBleedSection from '../components/FullBleedSection.astro';
+import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
+
+interface ProcessStep { label: string; caption?: string; }
+interface SymptomItem { title: string; body: string; }
+interface FaqItem { q: string; a: string; placeholderFact?: string; }
+interface WarrantyRow { label: string; fact: string; }
+
+interface Props {
+	title: string;
+	heroEyebrow: string;
+	heroH1: string;
+	heroSub: string;
+	heroPhoto: string;
+	heroPhotoAlt?: string;
+	heroCtaLabel?: string;
+	heroCtaHref?: string;
+	whatWeMeanHeading: string;
+	whatWeMeanParagraphs: string[];
+	whenYouNeedHeading: string;
+	whenYouNeedItems: SymptomItem[];
+	processHeading: string;
+	processSub?: string;
+	processSteps: ProcessStep[];
+	materialsHeading?: string;
+	materialsSub?: string;
+	costHeading: string;
+	costPriceBandFact: string;
+	costFactors: string[];
+	warrantyHeading: string;
+	warrantyRows?: WarrantyRow[];
+	faqItems: FaqItem[];
+	endCtaPhoto: string;
+	endCtaHeading: string;
+	endCtaSub: string;
+	endCtaLabel: string;
+	endCtaHref: string;
+}
+
+const {
+	title,
+	heroEyebrow,
+	heroH1,
+	heroSub,
+	heroPhoto,
+	heroPhotoAlt = '',
+	heroCtaLabel = 'Get my free inspection',
+	heroCtaHref = '/free-inspection',
+	whatWeMeanHeading,
+	whatWeMeanParagraphs,
+	whenYouNeedHeading,
+	whenYouNeedItems,
+	processHeading,
+	processSub,
+	processSteps,
+	materialsHeading,
+	materialsSub,
+	costHeading,
+	costPriceBandFact,
+	costFactors,
+	warrantyHeading,
+	warrantyRows,
+	faqItems,
+	endCtaPhoto,
+	endCtaHeading,
+	endCtaSub,
+	endCtaLabel,
+	endCtaHref,
+} = Astro.props;
+
+const defaultWarrantyRows: WarrantyRow[] = [
+	{ label: 'Workmanship warranty', fact: 'Workmanship warranty length on residential installs (years). State as a single sentence. See Founder Input page §1.' },
+	{ label: 'Material pass-through', fact: 'Manufacturer pass-through warranty (which manufacturer, how long, transferable on home sale Y/N). See Founder Input page §1.' },
+];
+---
+
+<BaseLayout title={title}>
+	<!-- Hero -->
+	<section class="sd-hero">
+		<div class="sd-hero-photo" aria-hidden="true">
+			<img src={heroPhoto} alt={heroPhotoAlt} loading="eager" />
+		</div>
+		<div class="sd-hero-overlay" aria-hidden="true"></div>
+		<div class="sd-hero-content">
+			<p class="sd-hero-eyebrow">{heroEyebrow}</p>
+			<h1 class="sd-hero-h1">{heroH1}</h1>
+			<p class="sd-hero-sub">{heroSub}</p>
+			<div class="sd-hero-cta-row">
+				<a class="cta-primary" href={heroCtaHref}>{heroCtaLabel}</a>
+				<a class="cta-secondary" href="tel:9032428102">Call 903-242-8102</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Continuous off-white flow -->
+	<div class="flow">
+
+		<!-- What we mean -->
+		<section class="block sd-what">
+			<div class="sd-narrative">
+				<p class="eyebrow">What we mean</p>
+				<h2 class="block-h">{whatWeMeanHeading}</h2>
+				{whatWeMeanParagraphs.map((p) => <p class="sd-p">{p}</p>)}
+			</div>
+		</section>
+
+		<!-- When you need this -->
+		<section class="block sd-when">
+			<p class="eyebrow">When you need this</p>
+			<h2 class="block-h">{whenYouNeedHeading}</h2>
+			<div class="sd-symptom-grid">
+				{whenYouNeedItems.map((s) => (
+					<div class="sd-symptom">
+						<p class="sd-symptom-title">{s.title}</p>
+						<p class="sd-symptom-body">{s.body}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<!-- Materials / options (slot) -->
+		<section class="block sd-materials">
+			{materialsHeading && <p class="eyebrow">Materials + options</p>}
+			{materialsHeading && <h2 class="block-h">{materialsHeading}</h2>}
+			{materialsSub && <p class="block-sub">{materialsSub}</p>}
+			<slot name="materials" />
+		</section>
+
+		<!-- Process -->
+		<section class="block sd-process">
+			<p class="eyebrow">How we do it</p>
+			<h2 class="block-h">{processHeading}</h2>
+			{processSub && <p class="block-sub">{processSub}</p>}
+			<ProcessFlow steps={processSteps} />
+		</section>
+
+		<!-- Cost -->
+		<section class="block sd-cost">
+			<p class="eyebrow">What it costs</p>
+			<h2 class="block-h">{costHeading}</h2>
+			<div class="sd-cost-row">
+				<div class="sd-cost-band">
+					<p class="sd-cost-label">Typical price band</p>
+					<HeritagePlaceholder fact={costPriceBandFact} />
+				</div>
+				<div class="sd-cost-factors">
+					<p class="sd-cost-label">What moves the number</p>
+					<ul class="sd-cost-list">
+						{costFactors.map((f) => <li>{f}</li>)}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- Warranty -->
+		<section class="block sd-warranty">
+			<WarrantyBlock theme="light" heading={warrantyHeading} cards={warrantyRows || defaultWarrantyRows} />
+		</section>
+
+		<!-- FAQ -->
+		<section class="block sd-faq">
+			<p class="eyebrow">Common questions</p>
+			<h2 class="block-h">What homeowners ask us.</h2>
+			<Accordion items={faqItems} />
+		</section>
+
+	</div>
+
+	<!-- End CTA -->
+	<FullBleedSection
+		imageSrc={endCtaPhoto}
+		imageAlt=""
+		overlayPosition="center"
+		minHeight="440px"
+		overlayDarken={0.65}
+	>
+		<p class="end-cta-eyebrow">Ready when you are</p>
+		<h2 class="end-cta-h">{endCtaHeading}</h2>
+		<p class="end-cta-sub">{endCtaSub}</p>
+		<a class="end-cta-button" href={endCtaHref}>{endCtaLabel}</a>
+	</FullBleedSection>
+</BaseLayout>
+
+<style>
+	.sd-hero { position: relative; min-height: 520px; background: var(--charcoal); overflow: hidden; }
+	.sd-hero-photo { position: absolute; inset: 0; }
+	.sd-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+	.sd-hero-overlay {
+		position: absolute; inset: 0;
+		background: linear-gradient(90deg, rgba(26,26,26,0.82) 0%, rgba(26,26,26,0.5) 50%, rgba(26,26,26,0.2) 100%);
+	}
+	.sd-hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
+	.sd-hero-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase; }
+	.sd-hero-h1 { color: var(--off-white); font-size: 56px; font-weight: 600; line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px; }
+	.sd-hero-sub { color: var(--subhead-dark); font-size: 17px; line-height: 1.55; margin: 0 0 32px; max-width: 580px; }
+	.sd-hero-cta-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+	.cta-primary {
+		background: var(--rust); color: var(--off-white);
+		padding: 14px 28px; font-size: 15px; font-weight: 500;
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, box-shadow 150ms ease;
+	}
+	.cta-primary:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
+	.cta-secondary {
+		color: var(--off-white); padding: 12px 26px;
+		font-size: 15px; font-weight: 500;
+		border: 2px solid var(--off-white);
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, color 150ms ease;
+	}
+	.cta-secondary:hover { background: var(--off-white); color: var(--charcoal); }
+
+	.flow { background: var(--off-white); }
+	.block { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
+	.block + .block { border-top: 1px solid var(--border); }
+
+	.eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
+	.block-h { color: var(--charcoal); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 16px; }
+	.block-sub { color: var(--warm-gray); font-size: 17px; line-height: 1.6; margin: 0 0 32px; max-width: 580px; }
+
+	/* What we mean */
+	.sd-narrative { max-width: 720px; }
+	.sd-p { color: var(--warm-gray); font-size: 17px; line-height: 1.65; margin: 0 0 18px; }
+	.sd-p:last-child { margin-bottom: 0; }
+
+	/* When you need this */
+	.sd-symptom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--border); }
+	.sd-symptom { padding: 28px 28px 0 0; }
+	.sd-symptom + .sd-symptom { padding-left: 28px; }
+	.sd-symptom:nth-child(3n+2),
+	.sd-symptom:nth-child(3n) { border-left: 1px solid var(--border); padding-left: 28px; }
+	.sd-symptom:nth-child(n+4) { padding-top: 28px; border-top: 1px solid var(--border); margin-top: 28px; }
+	.sd-symptom-title { color: var(--charcoal); font-size: 17px; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.2px; }
+	.sd-symptom-body { color: var(--warm-gray); font-size: 14px; line-height: 1.55; margin: 0; }
+
+	/* Process */
+	.sd-process .processflow { padding: 0; }
+
+	/* Cost */
+	.sd-cost-row { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; max-width: 1000px; }
+	.sd-cost-label { color: var(--charcoal); font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 12px; }
+	.sd-cost-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+	.sd-cost-list li { color: var(--warm-gray); font-size: 14px; line-height: 1.55; padding-left: 16px; position: relative; }
+	.sd-cost-list li::before { content: '·'; position: absolute; left: 0; color: var(--rust); font-weight: 700; }
+
+	/* End CTA helpers */
+	.end-cta-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
+	.end-cta-h { color: var(--off-white); font-size: 44px; font-weight: 600; letter-spacing: -1px; line-height: 1.1; margin: 0 0 14px; max-width: 640px; }
+	.end-cta-sub { color: var(--subhead-dark); font-size: 17px; line-height: 1.55; margin: 0 0 28px; max-width: 580px; }
+	.end-cta-button {
+		display: inline-flex; align-items: center;
+		padding: 18px 36px;
+		background: var(--rust); color: var(--off-white);
+		font-size: 16px; font-weight: 500;
+		border-radius: var(--radius-pill);
+		box-shadow: var(--shadow-active);
+		transition: background 150ms ease, transform 200ms ease;
+	}
+	.end-cta-button:hover { background: #9d3a1a; transform: translateY(-1px); }
+</style>
