@@ -3,7 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FounderCard from '../components/FounderCard.astro';
 import CertificationsBlock from '../components/CertificationsBlock.astro';
 import WarrantyBlock from '../components/WarrantyBlock.astro';
-import BadgeCluster from '../components/BadgeCluster.astro';
+import TrustBadgeRow from '../components/TrustBadgeRow.astro';
+import AsymmetricRow from '../components/AsymmetricRow.astro';
+import StatRow from '../components/StatRow.astro';
+import LayeredCard from '../components/LayeredCard.astro';
 import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 import { founders } from '../content/founders';
 ---
@@ -22,19 +25,28 @@ import { founders } from '../content/founders';
 		</div>
 	</section>
 
-	<!-- Founding story -->
+	<!-- Founding story — 2 asymmetric rows -->
 	<section class="story">
 		<p class="section-eyebrow">Why we built it</p>
 		<h2 class="section-h">We did the work for someone else first.</h2>
-		<div class="story-body">
-			<p>
-				Heritage Co. is locally owned and operated. The four founders — Jordy, Peyton, Nishil, and Vivek — between them have years on East Texas roofs, years running commercial projects, and years running operations and finance. They started Heritage Co. to build a roofing company that answers the phone, stands behind its work, and is still 30 minutes away when you need it.
-			</p>
-			<HeritagePlaceholder fact="Real founding story — actual year of founding, what triggered it (specific incident, gap in market, prior shop they left), where the four founders met, and the one or two sentences that capture *why* in their own words. 2–3 short paragraphs. See Founder Input page §7." />
-			<p>
-				What you can count on: the same name on the truck and the contract, the same crew on the install and the warranty visit, and a number that goes to a person.
-			</p>
+		<AsymmetricRow
+			heading="Years on East Texas roofs first."
+			body="The four founders — Jordy, Peyton, Nishil, and Vivek — between them have years on East Texas roofs, years running commercial projects, and years running operations and finance. They started Heritage Co. to build a roofing company that answers the phone, stands behind its work, and is still 30 minutes away when you need it."
+			photoSide="left"
+			aspect="4/5"
+			gradient="linear-gradient(180deg, #6b5d4a 0%, #4a4239 100%)"
+		/>
+		<div class="story-placeholder">
+			<HeritagePlaceholder fact="Real founding story — actual year of founding, what triggered it (specific incident, gap in market, prior shop they left), where the four founders met, and the one or two sentences that capture why in their own words. 2–3 short paragraphs. See Founder Input page §7." />
 		</div>
+		<AsymmetricRow
+			heading="What you can count on."
+			body="The same name on the truck and the contract. The same crew on the install and the warranty visit. A number that goes to a person."
+			bullets={["Locally owned and operated", "Crews live in the area they work", "Owner-direct line for warranty visits"]}
+			photoSide="right"
+			aspect="3/2"
+			gradient="linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)"
+		/>
 	</section>
 
 	<!-- Founders (inset card-on-card on ivory-tint) -->
@@ -51,13 +63,33 @@ import { founders } from '../content/founders';
 		</div>
 	</section>
 
-	<!-- Quick-glance badges -->
+	<!-- Quick-glance badges (TrustBadgeRow) -->
 	<section class="badges">
-		<BadgeCluster />
+		<TrustBadgeRow />
+	</section>
+
+	<!-- Stats -->
+	<section class="stats-section">
+		<StatRow stats={[
+			{ label: 'Combined years', placeholderFact: 'Real total years roofing across the four founders. See Founder Input page §7.' },
+			{ label: 'Roofs installed', placeholderFact: 'Lifetime residential roof count. See Founder Input page §5.' },
+			{ label: 'Manufacturer certs', placeholderFact: 'Count of held manufacturer certifications (e.g. 3 — GAF + Owens Corning + CertainTeed). See Founder Input page §2.' },
+			{ value: 'TX + AR', label: 'Service area' },
+		]} />
 	</section>
 
 	<!-- Certifications detail -->
 	<CertificationsBlock />
+
+	<!-- Named guarantee callout -->
+	<section class="guarantee-callout">
+		<LayeredCard
+			eyebrow="The guarantee"
+			heading="What every Heritage Co. roof comes with."
+			body="Workmanship from us. Manufacturer pass-through on the materials. Specific years and any branded guarantee phrase are in the warranty block below."
+			gradient="linear-gradient(180deg, #6b5d4a 0%, #4a4239 100%)"
+		/>
+	</section>
 
 	<WarrantyBlock theme="dark" />
 
@@ -114,15 +146,7 @@ import { founders } from '../content/founders';
 
 	/* Story */
 	.story { background: #faf8f4; padding: 96px 48px; }
-	.story-body {
-		max-width: 720px;
-		margin: 36px auto 0;
-		color: #5a5347;
-		font-size: 17px;
-		line-height: 1.7;
-	}
-	.story-body p { margin: 0 0 20px; }
-	.story-body p:last-child { margin-bottom: 0; }
+	.story-placeholder { max-width: 1100px; margin: 24px auto; }
 
 	/* Founders (ivory-tint + inset card-on-card) */
 	.founders { background: var(--ivory-tint); padding: 96px 48px; border-top: 1px solid #ece7de; }
@@ -140,6 +164,8 @@ import { founders } from '../content/founders';
 
 	/* Badges */
 	.badges { padding: 64px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
+	.stats-section { padding: 80px 48px; background: var(--ivory-tint); border-top: 1px solid #ece7de; }
+	.guarantee-callout { padding: 96px 48px; background: var(--ivory-tint); border-top: 1px solid #ece7de; }
 
 	/* Credentials band */
 	.creds { background: #faf8f4; padding: 56px 48px; text-align: center; border-top: 1px solid #ece7de; }
