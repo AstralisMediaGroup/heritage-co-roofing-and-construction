@@ -10,6 +10,7 @@ import ConstrainedSection from '../components/ConstrainedSection.astro';
 import BleedingImage from '../components/BleedingImage.astro';
 import MarqueeStrip from '../components/MarqueeStrip.astro';
 import RevealOnScroll from '../components/RevealOnScroll.astro';
+import { imagery } from '../content/imagery';
 import { founders } from '../content/founders';
 ---
 
@@ -56,8 +57,10 @@ import { founders } from '../content/founders';
 		<h2 class="audience-h">What kind of roof do you need?</h2>
 		<p class="audience-sub">We do both. The work is different for each.</p>
 		<div class="cards">
-			<a class="card" href="/residential">
-				<div class="card-photo" aria-hidden="true"></div>
+			<a class="card has-zoom-photo" href="/residential">
+				<div class="card-photo">
+					<img src={imagery.heroCandidates.residentialRoofB.url} alt="Residential roof" loading="lazy" class="zoom-photo" />
+				</div>
 				<div class="card-body-pad">
 					<p class="card-label">For homeowners</p>
 					<h3 class="card-h">Roofs for your home.</h3>
@@ -65,8 +68,10 @@ import { founders } from '../content/founders';
 					<span class="card-cta">Free inspection →</span>
 				</div>
 			</a>
-			<a class="card" href="/commercial">
-				<div class="card-photo commercial" aria-hidden="true"></div>
+			<a class="card has-zoom-photo" href="/commercial">
+				<div class="card-photo">
+					<img src={imagery.metal.hero.url} alt="Commercial standing seam metal roof" loading="lazy" class="zoom-photo" />
+				</div>
 				<div class="card-body-pad">
 					<p class="card-label">For businesses</p>
 					<h3 class="card-h">Roofs for your business.</h3>
@@ -260,11 +265,9 @@ import { founders } from '../content/founders';
 	.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-active); }
 	.card-photo {
 		aspect-ratio: 16 / 10;
-		background: linear-gradient(180deg, #8fa8c0 0%, #c4b89e 50%, #8a6f54 100%);
+		overflow: hidden;
 	}
-	.card-photo.commercial {
-		background: linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%);
-	}
+	.card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 	.card-body-pad { padding: 36px; }
 	.card-label {
 		color: #b54620; font-size: 12px; font-weight: 500; margin: 0 0 12px;

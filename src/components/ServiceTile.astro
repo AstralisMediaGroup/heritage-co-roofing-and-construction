@@ -5,6 +5,8 @@ interface Props {
 	href?: string;
 	photo?: boolean;
 	gradient?: string;
+	imageSrc?: string;
+	imageAlt?: string;
 }
 
 const {
@@ -13,12 +15,23 @@ const {
 	href,
 	photo = false,
 	gradient = 'linear-gradient(180deg, #8fa8c0 0%, #c4b89e 50%, #8a6f54 100%)',
+	imageSrc,
+	imageAlt = '',
 } = Astro.props;
 const Tag = href ? 'a' : 'div';
+const showPhoto = photo || !!imageSrc;
 ---
 
-<Tag class="tile" href={href}>
-	{photo && <div class="tile-photo" style={`background: ${gradient};`} aria-hidden="true"></div>}
+<Tag class={`tile ${showPhoto ? 'has-zoom-photo' : ''}`} href={href}>
+	{showPhoto && (
+		<div class="tile-photo">
+			{imageSrc ? (
+				<img src={imageSrc} alt={imageAlt} loading="lazy" class="zoom-photo" />
+			) : (
+				<div class="zoom-photo-bg" style={`background: ${gradient};`} aria-hidden="true"></div>
+			)}
+		</div>
+	)}
 	<div class="tile-body-pad">
 		<p class="tile-h">{label}</p>
 		<p class="tile-body">{body}</p>
@@ -45,6 +58,13 @@ const Tag = href ? 'a' : 'div';
 	.tile-photo {
 		aspect-ratio: 16 / 10;
 		width: 100%;
+		overflow: hidden;
+	}
+	.tile-photo img,
+	.tile-photo .zoom-photo-bg {
+		width: 100%; height: 100%;
+		object-fit: cover;
+		display: block;
 	}
 	.tile-body-pad { padding: 28px 28px 32px; }
 	.tile-h {

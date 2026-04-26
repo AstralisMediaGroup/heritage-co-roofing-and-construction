@@ -13,12 +13,12 @@ import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 import { imagery } from '../content/imagery';
 
 const services = [
-	{ label: 'New construction', body: 'Single-source coordination from deck-up. Ground-up builds, on schedule.', gradient: 'linear-gradient(180deg, #7d8b9e 0%, #4a5566 100%)' },
-	{ label: 'Re-roofs', body: 'Tear-off and replacement on existing buildings. Minimum tenant disruption.', gradient: 'linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%)' },
-	{ label: 'Maintenance', body: 'Scheduled inspections and small repairs. Stops the leak before it starts.', gradient: 'linear-gradient(180deg, #c4b89e 0%, #8a7d63 100%)' },
-	{ label: 'Repairs', body: 'Targeted fixes for known issues. Same-week response for active leaks.', gradient: 'linear-gradient(180deg, #8a6f54 0%, #5a4836 100%)' },
-	{ label: 'Roof systems', body: 'TPO, EPDM, modified bitumen, metal, built-up, coatings. We spec to the building.', gradient: 'linear-gradient(180deg, #a8a89c 0%, #4a4a48 100%)' },
-	{ label: 'Project portfolio', body: 'Past commercial work across schools, retail, healthcare, and industrial.', gradient: 'linear-gradient(180deg, #6b8aa8 0%, #4a5566 100%)' },
+	{ label: 'New construction', body: 'Single-source coordination from deck-up. Ground-up builds, on schedule.', imageSrc: imagery.metal.hero.url, imageAlt: 'Standing seam metal roof' },
+	{ label: 'Re-roofs', body: 'Tear-off and replacement on existing buildings. Minimum tenant disruption.', imageSrc: imagery.metal.secondary.url, imageAlt: 'Modern building with metal roof' },
+	{ label: 'Maintenance', body: 'Scheduled inspections and small repairs. Stops the leak before it starts.', imageSrc: imagery.projectGallery[3].url, imageAlt: 'Stacks of roofing tiles' },
+	{ label: 'Repairs', body: 'Targeted fixes for known issues. Same-week response for active leaks.', imageSrc: imagery.beforeAfterPairs.windBefore.url, imageAlt: 'Roof during a storm' },
+	{ label: 'Roof systems', body: 'TPO, EPDM, modified bitumen, metal, built-up, coatings. We spec to the building.', imageSrc: imagery.projectGallery[1].url, imageAlt: 'Tiled rooftops from above' },
+	{ label: 'Project portfolio', body: 'Past commercial work across schools, retail, healthcare, and industrial.', imageSrc: imagery.projectGallery[4].url, imageAlt: 'Aerial view of a roof' },
 ];
 
 const systemsDetail = [
@@ -162,7 +162,7 @@ const bondingItems = [
 				</div>
 			</div>
 			<div class="service-grid">
-				{services.map((s) => <ServiceTile label={s.label} body={s.body} photo={true} gradient={s.gradient} />)}
+				{services.map((s) => <ServiceTile label={s.label} body={s.body} imageSrc={s.imageSrc} imageAlt={s.imageAlt} />)}
 			</div>
 		</section>
 

@@ -14,12 +14,12 @@ import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
 import { imagery } from '../../content/imagery';
 
 const services = [
-	{ label: 'Roof replacement', body: 'Full tear-off and install. Asphalt, metal, synthetic. Workmanship and material warranties.', gradient: 'linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)' },
-	{ label: 'Roof repair', body: 'Leaks, missing shingles, flashing failures. Fast turnaround, no upsell.', gradient: 'linear-gradient(180deg, #8a6f54 0%, #5a4836 100%)' },
-	{ label: 'Storm damage', body: 'Hail, wind, tree fall. We work directly with your insurance adjuster.', href: '/residential/storm-damage-roofing', gradient: 'linear-gradient(180deg, #4a4a48 0%, #6b5d4a 50%, #2a2a28 100%)' },
-	{ label: 'Inspection', body: 'Free, no-obligation roof inspection. Honest report, photos included.', gradient: 'linear-gradient(180deg, #7d8b9e 0%, #b8a78c 100%)' },
-	{ label: 'Maintenance', body: 'Annual checkups and tune-ups. Catch problems before they become claims.', gradient: 'linear-gradient(180deg, #c4b89e 0%, #8a7d63 100%)' },
-	{ label: 'Insurance claims', body: 'Adjuster meetings, documentation, scope review. We handle the back-and-forth.', gradient: 'linear-gradient(180deg, #6b5d4a 0%, #4a4239 100%)' },
+	{ label: 'Roof replacement', body: 'Full tear-off and install. Asphalt, metal, synthetic. Workmanship and material warranties.', imageSrc: imagery.heroCandidates.residentialRoofA.url, imageAlt: 'Residential roof' },
+	{ label: 'Roof repair', body: 'Leaks, missing shingles, flashing failures. Fast turnaround, no upsell.', imageSrc: imagery.asphalt.closeup.url, imageAlt: 'Close-up of asphalt shingles' },
+	{ label: 'Storm damage', body: 'Hail, wind, tree fall. We work directly with your insurance adjuster.', href: '/residential/storm-damage-roofing', imageSrc: imagery.beforeAfterPairs.hailBefore.url, imageAlt: 'Storm-damaged roof' },
+	{ label: 'Inspection', body: 'Free, no-obligation roof inspection. Honest report, photos included.', imageSrc: imagery.heroCandidates.residentialRoofC.url, imageAlt: 'Aerial view of a residential roof' },
+	{ label: 'Maintenance', body: 'Annual checkups and tune-ups. Catch problems before they become claims.', imageSrc: imagery.projectGallery[2].url, imageAlt: 'Roofs in warm sunlight' },
+	{ label: 'Insurance claims', body: 'Adjuster meetings, documentation, scope review. We handle the back-and-forth.', imageSrc: imagery.heroCandidates.residentialRoofB.url, imageAlt: 'Brown and white house with completed roof' },
 ];
 
 const materials = [
@@ -117,7 +117,7 @@ const faqs = [
 				</div>
 			</div>
 			<div class="service-grid">
-				{services.map((s) => <ServiceTile label={s.label} body={s.body} href={s.href} photo={true} gradient={s.gradient} />)}
+				{services.map((s) => <ServiceTile label={s.label} body={s.body} href={s.href} imageSrc={s.imageSrc} imageAlt={s.imageAlt} />)}
 			</div>
 		</section>
 
