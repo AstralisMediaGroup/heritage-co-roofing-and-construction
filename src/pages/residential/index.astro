@@ -192,20 +192,24 @@ const faqs = [
 			</div>
 			<div class="financing-inline">
 				<p class="eyebrow eyebrow-soft">Paying for it</p>
-				<div class="financing-grid">
-					<div class="financing-card">
-						<p class="financing-label">Insurance jobs</p>
-						<p class="financing-body">For storm-damage claims, your deductible is the only out-of-pocket on most jobs. See <a href="/residential/storm-damage-roofing" class="inline-link">storm damage</a> for the full process.</p>
+				<dl class="data-list">
+					<div class="data-row">
+						<dt class="data-row-label">Insurance jobs</dt>
+						<dd class="data-row-value">For storm-damage claims, your deductible is the only out-of-pocket on most jobs. See <a href="/residential/storm-damage-roofing" class="inline-link">storm damage</a> for the full process.</dd>
 					</div>
-					<div class="financing-card">
-						<p class="financing-label">Financing partners</p>
-						<HeritagePlaceholder fact="Financing partners (GreenSky, Service Finance, Hearth, Aqua Finance, EnerBank, in-house, or none). Typical promo terms. See Founder Input page §4." />
+					<div class="data-row">
+						<dt class="data-row-label">Financing partners</dt>
+						<dd class="data-row-value">
+							<HeritagePlaceholder fact="Financing partners (GreenSky, Service Finance, Hearth, Aqua Finance, EnerBank, in-house, or none). Typical promo terms. See Founder Input page §4." />
+						</dd>
 					</div>
-					<div class="financing-card">
-						<p class="financing-label">Deductible payment plans</p>
-						<HeritagePlaceholder fact="Whether Heritage accepts payment plans on the homeowner deductible (Y/N + conditions). See Founder Input page §4 + §8." />
+					<div class="data-row">
+						<dt class="data-row-label">Deductible payment plans</dt>
+						<dd class="data-row-value">
+							<HeritagePlaceholder fact="Whether Heritage accepts payment plans on the homeowner deductible (Y/N + conditions). See Founder Input page §4 + §8." />
+						</dd>
 					</div>
-				</div>
+				</dl>
 			</div>
 		</section>
 
@@ -423,22 +427,22 @@ const faqs = [
 		padding-top: 40px;
 		border-top: 1px solid var(--border);
 	}
-	.financing-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 20px;
+	.data-list {
+		max-width: 880px; margin: 0;
+		display: flex; flex-direction: column; gap: 0;
 	}
-	.financing-card {
-		padding: 24px;
-		background: #ffffff;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-card);
-		box-shadow: var(--shadow-subtle);
+	.data-row {
+		display: grid; grid-template-columns: 240px 1fr;
+		gap: 32px; padding: 18px 0;
+		border-top: 1px solid var(--border);
+		align-items: start;
 	}
-	.financing-label {
-		color: var(--rust); font-size: 12px; font-weight: 500;
-		letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 12px;
+	.data-row:last-child { border-bottom: 1px solid var(--border); }
+	.data-row-label {
+		color: var(--charcoal); font-size: 14px; font-weight: 600;
+		letter-spacing: -0.1px; padding-top: 4px;
 	}
-	.financing-body { color: var(--warm-gray); font-size: 14px; line-height: 1.6; margin: 0; }
+	.data-row-value { color: var(--warm-gray); font-size: 14px; line-height: 1.6; margin: 0; }
 	.inline-link {
 		color: var(--charcoal); border-bottom: 1px solid var(--charcoal);
 	}

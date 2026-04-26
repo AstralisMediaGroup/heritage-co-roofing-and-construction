@@ -160,17 +160,19 @@ const bondingItems = [
 			</div>
 		</section>
 
-		<!-- Bonding + insurance — flat list, no headline (heading was already done above) -->
+		<!-- Bonding + insurance — flat 2-col data list -->
 		<section class="block bonding">
 			<p class="eyebrow eyebrow-soft">The numbers procurement wants</p>
-			<div class="bonding-grid">
+			<dl class="data-list">
 				{bondingItems.map((b) => (
-					<div class="bonding-card">
-						<p class="bonding-label">{b.label}</p>
-						<HeritagePlaceholder fact={b.fact} />
+					<div class="data-row">
+						<dt class="data-row-label">{b.label}</dt>
+						<dd class="data-row-value">
+							<HeritagePlaceholder fact={b.fact} />
+						</dd>
 					</div>
 				))}
-			</div>
+			</dl>
 		</section>
 
 		<!-- Re-roof process — photo + ProcessFlow -->
@@ -415,22 +417,23 @@ const bondingItems = [
 	/* Why commercial — LayeredCard + StatRow */
 	.stats-inline { margin-top: 56px; }
 
-	/* Bonding */
-	.bonding-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 20px;
+	/* Bonding — flat data list */
+	.data-list {
+		max-width: 880px; margin: 0;
+		display: flex; flex-direction: column; gap: 0;
 	}
-	.bonding-card {
-		padding: 24px;
-		background: #ffffff;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-card);
-		box-shadow: var(--shadow-subtle);
+	.data-row {
+		display: grid; grid-template-columns: 240px 1fr;
+		gap: 32px; padding: 18px 0;
+		border-top: 1px solid var(--border);
+		align-items: start;
 	}
-	.bonding-label {
+	.data-row:last-child { border-bottom: 1px solid var(--border); }
+	.data-row-label {
 		color: var(--charcoal); font-size: 14px; font-weight: 600;
-		margin: 0 0 12px;
+		letter-spacing: -0.1px; padding-top: 4px;
 	}
+	.data-row-value { margin: 0; }
 
 	/* Re-roof row */
 	.reroof-row {

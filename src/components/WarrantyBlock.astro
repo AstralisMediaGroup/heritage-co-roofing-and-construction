@@ -11,12 +11,13 @@ interface Props {
 	sub?: string;
 	theme?: 'light' | 'dark';
 	cards?: WarrantyCard[];
+	flat?: boolean;
 }
 
 const defaultCards: WarrantyCard[] = [
 	{ label: 'Workmanship warranty', fact: 'Workmanship warranty length on residential installs (years). State as a single sentence. See Founder Input page §1.' },
 	{ label: 'Material warranty', fact: 'Manufacturer pass-through warranty (which manufacturer, how long, transferable on home sale Y/N). See Founder Input page §1.' },
-	{ label: 'Named guarantee', fact: 'Branded one-line guarantee phrase if Heritage has one. If not, leave this card off — do not invent one. See Founder Input page §1.' },
+	{ label: 'Named guarantee', fact: 'Branded one-line guarantee phrase if Heritage has one. If not, leave this row off — do not invent one. See Founder Input page §1.' },
 	{ label: 'Money-back / satisfaction', fact: 'Money-back or satisfaction guarantee (Y/N + conditions). See Founder Input page §1.' },
 ];
 
@@ -25,6 +26,7 @@ const {
 	sub,
 	theme = 'light',
 	cards = defaultCards,
+	flat = true,
 } = Astro.props;
 ---
 
@@ -32,41 +34,85 @@ const {
 	<p class={`section-eyebrow ${theme === 'dark' ? 'on-dark' : ''}`}>The warranty</p>
 	<h2 class={`section-h ${theme === 'dark' ? 'on-dark' : ''}`}>{heading}</h2>
 	{sub && <p class={`section-sub ${theme === 'dark' ? 'on-dark' : ''}`}>{sub}</p>}
-	<div class="warranty-grid">
-		{cards.map((c) => (
-			<div class="warranty-card">
-				<p class="warranty-label">{c.label}</p>
-				<HeritagePlaceholder fact={c.fact} />
-			</div>
-		))}
-	</div>
+
+	{flat ? (
+		<dl class="warranty-list">
+			{cards.map((c) => (
+				<div class="warranty-row">
+					<dt class="warranty-row-label">{c.label}</dt>
+					<dd class="warranty-row-value">
+						<HeritagePlaceholder fact={c.fact} />
+					</dd>
+				</div>
+			))}
+		</dl>
+	) : (
+		<div class="warranty-grid">
+			{cards.map((c) => (
+				<div class="warranty-card">
+					<p class="warranty-label">{c.label}</p>
+					<HeritagePlaceholder fact={c.fact} />
+				</div>
+			))}
+		</div>
+	)}
 </section>
 
 <style>
 	.warranty { padding: 96px 48px; }
-	.warranty-light { background: #ffffff; border-top: 1px solid #ece7de; }
-	.warranty-dark { background: #1a1a1a; }
+	.warranty-light { background: transparent; }
+	.warranty-dark { background: var(--charcoal); }
 
 	.section-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
+		color: var(--rust); font-size: 13px; font-weight: 500;
 		text-align: center; margin: 0 0 16px;
 		letter-spacing: 1px; text-transform: uppercase;
 	}
 	.section-h {
-		color: #1a1a1a; font-size: 40px; font-weight: 600;
+		color: var(--charcoal); font-size: 36px; font-weight: 600;
 		text-align: center; margin: 0 0 16px;
-		letter-spacing: -1px; line-height: 1.1;
+		letter-spacing: -0.8px; line-height: 1.15;
 	}
-	.section-h.on-dark { color: #faf8f4; }
+	.section-h.on-dark { color: var(--off-white); }
 	.section-sub {
-		color: #5a5347; font-size: 16px; text-align: center;
-		margin: 0 auto 56px; max-width: 600px;
+		color: var(--warm-gray); font-size: 16px; text-align: center;
+		margin: 0 auto 48px; max-width: 600px;
 	}
-	.section-sub.on-dark { color: #d8d2c2; }
+	.section-sub.on-dark { color: var(--subhead-dark); }
 
+	/* Flat list (default Plan 009) */
+	.warranty-list {
+		max-width: 880px;
+		margin: 40px auto 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+	.warranty-row {
+		display: grid;
+		grid-template-columns: 240px 1fr;
+		gap: 32px;
+		padding: 22px 0;
+		border-top: 1px solid var(--border);
+		align-items: start;
+	}
+	.warranty-row:last-child { border-bottom: 1px solid var(--border); }
+	.warranty-dark .warranty-row { border-color: rgba(250,248,244,0.18); }
+	.warranty-dark .warranty-row:last-child { border-bottom-color: rgba(250,248,244,0.18); }
+	.warranty-row-label {
+		color: var(--charcoal);
+		font-size: 14px;
+		font-weight: 600;
+		letter-spacing: -0.1px;
+		padding-top: 4px;
+	}
+	.warranty-dark .warranty-row-label { color: var(--off-white); }
+	.warranty-row-value { margin: 0; }
+
+	/* Card grid (legacy, only when flat={false} is passed) */
 	.warranty-grid {
 		display: grid; grid-template-columns: repeat(2, 1fr);
-		gap: 24px; max-width: 800px; margin: 56px auto 0;
+		gap: 24px; max-width: 800px; margin: 40px auto 0;
 	}
 	.warranty-light .warranty-card {
 		padding: 28px;
@@ -82,7 +128,7 @@ const {
 		border-radius: var(--radius-card);
 	}
 	.warranty-label {
-		color: #b54620; font-size: 12px; font-weight: 500;
+		color: var(--rust); font-size: 12px; font-weight: 500;
 		margin: 0 0 14px; letter-spacing: 1.5px; text-transform: uppercase;
 	}
 </style>
