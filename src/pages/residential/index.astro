@@ -2,13 +2,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ServiceTile from '../../components/ServiceTile.astro';
 import LocalItem from '../../components/LocalItem.astro';
-import FAQItem from '../../components/FAQItem.astro';
 import WarrantyBlock from '../../components/WarrantyBlock.astro';
 import ReviewCard from '../../components/ReviewCard.astro';
-import MaterialComparison from '../../components/MaterialComparison.astro';
+import MaterialTabs from '../../components/MaterialTabs.astro';
+import Accordion from '../../components/Accordion.astro';
 import ColorSwatchGrid from '../../components/ColorSwatchGrid.astro';
 import ProcessFlow from '../../components/ProcessFlow.astro';
 import LayeredCard from '../../components/LayeredCard.astro';
+import ConstrainedSection from '../../components/ConstrainedSection.astro';
+import SplitScreenSection from '../../components/SplitScreenSection.astro';
+import FullBleedSection from '../../components/FullBleedSection.astro';
 import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
 
 const services = [
@@ -22,6 +25,7 @@ const services = [
 
 const materials = [
 	{
+		id: 'asphalt',
 		name: 'Asphalt shingle',
 		intro: 'The standard for East Texas residential. Lower up-front cost, wide color range, replaceable shingle-by-shingle on repairs.',
 		gradient: 'linear-gradient(135deg, #8a6f54 0%, #5a4836 60%, #2a2a28 100%)',
@@ -34,6 +38,7 @@ const materials = [
 		manufacturerPlaceholder: "Preferred asphalt manufacturer Heritage stocks (e.g. GAF Timberline HDZ, Owens Corning Duration, CertainTeed Landmark) and the impact-rating line. See Founder Input page §2.",
 	},
 	{
+		id: 'metal',
 		name: 'Metal',
 		intro: 'Longer service life, better in hail. Higher up-front. Standing seam or stamped-profile panel.',
 		gradient: 'linear-gradient(135deg, #7d8b9e 0%, #4a5566 60%, #2a3035 100%)',
@@ -46,8 +51,9 @@ const materials = [
 		manufacturerPlaceholder: "Metal panel brand Heritage installs most often (e.g. McElroy, Mueller, Berridge) and standard gauges offered. See Founder Input page §2.",
 	},
 	{
-		name: 'Synthetic + tile',
-		intro: 'Slate-look or tile-look at lower install weight. Niche, but worth the conversation if the roof line and the budget are right.',
+		id: 'tile',
+		name: 'Tile',
+		intro: 'Slate-look, tile-look, or real concrete tile. Niche but worth the conversation if the roof line and the budget are right.',
 		gradient: 'linear-gradient(135deg, #b8a78c 0%, #8a7d63 60%, #4a4239 100%)',
 		specs: [
 			{ label: 'Service life', value: '40–50 years (synthetic); 50+ (real tile)' },
@@ -133,12 +139,26 @@ const faqs = [
 		</div>
 	</section>
 
-	<!-- Materials -->
+	<!-- Split-screen: residential focus -->
+	<SplitScreenSection
+		imageSide="left"
+		gradient="linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)"
+		background="ivory"
+		minHeight="440px"
+	>
+		<p class="ss-eyebrow">For homeowners</p>
+		<h2 class="ss-h">Six things on every house.</h2>
+		<p class="ss-body">Replacement, repair, storm damage, inspection, maintenance, insurance claims. We do all six. The first three are the most common in East Texas; the last three are how we keep a roof out of trouble in the first place.</p>
+		<a class="ss-cta" href="/#inspection">Get my free inspection</a>
+	</SplitScreenSection>
+
+	<!-- Materials (MaterialTabs — interactive) -->
 	<section class="materials">
 		<p class="section-eyebrow">Materials</p>
 		<h2 class="section-h">What we install.</h2>
 		<p class="section-sub">A short read, not a manufacturer brochure. We talk trade-offs at the inspection.</p>
-		<MaterialComparison materials={materials} />
+		<MaterialTabs materials={materials} />
+		<p class="materials-attribution">Product photography courtesy of GAF, Owens Corning, CertainTeed (asphalt); Drexel Metals, McElroy Metal (standing seam); Boral, Eagle Roofing (tile). See <code>imagery-manifest.json</code> for license status — gradient placeholders shown until manufacturer assets land.</p>
 	</section>
 
 	<!-- Color swatches (ivory-tint section) -->
@@ -162,6 +182,16 @@ const faqs = [
 			<LocalItem heading="We're around if you need us." body="After the install, we're not gone. We're 30 minutes away if something needs attention. Call the owner direct." />
 		</div>
 	</section>
+
+	<!-- FullBleed cinematic: "One day install" -->
+	<FullBleedSection
+		gradient="linear-gradient(135deg, #8fa8c0 0%, #c4b89e 50%, #8a6f54 100%)"
+		overlayPosition="bottom-right"
+		minHeight="380px"
+	>
+		<p class="fb-eyebrow">Most installs</p>
+		<h2 class="fb-h">One day from tear-off to cleanup.</h2>
+	</FullBleedSection>
 
 	<!-- Process -->
 	<section class="process">
@@ -213,6 +243,13 @@ const faqs = [
 		</div>
 	</section>
 
+	<!-- Constrained narrative before testimonials -->
+	<ConstrainedSection background="ivory" paddingY="md">
+		<p class="cs-eyebrow">From the roofs we've done</p>
+		<h2 class="cs-h">Three real customers. Names go below.</h2>
+		<p class="cs-body">We post named reviews only with permission. Until the founders confirm three to publish, the cards below show what is coming.</p>
+	</ConstrainedSection>
+
 	<!-- Testimonials -->
 	<section class="testimonials">
 		<p class="section-eyebrow">From our customers</p>
@@ -225,22 +262,11 @@ const faqs = [
 		</div>
 	</section>
 
-	<!-- FAQ -->
+	<!-- FAQ (Accordion — interactive) -->
 	<section class="faq">
 		<p class="section-eyebrow">Common questions</p>
 		<h2 class="section-h">What homeowners ask us.</h2>
-		<div class="faq-list">
-			{faqs.map((f) => (
-				<div class="faq-wrap">
-					<FAQItem question={f.q} answer={f.a} />
-					{f.placeholderFact && (
-						<div class="faq-placeholder">
-							<HeritagePlaceholder fact={f.placeholderFact} />
-						</div>
-					)}
-				</div>
-			))}
-		</div>
+		<Accordion items={faqs} />
 	</section>
 </BaseLayout>
 
@@ -352,6 +378,32 @@ const faqs = [
 	.process { padding: 96px 48px; background: #faf8f4; }
 	.process-sla { max-width: 1100px; margin: 40px auto 0; }
 	.guarantee-callout { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
+
+	/* SplitScreen helpers */
+	.ss-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
+	.ss-h { color: var(--charcoal); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 16px; }
+	.ss-body { color: var(--warm-gray); font-size: 17px; line-height: 1.6; margin: 0 0 24px; }
+	.ss-cta { display: inline-flex; padding: 14px 28px; background: var(--rust); color: var(--off-white); font-size: 15px; font-weight: 500; border-radius: var(--radius-pill); transition: background 150ms ease; }
+	.ss-cta:hover { background: #9d3a1a; }
+
+	/* FullBleed helpers */
+	.fb-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
+	.fb-h { color: var(--off-white); font-size: 40px; font-weight: 600; letter-spacing: -1px; line-height: 1.15; margin: 0; max-width: 580px; }
+
+	/* Constrained helpers */
+	.cs-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 14px; text-align: center; }
+	.cs-h { color: var(--charcoal); font-size: 32px; font-weight: 600; letter-spacing: -0.6px; line-height: 1.2; margin: 0 0 16px; text-align: center; }
+	.cs-body { color: var(--warm-gray); font-size: 15px; line-height: 1.65; margin: 0 auto; text-align: center; max-width: 600px; }
+
+	/* Materials attribution */
+	.materials-attribution {
+		max-width: 1100px;
+		margin: 24px auto 0;
+		font-size: 12px;
+		color: var(--warm-gray);
+		text-align: center;
+	}
+	.materials-attribution code { font-size: 11px; }
 
 	/* Financing */
 	.financing { background: #1a1a1a; padding: 96px 48px; }
