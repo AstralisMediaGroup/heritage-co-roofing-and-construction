@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FounderCard from '../components/FounderCard.astro';
-import LocalItem from '../components/LocalItem.astro';
-import RegionColumns from '../components/RegionColumns.astro';
-import Testimonial from '../components/Testimonial.astro';
-import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
+import AsymmetricRow from '../components/AsymmetricRow.astro';
+import StatRow from '../components/StatRow.astro';
+import ServiceAreaMap from '../components/ServiceAreaMap.astro';
+import ReviewCard from '../components/ReviewCard.astro';
 import { founders } from '../content/founders';
 ---
 
@@ -56,23 +56,38 @@ import { founders } from '../content/founders';
 		</div>
 	</section>
 
-	<!-- Why local matters -->
-	<section class="local">
-		<p class="local-eyebrow">Why local matters</p>
-		<h2 class="local-h">We're not a national chain.</h2>
-		<p class="local-sub">When the big roofing companies finish a job, they're gone. We don't go anywhere.</p>
-		<div class="local-grid">
-			<LocalItem heading="We live here." body="Heritage Co. is locally owned and operated. Our crews live in your area, work in your area, send their kids to school in your area." />
-			<LocalItem heading="We answer the phone." body="When you call, you get us. Not a 1-800 number routing through three states to a script-reader." />
-			<LocalItem heading="We're around if you need us." body="After the install, we're not gone. We're 30 minutes away if something needs attention. Call the owner direct." />
-		</div>
+	<!-- Why local matters — 2 asymmetric rows -->
+	<section class="why-local">
+		<p class="section-eyebrow">Why local matters</p>
+		<h2 class="section-h">We're not a national chain.</h2>
+		<p class="section-sub">When the big roofing companies finish a job, they're gone. We don't go anywhere.</p>
+		<AsymmetricRow
+			heading="We answer the phone."
+			body="When you call, you get us. Not a 1-800 number routing through three states to a script-reader. The four founders on the about page are the four people you talk to."
+			bullets={["Same person from inspection through warranty", "Owner-direct line if anything needs attention", "No call-center, no script"]}
+			photoSide="left"
+			aspect="4/5"
+			gradient="linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%)"
+			ctaHref="/about"
+			ctaLabel="Meet the team"
+		/>
+		<AsymmetricRow
+			heading="We're 30 minutes away."
+			body="Crews live across East Texas and Central Arkansas. After the install, we're not gone — call about a question in 2030 and the same shop is still here."
+			bullets={["Locally owned and operated", "Crews in your area, not a regional dispatch", "Free inspection from a real person on the roof"]}
+			photoSide="right"
+			aspect="3/2"
+			gradient="linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)"
+			ctaHref="/service-areas"
+			ctaLabel="See service area"
+		/>
 	</section>
 
 	<!-- Founders -->
 	<section class="founders">
-		<p class="founders-eyebrow">Meet the team</p>
-		<h2 class="founders-h">The people answering your call.</h2>
-		<p class="founders-sub">30+ combined years of roofing. Locally owned and operated.</p>
+		<p class="section-eyebrow">Meet the team</p>
+		<h2 class="section-h">The people answering your call.</h2>
+		<p class="section-sub">30+ combined years of roofing. Locally owned and operated.</p>
 		<div class="founders-grid">
 			{founders.map((f) => (
 				<FounderCard name={f.name} role={f.role} cred={f.cred} />
@@ -83,32 +98,40 @@ import { founders } from '../content/founders';
 		</p>
 	</section>
 
-	<!-- Testimonials -->
-	<section class="testimonials">
-		<p class="testimonials-eyebrow">From our customers</p>
-		<h2 class="testimonials-h">What people in your zip code have said.</h2>
-		<p class="testimonials-sub">Three named testimonials below. Until we have permission to publish, the placeholders show what's coming.</p>
-		<div class="testimonials-grid">
-			<Testimonial placeholderFact="Homepage testimonial #1 — first + last name, city, project type, 1–2 sentences. Permission required. See Founder Input page §5." />
-			<Testimonial placeholderFact="Homepage testimonial #2 — first + last name, city, project type, 1–2 sentences. See Founder Input page §5." />
-			<Testimonial placeholderFact="Homepage testimonial #3 — first + last name, city, project type, 1–2 sentences. See Founder Input page §5." />
-		</div>
-		<div class="testimonials-stat">
-			<HeritagePlaceholder fact="Lifetime residential roof count + lifetime commercial sq ft + Heritage Co. founding year. Three short stats for a 'by the numbers' line. See Founder Input page §5." />
-		</div>
+	<!-- Stats -->
+	<section class="stats-section">
+		<StatRow stats={[
+			{ label: 'Combined years', placeholderFact: 'Real total years roofing across the four founders. Build Pack §1 hedges with \"30+ combined years\"; we want the actual number. See Founder Input page §7.' },
+			{ label: 'Roofs installed', placeholderFact: 'Lifetime residential roof count. See Founder Input page §5.' },
+			{ value: 'A+', label: 'BBB rating', placeholderFact: 'Confirm BBB rating + accreditation start year. See Founder Input page §2.' },
+			{ value: 'TX + AR', label: 'Service area' },
+		]} />
+		<p class="stats-note">Numbers above are HeritagePlaceholders until the founders confirm. \"A+\" is a default — replace if different.</p>
 	</section>
 
-	<!-- Service area -->
-	<section class="area">
-		<p class="area-eyebrow">Service area</p>
-		<h2 class="area-h">East Texas + Central Arkansas.</h2>
-		<p class="area-sub">Headquartered in Longview. Crews across two states.</p>
-		<RegionColumns />
+	<!-- Service area map -->
+	<section class="area-map">
+		<p class="section-eyebrow">Service area</p>
+		<h2 class="section-h">East Texas + Central Arkansas.</h2>
+		<p class="section-sub">Headquartered in Longview. Crews across two states.</p>
+		<ServiceAreaMap />
+	</section>
+
+	<!-- Reviews -->
+	<section class="reviews">
+		<p class="section-eyebrow">From our customers</p>
+		<h2 class="section-h">What people in your zip code have said.</h2>
+		<p class="section-sub">Three named reviews go below. Until we have permission to publish, the placeholders show what's coming.</p>
+		<div class="reviews-grid">
+			<ReviewCard placeholderFact="Homepage review #1 — first + last name, city, project type, star rating, 1–2 sentence quote. Permission required. See Founder Input page §5." />
+			<ReviewCard placeholderFact="Homepage review #2 — first + last name, city, project type, star rating, 1–2 sentence quote. See Founder Input page §5." />
+			<ReviewCard placeholderFact="Homepage review #3 — first + last name, city, project type, star rating, 1–2 sentence quote. See Founder Input page §5." />
+		</div>
 	</section>
 </BaseLayout>
 
 <style>
-	/* Hero */
+	/* Hero — UNCHANGED from prior */
 	.hero { position: relative; min-height: 620px; background: #1a1a1a; }
 	.hero-photo {
 		position: absolute; inset: 0;
@@ -153,6 +176,23 @@ import { founders } from '../content/founders';
 		font-weight: 500;
 		border-bottom: 2px solid #faf8f4;
 	}
+	/* End hero block — anything below this is fair game */
+
+	/* Section labels */
+	.section-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		text-align: center; margin: 0 0 16px;
+		letter-spacing: 1px; text-transform: uppercase;
+	}
+	.section-h {
+		color: #1a1a1a; font-size: 40px; font-weight: 600;
+		text-align: center; margin: 0 0 16px;
+		letter-spacing: -1px; line-height: 1.1;
+	}
+	.section-sub {
+		color: #5a5347; font-size: 16px; text-align: center;
+		margin: 0 auto 56px; max-width: 600px;
+	}
 
 	/* Audience */
 	.audience { padding: 96px 48px; background: #faf8f4; }
@@ -162,9 +202,16 @@ import { founders } from '../content/founders';
 	}
 	.audience-sub { color: #5a5347; font-size: 16px; text-align: center; margin: 0 0 56px; }
 	.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 0 auto; }
-	.card { background: #ffffff; overflow: hidden; display: block; }
+	.card {
+		background: #ffffff; overflow: hidden; display: block;
+		border: 1px solid #ece7de;
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-subtle);
+		transition: transform 200ms ease, box-shadow 200ms ease;
+	}
+	.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-active); }
 	.card-photo {
-		height: 280px;
+		aspect-ratio: 16 / 10;
 		background: linear-gradient(180deg, #8fa8c0 0%, #c4b89e 50%, #8a6f54 100%);
 	}
 	.card-photo.commercial {
@@ -185,36 +232,14 @@ import { founders } from '../content/founders';
 		border-bottom: 2px solid #1a1a1a; padding-bottom: 4px;
 	}
 
-	/* Why local */
-	.local { padding: 120px 48px; background: #1a1a1a; }
-	.local-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		text-align: center; margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
-	}
-	.local-h {
-		color: #faf8f4; font-size: 48px; font-weight: 600;
-		text-align: center; line-height: 1.05; margin: 0 auto 24px;
-		letter-spacing: -1.5px; max-width: 720px;
-	}
-	.local-sub {
-		color: #d8d2c2; font-size: 17px; text-align: center;
-		max-width: 600px; margin: 0 auto 64px; line-height: 1.6;
-	}
-	.local-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 40px; max-width: 1100px; margin: 0 auto;
-	}
+	/* Why local — asymmetric rows */
+	.why-local { padding: 80px 48px 96px; background: #ffffff; border-top: 1px solid #ece7de; }
+	.why-local .section-eyebrow,
+	.why-local .section-h,
+	.why-local .section-sub { /* defaults are fine */ }
+
 	/* Founders */
-	.founders { background: #faf8f4; padding: 96px 48px; }
-	.founders-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		text-align: center; margin: 0 0 16px; letter-spacing: 1px; text-transform: uppercase;
-	}
-	.founders-h {
-		color: #1a1a1a; font-size: 40px; font-weight: 600;
-		text-align: center; margin: 0 0 16px; letter-spacing: -1px; line-height: 1.1;
-	}
-	.founders-sub { color: #5a5347; font-size: 16px; text-align: center; margin: 0 0 56px; }
+	.founders { background: var(--ivory-tint); padding: 96px 48px; border-top: 1px solid #ece7de; }
 	.founders-grid {
 		display: grid; grid-template-columns: repeat(4, 1fr);
 		gap: 24px; max-width: 960px; margin: 0 auto;
@@ -222,32 +247,24 @@ import { founders } from '../content/founders';
 	.founders-link { text-align: center; margin: 32px 0 0; font-size: 14px; }
 	.text-link { color: #1a1a1a; font-weight: 500; border-bottom: 2px solid #1a1a1a; padding-bottom: 3px; }
 
-	/* Testimonials */
-	.testimonials { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
-	.testimonials-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		text-align: center; margin: 0 0 16px; letter-spacing: 1px; text-transform: uppercase;
+	/* Stats */
+	.stats-section { background: #ffffff; padding: 80px 48px; border-top: 1px solid #ece7de; }
+	.stats-note {
+		color: var(--warm-gray);
+		font-size: 12px;
+		text-align: center;
+		margin: 24px auto 0;
+		max-width: 700px;
+		font-style: normal;
 	}
-	.testimonials-h {
-		color: #1a1a1a; font-size: 40px; font-weight: 600;
-		text-align: center; margin: 0 0 16px; letter-spacing: -1px; line-height: 1.1;
-	}
-	.testimonials-sub { color: #5a5347; font-size: 16px; text-align: center; margin: 0 auto 56px; max-width: 600px; }
-	.testimonials-grid {
+
+	/* Service area */
+	.area-map { background: var(--ivory-tint); padding: 96px 48px; border-top: 1px solid #ece7de; }
+
+	/* Reviews */
+	.reviews { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
+	.reviews-grid {
 		display: grid; grid-template-columns: repeat(3, 1fr);
 		gap: 24px; max-width: 1100px; margin: 0 auto;
 	}
-	.testimonials-stat { max-width: 1100px; margin: 32px auto 0; }
-
-	/* Service area */
-	.area { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
-	.area-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		text-align: center; margin: 0 0 16px; letter-spacing: 1px; text-transform: uppercase;
-	}
-	.area-h {
-		color: #1a1a1a; font-size: 40px; font-weight: 600;
-		text-align: center; margin: 0 0 16px; letter-spacing: -1px; line-height: 1.1;
-	}
-	.area-sub { color: #5a5347; font-size: 16px; text-align: center; margin: 0 0 56px; }
 </style>

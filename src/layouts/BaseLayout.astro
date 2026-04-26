@@ -3,6 +3,7 @@ import '../styles/global.css';
 import TopBar from '../components/TopBar.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import StickyPhonePill from '../components/StickyPhonePill.astro';
 
 interface Props {
 	title?: string;
@@ -38,5 +39,6 @@ const {
 			<slot />
 			<Footer ctaHeading={ctaHeading} ctaSub={ctaSub} ctaButton={ctaButton} />
 		</div>
+		<StickyPhonePill />
 	</body>
 </html>
