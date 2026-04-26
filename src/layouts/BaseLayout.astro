@@ -4,6 +4,7 @@ import TopBar from '../components/TopBar.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyPhonePill from '../components/StickyPhonePill.astro';
+import StickyAnchor from '../components/StickyAnchor.astro';
 
 interface Props {
 	title?: string;
@@ -40,5 +41,6 @@ const {
 			<Footer ctaHeading={ctaHeading} ctaSub={ctaSub} ctaButton={ctaButton} />
 		</div>
 		<StickyPhonePill />
+		<StickyAnchor />
 	</body>
 </html>
