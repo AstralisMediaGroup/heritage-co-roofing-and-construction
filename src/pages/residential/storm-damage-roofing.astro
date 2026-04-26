@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import FAQItem from '../../components/FAQItem.astro';
 import TrustStrip from '../../components/TrustStrip.astro';
 import BeforeAfter from '../../components/BeforeAfter.astro';
+import ProcessFlow from '../../components/ProcessFlow.astro';
 import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
 
 const insuranceSteps = [
@@ -103,15 +104,11 @@ const faqs = [
 		<p class="section-eyebrow">How it works</p>
 		<h2 class="section-h">How insurance claims work with us.</h2>
 		<p class="section-sub">Three steps. We do most of the work.</p>
-		<div class="claims-grid">
-			{insuranceSteps.map((s) => (
-				<div class="claim-step">
-					<p class="claim-num">{s.n}</p>
-					<p class="claim-h">{s.h}</p>
-					<p class="claim-body">{s.body}</p>
-				</div>
-			))}
-		</div>
+		<ProcessFlow steps={[
+			{ label: 'Free inspection', caption: 'We climb the roof, document what we find. No charge.' },
+			{ label: 'We document', caption: 'Photos, measurements, a written report for the adjuster.' },
+			{ label: 'We talk to your adjuster', caption: 'You stay out of the back-and-forth.' },
+		]} />
 	</section>
 
 	<!-- Damage types -->
@@ -157,24 +154,23 @@ const faqs = [
 		</div>
 	</section>
 
-	<!-- What to expect timeline -->
+	<!-- What to expect timeline (compact ProcessFlow with captions) -->
 	<section class="timeline">
 		<p class="section-eyebrow">What to expect</p>
 		<h2 class="section-h">From your call to a new roof.</h2>
 		<p class="section-sub">Seven steps. We tell you where you are at each one.</p>
-		<ol class="timeline-list">
-			{timelineSteps.map((s) => (
-				<li class="timeline-step">
-					<span class="timeline-n">{s.n}</span>
-					<div class="timeline-body">
-						<p class="timeline-label">{s.label}</p>
-						<p class="timeline-text">{s.body}</p>
-					</div>
-				</li>
-			))}
-		</ol>
+		<div class="timeline-flow">
+			<ProcessFlow steps={[
+				{ label: 'You call', caption: 'You reach a person on the line.' },
+				{ label: 'We inspect', caption: 'Roof, attic, eaves. Photos and a written report.' },
+				{ label: 'You file', caption: 'You give your adjuster our report.' },
+				{ label: 'Adjuster visit', caption: 'We meet them on the roof when scheduling allows.' },
+				{ label: 'Scope agreed', caption: 'Carrier approves. You sign with us. Deductible only.' },
+				{ label: 'Install', caption: 'Most residential roofs install in one day.' },
+				{ label: 'Warranty hand-off', caption: 'Workmanship + manufacturer pass-through paperwork.' },
+			]} />
+		</div>
 		<div class="timeline-sla">
-			<p class="timeline-sla-label">Heritage SLA — fill in for the live page</p>
 			<HeritagePlaceholder fact="Free-inspection turnaround in plain words (e.g. 'same-day or next-day') and total typical timeline from inspection to install on an approved claim. See Founder Input page §8." />
 		</div>
 	</section>
@@ -253,13 +249,19 @@ const faqs = [
 	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
 	.cta-primary {
 		background: #b54620; color: #faf8f4;
-		padding: 16px 32px; font-size: 15px; font-weight: 500;
+		padding: 14px 28px; font-size: 15px; font-weight: 500;
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, box-shadow 150ms ease;
 	}
+	.cta-primary:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
 	.cta-secondary {
-		color: #faf8f4; padding: 16px 0;
+		color: #faf8f4; padding: 12px 26px;
 		font-size: 15px; font-weight: 500;
-		border-bottom: 2px solid #faf8f4;
+		border: 2px solid #faf8f4;
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, color 150ms ease;
 	}
+	.cta-secondary:hover { background: #faf8f4; color: #1a1a1a; }
 
 	.section-eyebrow {
 		color: #b54620; font-size: 13px; font-weight: 500;
@@ -298,9 +300,10 @@ const faqs = [
 	}
 	.damage-card { background: transparent; }
 	.damage-photo {
-		height: 200px;
+		aspect-ratio: 4 / 3;
 		background: linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%);
 		margin-bottom: 20px;
+		border-radius: var(--radius-card);
 	}
 	.damage-label { color: #faf8f4; font-size: 22px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.3px; line-height: 1.2; }
 	.damage-body { color: #c4c1ba; font-size: 14px; line-height: 1.6; margin: 0; }
@@ -329,27 +332,10 @@ const faqs = [
 		margin: 56px auto 0;
 	}
 
-	/* Timeline */
+	/* Timeline (uses ProcessFlow with 7 cols) */
 	.timeline { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
-	.timeline-list {
-		max-width: 800px; margin: 0 auto; padding: 0; list-style: none;
-		display: flex; flex-direction: column; gap: 20px;
-	}
-	.timeline-step {
-		display: grid; grid-template-columns: 56px 1fr; gap: 20px;
-		padding: 24px 28px; background: #faf8f4; border: 1px solid #ece7de;
-	}
-	.timeline-n {
-		display: inline-flex; align-items: center; justify-content: center;
-		width: 40px; height: 40px;
-		background: #1a1a1a; color: #faf8f4;
-		font-size: 16px; font-weight: 600;
-	}
-	.timeline-body {}
-	.timeline-label { color: #1a1a1a; font-size: 18px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.2px; }
-	.timeline-text { color: #5a5347; font-size: 15px; line-height: 1.6; margin: 0; }
-	.timeline-sla { max-width: 800px; margin: 28px auto 0; }
-	.timeline-sla-label { color: #5a5347; font-size: 13px; font-weight: 500; margin: 0 0 8px; letter-spacing: 0.3px; text-transform: uppercase; }
+	.timeline-flow { --cols: 7; }
+	.timeline-sla { max-width: 1100px; margin: 40px auto 0; }
 
 	/* Carriers */
 	.carriers { padding: 96px 48px; background: #faf8f4; }
