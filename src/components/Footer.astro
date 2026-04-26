@@ -1,4 +1,6 @@
 ---
+import { attribution } from '../content/imagery';
+
 interface Props {
 	ctaHeading?: string;
 	ctaSub?: string;
@@ -23,7 +25,7 @@ const {
 
 <div class="footer">
 	<p class="footer-text">HERITAGE Co. ROOFING & CONSTRUCTION · Locally owned · East Texas + Central Arkansas</p>
-	<p class="footer-attribution">Imagery: GAF, Owens Corning, CertainTeed (product); Unsplash contributors (lifestyle).</p>
+	<p class="footer-attribution">{attribution.footer}</p>
 </div>
 
 <style>
