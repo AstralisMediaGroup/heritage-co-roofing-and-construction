@@ -129,7 +129,6 @@ Work order is locked by v2 — don't violate.
 - Do **NOT** propose visual amendments to existing pages. The architecture is the problem; polishing inside it is what failed four times.
 - Do **NOT** build pages 3–30 before homepage + metal page are client-validated.
 - Do **NOT** loosen voice or factual integrity. Those are v1 locked, not v2 negotiable.
-- Use **Sonnet, not Opus.** If running on Opus, surface that to the user before doing visual work.
 
 ## Self-check before producing visual code
 
