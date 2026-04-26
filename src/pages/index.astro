@@ -9,6 +9,7 @@ import FullBleedSection from '../components/FullBleedSection.astro';
 import ConstrainedSection from '../components/ConstrainedSection.astro';
 import BleedingImage from '../components/BleedingImage.astro';
 import MarqueeStrip from '../components/MarqueeStrip.astro';
+import RevealOnScroll from '../components/RevealOnScroll.astro';
 import { founders } from '../content/founders';
 ---
 
@@ -50,6 +51,7 @@ import { founders } from '../content/founders';
 	/>
 
 	<!-- Audience cards -->
+	<RevealOnScroll>
 	<section class="audience">
 		<h2 class="audience-h">What kind of roof do you need?</h2>
 		<p class="audience-sub">We do both. The work is different for each.</p>
@@ -74,8 +76,10 @@ import { founders } from '../content/founders';
 			</a>
 		</div>
 	</section>
+	</RevealOnScroll>
 
 	<!-- Why local matters — 2 asymmetric rows -->
+	<RevealOnScroll>
 	<section class="why-local">
 		<p class="section-eyebrow">Why local matters</p>
 		<h2 class="section-h">We're not a national chain.</h2>
