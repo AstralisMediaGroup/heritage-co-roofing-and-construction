@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceTile from '../../components/ServiceTile.astro';
+import LocalItem from '../../components/LocalItem.astro';
+
+const services = [
+	{ label: 'Roof replacement', body: 'Full tear-off and install. Asphalt, metal, synthetic. Workmanship + material warranties.' },
+	{ label: 'Roof repair', body: 'Leaks, missing shingles, flashing failures. Fast turnaround, no upsell.' },
+	{ label: 'Storm damage', body: 'Hail, wind, tree fall. We work directly with your insurance adjuster.', href: '/residential/storm-damage-roofing' },
+	{ label: 'Inspection', body: 'Free, no-obligation roof inspection. Honest report, photos included.' },
+	{ label: 'Maintenance', body: 'Annual checkups and tune-ups. Catch problems before they become claims.' },
+	{ label: 'Insurance claims', body: 'Adjuster meetings, documentation, scope review. We handle the back-and-forth.' },
+];
+
+const process = [
+	{ n: '01', h: 'Inspect', body: 'Free, same-day or next-day. We climb the roof, take photos, write it up.' },
+	{ n: '02', h: 'Quote', body: 'Clear scope, clear pricing. No surprise line items, no pressure.' },
+	{ n: '03', h: 'Install', body: 'Most residential roofs install in one day. Crews live in your area.' },
+	{ n: '04', h: 'Stand behind', body: 'Workmanship and material warranties. Owner-direct line if anything needs attention.' },
+];
+---
+
+<BaseLayout title="Residential Roofing — Heritage Co.">
+	<!-- Hero -->
+	<section class="hero">
+		<div class="hero-photo" aria-hidden="true"></div>
+		<div class="hero-overlay" aria-hidden="true"></div>
+		<div class="hero-content">
+			<p class="hero-eyebrow">For homeowners</p>
+			<h1 class="hero-h1">Roofs for your home.</h1>
+			<p class="hero-sub">
+				Replacement, repair, and storm damage. Insurance accepted. Free inspections, fast quotes — and the same crew is still around if something needs attention next year.
+			</p>
+			<div class="hero-cta-row">
+				<a class="cta-primary" href="/#inspection">Get my free inspection</a>
+				<a class="cta-secondary" href="tel:9032428102">Call 903-242-8102</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Service grid -->
+	<section class="services">
+		<p class="section-eyebrow">What we do</p>
+		<h2 class="section-h">Residential services.</h2>
+		<p class="section-sub">Six things we are good at, on every house.</p>
+		<div class="service-grid">
+			{services.map((s) => <ServiceTile label={s.label} body={s.body} href={s.href} />)}
+		</div>
+	</section>
+
+	<!-- Why local matters (reused) -->
+	<section class="local">
+		<p class="local-eyebrow">Why local matters</p>
+		<h2 class="local-h">We're not a national chain.</h2>
+		<p class="local-sub">When the big roofing companies finish a job, they're gone. We don't go anywhere.</p>
+		<div class="local-grid">
+			<LocalItem heading="We live here." body="Heritage Co. is locally owned and operated. Our crews live in your area, work in your area, send their kids to school in your area." />
+			<LocalItem heading="We answer the phone." body="When you call, you get us. Not a 1-800 number routing through three states to a script-reader." />
+			<LocalItem heading="We're around if you need us." body="After the install, we're not gone. We're 30 minutes away if something needs attention. Call the owner direct." />
+		</div>
+	</section>
+
+	<!-- Process -->
+	<section class="process">
+		<p class="section-eyebrow">How we work</p>
+		<h2 class="section-h">Four steps. No surprises.</h2>
+		<div class="process-grid">
+			{process.map((p) => (
+				<div class="process-step">
+					<p class="process-num">{p.n}</p>
+					<p class="process-h">{p.h}</p>
+					<p class="process-body">{p.body}</p>
+				</div>
+			))}
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	/* Hero */
+	.hero { position: relative; min-height: 540px; background: #1a1a1a; }
+	.hero-photo {
+		position: absolute; inset: 0;
+		background: linear-gradient(180deg, #6b8aa8 0%, #8fa8c0 38%, #ece7de 38%, #b8a78c 70%, #6b5d4a 100%);
+		opacity: 0.92;
+	}
+	.hero-overlay {
+		position: absolute; inset: 0;
+		background: linear-gradient(90deg, rgba(26,26,26,0.78) 0%, rgba(26,26,26,0.35) 60%, rgba(26,26,26,0.1) 100%);
+	}
+	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
+	.hero-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
+	}
+	.hero-h1 {
+		color: #faf8f4; font-size: 56px; font-weight: 600;
+		line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px;
+	}
+	.hero-sub {
+		color: #d8d2c2; font-size: 17px; line-height: 1.55;
+		margin: 0 0 32px; max-width: 560px;
+	}
+	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
+	.cta-primary {
+		background: #b54620; color: #faf8f4;
+		padding: 16px 32px; font-size: 15px; font-weight: 500;
+	}
+	.cta-secondary {
+		color: #faf8f4; padding: 16px 0;
+		font-size: 15px; font-weight: 500;
+		border-bottom: 2px solid #faf8f4;
+	}
+
+	/* Section labels */
+	.section-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		text-align: center; margin: 0 0 16px;
+		letter-spacing: 1px; text-transform: uppercase;
+	}
+	.section-h {
+		color: #1a1a1a; font-size: 40px; font-weight: 600;
+		text-align: center; margin: 0 0 16px;
+		letter-spacing: -1px; line-height: 1.1;
+	}
+	.section-sub {
+		color: #5a5347; font-size: 16px; text-align: center;
+		margin: 0 0 56px;
+	}
+
+	/* Services */
+	.services { padding: 96px 48px; background: #faf8f4; }
+	.service-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 24px; max-width: 1100px; margin: 0 auto;
+	}
+
+	/* Why local (reuse styles from homepage) */
+	.local { padding: 120px 48px; background: #1a1a1a; }
+	.local-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		text-align: center; margin: 0 0 20px;
+		letter-spacing: 1px; text-transform: uppercase;
+	}
+	.local-h {
+		color: #faf8f4; font-size: 48px; font-weight: 600;
+		text-align: center; line-height: 1.05; margin: 0 auto 24px;
+		letter-spacing: -1.5px; max-width: 720px;
+	}
+	.local-sub {
+		color: #d8d2c2; font-size: 17px; text-align: center;
+		max-width: 600px; margin: 0 auto 64px; line-height: 1.6;
+	}
+	.local-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 40px; max-width: 1100px; margin: 0 auto;
+	}
+
+	/* Process */
+	.process { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
+	.process-grid {
+		display: grid; grid-template-columns: repeat(4, 1fr);
+		gap: 32px; max-width: 1100px; margin: 0 auto;
+	}
+	.process-step {
+		padding: 32px;
+		background: #faf8f4;
+		border: 1px solid #ece7de;
+	}
+	.process-num {
+		color: #b54620; font-size: 12px; font-weight: 500;
+		margin: 0 0 16px; letter-spacing: 1.5px;
+	}
+	.process-h {
+		color: #1a1a1a; font-size: 22px; font-weight: 600;
+		margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2;
+	}
+	.process-body { color: #5a5347; font-size: 15px; line-height: 1.6; margin: 0; }
+</style>

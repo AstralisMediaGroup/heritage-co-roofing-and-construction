@@ -1,0 +1,40 @@
+---
+interface Props {
+	label: string;
+	body: string;
+	href?: string;
+}
+
+const { label, body, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag class="tile" href={href}>
+	<p class="tile-h">{label}</p>
+	<p class="tile-body">{body}</p>
+	{href && <span class="tile-cta">Learn more →</span>}
+</Tag>
+
+<style>
+	.tile {
+		display: block;
+		padding: 32px;
+		background: #ffffff;
+		border: 1px solid #ece7de;
+		text-decoration: none;
+		transition: border-color 120ms ease;
+	}
+	a.tile:hover { border-color: #1a1a1a; }
+	.tile-h {
+		color: #1a1a1a; font-size: 22px; font-weight: 600;
+		margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2;
+	}
+	.tile-body {
+		color: #5a5347; font-size: 15px; line-height: 1.6;
+		margin: 0 0 20px;
+	}
+	.tile-cta {
+		color: #1a1a1a; font-size: 13px; font-weight: 500;
+		border-bottom: 2px solid #1a1a1a; padding-bottom: 3px;
+	}
+</style>

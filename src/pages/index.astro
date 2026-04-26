@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FounderCard from '../components/FounderCard.astro';
+import LocalItem from '../components/LocalItem.astro';
 import { founders } from '../content/founders';
 import { eastTexas, eastTexasMore, centralArkansas } from '../content/cities';
 ---
@@ -59,21 +60,9 @@ import { eastTexas, eastTexasMore, centralArkansas } from '../content/cities';
 		<h2 class="local-h">We're not a national chain.</h2>
 		<p class="local-sub">When the big roofing companies finish a job, they're gone. We don't go anywhere.</p>
 		<div class="local-grid">
-			<div>
-				<div class="local-item-photo" aria-hidden="true"></div>
-				<p class="local-item-h">We live here.</p>
-				<p class="local-item-body">Heritage Co. is locally owned and operated. Our crews live in your area, work in your area, send their kids to school in your area.</p>
-			</div>
-			<div>
-				<div class="local-item-photo" aria-hidden="true"></div>
-				<p class="local-item-h">We answer the phone.</p>
-				<p class="local-item-body">When you call, you get us. Not a 1-800 number routing through three states to a script-reader.</p>
-			</div>
-			<div>
-				<div class="local-item-photo" aria-hidden="true"></div>
-				<p class="local-item-h">We're around if you need us.</p>
-				<p class="local-item-body">After the install, we're not gone. We're 30 minutes away if something needs attention. Call the owner direct.</p>
-			</div>
+			<LocalItem heading="We live here." body="Heritage Co. is locally owned and operated. Our crews live in your area, work in your area, send their kids to school in your area." />
+			<LocalItem heading="We answer the phone." body="When you call, you get us. Not a 1-800 number routing through three states to a script-reader." />
+			<LocalItem heading="We're around if you need us." body="After the install, we're not gone. We're 30 minutes away if something needs attention. Call the owner direct." />
 		</div>
 	</section>
 
@@ -204,17 +193,6 @@ import { eastTexas, eastTexasMore, centralArkansas } from '../content/cities';
 		display: grid; grid-template-columns: repeat(3, 1fr);
 		gap: 40px; max-width: 1100px; margin: 0 auto;
 	}
-	.local-item-photo {
-		height: 200px;
-		background: linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%);
-		margin-bottom: 24px;
-	}
-	.local-item-h {
-		color: #faf8f4; font-size: 22px; font-weight: 600;
-		margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2;
-	}
-	.local-item-body { color: #c4c1ba; font-size: 15px; line-height: 1.6; margin: 0; }
-
 	/* Founders */
 	.founders { background: #faf8f4; padding: 96px 48px; }
 	.founders-eyebrow {
