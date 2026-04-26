@@ -1,0 +1,167 @@
+---
+// Sitewide lightbox. Other components opt-in by adding data-lightbox-trigger to
+// elements that should open it, with data-lightbox-src + data-lightbox-caption.
+// Mount once via BaseLayout.
+---
+
+<dialog class="lb" data-lightbox aria-label="Image viewer">
+	<button type="button" class="lb-close" data-lightbox-close aria-label="Close">
+		<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<path d="M18 6 6 18M6 6l12 12" />
+		</svg>
+	</button>
+	<button type="button" class="lb-nav lb-prev" data-lightbox-prev aria-label="Previous image">
+		<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<path d="m15 18-6-6 6-6" />
+		</svg>
+	</button>
+	<figure class="lb-figure">
+		<img class="lb-image" data-lightbox-image alt="" />
+		<figcaption class="lb-caption" data-lightbox-caption></figcaption>
+	</figure>
+	<button type="button" class="lb-nav lb-next" data-lightbox-next aria-label="Next image">
+		<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<path d="m9 18 6-6-6-6" />
+		</svg>
+	</button>
+</dialog>
+
+<style>
+	.lb {
+		position: fixed;
+		inset: 0;
+		width: 100vw;
+		height: 100vh;
+		max-width: 100vw;
+		max-height: 100vh;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: rgba(20, 20, 19, 0.94);
+		color: var(--off-white);
+	}
+	.lb::backdrop { background: rgba(20, 20, 19, 0.85); }
+	.lb[open] {
+		display: grid;
+		grid-template-columns: 80px 1fr 80px;
+		align-items: center;
+		animation: lb-fade 200ms ease-out;
+	}
+	@keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+	.lb-close {
+		position: absolute; top: 24px; right: 24px;
+		width: 44px; height: 44px;
+		background: rgba(250, 248, 244, 0.1);
+		color: var(--off-white);
+		border: 0;
+		border-radius: var(--radius-pill);
+		cursor: pointer;
+		display: inline-flex; align-items: center; justify-content: center;
+		transition: background 150ms ease;
+	}
+	.lb-close:hover { background: rgba(250, 248, 244, 0.2); }
+	.lb-nav {
+		width: 56px; height: 56px;
+		background: rgba(250, 248, 244, 0.08);
+		color: var(--off-white);
+		border: 0;
+		border-radius: var(--radius-pill);
+		cursor: pointer;
+		display: inline-flex; align-items: center; justify-content: center;
+		justify-self: center;
+		transition: background 150ms ease;
+	}
+	.lb-nav:hover { background: rgba(250, 248, 244, 0.18); }
+	.lb-figure {
+		grid-column: 2;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 16px;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 24px;
+	}
+	.lb-image {
+		max-width: 100%;
+		max-height: 78vh;
+		object-fit: contain;
+		display: block;
+		border-radius: var(--radius-card);
+		animation: lb-scale 300ms ease-out;
+	}
+	@keyframes lb-scale { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+	.lb-caption {
+		color: var(--body-dark);
+		font-size: 14px;
+		line-height: 1.5;
+		text-align: center;
+		max-width: 720px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.lb[open], .lb-image { animation: none; }
+	}
+	@media (max-width: 700px) {
+		.lb[open] { grid-template-columns: 56px 1fr 56px; }
+		.lb-nav { width: 40px; height: 40px; }
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		const dialog = document.querySelector('[data-lightbox]');
+		if (!dialog) return;
+		const img = dialog.querySelector('[data-lightbox-image]');
+		const cap = dialog.querySelector('[data-lightbox-caption]');
+		const closeBtn = dialog.querySelector('[data-lightbox-close]');
+		const prevBtn = dialog.querySelector('[data-lightbox-prev]');
+		const nextBtn = dialog.querySelector('[data-lightbox-next]');
+
+		// Collect triggers; each trigger has data-lightbox-src and data-lightbox-caption.
+		// Triggers can opt into a "group" via data-lightbox-group; arrow keys cycle within the group.
+		let group = [];
+		let index = 0;
+
+		const open = (trigger) => {
+			const groupName = trigger.getAttribute('data-lightbox-group') || '';
+			group = Array.from(document.querySelectorAll(
+				groupName
+					? '[data-lightbox-trigger][data-lightbox-group="' + groupName + '"]'
+					: '[data-lightbox-trigger]'
+			));
+			index = group.indexOf(trigger);
+			render();
+			if (typeof dialog.showModal === 'function') dialog.showModal();
+			else dialog.setAttribute('open', '');
+		};
+		const render = () => {
+			const t = group[index];
+			if (!t) return;
+			img.src = t.getAttribute('data-lightbox-src') || '';
+			img.alt = t.getAttribute('data-lightbox-alt') || '';
+			cap.textContent = t.getAttribute('data-lightbox-caption') || '';
+		};
+		const next = () => { if (group.length) { index = (index + 1) % group.length; render(); } };
+		const prev = () => { if (group.length) { index = (index - 1 + group.length) % group.length; render(); } };
+
+		document.addEventListener('click', (e) => {
+			const trigger = e.target.closest('[data-lightbox-trigger]');
+			if (trigger) {
+				e.preventDefault();
+				open(trigger);
+			}
+		});
+		closeBtn.addEventListener('click', () => dialog.close());
+		nextBtn.addEventListener('click', next);
+		prevBtn.addEventListener('click', prev);
+		dialog.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowRight') next();
+			else if (e.key === 'ArrowLeft') prev();
+		});
+		// Click backdrop to close
+		dialog.addEventListener('click', (e) => {
+			if (e.target === dialog) dialog.close();
+		});
+	})();
+</script>

@@ -9,6 +9,7 @@ import ConstrainedSection from '../components/ConstrainedSection.astro';
 import SplitScreenSection from '../components/SplitScreenSection.astro';
 import FullBleedSection from '../components/FullBleedSection.astro';
 import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
+import { imagery } from '../content/imagery';
 
 const services = [
 	{ label: 'New construction', body: 'Single-source coordination from deck-up. Ground-up builds, on schedule.', gradient: 'linear-gradient(180deg, #7d8b9e 0%, #4a5566 100%)' },
@@ -227,12 +228,12 @@ const reRoofProcess = [
 				{ key: 'office', label: 'Office' },
 			]}
 			projects={[
-				{ industry: 'Schools', industryKey: 'schools', placeholderFact: 'Named school project — district, building, city, year, roof system, sq ft. See Founder Input §5.' },
-				{ industry: 'Healthcare', industryKey: 'healthcare', placeholderFact: 'Named healthcare project — clinic / MOB / hospital, city, year, roof system, sq ft. See Founder Input §5.' },
-				{ industry: 'Retail', industryKey: 'retail', placeholderFact: 'Named retail project — center, city, year, system, sq ft. See Founder Input §5.' },
-				{ industry: 'Industrial', industryKey: 'industrial', placeholderFact: 'Named industrial project — warehouse / manufacturing, city, year, system, sq ft. See Founder Input §5.' },
-				{ industry: 'Office', industryKey: 'office', placeholderFact: 'Named office project — building, city, year, system, sq ft. See Founder Input §5.' },
-				{ industry: 'Schools', industryKey: 'schools', placeholderFact: 'Second named school project. See Founder Input §5.' },
+				{ industry: 'Schools', industryKey: 'schools', imageSrc: imagery.projectGallery[0].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named school project (district, building, city, year, system, sq ft). See Founder Input §5.' },
+				{ industry: 'Healthcare', industryKey: 'healthcare', imageSrc: imagery.projectGallery[1].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named healthcare project. See Founder Input §5.' },
+				{ industry: 'Retail', industryKey: 'retail', imageSrc: imagery.projectGallery[2].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named retail project. See Founder Input §5.' },
+				{ industry: 'Industrial', industryKey: 'industrial', imageSrc: imagery.projectGallery[3].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named industrial project. See Founder Input §5.' },
+				{ industry: 'Office', industryKey: 'office', imageSrc: imagery.projectGallery[4].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named office project. See Founder Input §5.' },
+				{ industry: 'Schools', industryKey: 'schools', imageSrc: imagery.projectGallery[5].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with second named school project. See Founder Input §5.' },
 			]}
 		/>
 		<div class="projects-stats">

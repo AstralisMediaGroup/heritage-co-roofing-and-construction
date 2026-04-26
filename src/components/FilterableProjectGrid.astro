@@ -40,10 +40,23 @@ const { filters, projects } = Astro.props;
 	</div>
 	<div class="fpg-grid">
 		{projects.map((p) => (
-			<article class="fpg-card" data-industry={p.industryKey}>
-				<div class="fpg-photo" style={p.imageSrc ? '' : `background: ${p.gradient || 'linear-gradient(180deg, #7d8b9e 0%, #4a5566 100%)'};`} aria-hidden={p.imageSrc ? undefined : 'true'}>
-					{p.imageSrc && <img src={p.imageSrc} alt={p.projectName || ''} loading="lazy" />}
-				</div>
+			<article class="fpg-card has-zoom-photo" data-industry={p.industryKey}>
+				{p.imageSrc ? (
+					<button
+						type="button"
+						class="fpg-photo fpg-photo-button"
+						data-lightbox-trigger
+						data-lightbox-group="commercial-projects"
+						data-lightbox-src={p.imageSrc}
+						data-lightbox-alt={p.projectName || ''}
+						data-lightbox-caption={[p.projectName, p.city, p.year, p.system].filter(Boolean).join(' · ') || 'Illustrative project photo'}
+						aria-label={`Open ${p.projectName || 'project'} in lightbox`}
+					>
+						<img src={p.imageSrc} alt={p.projectName || ''} loading="lazy" class="zoom-photo" />
+					</button>
+				) : (
+					<div class="fpg-photo" style={`background: ${p.gradient || 'linear-gradient(180deg, #7d8b9e 0%, #4a5566 100%)'};`} aria-hidden="true"></div>
+				)}
 				{p.projectName ? (
 					<div class="fpg-body">
 						<p class="fpg-industry">{p.industry}</p>
@@ -111,8 +124,17 @@ const { filters, projects } = Astro.props;
 	}
 	.fpg-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-active); }
 	.fpg-card.is-hidden { display: none; }
-	.fpg-photo { aspect-ratio: 4 / 3; }
+	.fpg-photo { aspect-ratio: 4 / 3; overflow: hidden; }
 	.fpg-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+	.fpg-photo-button {
+		all: unset;
+		display: block;
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		cursor: zoom-in;
+		overflow: hidden;
+	}
+	.fpg-photo-button:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
 	.fpg-body { padding: 24px 28px; }
 	.fpg-industry {
 		color: var(--rust); font-size: 11px; font-weight: 500;
