@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npm create *)",
+      "Bash(shopt -s dotglob)",
+      "Bash(mv former-field/* former-field/.* .)",
+      "Bash(npx astro *)",
+      "Bash(git --version)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(git config *)",
+      "Bash(brew --version)",
+      "Bash(brew install *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git remote *)",
+      "Bash(git push *)"
+    ]
+  }
+}
