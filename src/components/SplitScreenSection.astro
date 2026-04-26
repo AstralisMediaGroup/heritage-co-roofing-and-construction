@@ -1,0 +1,64 @@
+---
+interface Props {
+	imageSide?: 'left' | 'right';
+	gradient?: string;
+	imageSrc?: string;
+	imageAlt?: string;
+	background?: 'light' | 'dark' | 'ivory';
+	minHeight?: string;
+}
+
+const {
+	imageSide = 'left',
+	gradient = 'linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)',
+	imageSrc,
+	imageAlt = '',
+	background = 'light',
+	minHeight = '480px',
+} = Astro.props;
+---
+
+<section class={`split split-${background} split-${imageSide}`} style={`min-height: ${minHeight};`}>
+	<div class="split-image" style={imageSrc ? '' : `background: ${gradient};`} aria-hidden={imageSrc ? undefined : 'true'}>
+		{imageSrc && <img src={imageSrc} alt={imageAlt} loading="lazy" />}
+	</div>
+	<div class="split-content">
+		<div class="split-inner">
+			<slot />
+		</div>
+	</div>
+</section>
+
+<style>
+	.split {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0;
+		padding: 0;
+	}
+	.split-light { background: #ffffff; }
+	.split-dark { background: var(--charcoal); color: var(--off-white); }
+	.split-ivory { background: var(--ivory-tint); }
+
+	.split-right { grid-template-columns: 1fr 1fr; }
+	.split-right .split-image { order: 2; }
+	.split-right .split-content { order: 1; }
+
+	.split-image {
+		min-height: inherit;
+		position: relative;
+		overflow: hidden;
+	}
+	.split-image img {
+		position: absolute; inset: 0;
+		width: 100%; height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.split-content {
+		display: flex;
+		align-items: center;
+		padding: 64px 48px;
+	}
+	.split-inner { max-width: 520px; }
+</style>

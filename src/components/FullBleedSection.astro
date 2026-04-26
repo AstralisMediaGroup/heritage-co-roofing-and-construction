@@ -1,0 +1,66 @@
+---
+interface Props {
+	gradient?: string;
+	imageSrc?: string;
+	imageAlt?: string;
+	overlayPosition?: 'bottom-left' | 'bottom-right' | 'center';
+	minHeight?: string;
+	overlayDarken?: number;
+}
+
+const {
+	gradient = 'linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)',
+	imageSrc,
+	imageAlt = '',
+	overlayPosition = 'bottom-left',
+	minHeight = '560px',
+	overlayDarken = 0.55,
+} = Astro.props;
+---
+
+<section class={`fullbleed pos-${overlayPosition}`} style={`min-height: ${minHeight};`}>
+	<div class="fullbleed-image" style={imageSrc ? '' : `background: ${gradient};`} aria-hidden={imageSrc ? undefined : 'true'}>
+		{imageSrc && <img src={imageSrc} alt={imageAlt} loading="lazy" />}
+	</div>
+	<div class="fullbleed-scrim" style={`background: linear-gradient(180deg, rgba(26,26,26,0) 30%, rgba(26,26,26,${overlayDarken}) 100%);`} aria-hidden="true"></div>
+	<div class="fullbleed-content">
+		<slot />
+	</div>
+</section>
+
+<style>
+	.fullbleed {
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		padding: 64px 64px;
+	}
+	.fullbleed-image {
+		position: absolute; inset: 0;
+		z-index: 0;
+	}
+	.fullbleed-image img {
+		position: absolute; inset: 0;
+		width: 100%; height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.fullbleed-scrim {
+		position: absolute; inset: 0;
+		z-index: 1;
+	}
+	.fullbleed-content {
+		position: relative;
+		z-index: 2;
+		max-width: 640px;
+		color: var(--off-white);
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+	.pos-bottom-left .fullbleed { justify-content: flex-start; align-items: flex-end; }
+	.pos-bottom-right { justify-content: flex-end; align-items: flex-end; }
+	.pos-bottom-right .fullbleed-content { margin-left: auto; }
+	.pos-center { justify-content: center; align-items: center; }
+	.pos-center .fullbleed-content { text-align: center; }
+</style>
