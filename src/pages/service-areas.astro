@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceAreaMap from '../components/ServiceAreaMap.astro';
+import ConstrainedSection from '../components/ConstrainedSection.astro';
 import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 ---
 
@@ -80,6 +81,12 @@ import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 		</div>
 	</section>
 
+	<!-- Constrained narrative before coverage details -->
+	<ConstrainedSection background="ivory" paddingY="sm">
+		<p class="cs-eyebrow">The fine print</p>
+		<h2 class="cs-h">Coverage details that don't fit on the map.</h2>
+	</ConstrainedSection>
+
 	<!-- Coverage details -->
 	<section class="coverage">
 		<p class="section-eyebrow">Coverage details</p>
@@ -151,6 +158,8 @@ import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 
 	/* Map */
 	.map-section { background: var(--ivory-tint); padding: 64px 48px; }
+	.cs-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 14px; text-align: center; }
+	.cs-h { color: var(--charcoal); font-size: 28px; font-weight: 600; letter-spacing: -0.5px; line-height: 1.2; margin: 0; text-align: center; }
 
 	/* Regions */
 	.regions { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
