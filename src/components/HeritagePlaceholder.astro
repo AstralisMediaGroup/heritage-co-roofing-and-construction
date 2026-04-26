@@ -1,0 +1,63 @@
+---
+interface Props {
+	fact: string;
+	inline?: boolean;
+}
+
+const { fact, inline = false } = Astro.props;
+---
+
+{inline ? (
+	<span class="placeholder placeholder-inline" role="note" aria-label="Heritage to provide">
+		<span class="placeholder-tag">HERITAGE TO PROVIDE</span>
+		<span class="placeholder-fact">{fact}</span>
+	</span>
+) : (
+	<div class="placeholder placeholder-block" role="note" aria-label="Heritage to provide">
+		<span class="placeholder-tag">HERITAGE TO PROVIDE</span>
+		<span class="placeholder-fact">{fact}</span>
+		<span class="placeholder-ref">see Founder Input page</span>
+	</div>
+)}
+
+<style>
+	.placeholder {
+		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+		color: #b54620;
+		border: 1px solid #b54620;
+		background: rgba(181, 70, 32, 0.06);
+	}
+	.placeholder-inline {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 8px;
+		padding: 2px 8px;
+		font-size: 0.92em;
+		line-height: 1.4;
+	}
+	.placeholder-block {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 14px 18px;
+		font-size: 14px;
+		line-height: 1.5;
+		margin: 12px 0;
+	}
+	.placeholder-tag {
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+	}
+	.placeholder-inline .placeholder-tag {
+		font-size: 10px;
+	}
+	.placeholder-fact {
+		font-weight: 500;
+	}
+	.placeholder-ref {
+		font-size: 11px;
+		opacity: 0.75;
+	}
+</style>
