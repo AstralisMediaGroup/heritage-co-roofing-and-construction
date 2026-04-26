@@ -1,5 +1,6 @@
 ---
 import { attribution } from '../content/imagery';
+import FooterDirectory from './FooterDirectory.astro';
 
 interface Props {
 	ctaHeading?: string;
@@ -13,6 +14,8 @@ const {
 	ctaButton = 'Schedule online',
 } = Astro.props;
 ---
+
+<FooterDirectory />
 
 <div class="footer-cta" id="inspection">
 	<h2 class="footer-cta-h">{ctaHeading}</h2>

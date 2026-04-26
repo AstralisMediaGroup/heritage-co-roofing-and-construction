@@ -1,0 +1,107 @@
+---
+import HeritagePlaceholder from './HeritagePlaceholder.astro';
+
+const services = [
+	{ label: 'Roof replacement', href: '/residential/roof-replacement' },
+	{ label: 'Roof repair', href: '/residential/roof-repair' },
+	{ label: 'Roof inspection', href: '/residential/roof-inspection' },
+	{ label: 'Storm damage', href: '/residential/storm-damage-roofing' },
+	{ label: 'Gutter installation + repair', href: '/residential/gutter-installation-and-repair' },
+	{ label: 'Skylight installation + repair', href: '/residential/skylight-installation-and-repair' },
+	{ label: 'Attic ventilation', href: '/residential/attic-ventilation' },
+	{ label: 'Chimney flashing + repair', href: '/residential/chimney-flashing-and-repair' },
+	{ label: 'TPO roofing', href: '/commercial/tpo-roofing' },
+	{ label: 'EPDM roofing', href: '/commercial/epdm-roofing' },
+	{ label: 'Modified bitumen', href: '/commercial/modified-bitumen-roofing' },
+	{ label: 'Metal roofing', href: '/commercial/metal-roofing' },
+	{ label: 'Built-up (BUR)', href: '/commercial/built-up-roofing' },
+	{ label: 'Coatings + restorations', href: '/commercial/roof-coatings-and-restorations' },
+];
+
+const cities = [
+	{ label: 'Tyler, TX', href: '/service-areas/tyler-tx' },
+	{ label: 'Longview, TX', href: '/service-areas/longview-tx' },
+	{ label: 'Marshall, TX', href: '/service-areas/marshall-tx' },
+	{ label: 'Kilgore, TX', href: '/service-areas/kilgore-tx' },
+	{ label: 'Henderson, TX', href: '/service-areas/henderson-tx' },
+	{ label: 'Nacogdoches, TX', href: '/service-areas/nacogdoches-tx' },
+	{ label: 'Little Rock, AR', href: '/service-areas/little-rock-ar' },
+	{ label: 'Conway, AR', href: '/service-areas/conway-ar' },
+	{ label: 'View all areas →', href: '/service-areas' },
+];
+
+const company = [
+	{ label: 'About', href: '/about' },
+	{ label: 'Reviews', href: '/reviews' },
+	{ label: 'Free inspection', href: '/free-inspection' },
+	{ label: 'Contact', href: '/free-inspection' },
+];
+---
+
+<div class="dir">
+	<div class="dir-grid">
+		<div class="dir-col">
+			<p class="dir-h">Services</p>
+			<ul>
+				{services.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+			</ul>
+		</div>
+		<div class="dir-col">
+			<p class="dir-h">Service areas</p>
+			<ul>
+				{cities.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+			</ul>
+		</div>
+		<div class="dir-col">
+			<p class="dir-h">Company</p>
+			<ul>
+				{company.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+			</ul>
+		</div>
+		<div class="dir-col">
+			<p class="dir-h">Contact</p>
+			<ul>
+				<li><a href="tel:9032428102">903-242-8102</a></li>
+				<li><HeritagePlaceholder inline={true} fact="email address" /></li>
+				<li><HeritagePlaceholder inline={true} fact="hours of operation" /></li>
+				<li><HeritagePlaceholder inline={true} fact="HQ mailing address — Longview, TX" /></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<style>
+	.dir {
+		background: var(--charcoal);
+		padding: 72px 48px 48px;
+	}
+	.dir-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 48px;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+	.dir-col {}
+	.dir-h {
+		color: var(--rust);
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+		margin: 0 0 18px;
+	}
+	.dir-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+	.dir-col a {
+		color: var(--off-white);
+		font-size: 14px;
+		text-decoration: none;
+		opacity: 0.78;
+		transition: opacity 150ms ease;
+	}
+	.dir-col a:hover { opacity: 1; }
+
+	@media (max-width: 880px) {
+		.dir-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+	}
+</style>
