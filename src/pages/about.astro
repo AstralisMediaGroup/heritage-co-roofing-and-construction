@@ -7,6 +7,9 @@ import TrustBadgeRow from '../components/TrustBadgeRow.astro';
 import AsymmetricRow from '../components/AsymmetricRow.astro';
 import StatRow from '../components/StatRow.astro';
 import LayeredCard from '../components/LayeredCard.astro';
+import ConstrainedSection from '../components/ConstrainedSection.astro';
+import FullBleedSection from '../components/FullBleedSection.astro';
+import BleedingImage from '../components/BleedingImage.astro';
 import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 import { founders } from '../content/founders';
 ---
@@ -23,6 +26,16 @@ import { founders } from '../content/founders';
 				Locally owned. Headquartered in Longview, Texas. Crews across East Texas and Central Arkansas. The four people who founded the company are the four people you talk to.
 			</p>
 		</div>
+	</section>
+
+	<!-- Bleeding image transition from hero to story -->
+	<section class="bleed-bridge">
+		<BleedingImage
+			gradient="linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%)"
+			aspect="21 / 9"
+			bleed={120}
+			maxWidth="900px"
+		/>
 	</section>
 
 	<!-- Founding story — 2 asymmetric rows -->
@@ -63,6 +76,17 @@ import { founders } from '../content/founders';
 		</div>
 	</section>
 
+	<!-- FullBleed cinematic between founders and badges -->
+	<FullBleedSection
+		gradient="linear-gradient(180deg, #6b5d4a 0%, #4a4239 60%, #2a2a28 100%)"
+		overlayPosition="bottom-right"
+		minHeight="380px"
+		overlayDarken={0.6}
+	>
+		<p class="fb-eyebrow">It is our name on the truck</p>
+		<h2 class="fb-h">Operators on every job, not just on the website.</h2>
+	</FullBleedSection>
+
 	<!-- Quick-glance badges (TrustBadgeRow) -->
 	<section class="badges">
 		<TrustBadgeRow />
@@ -92,6 +116,12 @@ import { founders } from '../content/founders';
 	</section>
 
 	<WarrantyBlock theme="dark" />
+
+	<!-- Constrained narrative before credentials band -->
+	<ConstrainedSection background="ivory" paddingY="sm">
+		<p class="cs-eyebrow">In one line</p>
+		<h2 class="cs-h">A regional shop. The four founders on every contract.</h2>
+	</ConstrainedSection>
 
 	<!-- Credentials band -->
 	<section class="creds">
@@ -147,6 +177,13 @@ import { founders } from '../content/founders';
 	/* Story */
 	.story { background: #faf8f4; padding: 96px 48px; }
 	.story-placeholder { max-width: 1100px; margin: 24px auto; }
+
+	/* Plan 006 helpers */
+	.bleed-bridge { padding: 0 48px; background: #faf8f4; position: relative; z-index: 1; }
+	.fb-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
+	.fb-h { color: var(--off-white); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0; max-width: 580px; }
+	.cs-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 14px; text-align: center; }
+	.cs-h { color: var(--charcoal); font-size: 28px; font-weight: 600; letter-spacing: -0.5px; line-height: 1.2; margin: 0; text-align: center; }
 
 	/* Founders (ivory-tint + inset card-on-card) */
 	.founders { background: var(--ivory-tint); padding: 96px 48px; border-top: 1px solid #ece7de; }
