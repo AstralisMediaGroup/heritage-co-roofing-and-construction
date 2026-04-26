@@ -3,28 +3,50 @@ interface Props {
 	label: string;
 	body: string;
 	href?: string;
+	photo?: boolean;
+	gradient?: string;
 }
 
-const { label, body, href } = Astro.props;
+const {
+	label,
+	body,
+	href,
+	photo = false,
+	gradient = 'linear-gradient(180deg, #8fa8c0 0%, #c4b89e 50%, #8a6f54 100%)',
+} = Astro.props;
 const Tag = href ? 'a' : 'div';
 ---
 
 <Tag class="tile" href={href}>
-	<p class="tile-h">{label}</p>
-	<p class="tile-body">{body}</p>
-	{href && <span class="tile-cta">Learn more →</span>}
+	{photo && <div class="tile-photo" style={`background: ${gradient};`} aria-hidden="true"></div>}
+	<div class="tile-body-pad">
+		<p class="tile-h">{label}</p>
+		<p class="tile-body">{body}</p>
+		{href && <span class="tile-cta">Learn more →</span>}
+	</div>
 </Tag>
 
 <style>
 	.tile {
 		display: block;
-		padding: 32px;
 		background: #ffffff;
 		border: 1px solid #ece7de;
 		text-decoration: none;
-		transition: border-color 120ms ease;
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-subtle);
+		overflow: hidden;
+		transition: border-color 150ms ease, transform 200ms ease, box-shadow 200ms ease;
 	}
-	a.tile:hover { border-color: #1a1a1a; }
+	a.tile:hover {
+		border-color: #1a1a1a;
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-active);
+	}
+	.tile-photo {
+		aspect-ratio: 16 / 10;
+		width: 100%;
+	}
+	.tile-body-pad { padding: 28px 28px 32px; }
 	.tile-h {
 		color: #1a1a1a; font-size: 22px; font-weight: 600;
 		margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2;

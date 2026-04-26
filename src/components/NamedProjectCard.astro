@@ -42,9 +42,17 @@ const meta = [year, system, sqft && `${sqft} sq ft`, industry].filter(Boolean).j
 </article>
 
 <style>
-	.project-card { background: #ffffff; border: 1px solid #ece7de; overflow: hidden; }
+	.project-card {
+		background: #ffffff;
+		border: 1px solid #ece7de;
+		overflow: hidden;
+		border-radius: var(--radius-large);
+		box-shadow: var(--shadow-subtle);
+		transition: transform 200ms ease, box-shadow 200ms ease;
+	}
+	.project-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-active); }
 	.project-photo {
-		height: 220px;
+		aspect-ratio: 4 / 3;
 		background: linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%);
 	}
 	.project-body { padding: 24px 28px; }

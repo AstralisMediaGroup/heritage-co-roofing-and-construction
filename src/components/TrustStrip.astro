@@ -8,11 +8,8 @@ const { items } = Astro.props;
 
 <section class="trust">
 	<div class="trust-row">
-		{items.map((item, i) => (
-			<>
-				{i > 0 && <span class="trust-dot">·</span>}
-				<span>{item}</span>
-			</>
+		{items.map((item) => (
+			<span class="trust-pill">{item}</span>
 		))}
 	</div>
 </section>
@@ -25,10 +22,19 @@ const { items } = Astro.props;
 		border-bottom: 1px solid #ece7de;
 	}
 	.trust-row {
-		display: flex; gap: 18px; justify-content: center;
-		align-items: center; color: #1a1a1a;
-		font-size: 14px; font-weight: 500;
-		letter-spacing: 0.3px; flex-wrap: wrap;
+		display: flex; gap: 12px; justify-content: center;
+		align-items: center; flex-wrap: wrap;
 	}
-	.trust-dot { color: #b54620; }
+	.trust-pill {
+		display: inline-flex;
+		align-items: center;
+		padding: 8px 18px;
+		background: #faf8f4;
+		border: 1px solid #ece7de;
+		color: #1a1a1a;
+		font-size: 13px;
+		font-weight: 500;
+		letter-spacing: 0.3px;
+		border-radius: var(--radius-pill);
+	}
 </style>

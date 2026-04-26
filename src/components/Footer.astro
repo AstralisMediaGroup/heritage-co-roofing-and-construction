@@ -43,14 +43,20 @@ const {
 		padding: 16px 32px;
 		font-size: 15px;
 		font-weight: 500;
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, box-shadow 150ms ease;
 	}
+	.footer-cta-btn:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
 	.footer-phone-btn {
 		color: #faf8f4;
-		padding: 16px 28px;
+		padding: 14px 26px;
 		font-size: 15px;
 		font-weight: 500;
 		border: 2px solid #faf8f4;
+		border-radius: var(--radius-pill);
+		transition: background 150ms ease, color 150ms ease;
 	}
+	.footer-phone-btn:hover { background: #faf8f4; color: #1a1a1a; }
 
 	.footer {
 		background: #1a1a1a;

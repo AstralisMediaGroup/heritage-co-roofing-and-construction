@@ -61,7 +61,12 @@ const {
 		display: grid; grid-template-columns: repeat(2, 1fr);
 		gap: 32px; max-width: 960px; margin: 0 auto;
 	}
-	.cert-item { padding: 24px; background: #faf8f4; border: 1px solid #ece7de; }
+	.cert-item {
+		padding: 24px;
+		background: #faf8f4;
+		border: 1px solid #ece7de;
+		border-radius: var(--radius-card);
+	}
 	.cert-label {
 		color: #1a1a1a; font-size: 14px; font-weight: 600;
 		margin: 0 0 12px; letter-spacing: -0.2px;

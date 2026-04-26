@@ -9,15 +9,16 @@ const { question, answer } = Astro.props;
 
 <div class="faq-item">
 	<p class="faq-q">{question}</p>
-	<p class="faq-a">{answer}</p>
+	<div class="faq-a-pane">
+		<p class="faq-a">{answer}</p>
+	</div>
 </div>
 
 <style>
 	.faq-item {
-		padding: 28px 0;
-		border-bottom: 1px solid #ece7de;
+		padding: 0 0 16px;
+		margin-bottom: 16px;
 	}
-	.faq-item:last-child { border-bottom: 0; }
 	.faq-q {
 		color: #1a1a1a;
 		font-size: 19px;
@@ -25,6 +26,13 @@ const { question, answer } = Astro.props;
 		margin: 0 0 12px;
 		letter-spacing: -0.3px;
 		line-height: 1.3;
+		padding: 0 4px;
+	}
+	.faq-a-pane {
+		background: #ffffff;
+		border: 1px solid #ece7de;
+		border-radius: var(--radius-card);
+		padding: 18px 22px;
 	}
 	.faq-a {
 		color: #5a5347;
