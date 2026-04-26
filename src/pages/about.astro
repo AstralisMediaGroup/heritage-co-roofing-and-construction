@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FounderCard from '../components/FounderCard.astro';
+import { founders } from '../content/founders';
+---
+
+<BaseLayout title="About Heritage Co. — Built by operators, not marketers.">
+	<!-- Hero -->
+	<section class="hero">
+		<div class="hero-photo" aria-hidden="true"></div>
+		<div class="hero-overlay" aria-hidden="true"></div>
+		<div class="hero-content">
+			<p class="hero-eyebrow">About Heritage Co.</p>
+			<h1 class="hero-h1">Built by operators,<br />not marketers.</h1>
+			<p class="hero-sub">
+				Locally owned in East Texas. 30+ combined years on the roof. The people you call are the people who answer.
+			</p>
+		</div>
+	</section>
+
+	<!-- Founding story -->
+	<section class="story">
+		<p class="section-eyebrow">Why we built it</p>
+		<h2 class="section-h">We did the work for someone else first.</h2>
+		<div class="story-body">
+			<p>
+				Heritage Co. came together because the four of us kept seeing the same thing on roofs across East Texas — work that was rushed, crews that were gone, and homeowners who could not get a callback when something went wrong six months later. The big national chains can sell a roof. They cannot stand behind one in your zip code.
+			</p>
+			<p>
+				So we started a company you can actually reach. Locally owned. Locally crewed. Same people on the phone as on the ladder. Insurance work, retail roofs, commercial re-roofs — the same standard on every job, because it is our name on the truck.
+			</p>
+			<p>
+				We are not the cheapest roofer in East Texas. We are the one that is still going to be 30 minutes away when you need us in 2030.
+			</p>
+		</div>
+	</section>
+
+	<!-- Founders expanded -->
+	<section class="founders">
+		<p class="section-eyebrow">Meet the team</p>
+		<h2 class="section-h">The people answering your call.</h2>
+		<p class="section-sub">30+ combined years of roofing. Locally owned and operated.</p>
+		<div class="founders-grid">
+			{founders.map((f) => (
+				<FounderCard name={f.name} role={f.role} cred={f.cred} bio={f.bio} />
+			))}
+		</div>
+	</section>
+
+	<!-- Credentials band -->
+	<section class="creds">
+		<p class="creds-text">
+			30+ combined years roofing experience. Locally owned and operated. East Texas + Central Arkansas.
+		</p>
+	</section>
+</BaseLayout>
+
+<style>
+	/* Hero */
+	.hero { position: relative; min-height: 480px; background: #1a1a1a; }
+	.hero-photo {
+		position: absolute; inset: 0;
+		background: linear-gradient(180deg, #6b5d4a 0%, #4a4239 50%, #2a2a28 100%);
+		opacity: 0.92;
+	}
+	.hero-overlay {
+		position: absolute; inset: 0;
+		background: linear-gradient(90deg, rgba(26,26,26,0.82) 0%, rgba(26,26,26,0.4) 60%, rgba(26,26,26,0.15) 100%);
+	}
+	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
+	.hero-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
+	}
+	.hero-h1 {
+		color: #faf8f4; font-size: 56px; font-weight: 600;
+		line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px;
+	}
+	.hero-sub {
+		color: #d8d2c2; font-size: 17px; line-height: 1.55;
+		margin: 0; max-width: 560px;
+	}
+
+	/* Section labels */
+	.section-eyebrow {
+		color: #b54620; font-size: 13px; font-weight: 500;
+		text-align: center; margin: 0 0 16px;
+		letter-spacing: 1px; text-transform: uppercase;
+	}
+	.section-h {
+		color: #1a1a1a; font-size: 40px; font-weight: 600;
+		text-align: center; margin: 0 0 16px;
+		letter-spacing: -1px; line-height: 1.1;
+	}
+	.section-sub {
+		color: #5a5347; font-size: 16px; text-align: center;
+		margin: 0 0 56px;
+	}
+
+	/* Story */
+	.story { background: #faf8f4; padding: 96px 48px; }
+	.story-body {
+		max-width: 720px;
+		margin: 36px auto 0;
+		color: #5a5347;
+		font-size: 17px;
+		line-height: 1.7;
+	}
+	.story-body p { margin: 0 0 20px; }
+	.story-body p:last-child { margin-bottom: 0; }
+
+	/* Founders */
+	.founders { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
+	.founders-grid {
+		display: grid; grid-template-columns: repeat(2, 1fr);
+		gap: 48px; max-width: 960px; margin: 0 auto;
+	}
+
+	/* Credentials band */
+	.creds { background: #1a1a1a; padding: 56px 48px; text-align: center; }
+	.creds-text {
+		color: #faf8f4; font-size: 22px; font-weight: 600;
+		max-width: 800px; margin: 0 auto;
+		letter-spacing: -0.3px; line-height: 1.4;
+	}
+</style>
