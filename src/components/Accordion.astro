@@ -1,0 +1,116 @@
+---
+import HeritagePlaceholder from './HeritagePlaceholder.astro';
+
+interface Item {
+	q: string;
+	a: string;
+	placeholderFact?: string;
+}
+
+interface Props {
+	items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="accordion" data-accordion>
+	{items.map((item, i) => (
+		<details class="acc-item" open={i === 0 ? true : undefined}>
+			<summary class="acc-summary">
+				<span class="acc-q">{item.q}</span>
+				<span class="acc-icon" aria-hidden="true"></span>
+			</summary>
+			<div class="acc-body">
+				<p class="acc-a">{item.a}</p>
+				{item.placeholderFact && (
+					<div class="acc-placeholder">
+						<HeritagePlaceholder fact={item.placeholderFact} />
+					</div>
+				)}
+			</div>
+		</details>
+	))}
+</div>
+
+<style>
+	.accordion {
+		max-width: 800px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.acc-item {
+		background: #ffffff;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-subtle);
+		overflow: hidden;
+	}
+	.acc-summary {
+		list-style: none;
+		cursor: pointer;
+		padding: 22px 26px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 16px;
+	}
+	.acc-summary::-webkit-details-marker { display: none; }
+	.acc-q {
+		color: var(--charcoal);
+		font-size: 17px;
+		font-weight: 600;
+		letter-spacing: -0.2px;
+		line-height: 1.35;
+	}
+	.acc-icon {
+		flex-shrink: 0;
+		width: 24px; height: 24px;
+		position: relative;
+		transition: transform 200ms ease;
+	}
+	.acc-icon::before, .acc-icon::after {
+		content: '';
+		position: absolute;
+		background: var(--charcoal);
+	}
+	.acc-icon::before { left: 50%; top: 0; bottom: 0; width: 2px; transform: translateX(-50%); }
+	.acc-icon::after { top: 50%; left: 0; right: 0; height: 2px; transform: translateY(-50%); }
+	.acc-item[open] .acc-icon::before { display: none; }
+	.acc-body {
+		padding: 0 26px 22px;
+	}
+	.acc-a {
+		color: var(--warm-gray);
+		font-size: 15px;
+		line-height: 1.65;
+		margin: 0;
+	}
+	.acc-placeholder { margin-top: 14px; }
+
+	/* Smooth height animation only when JS is on (uses content-visibility approach) */
+	.accordion[data-accordion-enhanced] .acc-item:not([open]) .acc-body {
+		display: none;
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		const accs = document.querySelectorAll('[data-accordion]');
+		accs.forEach((acc) => {
+			acc.setAttribute('data-accordion-enhanced', 'true');
+			// Optional: only one open at a time
+			acc.querySelectorAll('details').forEach((d) => {
+				d.addEventListener('toggle', () => {
+					if (d.open) {
+						acc.querySelectorAll('details').forEach((other) => {
+							if (other !== d) other.open = false;
+						});
+					}
+				});
+			});
+		});
+	})();
+</script>

@@ -1,0 +1,153 @@
+---
+import HeritagePlaceholder from './HeritagePlaceholder.astro';
+
+interface Project {
+	industry: string;
+	industryKey: string;
+	projectName?: string;
+	city?: string;
+	year?: string;
+	system?: string;
+	sqft?: string;
+	gradient?: string;
+	imageSrc?: string;
+	placeholderFact?: string;
+}
+
+interface Filter {
+	key: string;
+	label: string;
+}
+
+interface Props {
+	filters: Filter[];
+	projects: Project[];
+}
+
+const { filters, projects } = Astro.props;
+---
+
+<div class="fpg" data-filterable-grid>
+	<div class="fpg-filters" role="tablist" aria-label="Filter projects by industry">
+		{filters.map((f, i) => (
+			<button
+				type="button"
+				class={`fpg-filter ${i === 0 ? 'is-active' : ''}`}
+				data-filter={f.key}
+				aria-pressed={i === 0 ? 'true' : 'false'}
+			>{f.label}</button>
+		))}
+	</div>
+	<div class="fpg-grid">
+		{projects.map((p) => (
+			<article class="fpg-card" data-industry={p.industryKey}>
+				<div class="fpg-photo" style={p.imageSrc ? '' : `background: ${p.gradient || 'linear-gradient(180deg, #7d8b9e 0%, #4a5566 100%)'};`} aria-hidden={p.imageSrc ? undefined : 'true'}>
+					{p.imageSrc && <img src={p.imageSrc} alt={p.projectName || ''} loading="lazy" />}
+				</div>
+				{p.projectName ? (
+					<div class="fpg-body">
+						<p class="fpg-industry">{p.industry}</p>
+						<h3 class="fpg-name">{p.projectName}</h3>
+						<p class="fpg-meta">
+							{[p.year, p.system, p.sqft && `${p.sqft} sq ft`].filter(Boolean).join(' · ')}
+						</p>
+						<p class="fpg-city">{p.city}</p>
+					</div>
+				) : (
+					<div class="fpg-body">
+						<p class="fpg-industry">{p.industry}</p>
+						<HeritagePlaceholder fact={p.placeholderFact || `Named ${p.industry.toLowerCase()} project — see Founder Input page §5.`} />
+					</div>
+				)}
+			</article>
+		))}
+	</div>
+</div>
+
+<style>
+	.fpg { width: 100%; }
+	.fpg-filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
+		margin: 0 auto 40px;
+		max-width: 900px;
+	}
+	.fpg-filter {
+		padding: 10px 22px;
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--charcoal);
+		background: #ffffff;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-pill);
+		cursor: pointer;
+		transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+	}
+	.fpg-filter:hover { border-color: var(--charcoal); }
+	.fpg-filter.is-active {
+		background: var(--charcoal);
+		color: var(--off-white);
+		border-color: var(--charcoal);
+	}
+	/* No-JS: hide filter UI (filters only meaningful with JS) */
+	.fpg:not([data-filterable-enhanced]) .fpg-filters { display: none; }
+
+	.fpg-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+	.fpg-card {
+		background: #ffffff;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-large);
+		box-shadow: var(--shadow-subtle);
+		overflow: hidden;
+		transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
+	}
+	.fpg-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-active); }
+	.fpg-card.is-hidden { display: none; }
+	.fpg-photo { aspect-ratio: 4 / 3; }
+	.fpg-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+	.fpg-body { padding: 24px 28px; }
+	.fpg-industry {
+		color: var(--rust); font-size: 11px; font-weight: 500;
+		margin: 0 0 10px; letter-spacing: 1.5px; text-transform: uppercase;
+	}
+	.fpg-name {
+		color: var(--charcoal); font-size: 20px; font-weight: 600;
+		margin: 0 0 8px; letter-spacing: -0.3px; line-height: 1.2;
+	}
+	.fpg-meta { color: var(--warm-gray); font-size: 13px; margin: 0 0 6px; line-height: 1.5; }
+	.fpg-city { color: var(--warm-gray); font-size: 13px; font-weight: 500; margin: 0; }
+</style>
+
+<script is:inline>
+	(function () {
+		const grids = document.querySelectorAll('[data-filterable-grid]');
+		grids.forEach((grid) => {
+			grid.setAttribute('data-filterable-enhanced', 'true');
+			const filters = grid.querySelectorAll('[data-filter]');
+			const cards = grid.querySelectorAll('[data-industry]');
+			filters.forEach((f) => {
+				f.addEventListener('click', () => {
+					const key = f.getAttribute('data-filter');
+					filters.forEach((other) => {
+						const isMatch = other === f;
+						other.classList.toggle('is-active', isMatch);
+						other.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+					});
+					cards.forEach((card) => {
+						const industry = card.getAttribute('data-industry');
+						const show = key === 'all' || industry === key;
+						card.classList.toggle('is-hidden', !show);
+					});
+				});
+			});
+		});
+	})();
+</script>

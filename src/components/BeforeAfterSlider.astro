@@ -1,0 +1,217 @@
+---
+import HeritagePlaceholder from './HeritagePlaceholder.astro';
+
+interface Props {
+	caption?: string;
+	beforeGradient?: string;
+	afterGradient?: string;
+	beforeImage?: string;
+	afterImage?: string;
+	beforeAlt?: string;
+	afterAlt?: string;
+	placeholderFact?: string;
+}
+
+const {
+	caption,
+	beforeGradient = 'linear-gradient(180deg, #6b5d4a 0%, #4a4239 60%, #2a2a28 100%)',
+	afterGradient = 'linear-gradient(180deg, #8fa8c0 0%, #c4b89e 50%, #8a6f54 100%)',
+	beforeImage,
+	afterImage,
+	beforeAlt = 'Before',
+	afterAlt = 'After',
+	placeholderFact = 'Before/after photo pair from a real Heritage job — same roof, same angle. Permission required. See Founder Input page §10.',
+} = Astro.props;
+---
+
+<figure class="bas" data-before-after>
+	<!-- No-JS fallback: side-by-side -->
+	<div class="bas-fallback">
+		<div class="bas-side">
+			<div class="bas-photo" style={beforeImage ? '' : `background: ${beforeGradient};`} aria-hidden={beforeImage ? undefined : 'true'}>
+				{beforeImage && <img src={beforeImage} alt={beforeAlt} loading="lazy" />}
+				<span class="bas-tag">Before</span>
+			</div>
+		</div>
+		<div class="bas-side">
+			<div class="bas-photo" style={afterImage ? '' : `background: ${afterGradient};`} aria-hidden={afterImage ? undefined : 'true'}>
+				{afterImage && <img src={afterImage} alt={afterAlt} loading="lazy" />}
+				<span class="bas-tag">After</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- JS-enhanced slider -->
+	<div class="bas-slider" aria-hidden="true">
+		<div class="bas-slider-frame">
+			<div class="bas-slider-after" style={afterImage ? '' : `background: ${afterGradient};`}>
+				{afterImage && <img src={afterImage} alt={afterAlt} loading="lazy" />}
+				<span class="bas-tag bas-tag-right">After</span>
+			</div>
+			<div class="bas-slider-before" data-before-clip>
+				<div class="bas-slider-before-inner" style={beforeImage ? '' : `background: ${beforeGradient};`}>
+					{beforeImage && <img src={beforeImage} alt={beforeAlt} loading="lazy" />}
+					<span class="bas-tag bas-tag-left">Before</span>
+				</div>
+			</div>
+			<button type="button" class="bas-handle" data-handle aria-label="Drag to compare before and after">
+				<span class="bas-handle-line" aria-hidden="true"></span>
+				<span class="bas-handle-knob" aria-hidden="true">
+					<span class="bas-knob-arrow bas-knob-arrow-l">‹</span>
+					<span class="bas-knob-arrow bas-knob-arrow-r">›</span>
+				</span>
+			</button>
+		</div>
+	</div>
+
+	{caption && <figcaption class="bas-caption">{caption}</figcaption>}
+	<div class="bas-placeholder">
+		<HeritagePlaceholder fact={placeholderFact} />
+	</div>
+</figure>
+
+<style>
+	.bas { margin: 0; max-width: 900px; margin-left: auto; margin-right: auto; }
+
+	/* No-JS state: show fallback, hide slider */
+	.bas-fallback { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+	.bas-slider { display: none; }
+
+	/* JS state: hide fallback, show slider */
+	.bas[data-bas-enhanced] .bas-fallback { display: none; }
+	.bas[data-bas-enhanced] .bas-slider { display: block; }
+
+	.bas-side { position: relative; }
+	.bas-photo {
+		aspect-ratio: 1 / 1;
+		width: 100%;
+		position: relative;
+		border-radius: var(--radius-card);
+		overflow: hidden;
+	}
+	.bas-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+	.bas-tag {
+		position: absolute;
+		left: 12px; bottom: 12px;
+		padding: 6px 12px;
+		background: rgba(26,26,26,0.78);
+		color: #faf8f4;
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+		border-radius: var(--radius-pill);
+	}
+
+	/* Slider variant */
+	.bas-slider-frame {
+		position: relative;
+		aspect-ratio: 16 / 9;
+		width: 100%;
+		border-radius: var(--radius-large);
+		overflow: hidden;
+		box-shadow: var(--shadow-subtle);
+		user-select: none;
+		touch-action: pan-y;
+	}
+	.bas-slider-after, .bas-slider-before {
+		position: absolute; inset: 0;
+		width: 100%; height: 100%;
+	}
+	.bas-slider-after img,
+	.bas-slider-before-inner img {
+		width: 100%; height: 100%; object-fit: cover; display: block;
+	}
+	.bas-slider-before {
+		clip-path: inset(0 50% 0 0);
+		transition: clip-path 80ms linear;
+	}
+	.bas-slider-before-inner {
+		position: absolute; inset: 0; width: 100%; height: 100%;
+	}
+	.bas-tag-left { left: 16px; bottom: 16px; }
+	.bas-tag-right { right: 16px; left: auto; bottom: 16px; }
+	.bas-handle {
+		position: absolute;
+		top: 0; bottom: 0;
+		left: 50%;
+		width: 44px;
+		transform: translateX(-50%);
+		background: transparent;
+		border: 0;
+		cursor: ew-resize;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.bas-handle-line {
+		position: absolute;
+		top: 0; bottom: 0; left: 50%;
+		width: 3px;
+		background: var(--off-white);
+		transform: translateX(-50%);
+		box-shadow: 0 0 0 1px rgba(26,26,26,0.4);
+	}
+	.bas-handle-knob {
+		position: relative;
+		width: 44px; height: 44px;
+		background: var(--off-white);
+		border-radius: var(--radius-pill);
+		box-shadow: var(--shadow-active);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 6px;
+		color: var(--charcoal);
+		font-size: 18px;
+		font-weight: 700;
+		line-height: 1;
+	}
+	.bas-knob-arrow { display: inline-block; }
+
+	.bas-caption { color: var(--warm-gray); font-size: 14px; line-height: 1.5; margin: 16px 0 0; text-align: center; }
+	.bas-placeholder { margin-top: 12px; }
+</style>
+
+<script is:inline>
+	(function () {
+		const sliders = document.querySelectorAll('[data-before-after]');
+		sliders.forEach((s) => {
+			s.setAttribute('data-bas-enhanced', 'true');
+			const frame = s.querySelector('.bas-slider-frame');
+			const before = s.querySelector('[data-before-clip]');
+			const handle = s.querySelector('[data-handle]');
+			if (!frame || !before || !handle) return;
+			let active = false;
+			let pct = 50;
+			const setPct = (p) => {
+				pct = Math.max(0, Math.min(100, p));
+				before.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+				handle.style.left = pct + '%';
+			};
+			const fromEvent = (e) => {
+				const rect = frame.getBoundingClientRect();
+				const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+				return ((clientX - rect.left) / rect.width) * 100;
+			};
+			const start = (e) => { active = true; setPct(fromEvent(e)); e.preventDefault(); };
+			const move = (e) => { if (active) setPct(fromEvent(e)); };
+			const end = () => { active = false; };
+			handle.addEventListener('mousedown', start);
+			frame.addEventListener('mousedown', start);
+			document.addEventListener('mousemove', move);
+			document.addEventListener('mouseup', end);
+			handle.addEventListener('touchstart', start, { passive: false });
+			frame.addEventListener('touchstart', start, { passive: false });
+			document.addEventListener('touchmove', move, { passive: true });
+			document.addEventListener('touchend', end);
+			// Keyboard support on the handle
+			handle.addEventListener('keydown', (e) => {
+				if (e.key === 'ArrowLeft') setPct(pct - 5);
+				else if (e.key === 'ArrowRight') setPct(pct + 5);
+			});
+			setPct(50);
+		});
+	})();
+</script>
