@@ -7,6 +7,7 @@ import ProcessFlow from '../../components/ProcessFlow.astro';
 import ConstrainedSection from '../../components/ConstrainedSection.astro';
 import FullBleedSection from '../../components/FullBleedSection.astro';
 import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
+import { imagery } from '../../content/imagery';
 
 const insuranceSteps = [
 	{
@@ -156,19 +157,28 @@ const faqs = [
 			<p class="section-sub on-dark">Three storm-damage jobs. Photos pulled from the inspection report and the closeout walk.</p>
 			<div class="proof-grid">
 				<BeforeAfterSlider
-					placeholderFact="Before/after pair #1 — hail-damaged asphalt vs. new install. City + month/year. Permission required. See Founder Input page §10."
-					beforeGradient="linear-gradient(180deg, #4a4a48 0%, #6b5d4a 70%, #2a2a28 100%)"
-					afterGradient="linear-gradient(180deg, #6b8aa8 0%, #8fa8c0 38%, #ece7de 38%, #b8a78c 70%, #6b5d4a 100%)"
+					placeholderFact="Illustrative — Unsplash stand-ins. Replace with a real Heritage hail-damage job pair (City + month/year). Permission required. See Founder Input page §10."
+					beforeImage={imagery.beforeAfterPairs.hailBefore.url}
+					afterImage={imagery.beforeAfterPairs.hailAfter.url}
+					beforeAlt={imagery.beforeAfterPairs.hailBefore.alt}
+					afterAlt={imagery.beforeAfterPairs.hailAfter.alt}
+					caption="Hail damage example (illustrative) — drag the handle to compare"
 				/>
 				<BeforeAfterSlider
-					placeholderFact="Before/after pair #2 — wind damage vs. new install. City + month/year. See Founder Input page §10."
-					beforeGradient="linear-gradient(180deg, #5a4836 0%, #4a4239 60%, #2a2a28 100%)"
-					afterGradient="linear-gradient(180deg, #7d8b9e 0%, #c4b89e 50%, #8a6f54 100%)"
+					placeholderFact="Illustrative — Unsplash stand-ins. Replace with a real Heritage wind-damage job pair. See Founder Input page §10."
+					beforeImage={imagery.beforeAfterPairs.windBefore.url}
+					afterImage={imagery.beforeAfterPairs.windAfter.url}
+					beforeAlt={imagery.beforeAfterPairs.windBefore.alt}
+					afterAlt={imagery.beforeAfterPairs.windAfter.alt}
+					caption="Wind damage example (illustrative)"
 				/>
 				<BeforeAfterSlider
-					placeholderFact="Before/after pair #3 — tree-fall or water damage vs. completed re-deck and install. City + month/year. See Founder Input page §10."
-					beforeGradient="linear-gradient(180deg, #4a4a48 0%, #2a2a28 100%)"
-					afterGradient="linear-gradient(180deg, #8fa8c0 0%, #b8a78c 60%, #6b5d4a 100%)"
+					placeholderFact="Illustrative — Unsplash stand-ins. Replace with a real Heritage water-intrusion or tree-fall job pair. See Founder Input page §10."
+					beforeImage={imagery.beforeAfterPairs.waterBefore.url}
+					afterImage={imagery.beforeAfterPairs.waterAfter.url}
+					beforeAlt={imagery.beforeAfterPairs.waterBefore.alt}
+					afterAlt={imagery.beforeAfterPairs.waterAfter.alt}
+					caption="Water / tree-fall damage example (illustrative)"
 				/>
 			</div>
 		</div>
