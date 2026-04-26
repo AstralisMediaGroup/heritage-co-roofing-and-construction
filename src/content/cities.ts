@@ -1,3 +1,6 @@
+// Authoritative city list per Build Pack §6.
+// The "+ 25 more cities" hedge from §6 is not encoded here — Service Areas page
+// surfaces a HeritagePlaceholder for the real list (Founder Input §9).
 export const eastTexas: string[] = [
 	'Longview',
 	'Tyler',
@@ -10,8 +13,6 @@ export const eastTexas: string[] = [
 	'Gladewater',
 	'Gilmer',
 ];
-
-export const eastTexasMore = '+ 25 more cities';
 
 export const centralArkansas: string[] = [
 	'Little Rock',
