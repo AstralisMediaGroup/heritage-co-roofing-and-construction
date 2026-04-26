@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceTile from '../components/ServiceTile.astro';
 import TrustStrip from '../components/TrustStrip.astro';
+import NamedProjectCard from '../components/NamedProjectCard.astro';
+import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
 
 const services = [
 	{ label: 'New construction', body: 'Single-source coordination from deck-up. Ground-up builds, on schedule.' },
@@ -12,14 +14,30 @@ const services = [
 	{ label: 'Project portfolio', body: 'Past commercial work across schools, retail, healthcare, and industrial.' },
 ];
 
-const systems = ['TPO', 'EPDM', 'Modified bitumen', 'Metal', 'Built-up', 'Coatings'];
+const systemsDetail = [
+	{ name: 'TPO', body: 'Single-ply thermoplastic. Bright white, reflective, weldable seams. Standard for retail and warehouse re-roofs.' },
+	{ name: 'EPDM', body: 'Single-ply rubber. Long service life, forgiving install. Common on flat commercial.' },
+	{ name: 'Modified bitumen', body: 'Asphalt-based, multi-ply. Torch-down or self-adhered. Workhorse for institutional buildings.' },
+	{ name: 'Metal', body: 'Standing seam, R-panel, structural. Long life, high wind ratings. Common on schools and ag.' },
+	{ name: 'Built-up', body: 'Tar-and-gravel BUR systems. Older spec but still installed where the building calls for it.' },
+	{ name: 'Coatings', body: 'Acrylic, silicone, urethane. Restoration over an existing roof to extend life and reflect heat.' },
+];
+
 const industries = [
 	{ label: 'Schools', body: 'Districts and private. Summer-window installs.' },
 	{ label: 'Healthcare', body: 'Clinics, MOBs, hospitals. Negative-pressure-aware.' },
 	{ label: 'Retail', body: 'Strip centers, big-box, mixed-use.' },
 	{ label: 'Industrial', body: 'Warehouses, manufacturing, distribution.' },
 	{ label: 'Office', body: 'Class A, B, multi-tenant.' },
-	{ label: 'Government', body: 'Municipal, county, federal — all bid-compliant.' },
+	{ label: 'Government', body: 'Municipal, county, federal. Bid-compliant.' },
+];
+
+const reRoofProcess = [
+	{ n: '01', label: 'Walkthrough', body: 'On-roof survey with the facility manager. Photos, measurements, system options.' },
+	{ n: '02', label: 'Spec + bid', body: 'Written scope, system rec, price. Bonded estimate ready for procurement.' },
+	{ n: '03', label: 'Pre-construction', body: 'Tenant notice plan, staging, dumpster placement, working hours.' },
+	{ n: '04', label: 'Tear-off + install', body: 'Phased on occupied buildings. We work around tenants, not over them.' },
+	{ n: '05', label: 'Closeout', body: 'Final walk, warranty hand-off, manufacturer pass-through paperwork.' },
 ];
 ---
 
@@ -56,16 +74,21 @@ const industries = [
 		</div>
 	</section>
 
-	<!-- Roof systems strip -->
-	<section class="systems">
-		<p class="systems-eyebrow">Roof systems we install</p>
-		<div class="systems-row">
-			{systems.map((s, i) => (
-				<>
-					{i > 0 && <span class="systems-dot">·</span>}
-					<span class="systems-item">{s}</span>
-				</>
+	<!-- Roof systems EXPANDED -->
+	<section class="systems-detail">
+		<p class="section-eyebrow on-dark">Roof systems</p>
+		<h2 class="section-h on-dark">Six systems. We spec to the building.</h2>
+		<p class="section-sub on-dark">Short read on each. The right system depends on slope, occupancy, climate, and budget — we walk through trade-offs at the inspection.</p>
+		<div class="systems-grid">
+			{systemsDetail.map((s) => (
+				<div class="system-card">
+					<p class="system-name">{s.name}</p>
+					<p class="system-body">{s.body}</p>
+				</div>
 			))}
+		</div>
+		<div class="systems-cert">
+			<HeritagePlaceholder fact="Manufacturer system certifications Heritage holds (e.g. Carlisle SureWeld, Firestone Red Shield, GAF EverGuard, Johns Manville Peak Advantage). Plain-text list. See Founder Input page §2." />
 		</div>
 	</section>
 
@@ -77,6 +100,82 @@ const industries = [
 		<div class="industry-grid">
 			{industries.map((i) => <ServiceTile label={i.label} body={i.body} />)}
 		</div>
+	</section>
+
+	<!-- Bonding + insurance callout -->
+	<section class="bonding">
+		<p class="section-eyebrow">Bonding + insurance</p>
+		<h2 class="section-h">The numbers procurement wants.</h2>
+		<p class="section-sub">Plain answers for the bid form. Filled in by the founders.</p>
+		<div class="bonding-grid">
+			<div class="bonding-card">
+				<p class="bonding-label">Bonding capacity (single)</p>
+				<HeritagePlaceholder fact="Single-project bonding capacity (e.g. $2M). See Founder Input page §3." />
+			</div>
+			<div class="bonding-card">
+				<p class="bonding-label">Bonding capacity (aggregate)</p>
+				<HeritagePlaceholder fact="Aggregate bonding capacity. See Founder Input page §3." />
+			</div>
+			<div class="bonding-card">
+				<p class="bonding-label">General liability</p>
+				<HeritagePlaceholder fact="GL coverage limit per occurrence + aggregate. See Founder Input page §3." />
+			</div>
+			<div class="bonding-card">
+				<p class="bonding-label">Umbrella</p>
+				<HeritagePlaceholder fact="Umbrella policy limit. See Founder Input page §3." />
+			</div>
+			<div class="bonding-card">
+				<p class="bonding-label">Workers' comp</p>
+				<HeritagePlaceholder fact="Workers' comp carrier name. See Founder Input page §3." />
+			</div>
+			<div class="bonding-card">
+				<p class="bonding-label">Roofing license #</p>
+				<HeritagePlaceholder fact="Texas roofing license # and Arkansas equivalent if applicable. See Founder Input page §3." />
+			</div>
+		</div>
+	</section>
+
+	<!-- Re-roof process / tenant disruption -->
+	<section class="reroof">
+		<p class="section-eyebrow on-dark">How a re-roof runs</p>
+		<h2 class="section-h on-dark">Five phases on an occupied building.</h2>
+		<p class="section-sub on-dark">We tell tenants what to expect before we tell them to expect it.</p>
+		<ol class="reroof-list">
+			{reRoofProcess.map((p) => (
+				<li class="reroof-step">
+					<span class="reroof-n">{p.n}</span>
+					<div class="reroof-body">
+						<p class="reroof-label">{p.label}</p>
+						<p class="reroof-text">{p.body}</p>
+					</div>
+				</li>
+			))}
+		</ol>
+	</section>
+
+	<!-- Named projects -->
+	<section class="projects">
+		<p class="section-eyebrow">Past projects</p>
+		<h2 class="section-h">Buildings we've roofed.</h2>
+		<p class="section-sub">Specific named projects with permission to publish go below. Until they are filled in, the placeholders show what's coming.</p>
+		<div class="projects-grid">
+			<NamedProjectCard placeholderFact="Named commercial project #1 — building or owner name, city, year, roof system, sq ft, industry. Permission required. See Founder Input page §5." />
+			<NamedProjectCard placeholderFact="Named commercial project #2 — building or owner name, city, year, roof system, sq ft, industry. See Founder Input page §5." />
+			<NamedProjectCard placeholderFact="Named commercial project #3 — building or owner name, city, year, roof system, sq ft, industry. See Founder Input page §5." />
+			<NamedProjectCard placeholderFact="Named commercial project #4 — building or owner name, city, year, roof system, sq ft, industry. See Founder Input page §5." />
+			<NamedProjectCard placeholderFact="Named commercial project #5 — building or owner name, city, year, roof system, sq ft, industry. See Founder Input page §5." />
+		</div>
+		<div class="projects-stats">
+			<HeritagePlaceholder fact="Lifetime sq ft of commercial roof installed (number). Oldest active commercial roof Heritage installed (year + city). See Founder Input page §5." />
+		</div>
+	</section>
+
+	<!-- Maintenance contracts -->
+	<section class="maintenance">
+		<p class="section-eyebrow">Maintenance contracts</p>
+		<h2 class="section-h">Caught small beats fixed expensive.</h2>
+		<p class="section-sub">Scheduled inspections, small repairs, and a documented roof history. Quoted by building.</p>
+		<HeritagePlaceholder fact="Maintenance contract structure: typical visit frequency (semi-annual / quarterly), what's included, typical price band. See Founder Input page §5." />
 	</section>
 
 	<TrustStrip items={["Bonded and insured", "All major systems", "Locally owned"]} />
@@ -108,31 +207,26 @@ const industries = [
 		margin: 0 0 32px; max-width: 560px;
 	}
 	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
-	.cta-primary {
-		background: #b54620; color: #faf8f4;
-		padding: 16px 32px; font-size: 15px; font-weight: 500;
-	}
-	.cta-secondary {
-		color: #faf8f4; padding: 16px 0;
-		font-size: 15px; font-weight: 500;
-		border-bottom: 2px solid #faf8f4;
-	}
+	.cta-primary { background: #b54620; color: #faf8f4; padding: 16px 32px; font-size: 15px; font-weight: 500; }
+	.cta-secondary { color: #faf8f4; padding: 16px 0; font-size: 15px; font-weight: 500; border-bottom: 2px solid #faf8f4; }
 
-	/* Section labels */
 	.section-eyebrow {
 		color: #b54620; font-size: 13px; font-weight: 500;
 		text-align: center; margin: 0 0 16px;
 		letter-spacing: 1px; text-transform: uppercase;
 	}
+	.section-eyebrow.on-dark { color: #b54620; }
 	.section-h {
 		color: #1a1a1a; font-size: 40px; font-weight: 600;
 		text-align: center; margin: 0 0 16px;
 		letter-spacing: -1px; line-height: 1.1;
 	}
+	.section-h.on-dark { color: #faf8f4; }
 	.section-sub {
 		color: #5a5347; font-size: 16px; text-align: center;
-		margin: 0 0 56px;
+		margin: 0 auto 56px; max-width: 600px;
 	}
+	.section-sub.on-dark { color: #d8d2c2; }
 
 	/* Services */
 	.services { padding: 96px 48px; background: #faf8f4; }
@@ -141,23 +235,23 @@ const industries = [
 		gap: 24px; max-width: 1100px; margin: 0 auto;
 	}
 
-	/* Systems strip */
-	.systems {
-		background: #1a1a1a;
-		padding: 48px 48px;
-		text-align: center;
+	/* Systems detail (dark) */
+	.systems-detail { background: #1a1a1a; padding: 96px 48px; }
+	.systems-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 24px; max-width: 1100px; margin: 0 auto;
 	}
-	.systems-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		margin: 0 0 18px; letter-spacing: 1px; text-transform: uppercase;
+	.system-card {
+		padding: 28px;
+		background: rgba(250,248,244,0.04);
+		border: 1px solid rgba(250,248,244,0.12);
 	}
-	.systems-row {
-		display: flex; gap: 16px; justify-content: center;
-		align-items: center; color: #faf8f4;
-		font-size: 16px; font-weight: 500;
-		letter-spacing: 0.2px; flex-wrap: wrap;
+	.system-name {
+		color: #faf8f4; font-size: 20px; font-weight: 600;
+		margin: 0 0 12px; letter-spacing: -0.3px;
 	}
-	.systems-dot { color: #b54620; }
+	.system-body { color: #c4c1ba; font-size: 14px; line-height: 1.6; margin: 0; }
+	.systems-cert { max-width: 1100px; margin: 28px auto 0; }
 
 	/* Industries */
 	.industries { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
@@ -165,4 +259,49 @@ const industries = [
 		display: grid; grid-template-columns: repeat(3, 1fr);
 		gap: 24px; max-width: 1100px; margin: 0 auto;
 	}
+
+	/* Bonding */
+	.bonding { padding: 96px 48px; background: #faf8f4; }
+	.bonding-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 24px; max-width: 1100px; margin: 0 auto;
+	}
+	.bonding-card { padding: 24px; background: #ffffff; border: 1px solid #ece7de; }
+	.bonding-label {
+		color: #1a1a1a; font-size: 14px; font-weight: 600;
+		margin: 0 0 12px; letter-spacing: -0.2px;
+	}
+
+	/* Re-roof process (dark) */
+	.reroof { background: #1a1a1a; padding: 96px 48px; }
+	.reroof-list {
+		max-width: 800px; margin: 0 auto; padding: 0; list-style: none;
+		display: flex; flex-direction: column; gap: 20px;
+	}
+	.reroof-step {
+		display: grid; grid-template-columns: 56px 1fr; gap: 20px;
+		padding: 24px 28px;
+		background: rgba(250,248,244,0.04);
+		border: 1px solid rgba(250,248,244,0.12);
+	}
+	.reroof-n {
+		display: inline-flex; align-items: center; justify-content: center;
+		width: 40px; height: 40px;
+		background: #b54620; color: #faf8f4;
+		font-size: 14px; font-weight: 600;
+	}
+	.reroof-label { color: #faf8f4; font-size: 18px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.2px; }
+	.reroof-text { color: #c4c1ba; font-size: 15px; line-height: 1.6; margin: 0; }
+
+	/* Projects */
+	.projects { padding: 96px 48px; background: #faf8f4; }
+	.projects-grid {
+		display: grid; grid-template-columns: repeat(3, 1fr);
+		gap: 24px; max-width: 1100px; margin: 0 auto;
+	}
+	.projects-stats { max-width: 1100px; margin: 32px auto 0; }
+
+	/* Maintenance */
+	.maintenance { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
+	.maintenance > :global(.placeholder) { max-width: 800px; margin-left: auto; margin-right: auto; }
 </style>
