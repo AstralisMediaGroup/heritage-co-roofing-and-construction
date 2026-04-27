@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroFlagship from '../components/v2/HeroFlagship.astro';
 import TrustMarquee from '../components/v2/TrustMarquee.astro';
 import SectionHead from '../components/v2/SectionHead.astro';
-import PhotoLede from '../components/v2/PhotoLede.astro';
+import SplitFeature from '../components/v2/SplitFeature.astro';
 import PhotoBleed from '../components/v2/PhotoBleed.astro';
 import StatBand from '../components/v2/StatBand.astro';
 import ProcessSteps from '../components/v2/ProcessSteps.astro';
@@ -43,7 +43,11 @@ const process = [
 		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
 	/>
 
-	<TrustMarquee items={v2.trustItems} />
+	<div class="bleed-up-sm trust-wrap">
+		<div class="container">
+			<TrustMarquee items={v2.trustItems} />
+		</div>
+	</div>
 
 	<Reveal>
 		<section class="page-section section-tight">
@@ -57,52 +61,45 @@ const process = [
 		</section>
 	</Reveal>
 
-	<Reveal>
-		<section class="page-section section-tight-bottom">
-			<div class="container">
-				<PhotoLede
-					photo={v2.pageHeros.residential}
-					eyebrow="For homeowners"
-					heading="Roofs for your home."
-					body="Replacement, repair, and storm damage. Insurance accepted. Free inspections, same-day quotes. Most residential roofs install in a single day."
-					bullets={['Asphalt shingle, metal, and tile', 'Insurance claim handling', 'Workmanship + material warranties']}
-					cta={{ label: 'See residential services →', href: '/residential' }}
-					photoSide="left"
-				/>
-			</div>
-		</section>
-	</Reveal>
-
-	<Reveal>
-		<section class="page-section">
-			<div class="container">
-				<PhotoLede
-					photo={v2.pageHeros.commercial}
-					eyebrow="For businesses"
-					heading="Roofs for your business."
-					body="New construction, re-roofs, restoration, and maintenance programs. Bonded and insured. We install every major commercial system."
-					bullets={['TPO, EPDM, mod-bit, BUR, metal, coatings', 'Maintenance + roof asset management', 'Bonded + insured']}
-					cta={{ label: 'See commercial systems →', href: '/commercial' }}
-					photoSide="right"
-				/>
-			</div>
-		</section>
-	</Reveal>
+	<SplitFeature
+		left={{
+			href: '/residential',
+			eyebrow: 'For homeowners',
+			heading: 'Roofs for your home.',
+			body: 'Replacement, repair, storm damage. Insurance accepted. Free inspections, same-day quotes. Most residential roofs install in a single day.',
+			bullets: ['Asphalt shingle, metal, tile', 'Insurance claim handling', 'Workmanship + material warranties'],
+			cta: 'See residential services',
+			photo: v2.pageHeros.residential,
+		}}
+		right={{
+			href: '/commercial',
+			eyebrow: 'For businesses',
+			heading: 'Roofs for your business.',
+			body: 'New construction, re-roofs, restoration, and maintenance programs. Bonded and insured. We install every major commercial system.',
+			bullets: ['TPO, EPDM, mod-bit, BUR, metal, coatings', 'Maintenance + roof asset management', 'Bonded + insured'],
+			cta: 'See commercial systems',
+			photo: v2.pageHeros.commercial,
+		}}
+	/>
 
 	<PhotoBleed
 		photo={v2.bleeds.home}
 		heading="We're 30 minutes away."
 		caption="Crews live across East Texas and Central Arkansas. After the install, we're not gone. Call about a question in 2030 — same shop, same number."
 		overlay={true}
-		heightVw={68}
+		heightVw={72}
 	/>
 
-	<StatBand stats={[
-		{ value: '30+', label: 'Combined years roofing', numericValue: 30, suffix: '+' },
-		{ value: '14', label: 'Service-area cities · TX + AR', numericValue: 14 },
-		{ value: '1 day', label: 'Typical residential install' },
-		{ value: 'A+', label: 'BBB rating · pending confirm' },
-	]} />
+	<div class="bleed-up stat-on-photo">
+		<div class="container">
+			<StatBand stats={[
+				{ value: '30+', label: 'Combined years roofing', numericValue: 30, suffix: '+' },
+				{ value: '14', label: 'Service-area cities · TX + AR', numericValue: 14 },
+				{ value: '1 day', label: 'Typical residential install' },
+				{ value: 'A+', label: 'BBB rating · pending confirm' },
+			]} />
+		</div>
+	</div>
 
 	<Reveal>
 		<section class="page-section">
@@ -149,8 +146,31 @@ const process = [
 
 <style>
 	.page-section { padding: clamp(80px, 9vw, 144px) 0; }
-	.section-tight { padding: clamp(72px, 8vw, 120px) 0 clamp(20px, 2vw, 32px); }
-	.section-tight-bottom { padding-top: clamp(40px, 5vw, 80px); padding-bottom: clamp(40px, 5vw, 80px); }
+	.section-tight { padding: clamp(96px, 10vw, 160px) 0 clamp(20px, 2vw, 32px); }
 	.process-spacer { margin-top: clamp(56px, 6vw, 88px); }
 	.reviews-spacer { margin-top: clamp(48px, 5vw, 72px); }
+
+	/* Trust marquee bleeds up over the hero's bottom edge.
+	   The wrapper has bg so the marquee sits on its own card-like band. */
+	.trust-wrap {
+		background: var(--bg);
+		border-top: 1px solid var(--rule);
+		border-bottom: 1px solid var(--rule);
+	}
+	.trust-wrap :global(.trust-marquee) {
+		border-top: 0;
+		border-bottom: 0;
+	}
+
+	/* Stat band bleeds up to overlap the bottom of the photo bleed.
+	   Stats sit on a card surface that crosses the photo/bg seam. */
+	.stat-on-photo {
+		background: var(--bg);
+	}
+	.stat-on-photo :global(.stat-band) {
+		padding-top: clamp(40px, 4vw, 64px);
+		padding-bottom: clamp(56px, 6vw, 96px);
+		border-top: 0;
+		border-bottom: 0;
+	}
 </style>

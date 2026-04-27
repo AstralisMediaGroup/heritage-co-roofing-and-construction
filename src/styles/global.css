@@ -8,9 +8,9 @@
    ───────────────────────────────────────────────────────────────────────── */
 
 :root {
-	/* Surfaces — single warm off-white for the entire site */
-	--bg: #f6f1e7;                /* THE base background (entire site) */
-	--bg-deep: #efe8d8;           /* Subtle inset for occasional emphasis bands */
+	/* Surfaces — single off-white for the entire site (warm but not cream) */
+	--bg: #f3f1ec;                /* THE base background (entire site) */
+	--bg-deep: #ebe8e1;           /* Subtle inset for occasional emphasis bands */
 	--ink: #15140f;               /* Primary text — slightly warmer than pure black */
 	--ink-2: #45413a;             /* Body text on light bg */
 	--ink-3: #76716a;             /* Muted, captions, fine print */
@@ -249,6 +249,18 @@ section {
 	border: 0;
 	border-top: 1px solid var(--rule);
 	margin: 0;
+}
+
+/* ─── Bleed utilities — sections crossing into adjacent sections ─── */
+.bleed-up { margin-top: clamp(-160px, -10vw, -80px); position: relative; z-index: 2; }
+.bleed-up-sm { margin-top: clamp(-80px, -6vw, -48px); position: relative; z-index: 2; }
+.bleed-down { margin-bottom: clamp(-160px, -10vw, -80px); position: relative; z-index: 2; }
+.bleed-down-sm { margin-bottom: clamp(-80px, -6vw, -48px); position: relative; z-index: 2; }
+
+.full-bleed-edge {
+	width: 100vw;
+	margin-left: 50%;
+	transform: translateX(-50%);
 }
 
 /* ─── Selection ─── */
