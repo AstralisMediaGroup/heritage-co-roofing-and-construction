@@ -2,13 +2,17 @@
 	"compatibility_date": "2026-04-26",
 	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "former-field",
-	"main": "@astrojs/cloudflare/entrypoints/server",
-	"build": {
-		"command": "npm run build"
-	},
+	"main": "./dist/server/entry.mjs",
+	"no_bundle": true,
 	"assets": {
-		"directory": "./dist",
+		"directory": "./dist/client",
 		"binding": "ASSETS"
+	},
+	"kv_namespaces": [
+		{ "binding": "SESSION" }
+	],
+	"images": {
+		"binding": "IMAGES"
 	},
 	"observability": {
 		"enabled": true
