@@ -1,0 +1,99 @@
+---
+import type { ImageRef } from '../../content/imagery';
+
+interface Props {
+	eyebrow?: string;
+	heading: string;
+	lede?: string;
+	primaryCta?: { label: string; href: string };
+	secondaryCta?: { label: string; href: string };
+	photo: ImageRef;
+	tier?: 1 | 2 | 3;
+}
+
+const { eyebrow, heading, lede, primaryCta, secondaryCta, photo, tier = 2 } = Astro.props;
+---
+
+<section class={`hero-page tier-${tier}`}>
+	<div class="container hero-page-grid">
+		<div class="hero-page-text">
+			{eyebrow && <p class="eyebrow">{eyebrow}</p>}
+			<h1 class="h1 hero-page-h1" set:html={heading} />
+			{lede && <p class="lede hero-page-lede">{lede}</p>}
+			{(primaryCta || secondaryCta) && (
+				<div class="hero-page-ctas">
+					{primaryCta && <a class="btn btn-primary" href={primaryCta.href}>{primaryCta.label}</a>}
+					{secondaryCta && <a class="text-link" href={secondaryCta.href}>{secondaryCta.label}</a>}
+				</div>
+			)}
+		</div>
+		<div class="hero-page-photo">
+			{photo.url ? (
+				<img src={photo.url} alt={photo.alt} loading="eager" fetchpriority="high" />
+			) : (
+				<div class="hero-page-fallback" aria-label={photo.placeholderFact || 'Photo placeholder'} />
+			)}
+			{photo.photographer && <span class="photo-credit">{photo.photographer} / Unsplash</span>}
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero-page {
+		padding-top: clamp(88px, 10vw, 144px);
+		padding-bottom: clamp(48px, 6vw, 96px);
+	}
+	.hero-page-grid {
+		display: grid;
+		grid-template-columns: 1.05fr 1fr;
+		gap: clamp(32px, 5vw, 80px);
+		align-items: end;
+	}
+	.tier-3 .hero-page-grid {
+		grid-template-columns: 1.4fr 1fr;
+	}
+	.hero-page-text { max-width: 640px; }
+	.hero-page-h1 {
+		margin-top: 18px;
+	}
+	.hero-page-lede {
+		margin-top: 28px;
+		max-width: 540px;
+	}
+	.hero-page-ctas {
+		margin-top: 36px;
+		display: flex;
+		gap: 24px;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+	.hero-page-photo {
+		position: relative;
+		aspect-ratio: 4 / 5;
+		overflow: hidden;
+		background: var(--ink-bg);
+	}
+	.tier-3 .hero-page-photo { aspect-ratio: 5 / 4; }
+	.hero-page-photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.hero-page-fallback {
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(135deg, #5a5347 0%, #2a2826 100%);
+	}
+	.photo-credit {
+		position: absolute;
+		bottom: 10px;
+		right: 12px;
+		font-size: 10px;
+		color: rgba(255,255,255,0.7);
+		letter-spacing: 0.04em;
+	}
+	@media (max-width: 880px) {
+		.hero-page-grid { grid-template-columns: 1fr; gap: 40px; }
+		.hero-page-photo { aspect-ratio: 16 / 11; }
+	}
+</style>

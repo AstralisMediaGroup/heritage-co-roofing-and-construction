@@ -1,226 +1,92 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ServiceAreaMap from '../components/ServiceAreaMap.astro';
-import ConstrainedSection from '../components/ConstrainedSection.astro';
-import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
+import HeroPage from '../components/v2/HeroPage.astro';
+import SectionHead from '../components/v2/SectionHead.astro';
+import PromiseStrip from '../components/v2/PromiseStrip.astro';
+import CityList from '../components/v2/CityList.astro';
+import PhotoBleed from '../components/v2/PhotoBleed.astro';
+import StatBand from '../components/v2/StatBand.astro';
+import PageCTA from '../components/v2/PageCTA.astro';
+import Reveal from '../components/v2/Reveal.astro';
+import { imagery } from '../content/imagery';
+
+const v2 = imagery.v2;
 ---
 
-<BaseLayout title="Service Areas — East Texas + Central Arkansas | Heritage Co.">
-	<!-- Hero -->
-	<section class="hero">
-		<div class="hero-photo" aria-hidden="true"></div>
-		<div class="hero-overlay" aria-hidden="true"></div>
-		<div class="hero-content">
-			<p class="hero-eyebrow">Service area</p>
-			<h1 class="hero-h1">East Texas + Central Arkansas.</h1>
-			<p class="hero-sub">
-				Headquartered in Longview, Texas. Crews across two states. If your town is on this page, we come to it.
-			</p>
+<BaseLayout
+	title="Service area — Heritage Co. Roofing & Construction"
+	description="Heritage Co. roofs across East Texas and Central Arkansas. Headquartered in Longview, TX. 14+ cities, two states, one shop."
+>
+	<HeroPage
+		eyebrow="Service area"
+		heading="East Texas +<br />Central Arkansas."
+		lede="Headquartered in Longview, TX. Crews across two states. We work in 14+ cities. If you're not sure we cover yours, call — we usually do."
+		primaryCta={{ label: 'Free inspection', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.serviceAreas}
+		tier={2}
+	/>
+
+	<section class="page-section">
+		<div class="container">
+			<PromiseStrip items={['Same crew region-wide', 'Free inspections', 'Local crews — not regional dispatch']} />
 		</div>
 	</section>
 
-	<!-- Map (centerpiece) -->
-	<section class="map-section">
-		<ServiceAreaMap />
-	</section>
-
-	<!-- Per-region info cards -->
-	<section class="regions">
-		<p class="section-eyebrow">By region</p>
-		<h2 class="section-h">Crews where the work is.</h2>
-		<p class="section-sub">Two regions, one shop. Each region's response time and roof count goes below as the founders confirm.</p>
-		<div class="region-grid">
-			<article class="region-card">
-				<p class="region-label">East Texas</p>
-				<h3 class="region-h">Headquartered in Longview.</h3>
-				<dl class="region-stats">
-					<div class="region-stat-row">
-						<dt class="region-stat-label">Crews based in</dt>
-						<dd class="region-stat-value">
-							<HeritagePlaceholder inline={true} fact="cities crews live in across East TX (vs. drive to). See Founder Input §6." />
-						</dd>
-					</div>
-					<div class="region-stat-row">
-						<dt class="region-stat-label">Typical response</dt>
-						<dd class="region-stat-value">
-							<HeritagePlaceholder inline={true} fact="Free-inspection turnaround in plain words. See Founder Input §8." />
-						</dd>
-					</div>
-					<div class="region-stat-row">
-						<dt class="region-stat-label">Roofs installed in region</dt>
-						<dd class="region-stat-value">
-							<HeritagePlaceholder inline={true} fact="Lifetime East TX roof count if tracked. See Founder Input §5." />
-						</dd>
-					</div>
-				</dl>
-			</article>
-			<article class="region-card">
-				<p class="region-label">Central Arkansas</p>
-				<h3 class="region-h">Crews across the I-40 corridor.</h3>
-				<dl class="region-stats">
-					<div class="region-stat-row">
-						<dt class="region-stat-label">Crews based in</dt>
-						<dd class="region-stat-value">
-							<HeritagePlaceholder inline={true} fact="Cities crews live in across Central AR (or whether they drive from East TX). See Founder Input §6." />
-						</dd>
-					</div>
-					<div class="region-stat-row">
-						<dt class="region-stat-label">Typical response</dt>
-						<dd class="region-stat-value">
-							<HeritagePlaceholder inline={true} fact="Free-inspection turnaround for AR specifically. Same as TX, or different? See Founder Input §9." />
-						</dd>
-					</div>
-					<div class="region-stat-row">
-						<dt class="region-stat-label">Roofs installed in region</dt>
-						<dd class="region-stat-value">
-							<HeritagePlaceholder inline={true} fact="Lifetime AR roof count if tracked. See Founder Input §5." />
-						</dd>
-					</div>
-				</dl>
-			</article>
-		</div>
-	</section>
-
-	<!-- Constrained narrative before coverage details -->
-	<ConstrainedSection background="ivory" paddingY="sm">
-		<p class="cs-eyebrow">The fine print</p>
-		<h2 class="cs-h">Coverage details that don't fit on the map.</h2>
-	</ConstrainedSection>
-
-	<!-- Coverage details -->
-	<section class="coverage">
-		<p class="section-eyebrow">Coverage details</p>
-		<h2 class="section-h">The fine print on how we cover the footprint.</h2>
-		<div class="coverage-grid">
-			<div class="coverage-item">
-				<p class="coverage-label">Travel charge / drive radius</p>
-				<HeritagePlaceholder fact="Max drive radius before a travel charge kicks in (miles). Yes/no on travel charge for inside-footprint jobs. See Founder Input §9." />
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="Coverage"
+					heading="Where we work."
+					lede="Authoritative city list below. Service stretches further than the named cities — call if yours isn't on the list."
+					maxWidth="700px"
+				/>
+				<div class="cities-spacer">
+					<CityList />
+				</div>
 			</div>
-			<div class="coverage-item">
-				<p class="coverage-label">Satellite offices</p>
-				<HeritagePlaceholder fact="Offices besides the Longview HQ — addresses if any. See Founder Input §9." />
-			</div>
-			<div class="coverage-item">
-				<p class="coverage-label">Emergency / after-hours</p>
-				<HeritagePlaceholder fact="Is 903-242-8102 the emergency line, or different? 24-hour response yes/no. See Founder Input §11." />
-			</div>
-		</div>
-	</section>
+		</section>
+	</Reveal>
 
-	<!-- HQ -->
-	<section class="hq">
-		<p class="hq-eyebrow">Headquarters</p>
-		<p class="hq-h">Longview, Texas.</p>
-		<HeritagePlaceholder fact="Full HQ mailing address — for footer, contact page, and Google Business listing. See Founder Input §11." />
-	</section>
+	<PhotoBleed
+		photo={v2.bleeds.crew}
+		heading="HQ in Longview.<br />Crews in your zip code."
+		caption="Drive times from Longview HQ: Tyler 30min · Marshall 30min · Kilgore 15min · Henderson 25min · Nacogdoches 1hr · Little Rock 3hr."
+		overlay={true}
+		heightVw={62}
+	/>
+
+	<StatBand stats={[
+		{ value: '14+', label: 'Cities served · East TX + Central AR' },
+		{ value: '2', label: 'States · TX + AR', numericValue: 2 },
+		{ value: '30 min', label: 'Most jobs · drive from Longview HQ' },
+		{ value: '0', label: 'Regional dispatchers · ever', numericValue: 0 },
+	]} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="Why local matters"
+					heading="The crew lives where you live."
+					lede="No subcontractors imported from out of state. No commission-paid sales reps driving in from a regional office. The same crew you meet on the inspection is the crew on the install — and they're 30 minutes away if anything needs attention later."
+					maxWidth="800px"
+				/>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading="Free inspection.<br />Anywhere in the service area."
+		lede="Same-day or next-day in most cities. Real person on the ladder."
+		primaryCta={{ label: 'Schedule online', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.freeInspection}
+	/>
 </BaseLayout>
 
 <style>
-	/* Hero */
-	.hero { position: relative; min-height: 440px; background: #1a1a1a; }
-	.hero-photo {
-		position: absolute; inset: 0;
-		background: linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%);
-		opacity: 0.92;
-	}
-	.hero-overlay {
-		position: absolute; inset: 0;
-		background: linear-gradient(90deg, rgba(26,26,26,0.78) 0%, rgba(26,26,26,0.35) 60%, rgba(26,26,26,0.1) 100%);
-	}
-	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
-	.hero-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
-	}
-	.hero-h1 {
-		color: #faf8f4; font-size: 56px; font-weight: 600;
-		line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px;
-	}
-	.hero-sub {
-		color: #d8d2c2; font-size: 17px; line-height: 1.55;
-		margin: 0; max-width: 560px;
-	}
-
-	.section-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		text-align: center; margin: 0 0 16px;
-		letter-spacing: 1px; text-transform: uppercase;
-	}
-	.section-h {
-		color: #1a1a1a; font-size: 36px; font-weight: 600;
-		text-align: center; margin: 0 0 16px;
-		letter-spacing: -0.8px; line-height: 1.1;
-	}
-	.section-sub {
-		color: #5a5347; font-size: 16px; text-align: center;
-		margin: 0 auto 56px; max-width: 600px;
-	}
-
-	/* Map */
-	.map-section { background: var(--ivory-tint); padding: 64px 48px; }
-	.cs-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 14px; text-align: center; }
-	.cs-h { color: var(--charcoal); font-size: 28px; font-weight: 600; letter-spacing: -0.5px; line-height: 1.2; margin: 0; text-align: center; }
-
-	/* Regions */
-	.regions { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
-	.region-grid {
-		display: grid; grid-template-columns: 1fr 1fr;
-		gap: 24px; max-width: 1100px; margin: 0 auto;
-	}
-	.region-card {
-		padding: 32px;
-		background: #ffffff;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-large);
-		box-shadow: var(--shadow-subtle);
-	}
-	.region-label {
-		color: var(--rust); font-size: 12px; font-weight: 500;
-		margin: 0 0 12px; letter-spacing: 1.5px; text-transform: uppercase;
-	}
-	.region-h {
-		color: var(--charcoal); font-size: 24px; font-weight: 600;
-		margin: 0 0 24px; letter-spacing: -0.4px; line-height: 1.2;
-	}
-	.region-stats { display: flex; flex-direction: column; gap: 0; margin: 0; }
-	.region-stat-row {
-		display: grid; grid-template-columns: 1fr;
-		gap: 6px; padding: 12px 0;
-		border-top: 1px solid var(--border);
-	}
-	.region-stat-label {
-		color: var(--charcoal); font-size: 12px; font-weight: 600;
-		letter-spacing: 1px; text-transform: uppercase;
-	}
-	.region-stat-value { color: var(--warm-gray); font-size: 14px; line-height: 1.5; margin: 0; }
-
-	/* Coverage */
-	.coverage { background: var(--ivory-tint); padding: 96px 48px; border-top: 1px solid #ece7de; }
-	.coverage-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px; max-width: 1100px; margin: 0 auto;
-	}
-	.coverage-item {
-		padding: 24px;
-		background: #ffffff;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-card);
-		box-shadow: var(--shadow-subtle);
-	}
-	.coverage-label {
-		color: var(--charcoal); font-size: 14px; font-weight: 600;
-		margin: 0 0 12px; letter-spacing: -0.2px;
-	}
-
-	/* HQ */
-	.hq { background: var(--charcoal); padding: 72px 48px; text-align: center; }
-	.hq-eyebrow {
-		color: var(--rust); font-size: 13px; font-weight: 500;
-		margin: 0 0 12px; letter-spacing: 1px; text-transform: uppercase;
-	}
-	.hq-h {
-		color: var(--off-white); font-size: 32px; font-weight: 600;
-		margin: 0 auto 20px; letter-spacing: -0.5px; max-width: 600px;
-	}
-	.hq > :global(.placeholder) { max-width: 600px; margin-left: auto; margin-right: auto; }
+	.page-section { padding: clamp(72px, 8vw, 120px) 0; }
+	.cities-spacer { margin-top: clamp(48px, 5vw, 80px); }
 </style>

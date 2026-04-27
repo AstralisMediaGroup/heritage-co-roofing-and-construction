@@ -1,97 +1,59 @@
 ---
-import MaterialDetailLayout from '../../layouts/MaterialDetailLayout.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const benefits = [
-	{ icon: 'shield' as const, title: 'Class 3 + Class 4 impact ratings', body: 'Class 4 impact-rated shingles take a 2-inch ice ball without splitting. Most Texas insurance carriers offer premium discounts for a Class 4 install — meaningful savings on top of better hail performance.' },
-	{ icon: 'wind' as const, title: 'Wind warranties up to 130 mph', body: 'Architectural shingles hand-nailed to the manufacturer spec carry 130 mph wind warranties as standard. Premium SBS-modified lines (StormMaster, Malarkey Legacy) push to 150 mph.' },
-	{ icon: 'flame' as const, title: 'Class A fire rating', body: 'Asphalt shingles with the right underlayment assembly are Class A — the highest UL fire rating. Standard on every modern install.' },
-	{ icon: 'water' as const, title: 'Algae-resistant granule blends', body: '3M and similar copper-based granules embedded in the cap surface inhibit black-streak algae. Most premium lines now ship algae-resistant by default.' },
-	{ icon: 'layers' as const, title: 'Fiberglass laminate construction', body: 'Modern architectural shingles laminate two layers of fiberglass mat with asphalt and ceramic granules. The laminated profile is what gives architecturals their dimensional shadow line.' },
-	{ icon: 'gauge' as const, title: 'Energy-rated cool-roof options', body: 'Cool-roof shingles with reflective granules (Atlas Pinnacle Sun, GAF Timberline Cool Series, OC ProArmor) reflect solar heat — measurable summer cooling savings on south-facing roofs.' },
-];
-
-const colorSwatches = [
-	{ name: 'Charcoal' },
-	{ name: 'Weathered Wood' },
-	{ name: 'Driftwood' },
-	{ name: 'Hickory' },
-	{ name: 'Slate' },
-	{ name: 'Hunter Green' },
-	{ name: 'Pewter Gray' },
-	{ name: 'Shakewood' },
-];
-
-const specRows = [
-	{ label: 'Service life', value: '20–30 years (architectural / dimensional in East Texas climate)' },
-	{ label: 'Wind warranty', value: 'Up to 130 mph standard; 150 mph on SBS-modified premium lines' },
-	{ label: 'Impact rating', value: 'Class 3 standard; Class 4 (2" ice ball) on impact-resistant lines' },
-	{ label: 'Fire rating', value: 'Class A (highest UL rating, with proper assembly)' },
-	{ label: 'Algae resistance', value: 'Standard on most premium lines (10–25 year algae warranty)' },
-	{ label: 'Construction', value: 'Fiberglass laminate, ceramic-coated granules, polymer-modified asphalt on premium lines' },
-	{ label: 'Cool-roof options', value: 'Class 1 cool-roof rated lines available (reflective granules)' },
-	{ label: 'Manufacturer warranty', value: 'Lifetime limited (most premium lines); transferable on home sale (typically 1–2 transfers)' },
-];
-
-const tradeoffs = [
-	{ kind: 'pro' as const, body: 'Lowest up-front cost of any major roofing material' },
-	{ kind: 'pro' as const, body: 'Widest color and style range in residential' },
-	{ kind: 'pro' as const, body: 'Easiest to repair shingle-by-shingle' },
-	{ kind: 'pro' as const, body: 'Standard for insurance-claim work in East Texas' },
-	{ kind: 'pro' as const, body: 'Class 4 lines available on every major manufacturer' },
-	{ kind: 'con' as const, body: 'Shorter lifespan than metal (20–30 vs 40–60 years)' },
-	{ kind: 'con' as const, body: 'Hail-vulnerable on lower Class-3 lines — Class 4 is the upgrade' },
-	{ kind: 'con' as const, body: 'East Texas heat shortens shingle life vs cooler regions' },
-	{ kind: 'con' as const, body: 'Granule loss is normal but progressive after year 15' },
-];
-
-const faqs = [
-	{ q: 'How long does an asphalt roof actually last in East Texas?', a: 'Architectural shingles with proper ventilation run 25–30 years here. Texas heat shortens shingle life vs cooler regions — a 30-year shingle in Minnesota often performs like a 25-year shingle in Smith County. The manufacturer warranty length and the real-world lifespan are not the same number.' },
-	{ q: 'Should I pay extra for Class 4 impact-resistant shingles?', a: 'Almost always, in East Texas. Spring hail is annual. The Class 4 upgrade typically costs 10–20% more on the shingle, but most Texas insurance carriers offer 20–30% premium discounts on a Class 4 install. The math pencils out by year three on most homes.' },
-	{ q: 'What\'s the difference between 3-tab and architectural?', a: '3-tab: a single flat layer of shingle, the budget option, 20–25 year service life, lower wind ratings. Architectural (also called dimensional or laminated): two laminated layers, dimensional shadow line, 25–30 year service life, 130 mph wind standard. Architectural is the modern default.' },
-	{ q: 'Do you install Malarkey, Atlas, GAF, Owens Corning, CertainTeed?', a: 'See below — Heritage\'s primary stocked lines vary by what we are running through the warehouse. The major manufacturers are all comparable on quality at equivalent product tiers; the differences are color range and warranty terms.', placeholderFact: 'Heritage\'s primary stocked asphalt manufacturers + product tiers (e.g. GAF Timberline HDZ, Owens Corning Duration, Atlas Pinnacle Impact, Malarkey Legacy, CertainTeed Landmark Pro). See Founder Input page §2.' },
-	{ q: 'Are algae streaks covered under warranty?', a: 'Most premium lines now include 10–25 year algae warranties — black-streak coverage included. Older or budget shingle lines do not include algae coverage; a non-algae-resistant install in humid East Texas can show streaking by year 7–8.' },
-	{ q: 'Can I get a cool-roof asphalt shingle?', a: 'Yes. Cool-roof shingles use reflective granules to bounce solar heat back. Atlas Pinnacle Sun, GAF Timberline Cool Series, and Owens Corning ProArmor all carry Class 1 cool-roof ratings. Limited color range (mostly lighter grays and tans) — the dark colors do not hit cool-roof reflectance numbers.' },
-	{ q: 'What\'s the warranty on a Heritage asphalt install?', a: 'Two warranties on every roof: Heritage workmanship + manufacturer pass-through on the materials.', placeholderFact: 'Heritage workmanship warranty length on residential asphalt installs. Manufacturer pass-through length + transferability terms. See Founder Input page §1.' },
-];
+const v2 = imagery.v2;
 ---
 
-<MaterialDetailLayout
-	title="Asphalt Shingle Roofs — Heritage Co. Residential"
-	heroEyebrow="Residential · Asphalt shingles"
-	heroH1="Asphalt shingles. The standard for East Texas residential."
-	heroSub="Lower up-front cost than metal or tile. Wide color range. Class 4 hail-rated and 130 mph wind options on every major manufacturer."
-	heroPhoto={imagery.heroCandidates.residentialRoofA.url!}
-	heroPhotoAlt="Residential asphalt shingle roof"
-	whatItIsHeading="A laminated fiberglass mat coated in asphalt and granules."
-	whatItIsParagraphs={[
-		'Asphalt shingles are the most-installed residential roof material in the United States — about 75% of homes. The shingle itself is a fiberglass mat saturated with asphalt, surfaced with ceramic-coated granules that handle UV and weather. Premium lines add polymer modifiers (SBS rubber) for flexibility and impact resistance.',
-		'In East Texas, asphalt is the default for almost every residential install. Insurance work runs on it. The local supply chain is built around it. Heritage stocks several manufacturers and chooses by job — color match for repairs, premium lines for new installs, Class 4 upgrades on storm-damage replacements.',
+<SystemPage
+	title="Asphalt shingle roofs"
+	heroEyebrow="Residential · materials"
+	heroHeading="Asphalt shingle.<br />The default for East Texas."
+	heroLede="Architectural and laminated shingles from GAF, Owens Corning, CertainTeed, Atlas, and Malarkey. The right answer for most East Texas homes — and we say so honestly."
+	heroPhoto={v2.pageHeros.asphaltShingle}
+	heroCta={{ label: 'Get my free inspection', href: '/free-inspection' }}
+	bleedPhoto={v2.bleeds.workmanship}
+	bleedHeading="Most residential roofs<br />install in one day."
+	overview={{
+		eyebrow: 'Why asphalt',
+		heading: 'It works for the climate, the budget, and the timeline.',
+		body: "Asphalt shingles are the default for residential roofing in East Texas for good reason — they handle our heat, hail, and humidity at a price homeowners can absorb on a 20-year cycle, and the install fits inside one day for most houses. Architectural laminated shingles in particular have closed most of the visual gap with metal and tile while staying inside a residential budget. We install GAF, Owens Corning, CertainTeed, Atlas, and Malarkey — manufacturer pick depends on the warranty Heritage carries with each."
+	}}
+	keyPoints={[
+		{
+			heading: 'Architectural vs 3-tab.',
+			body: 'Architectural (laminated) shingles are the standard now — two layers of asphalt mat creates depth, dimensionality, and roughly 2x the wind/impact rating of 3-tab. 3-tab is largely a budget tier for shorter-stay rentals or repairs that need to match an old roof. We default-spec architectural and price 3-tab if asked.',
+			bullets: ['Architectural is the new default', '110–130 mph wind ratings standard', 'Class 4 impact options (Pinnacle Impact, NorthGate, Northgate ClimateFlex)', 'Algae resistance built in'],
+			photo: v2.materialTiles.asphalt,
+			photoSide: 'left',
+		},
+		{
+			heading: 'How long it actually lasts.',
+			body: "Manufacturer warranties read 30 years, lifetime, or limited-lifetime. Real-world East Texas service life on a quality architectural shingle is 20–25 years. The variables are attic ventilation (#1 cause of premature failure we see), hail history, and color (lighter shingles age slower in our heat). We document ventilation on every inspection.",
+			bullets: ['20–25 yr real-world service in East Texas', 'Attic ventilation is the #1 longevity factor', 'Lighter colors age slower in our heat', 'Hail history matters — we account for it'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'right',
+		},
 	]}
-	benefitsHeading="Six things that distinguish a good asphalt roof from a bad one."
-	benefitsSub="Industry-generic specs — these apply to any quality install from any major manufacturer."
-	benefits={benefits}
-	colorsHeading="Color families across the major manufacturers."
-	colorsSub="The exact color names vary by manufacturer (GAF “Pewter Gray” ≈ Owens Corning “Driftwood” ≈ CertainTeed “Moire Black”), but the eight color families below cover what is available. Specific manufacturer SKUs surface at the inspection."
-	colorSwatches={colorSwatches}
-	colorsPlaceholder="Confirm: Heritage's primary asphalt manufacturer + the actual stocked color line for that brand. See Founder Input page §2. Manufacturer color photography (real product close-ups, not stand-in gradients) requires dealer-portal access from GAF / Owens Corning / CertainTeed / Atlas / Malarkey."
-	specsHeading="Asphalt shingle specs at a glance."
-	specRows={specRows}
-	manufacturerPlaceholder="Heritage's preferred asphalt manufacturer + product tier (e.g. GAF Timberline HDZ for value tier, GAF Timberline UHDZ or Atlas Pinnacle Impact for Class 4 upgrade, Malarkey Legacy for premium SBS-modified). See Founder Input page §2."
-	costPriceBandFact="Typical residential asphalt install price band — basic 3-tab on the low end, premium architectural with Class 4 upgrade on the high end, dollars per square (100 sq ft). See Founder Input page §4."
-	costFactors={[
-		'3-tab vs architectural vs premium SBS-modified',
-		'Class 3 vs Class 4 impact rating',
-		'Standard vs cool-roof reflective granules',
-		'Square footage and roof pitch (steeper = slower install)',
-		'Tear-off layers (one layer vs two)',
-		'Decking condition once tear-off is done (rot replacement)',
-		'Edge metal, flashing, and ridge upgrades',
+	stats={[
+		{ value: '20–25', label: 'Years real-world service · East TX' },
+		{ value: '130', label: 'Mph wind rating · architectural', numericValue: 130, suffix: ' mph' },
+		{ value: 'Class 4', label: 'Impact rating · upgrade tier' },
+		{ value: '1 day', label: 'Typical install timeline' },
 	]}
-	tradeoffsHeading="Where asphalt shines, where it doesn't."
-	tradeoffs={tradeoffs}
-	faqItems={faqs}
-	endCtaPhoto={imagery.heroCandidates.residentialRoofC.url!}
-	endCtaHeading="Free inspection. We talk through the right asphalt line for your house."
-	endCtaSub="Class 3 vs Class 4, color match, warranty terms — at the inspection, not in a sales pitch."
+	projectPhotos={[v2.projects[0], v2.projects[1], v2.projects[6], v2.projects[7]]}
+	projectCaptions={['Architectural re-roof, Tyler', 'Insurance replacement, Longview', 'Tear-off + decking, Marshall', 'Color match repair, Kilgore']}
+	faq={[
+		{ q: 'Which manufacturer is best?', a: "<p>The honest answer: there's no single best. GAF Timberline HDZ, Owens Corning Duration, CertainTeed Landmark, Atlas Pinnacle Pristine, and Malarkey Highlander are all solid architectural shingles in the same performance band. The decision usually comes down to which warranty Heritage carries with that manufacturer and which color matches the house. We tell you which one we'd put on our own house and why.</p>" },
+		{ q: 'How much does a roof actually cost?', a: '<p>Residential asphalt re-roofs in East Texas land in a wide band depending on square footage, slope, decking condition, ventilation work, and material tier. We won\'t put a number on this page — every roof is different. The free inspection ends with a written quote with the actual number.</p>' },
+		{ q: 'Class 4 impact — worth it?', a: "<p>If you've had hail damage in the last 10 years, yes. Insurance discounts on Class 4 shingles in hail-prone areas often pay back the upgrade cost over the roof's life. If you haven't had hail, the math is closer — Class 4 shingles cost more up front and the discount only matters if your insurer offers it. We tell you both numbers on the proposal.</p>" },
+		{ q: 'Tear-off or overlay?', a: '<p>Tear-off, almost always. Overlay (installing new shingles over old) saves tear-off cost but locks in any decking problems, voids most warranty coverage, and traps an old layer of failure underneath. We only overlay on jobs where the existing roof is essentially new and the homeowner accepts the warranty trade-offs in writing.</p>' },
+		{ q: 'What about the warranty?', a: '<p>Manufacturer warranty (30 yr to limited-lifetime) plus Heritage workmanship warranty on the install. Specific term lengths and any extended coverage land on the proposal.</p>' },
+		{ q: 'Will my premium go up after a claim?', a: "<p>No. Insurance premiums in Texas don't go up based on a single weather-related claim filed properly. We talk you through that on the inspection if it's a concern. Note: this is general guidance, not insurance advice — your carrier and your specific policy govern.</p>" },
+	]}
+	ctaHeading="Free inspection.<br />Real quote in a day."
+	ctaLede="Same-day or next-day quote. Real person on the ladder, not a salesperson."
+	ctaPhoto={v2.pageHeros.freeInspection}
+	ctaPrimary={{ label: 'Get my free inspection', href: '/free-inspection' }}
+	promises={['Insurance accepted', 'Workmanship + material warranties', 'Free inspections']}
 />

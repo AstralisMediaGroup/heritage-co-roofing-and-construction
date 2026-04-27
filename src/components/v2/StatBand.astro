@@ -1,0 +1,104 @@
+---
+interface Stat {
+	value: string;
+	label: string;
+	suffix?: string;
+	prefix?: string;
+	numericValue?: number;
+}
+interface Props {
+	stats: Stat[];
+	tone?: 'light' | 'dark';
+}
+const { stats, tone = 'light' } = Astro.props;
+---
+
+<section class={`stat-band tone-${tone}`}>
+	<div class="container stat-band-grid" style={`--cols: ${stats.length};`}>
+		{stats.map((s, i) => (
+			<div class="stat-cell" style={`transition-delay: ${i * 80}ms;`}>
+				<p class="stat-value h-display" data-stat data-numeric={s.numericValue ?? ''} data-prefix={s.prefix ?? ''} data-suffix={s.suffix ?? ''}>
+					{s.numericValue !== undefined ? `${s.prefix ?? ''}${s.numericValue}${s.suffix ?? ''}` : s.value}
+				</p>
+				<p class="stat-label">{s.label}</p>
+			</div>
+		))}
+	</div>
+</section>
+
+<style>
+	.stat-band {
+		padding: clamp(56px, 7vw, 104px) 0;
+		border-top: 1px solid var(--rule);
+		border-bottom: 1px solid var(--rule);
+	}
+	.stat-band-grid {
+		display: grid;
+		grid-template-columns: repeat(var(--cols), 1fr);
+		gap: clamp(32px, 5vw, 64px);
+	}
+	.stat-cell {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.stat-value {
+		font-size: var(--fs-stat);
+		line-height: 0.92;
+		letter-spacing: -0.045em;
+		color: var(--ink);
+		font-feature-settings: "tnum";
+		white-space: nowrap;
+	}
+	.stat-label {
+		font-size: 13px;
+		font-weight: 500;
+		letter-spacing: 0.06em;
+		color: var(--ink-3);
+		text-transform: uppercase;
+		max-width: 220px;
+	}
+	.tone-dark { background: var(--ink-bg); border-color: rgba(255,255,255,0.08); }
+	.tone-dark .stat-value { color: var(--bg); }
+	.tone-dark .stat-label { color: var(--ink-bg-mute); }
+	@media (max-width: 880px) {
+		.stat-band-grid { grid-template-columns: repeat(2, 1fr); }
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		if (window.__heritageStatInit) return;
+		window.__heritageStatInit = true;
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+		const animate = (el) => {
+			const numeric = parseFloat(el.dataset.numeric);
+			if (!isFinite(numeric)) return;
+			if (reduceMotion) return;
+			const prefix = el.dataset.prefix || '';
+			const suffix = el.dataset.suffix || '';
+			const duration = 1400;
+			const start = performance.now();
+			const tick = (now) => {
+				const t = Math.min(1, (now - start) / duration);
+				const v = numeric * easeOut(t);
+				const display = numeric % 1 === 0 ? Math.round(v) : v.toFixed(1);
+				el.textContent = prefix + display + suffix;
+				if (t < 1) requestAnimationFrame(tick);
+			};
+			requestAnimationFrame(tick);
+		};
+		const io = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					animate(entry.target);
+					io.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.4 });
+		document.querySelectorAll('[data-stat]').forEach((el) => {
+			if (el.dataset.numeric) io.observe(el);
+		});
+	})();
+</script>

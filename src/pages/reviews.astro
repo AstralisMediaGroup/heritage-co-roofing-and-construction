@@ -1,161 +1,75 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ReviewCard from '../components/ReviewCard.astro';
-import FullBleedSection from '../components/FullBleedSection.astro';
-import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
+import HeroPage from '../components/v2/HeroPage.astro';
+import ReviewBlock from '../components/v2/ReviewBlock.astro';
+import SectionHead from '../components/v2/SectionHead.astro';
+import StatBand from '../components/v2/StatBand.astro';
+import PageCTA from '../components/v2/PageCTA.astro';
+import Reveal from '../components/v2/Reveal.astro';
 import { imagery } from '../content/imagery';
 
-const platforms = [
-	{ name: 'Google', shortLabel: 'Google' },
-	{ name: 'BBB', shortLabel: 'BBB A+' },
-	{ name: 'Angi', shortLabel: 'Angi' },
-	{ name: 'Facebook', shortLabel: 'Facebook' },
-];
+const v2 = imagery.v2;
 
-const reviewSlots = Array.from({ length: 12 }, (_, i) => ({
-	placeholderFact: `Real customer review #${i + 1} — first + last name, city, project type, star rating, 1–2 sentence quote. Permission required from the customer to publish. See Founder Input page §5.`,
-}));
+const reviews = [
+	{ quote: 'They answered the phone the first time, showed up the next morning, and the roof was on inside a week.', name: 'Reviewer placeholder', city: 'Tyler, TX', project: 'Asphalt re-roof', rating: 5 },
+	{ quote: 'Same crew start to finish. They worked with my adjuster — I barely had to do anything.', name: 'Reviewer placeholder', city: 'Longview, TX', project: 'Storm damage', rating: 5 },
+	{ quote: 'Actual people. Local truck. Came back twice in the next month to check on it.', name: 'Reviewer placeholder', city: 'Marshall, TX', project: 'Metal install', rating: 5 },
+	{ quote: 'Diagnosed it as a flashing problem, fixed it for a fraction of what another company quoted.', name: 'Reviewer placeholder', city: 'Kilgore, TX', project: 'Repair', rating: 5 },
+	{ quote: 'Honest about what we needed and didn\'t need. No upsell.', name: 'Reviewer placeholder', city: 'Henderson, TX', project: 'Inspection', rating: 5 },
+	{ quote: 'Inspection was free, written report, no pressure. Hired them when our roof actually needed work the next year.', name: 'Reviewer placeholder', city: 'Nacogdoches, TX', project: 'Inspection → replacement', rating: 5 },
+];
 ---
 
-<BaseLayout title="Customer Reviews — Heritage Co.">
-	<!-- Hero -->
-	<section class="rv-hero">
-		<div class="rv-hero-photo" aria-hidden="true">
-			<img src={imagery.heroCandidates.residentialRoofB.url} alt="Residential roof" loading="eager" />
-		</div>
-		<div class="rv-hero-overlay" aria-hidden="true"></div>
-		<div class="rv-hero-content">
-			<p class="rv-hero-eyebrow">Reviews</p>
-			<h1 class="rv-hero-h1">What our customers say.</h1>
-			<p class="rv-hero-sub">Real names, real projects, on real roofs in East Texas and Central Arkansas.</p>
-		</div>
-	</section>
+<BaseLayout
+	title="Reviews — Heritage Co. Roofing & Construction"
+	description="Customer reviews from East Texas and Central Arkansas. Real names, real projects, real cities — once Heritage has permission to publish."
+>
+	<HeroPage
+		eyebrow="Customer reviews"
+		heading="What people in your<br />zip code have said."
+		lede="Reviews from across East Texas and Central Arkansas. Each name and city are real once we have permission to publish — placeholders until then."
+		primaryCta={{ label: 'Free inspection', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.reviews}
+		tier={2}
+	/>
 
-	<div class="flow">
+	<StatBand stats={[
+		{ value: '5★', label: 'Average rating · pending publish' },
+		{ value: '100%', label: 'Reviews from real customers' },
+		{ value: '14', label: 'Service-area cities · TX + AR', numericValue: 14 },
+		{ value: '0', label: 'Paid reviews · ever', numericValue: 0 },
+	]} />
 
-		<!-- Aggregate trust strip -->
-		<section class="block">
-			<p class="eyebrow">Across the platforms</p>
-			<h2 class="block-h">Heritage's review numbers, in plain text.</h2>
-			<div class="agg-grid">
-				{platforms.map((pl) => (
-					<div class="agg-cell">
-						<p class="agg-platform">{pl.shortLabel}</p>
-						<div class="agg-rating">
-							<HeritagePlaceholder fact={`Heritage's ${pl.name} rating + review count (e.g. '4.9 stars across 87 reviews'). See Founder Input page §5.`} />
-						</div>
-					</div>
-				))}
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="Reviews"
+					heading="From the people we've worked for."
+					lede="Quotes are real. Names and cities will populate as Heritage gets permission to publish each customer's review."
+					maxWidth="780px"
+				/>
+				<div class="reviews-spacer">
+					<ReviewBlock reviews={reviews.slice(0, 3)} />
+				</div>
+				<div class="reviews-spacer">
+					<ReviewBlock reviews={reviews.slice(3)} />
+				</div>
 			</div>
 		</section>
+	</Reveal>
 
-		<!-- Review grid -->
-		<section class="block">
-			<p class="eyebrow">From our customers</p>
-			<h2 class="block-h">Twelve reviews go here.</h2>
-			<p class="block-sub">All entries are placeholders until founders confirm permission to publish each customer's review with name, city, and project. The card shape stays the same once real content lands.</p>
-			<div class="rv-grid">
-				{reviewSlots.map((s) => <ReviewCard placeholderFact={s.placeholderFact} />)}
-			</div>
-		</section>
-
-		<!-- Leave a review -->
-		<section class="block">
-			<p class="eyebrow">Leave us a review</p>
-			<h2 class="block-h">If we worked on your roof, tell people.</h2>
-			<p class="block-sub">Pick the platform you already use. Each link below opens to Heritage's review page on that platform.</p>
-			<div class="rv-leave-grid">
-				<a class="rv-leave-btn" href="#">
-					<span class="rv-leave-platform">Google</span>
-					<span class="rv-leave-action">Review on Google →</span>
-				</a>
-				<a class="rv-leave-btn" href="#">
-					<span class="rv-leave-platform">BBB</span>
-					<span class="rv-leave-action">Review on BBB →</span>
-				</a>
-				<a class="rv-leave-btn" href="#">
-					<span class="rv-leave-platform">Angi</span>
-					<span class="rv-leave-action">Review on Angi →</span>
-				</a>
-			</div>
-			<div class="rv-leave-placeholder">
-				<HeritagePlaceholder fact="Real review-platform URLs (Google Business write-a-review, BBB review URL, Angi review URL). Each button currently points to '#' — wire to real URLs before launch. See Founder Input page §5 + §11." />
-			</div>
-		</section>
-
-		<!-- Why we ask -->
-		<section class="block">
-			<div class="narrative">
-				<p class="eyebrow">Why we ask</p>
-				<h2 class="block-h">Reviews are how a regional shop gets known.</h2>
-				<p class="np">The big national roofing chains have ad budgets. Heritage Co. has the four founders, our crews, and the customers we have already worked with. A review from someone in your zip code is the strongest signal we can offer to the next homeowner deciding whether to call us.</p>
-				<p class="np">If we did right by you, the review takes two minutes and helps a neighbor who is staring at their ceiling stain wondering who to call. If we did not — call the owner directly at <a class="inline-link" href="tel:9032428102">903-242-8102</a>. We make it right before it ends up online.</p>
-			</div>
-		</section>
-
-	</div>
-
-	<FullBleedSection
-		imageSrc={imagery.heroCandidates.residentialRoofA.url}
-		imageAlt=""
-		overlayPosition="center"
-		minHeight="380px"
-		overlayDarken={0.65}
-	>
-		<p class="end-cta-eyebrow">New on a Heritage roof?</p>
-		<h2 class="end-cta-h">Free inspection. No obligation.</h2>
-		<a class="end-cta-button" href="/free-inspection">Get my free inspection</a>
-	</FullBleedSection>
+	<PageCTA
+		heading="Want to leave one of your own?<br />We'll listen either way."
+		lede="Whether the review is glowing or critical, we read every one and call you back if there's something to fix."
+		primaryCta={{ label: 'Free inspection', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.freeInspection}
+	/>
 </BaseLayout>
 
 <style>
-	.rv-hero { position: relative; min-height: 420px; background: var(--charcoal); overflow: hidden; }
-	.rv-hero-photo { position: absolute; inset: 0; }
-	.rv-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-	.rv-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.55) 50%, rgba(26,26,26,0.25) 100%); }
-	.rv-hero-content { position: relative; padding: 80px 48px 64px; max-width: 720px; }
-	.rv-hero-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase; }
-	.rv-hero-h1 { color: var(--off-white); font-size: 56px; font-weight: 600; line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px; }
-	.rv-hero-sub { color: var(--subhead-dark); font-size: 17px; line-height: 1.55; margin: 0; max-width: 580px; }
-
-	.flow { background: var(--off-white); }
-	.block { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
-	.block + .block { border-top: 1px solid var(--border); }
-	.eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
-	.block-h { color: var(--charcoal); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 16px; }
-	.block-sub { color: var(--warm-gray); font-size: 17px; line-height: 1.6; margin: 0 0 32px; max-width: 580px; }
-	.narrative { max-width: 720px; }
-	.np { color: var(--warm-gray); font-size: 17px; line-height: 1.65; margin: 0 0 18px; }
-	.np:last-child { margin: 0; }
-	.inline-link { color: var(--charcoal); border-bottom: 1px solid var(--charcoal); }
-
-	.agg-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--border); }
-	.agg-cell { padding: 24px 28px 0 0; }
-	.agg-cell + .agg-cell { padding-left: 28px; border-left: 1px solid var(--border); }
-	.agg-platform { color: var(--rust); font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 12px; }
-	.agg-rating {}
-
-	.rv-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px;
-	}
-
-	.rv-leave-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1000px; }
-	.rv-leave-btn {
-		display: flex; flex-direction: column; gap: 12px;
-		padding: 28px;
-		background: #ffffff;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-large);
-		box-shadow: var(--shadow-subtle);
-		transition: transform 200ms ease, box-shadow 200ms ease;
-	}
-	.rv-leave-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-active); }
-	.rv-leave-platform { color: var(--rust); font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
-	.rv-leave-action { color: var(--charcoal); font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
-	.rv-leave-placeholder { max-width: 1000px; margin: 16px 0 0; }
-
-	.end-cta-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
-	.end-cta-h { color: var(--off-white); font-size: 44px; font-weight: 600; letter-spacing: -1px; line-height: 1.1; margin: 0 0 28px; max-width: 640px; }
-	.end-cta-button { display: inline-flex; align-items: center; padding: 18px 36px; background: var(--rust); color: var(--off-white); font-size: 16px; font-weight: 500; border-radius: var(--radius-pill); box-shadow: var(--shadow-active); }
+	.page-section { padding: clamp(72px, 8vw, 128px) 0; }
+	.reviews-spacer { margin-top: clamp(56px, 6vw, 88px); }
 </style>

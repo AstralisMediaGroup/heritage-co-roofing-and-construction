@@ -1,91 +1,48 @@
 ---
-import ServiceDetailLayout from '../../layouts/ServiceDetailLayout.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const flashingTypes = [
-	{ title: 'Step flashing', body: 'L-shaped pieces interwoven with each shingle course as the chimney rises. The first line of defense.' },
-	{ title: 'Counter flashing', body: 'Cap that overlaps the step flashing, embedded in the chimney mortar. Sheds water away from the joint.' },
-	{ title: 'Cricket / saddle', body: 'A small ridge built behind a wide chimney to divert water around it. Required on chimneys >30" wide.' },
-	{ title: 'Lead vs aluminum vs copper', body: 'Lead is traditional and forms to mortar. Aluminum is the modern standard. Copper is for premium / historic — outlasts the chimney.' },
-	{ title: 'Mortar pointing', body: 'When the brick joints fail, water enters through the mortar — not through the flashing. Re-pointing is a brick job, not a roof job.' },
-	{ title: 'Chase covers (metal chimneys)', body: 'Pre-fab metal chimneys (zero-clearance fireplaces) have a top metal cover that fails. Replace with a custom-fit stainless cover.' },
-];
-
-const faqs = [
-	{ q: 'Is the leak always the flashing?', a: 'On a chimney leak, 90% of the time. The remaining 10% is mortar joints, a chase cover failure, or the chimney crown cracked. We inspect all of these — the fix is whichever is actually failing, not whichever is easiest to bill.' },
-	{ q: 'Can I just caulk it?', a: 'Caulk is a 6-month bandage on a 20-year problem. Sealant degrades fast in UV; a caulked flashing fails again within a year or two. The right fix is to pull the flashing, replace it, and re-shingle around it. Costs more once; lasts decades.' },
-	{ q: 'What\'s a chimney cricket and do I need one?', a: 'A small ridge of roofing built behind the chimney that diverts water around it instead of letting it pond against the back. Required by code on chimneys wider than 30". If yours does not have one and the back of the chimney is leaking, that is the fix.' },
-	{ q: 'Should the chimney be relined?', a: 'Lining is interior chimney work — for fireplace use, not roof work. We will tell you if we see exterior signs that liners need attention, but we do not do the lining itself. We refer to a chimney specialist.' },
-	{ q: 'How long does flashing last?', a: 'Aluminum step flashing lasts 25–30 years if installed correctly under each shingle course. Lead flashing lasts 50+ years. Copper outlasts the chimney. Sealant on top of any of these — 2–5 years.' },
-	{ q: 'Will the repair match my roof?', a: 'The new shingles around the flashing will match if your roof is under \\~10 years old. Older roofs have weathered enough that fresh shingles look slightly different — visible up close, less so from the ground.' },
-];
+const v2 = imagery.v2;
 ---
 
-<ServiceDetailLayout
-	title="Chimney Flashing + Repair — Heritage Co."
-	heroEyebrow="Residential · Chimney flashing"
-	heroH1="The chimney is the #1 source of roof leaks."
-	heroSub="The fix is almost always flashing — not the chimney. Step + counter flashing, crickets, lead or aluminum. Pulled apart, replaced, re-shingled."
-	heroPhoto={imagery.asphalt.closeup.url}
-	heroPhotoAlt="Close-up of asphalt shingles"
-	whatWeMeanHeading="Chimney leaks are flashing leaks."
-	whatWeMeanParagraphs={[
-		'When water shows up in your ceiling near a chimney, the cause is almost always the metal flashing where the chimney meets the roof. Step flashing under each shingle course, counter flashing embedded in the mortar above it. Either piece can fail — corrode, lift, separate from the brick — and water finds the gap.',
-		'The right fix is to pull the affected shingles, remove the old flashing, install new step + counter flashing properly woven with new shingles, and seal at the masonry interface. Caulking over a failing flashing is a 6-month bandage. We do the right repair, not the cheap one.',
+<SystemPage
+	title="Chimney flashing and repair"
+	heroEyebrow="Residential · service"
+	heroHeading="Chimney flashing.<br />Where most leaks start."
+	heroLede="Step flashing, counter flashing, cricket installation, and full chimney rebuilds. The single most common source of residential roof leaks in East Texas — and the most often installed wrong."
+	heroPhoto={v2.pageHeros.chimneyFlashing}
+	heroCta={{ label: 'Get my free inspection', href: '/free-inspection' }}
+	bleedPhoto={v2.bleeds.workmanship}
+	bleedHeading="Step into the courses.<br />Counter into the brick."
+	overview={{
+		eyebrow: 'Why chimneys leak',
+		heading: 'Two flashings, both have to work.',
+		body: "Chimney flashing is a two-piece system: step flashing woven into each shingle course as the roof goes up, and counter flashing cut into the brick or stone above to cover the step flashing. If either is missing, wrong, or aging, water tracks in. Most leaks we see come from chimneys built when the roofer skipped the counter flashing and substituted caulk — which works for about 5 years."
+	}}
+	keyPoints={[
+		{
+			heading: 'Step + counter flashing (the right way).',
+			body: "Step flashing is interleaved with shingle courses on both sides of the chimney — each piece bent 90 degrees, one leg under the shingle, one leg up the chimney. Counter flashing is set into a cut in the brick mortar (or stone joints) and folded down over the step flashing. The two pieces work together; neither alone is enough.",
+			bullets: ['Step flashing woven into shingle courses', 'Counter flashing cut into the brick', 'Mortar reglet or surface-mount termination', 'Sealant only as a finishing detail'],
+			photo: v2.serviceTiles.chimney,
+			photoSide: 'left',
+		},
+		{
+			heading: 'Crickets — when and why.',
+			body: "A cricket (saddle) is a small triangular roof structure built behind the chimney to divert water around it. Code requires a cricket on chimneys 30+ inches wide. Without one, water and debris pile up behind the chimney and back up under the shingles. We install crickets on any chimney that needs one — about half of the chimney repairs we do.",
+			bullets: ['Required: chimneys 30"+ wide', 'Diverts water around chimney', 'Prevents debris/ice dam buildup'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'right',
+		},
 	]}
-	whenYouNeedHeading="The signs the chimney needs flashing work."
-	whenYouNeedItems={[
-		{ title: 'Water stains near the chimney', body: 'Brown ring on the ceiling within 4–6 feet of the chimney chase. Almost always flashing.' },
-		{ title: 'Visible flashing rust or separation', body: 'From the ground or a ladder, you can see metal pulled away from the brick. Active failure.' },
-		{ title: 'Mortar damage at the roofline', body: 'The brick joints where flashing tucks in have crumbled. The flashing has nothing to anchor to. Re-pointing + re-flashing.' },
-		{ title: 'No cricket on a wide chimney', body: 'If the chimney is more than 30" across the upslope side, water ponds behind it during rain. Cricket retrofit fixes this.' },
-		{ title: 'Sealant repeatedly failing', body: 'Each year the homeowner re-caulks and each year the leak comes back. The flashing under the caulk has aged out.' },
-		{ title: 'Chase cover failure (metal chimneys)', body: 'On pre-fab metal chimneys, the top cover rusts through. Custom stainless replacement.' },
+	faq={[
+		{ q: "Can you fix a leak without rebuilding the flashing?", a: '<p>Sometimes — if the failure is a single piece of flashing or a cracked sealant joint, a targeted repair holds. If multiple pieces have failed or the original install was wrong (caulk-and-pray), the right fix is a flashing rebuild. We tell you which it is on the inspection.</p>' },
+		{ q: "Can you flash a chimney without disturbing the brick?", a: '<p>Surface-mount counter flashing avoids cutting into the brick — we install it on the brick face with stainless fasteners and sealant. Cleaner-looking than mortar-cut on some chimneys; not as durable on others. We pick the method that fits the chimney and the homeowner\'s priorities.</p>' },
+		{ q: "Do I need a cricket?", a: '<p>If the chimney is 30+ inches wide measured along the slope, code requires one. Even on smaller chimneys, a cricket is worth installing — the cost is modest and the leak prevention is significant.</p>' },
+		{ q: "Why does my chimney leak only on one side?", a: '<p>Water generally enters at the up-slope or one of the side flashings — that\'s where the failed piece is. Most leak diagnostics start on the up-slope (highest-water-flow) side and work down.</p>' },
 	]}
-	processHeading="Four steps. Most jobs done in a half-day."
-	processSteps={[
-		{ label: 'Inspect', caption: 'Free. Identify whether it\'s flashing, mortar, or both.' },
-		{ label: 'Quote', caption: 'Per-chimney pricing. Cricket extra if needed.' },
-		{ label: 'Repair', caption: 'Pull, re-flash, re-shingle. Half-day typical.' },
-		{ label: 'Stand by', caption: 'Workmanship guarantee on the patched area.' },
-	]}
-	materialsHeading="Six flashing components."
-	materialsSub="The fix depends on which piece is failing."
-	costHeading="Per-chimney pricing."
-	costPriceBandFact="Typical chimney flashing repair price band — flashing-only repair (low end) vs flashing + mortar pointing + cricket (high end). See Founder Input page §4."
-	costFactors={[
-		'Flashing-only vs flashing + mortar work',
-		'Aluminum (standard) vs lead (premium) vs copper (premium)',
-		'Cricket retrofit if needed (>30" chimney)',
-		'Chase cover replacement (metal chimneys)',
-		'Roof access difficulty (single-story vs steep two-story)',
-		'Shingle availability for re-shingling around the patch',
-	]}
-	warrantyHeading="Workmanship warranty on every flashing repair."
-	faqItems={faqs}
-	endCtaPhoto={imagery.heroCandidates.residentialRoofA.url}
-	endCtaHeading="Free chimney inspection."
-	endCtaSub="We tell you whether it's flashing, mortar, or something else."
-	endCtaLabel="Get my free inspection"
-	endCtaHref="/free-inspection"
->
-	<div slot="materials">
-		<div class="ft-grid">
-			{flashingTypes.map((f) => (
-				<div class="ft-item">
-					<p class="ft-title">{f.title}</p>
-					<p class="ft-body">{f.body}</p>
-				</div>
-			))}
-		</div>
-	</div>
-</ServiceDetailLayout>
-
-<style>
-	.ft-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--border); }
-	.ft-item { padding: 24px 28px 0 0; }
-	.ft-item + .ft-item { padding-left: 28px; border-left: 1px solid var(--border); }
-	.ft-item:nth-child(n+4) { padding-top: 24px; border-top: 1px solid var(--border); margin-top: 24px; }
-	.ft-title { color: var(--charcoal); font-size: 16px; font-weight: 600; margin: 0 0 8px; }
-	.ft-body { color: var(--warm-gray); font-size: 14px; line-height: 1.55; margin: 0; }
-</style>
+	ctaHeading="Chimney leaking?<br />We diagnose to the source."
+	ctaLede="Free inspection. Most chimney leaks have a known fix."
+	ctaPhoto={v2.pageHeros.freeInspection}
+	ctaPrimary={{ label: 'Get my free inspection', href: '/free-inspection' }}
+/>

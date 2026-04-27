@@ -1,207 +1,56 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Accordion from '../../components/Accordion.astro';
-import FullBleedSection from '../../components/FullBleedSection.astro';
-import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const tiers = [
-	{
-		name: 'Basic',
-		summary: 'Annual inspection. Documented condition report. Minor patches included up to a cap.',
-		features: [
-			'1 scheduled inspection per year',
-			'Drains cleared, debris removed, gutters checked',
-			'Photo-documented condition report',
-			'Up to ' + '[hours TBD]' + ' of minor patch work included annually',
-			'Same-day callback on an active leak',
-		],
-	},
-	{
-		name: 'Standard',
-		summary: 'Semi-annual inspection. Seam and flashing checks. Minor repairs included up to a higher cap.',
-		features: [
-			'2 scheduled inspections per year (spring + fall)',
-			'Seam integrity check + flashing detail check',
-			'Drains cleared, debris removed, gutters checked',
-			'Photo-documented report after each inspection',
-			'Up to ' + '[hours TBD]' + ' of minor patch work per year',
-			'Same-week response on non-emergency repairs',
-			'Manufacturer warranty maintenance documentation kept on file',
-		],
-	},
-	{
-		name: 'Comprehensive',
-		summary: 'Quarterly inspection. Full preventive cadence. Most minor + medium repairs included.',
-		features: [
-			'4 inspections per year',
-			'All Standard inclusions',
-			'Up to ' + '[hours TBD]' + ' of repair work per year — most minor and medium repairs covered',
-			'24-hour emergency response on active leaks',
-			'Annual roof life-extension consultation (recoat / replace planning)',
-			'Priority scheduling on insurance claim work',
-		],
-	},
-];
-
-const notCovered = [
-	'Tear-off and full replacement',
-	'Storm damage covered by an insurance claim (handled separately)',
-	'Damage from third-party trades (HVAC techs, antenna installs) walking the roof outside scheduled visits',
-	'Any work outside the building footprint covered by the contract',
-];
-
-const faqs = [
-	{ q: 'Why does my manufacturer warranty require maintenance?', a: 'Most commercial roof manufacturer warranties (Carlisle, GAF, Firestone, Johns Manville, etc.) require documented annual or semi-annual inspections by an authorized contractor. A warranty claim with no maintenance records is often denied. Heritage maintenance keeps the documentation chain intact.' },
-	{ q: 'What triggers a charge above the contract?', a: 'Anything outside the included scope — major repairs over the included hours, tear-off + replacement, third-party damage, work outside the contracted building. We always quote and call before billing extra. No surprise invoices.' },
-	{ q: 'Can I add buildings to an existing contract?', a: 'Yes. Mid-contract additions are common — owners adding a new property to the program. We re-spec the contract to include the new building and either prorate or roll into the next renewal.' },
-	{ q: 'How does cancellation work?', a: 'Standard contract is annual with 30-day notice. We do not lock owners in past one year. If the relationship is not working, you tell us and we wrap up.' },
-	{ q: 'Do you cover roofs Heritage didn\'t install?', a: 'Yes — most of our maintenance contracts are on roofs we did not originally install. We document baseline condition at the first inspection and start the maintenance record from there.' },
-	{ q: 'What\'s the difference between Basic and Comprehensive?', a: 'Inspection frequency (1× / 2× / 4× per year), included repair hours per year, and emergency response time. Comprehensive is the full preventive cadence; Basic is bare-minimum warranty compliance. Most owners land on Standard.' },
-	{ q: 'Can I just call you when something breaks?', a: 'Yes — on-call repair work is always available. The maintenance program is for owners who want documented preventive cadence (warranty compliance, budget predictability) instead of reactive break-fix.' },
-];
+const v2 = imagery.v2;
 ---
 
-<BaseLayout title="Commercial Maintenance Programs — Heritage Co.">
-	<!-- Hero -->
-	<section class="mp-hero">
-		<div class="mp-hero-photo" aria-hidden="true">
-			<img src={imagery.metal.hero.url} alt="Commercial roof" loading="eager" />
-		</div>
-		<div class="mp-hero-overlay" aria-hidden="true"></div>
-		<div class="mp-hero-content">
-			<p class="mp-hero-eyebrow">Commercial · Maintenance programs</p>
-			<h1 class="mp-hero-h1">Caught small beats fixed expensive.</h1>
-			<p class="mp-hero-sub">Three tiers of preventive maintenance. Documented inspections, included repairs, manufacturer-warranty compliance.</p>
-			<div class="mp-hero-cta-row">
-				<a class="cta-primary" href="/free-inspection">Enroll my building</a>
-				<a class="cta-secondary" href="tel:9032428102">Call 903-242-8102</a>
-			</div>
-		</div>
-	</section>
-
-	<div class="flow">
-
-		<section class="block">
-			<div class="narrative">
-				<p class="eyebrow">Why maintenance matters</p>
-				<h2 class="block-h">Most commercial roof failures start small.</h2>
-				<p class="np">A worn flashing detail. A clogged drain. A torn cap on a curb. The kind of thing that is a 30-minute fix in March turns into a $40,000 saturated-insulation tear-off by October. Preventive maintenance catches the small problem.</p>
-				<p class="np">There is also the warranty side: most manufacturer warranties on commercial systems require documented annual or semi-annual inspections by an authorized contractor. A warranty claim with no maintenance records is often denied. The program is the documentation chain.</p>
-			</div>
-		</section>
-
-		<section class="block">
-			<p class="eyebrow">Three tiers</p>
-			<h2 class="block-h">Pick the cadence that matches the building.</h2>
-			<p class="block-sub">Annual, semi-annual, or quarterly. Inspection frequency, included repair hours, and emergency response scale with the tier.</p>
-			<div class="tier-grid">
-				{tiers.map((t) => (
-					<div class="tier">
-						<p class="tier-name">{t.name}</p>
-						<p class="tier-summary">{t.summary}</p>
-						<ul class="tier-features">
-							{t.features.map((f) => <li>{f}</li>)}
-						</ul>
-						<div class="tier-price">
-							<HeritagePlaceholder fact={`${t.name} tier monthly or annual price band. See Founder Input page §5.`} />
-						</div>
-					</div>
-				))}
-			</div>
-		</section>
-
-		<section class="block">
-			<p class="eyebrow">What's not covered</p>
-			<h2 class="block-h">Honest about the limits.</h2>
-			<dl class="data-list">
-				{notCovered.map((n) => (
-					<div class="data-row">
-						<dt class="data-row-label">Not included</dt>
-						<dd class="data-row-value">{n}</dd>
-					</div>
-				))}
-			</dl>
-		</section>
-
-		<section class="block">
-			<p class="eyebrow">How to enroll</p>
-			<h2 class="block-h">One inspection, one quote, one contract.</h2>
-			<p class="block-sub">Heritage walks the roof, documents baseline condition, and quotes the right tier for the building. Contracts run annually with 30-day cancellation notice.</p>
-		</section>
-
-		<section class="block">
-			<p class="eyebrow">Common questions</p>
-			<h2 class="block-h">What facility managers ask us.</h2>
-			<Accordion items={faqs} />
-		</section>
-
-	</div>
-
-	<FullBleedSection
-		imageSrc={imagery.metal.secondary.url}
-		imageAlt=""
-		overlayPosition="center"
-		minHeight="440px"
-		overlayDarken={0.65}
-	>
-		<p class="end-cta-eyebrow">Bid-ready</p>
-		<h2 class="end-cta-h">Free baseline inspection. We tell you which tier fits.</h2>
-		<p class="end-cta-sub">Walkthrough, scope, contract within the week.</p>
-		<a class="end-cta-button" href="/free-inspection">Enroll my building</a>
-	</FullBleedSection>
-</BaseLayout>
-
-<style>
-	.mp-hero { position: relative; min-height: 480px; background: var(--charcoal); overflow: hidden; }
-	.mp-hero-photo { position: absolute; inset: 0; }
-	.mp-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-	.mp-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(26,26,26,0.82) 0%, rgba(26,26,26,0.5) 50%, rgba(26,26,26,0.2) 100%); }
-	.mp-hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
-	.mp-hero-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase; }
-	.mp-hero-h1 { color: var(--off-white); font-size: 56px; font-weight: 600; line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px; }
-	.mp-hero-sub { color: var(--subhead-dark); font-size: 17px; line-height: 1.55; margin: 0 0 32px; max-width: 580px; }
-	.mp-hero-cta-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-	.cta-primary { background: var(--rust); color: var(--off-white); padding: 14px 28px; font-size: 15px; font-weight: 500; border-radius: var(--radius-pill); }
-	.cta-secondary { color: var(--off-white); padding: 12px 26px; font-size: 15px; font-weight: 500; border: 2px solid var(--off-white); border-radius: var(--radius-pill); }
-
-	.flow { background: var(--off-white); }
-	.block { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
-	.block + .block { border-top: 1px solid var(--border); }
-	.eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
-	.block-h { color: var(--charcoal); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 16px; }
-	.block-sub { color: var(--warm-gray); font-size: 17px; line-height: 1.6; margin: 0 0 32px; max-width: 580px; }
-	.narrative { max-width: 720px; }
-	.np { color: var(--warm-gray); font-size: 17px; line-height: 1.65; margin: 0 0 18px; }
-	.np:last-child { margin: 0; }
-
-	.tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-	.tier {
-		padding: 32px;
-		background: #ffffff;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-large);
-		box-shadow: var(--shadow-subtle);
-		display: flex; flex-direction: column;
-	}
-	.tier-name { color: var(--rust); font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 12px; }
-	.tier-summary { color: var(--charcoal); font-size: 17px; font-weight: 600; line-height: 1.3; margin: 0 0 24px; }
-	.tier-features { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px; }
-	.tier-features li {
-		color: var(--warm-gray); font-size: 14px; line-height: 1.5;
-		padding-left: 18px; position: relative;
-	}
-	.tier-features li::before { content: '+'; position: absolute; left: 0; color: var(--rust); font-weight: 700; }
-	.tier-price { margin-top: auto; }
-
-	.data-list { max-width: 880px; margin: 0; display: flex; flex-direction: column; gap: 0; }
-	.data-row { display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 16px 0; border-top: 1px solid var(--border); align-items: start; }
-	.data-row:last-child { border-bottom: 1px solid var(--border); }
-	.data-row-label { color: var(--rust); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding-top: 4px; }
-	.data-row-value { color: var(--warm-gray); font-size: 14px; line-height: 1.55; margin: 0; }
-
-	.end-cta-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
-	.end-cta-h { color: var(--off-white); font-size: 44px; font-weight: 600; letter-spacing: -1px; line-height: 1.1; margin: 0 0 14px; max-width: 640px; }
-	.end-cta-sub { color: var(--subhead-dark); font-size: 17px; line-height: 1.55; margin: 0 0 28px; max-width: 580px; }
-	.end-cta-button { display: inline-flex; align-items: center; padding: 18px 36px; background: var(--rust); color: var(--off-white); font-size: 16px; font-weight: 500; border-radius: var(--radius-pill); box-shadow: var(--shadow-active); }
-</style>
+<SystemPage
+	title="Commercial roof maintenance programs"
+	heroEyebrow="Commercial · maintenance"
+	heroHeading="Maintenance programs.<br />Catch leaks before they're leaks."
+	heroLede="Annual or semi-annual inspection contracts for commercial buildings across East Texas and Central Arkansas. Protects manufacturer warranties, cuts emergency calls, extends roof life."
+	heroPhoto={v2.pageHeros.maintenance}
+	bleedPhoto={v2.bleeds.commercial}
+	bleedHeading="Scheduled work, not emergency calls."
+	overview={{
+		eyebrow: 'What the program is',
+		heading: 'A standing inspection + repair contract.',
+		body: "Heritage's maintenance program is a standing contract: annual or semi-annual inspection of every roof on the contract, written report with photos, sealant maintenance, drain cleaning, and repair work scheduled into the program rather than billed as emergencies. Most manufacturer warranties require documented maintenance to stay in force — the program covers that too."
+	}}
+	keyPoints={[
+		{
+			heading: 'What gets done at every visit.',
+			body: "Visual inspection of the field membrane, all penetrations, edges, drains, and parapets. Sealant maintenance at metal flashings, pitch pans, and curbs. Drain and scupper cleaning. Photo documentation of any concerns. Written report delivered to the building owner.",
+			bullets: ['Field + flashing inspection', 'Sealant maintenance at penetrations', 'Drain + scupper cleaning', 'Photo report + recommendations'],
+			photo: v2.systemTiles.maintenance,
+			photoSide: 'left',
+		},
+		{
+			heading: 'Where the savings come from.',
+			body: "Two places. First: caught leaks are cheap to fix; ignored leaks are expensive (membrane damage, wet insulation, interior tenant claims). Second: documented maintenance keeps manufacturer warranties in force — without it, a 20-year warranty becomes a piece of paper. Owners on the program report 30–50% lower repair spend over the roof's life.",
+			bullets: ['Repair-first, not replace', 'Manufacturer warranty preservation', 'Tenant-claim avoidance', 'Capex deferral'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'right',
+		},
+	]}
+	stats={[
+		{ value: '2x', label: 'Visits/year · single-ply + ballasted' },
+		{ value: '30–50%', label: 'Lower repair spend over life' },
+		{ value: '100%', label: 'Warranty maintenance compliance' },
+		{ value: '24/7', label: 'Emergency call response · contract holders' },
+	]}
+	projectPhotos={[v2.projects[5], v2.projects[6], v2.projects[8], v2.projects[3]]}
+	projectCaptions={['Annual inspection, retail', 'Drain cleaning + sealant maintenance', 'Photo-report sample, manufacturing', 'Maintenance route, multi-building']}
+	faq={[
+		{ q: 'How much does the program cost?', a: "<p>Per-roof, scaled to building size and system type. Single-ply costs less to maintain than mod-bit, which costs less than ballasted BUR. We give you a per-visit and an annual number on the contract — no per-call surprises during the year.</p>" },
+		{ q: 'Does this replace warranty?', a: "<p>No — it preserves the warranty. Most manufacturer warranties (GAF, Carlisle, Versico, Firestone) require documented annual or biennial maintenance. The program does that documentation. Without it, a covered failure can come back as 'lack of maintenance' and the warranty doesn't apply.</p>" },
+		{ q: 'What if I have a system you didn\'t install?', a: '<p>We maintain it anyway. Heritage can carry maintenance on a roof regardless of who installed it, as long as the system is one we know (TPO, EPDM, mod-bit, BUR, metal, coatings). We document the existing condition on the first visit so the baseline is clear.</p>' },
+		{ q: 'What about emergency leaks?', a: '<p>Contract holders get priority response — typically same-day for during-business-hours calls, next-morning for after-hours. The repair cost is either covered by the program (small leaks, sealant work) or billed at the program rate (larger repairs).</p>' },
+		{ q: 'Can I cancel?', a: '<p>Yes — the contract is annual and renewable. No multi-year lock-in.</p>' },
+	]}
+	ctaHeading="Roof asset management,<br />not roof emergencies."
+	ctaLede="Free initial assessment. We tell you the program scope and the per-roof number before you sign."
+	ctaPhoto={v2.pageHeros.commercial}
+	promises={['Bonded + insured', 'Warranty maintenance documentation', 'Same-day emergency response']}
+/>

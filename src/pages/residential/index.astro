@@ -1,551 +1,158 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ServiceTile from '../../components/ServiceTile.astro';
-import WarrantyBlock from '../../components/WarrantyBlock.astro';
-import ReviewCard from '../../components/ReviewCard.astro';
-import MaterialTabs from '../../components/MaterialTabs.astro';
-import Accordion from '../../components/Accordion.astro';
-import ColorSwatchGrid from '../../components/ColorSwatchGrid.astro';
-import ProcessFlow from '../../components/ProcessFlow.astro';
-import LayeredCard from '../../components/LayeredCard.astro';
-import FullBleedSection from '../../components/FullBleedSection.astro';
-import TechnicalFeatures from '../../components/TechnicalFeatures.astro';
-import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
+import HeroFlagship from '../../components/v2/HeroFlagship.astro';
+import TrustMarquee from '../../components/v2/TrustMarquee.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import PromiseStrip from '../../components/v2/PromiseStrip.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
+import PhotoBleed from '../../components/v2/PhotoBleed.astro';
+import PhotoLede from '../../components/v2/PhotoLede.astro';
+import ProcessSteps from '../../components/v2/ProcessSteps.astro';
+import StatBand from '../../components/v2/StatBand.astro';
+import PageCTA from '../../components/v2/PageCTA.astro';
+import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
 
+const v2 = imagery.v2;
+
 const services = [
-	{ label: 'Roof replacement', body: 'Full tear-off and install. Asphalt, metal, synthetic. Workmanship and material warranties.', imageSrc: imagery.heroCandidates.residentialRoofA.url, imageAlt: 'Residential roof' },
-	{ label: 'Roof repair', body: 'Leaks, missing shingles, flashing failures. Fast turnaround, no upsell.', imageSrc: imagery.asphalt.closeup.url, imageAlt: 'Close-up of asphalt shingles' },
-	{ label: 'Storm damage', body: 'Hail, wind, tree fall. We work directly with your insurance adjuster.', href: '/residential/storm-damage-roofing', imageSrc: imagery.beforeAfterPairs.hailBefore.url, imageAlt: 'Storm-damaged roof' },
-	{ label: 'Inspection', body: 'Free, no-obligation roof inspection. Honest report, photos included.', imageSrc: imagery.heroCandidates.residentialRoofC.url, imageAlt: 'Aerial view of a residential roof' },
-	{ label: 'Maintenance', body: 'Annual checkups and tune-ups. Catch problems before they become claims.', imageSrc: imagery.projectGallery[2].url, imageAlt: 'Roofs in warm sunlight' },
-	{ label: 'Insurance claims', body: 'Adjuster meetings, documentation, scope review. We handle the back-and-forth.', imageSrc: imagery.heroCandidates.residentialRoofB.url, imageAlt: 'Brown and white house with completed roof' },
+	{ heading: 'Roof replacement', body: 'Tear-off and full re-roof. Most jobs install in a single day.', href: '/residential/roof-replacement', photo: v2.serviceTiles.replacement, eyebrow: 'Service' },
+	{ heading: 'Roof repair', body: 'Targeted repair when replacement is overkill. Diagnostic-first.', href: '/residential/roof-repair', photo: v2.serviceTiles.repair, eyebrow: 'Service' },
+	{ heading: 'Storm damage', body: 'Hail and wind damage. We handle the insurance back-and-forth.', href: '/residential/storm-damage-roofing', photo: v2.serviceTiles.storm, eyebrow: 'Service' },
+	{ heading: 'Roof inspection', body: 'Free, documented inspection from a real person on the ladder.', href: '/residential/roof-inspection', photo: v2.serviceTiles.inspection, eyebrow: 'Service' },
+	{ heading: 'Gutter installation + repair', body: 'Seamless aluminum and steel. Gutter guards available.', href: '/residential/gutter-installation-and-repair', photo: v2.serviceTiles.gutter, eyebrow: 'Service' },
+	{ heading: 'Skylight installation + repair', body: 'Velux, Fakro. Curb-mounted and deck-mounted.', href: '/residential/skylight-installation-and-repair', photo: v2.serviceTiles.skylight, eyebrow: 'Service' },
+	{ heading: 'Attic ventilation', body: 'Ridge, soffit, and powered. Often the missing factor in early failures.', href: '/residential/attic-ventilation', photo: v2.serviceTiles.attic, eyebrow: 'Service' },
+	{ heading: 'Chimney flashing + repair', body: 'Where most leaks actually start. Step + counter flashing rebuilt.', href: '/residential/chimney-flashing-and-repair', photo: v2.serviceTiles.chimney, eyebrow: 'Service' },
 ];
 
 const materials = [
-	{
-		id: 'asphalt',
-		name: 'Asphalt shingle',
-		intro: 'The standard for East Texas residential. Lower up-front cost, wide color range, replaceable shingle-by-shingle on repairs.',
-		gradient: 'linear-gradient(135deg, #8a6f54 0%, #5a4836 60%, #2a2a28 100%)',
-		imageSrc: imagery.asphalt.hero.url,
-		imageAlt: imagery.asphalt.hero.alt,
-		specs: [
-			{ label: 'Service life', value: '20–30 years (architectural / dimensional)' },
-			{ label: 'Hail rating', value: 'Class 3 or Class 4 impact-resistant available' },
-			{ label: 'Repair', value: 'Shingle-by-shingle on damaged sections' },
-			{ label: 'Cost band', value: 'Lowest of the three. Standard for insurance jobs.' },
-		],
-		manufacturerPlaceholder: 'Preferred asphalt manufacturer Heritage stocks (e.g. GAF Timberline HDZ, Owens Corning Duration, CertainTeed Landmark) and the impact-rating line. See Founder Input page §2.',
-	},
-	{
-		id: 'metal',
-		name: 'Metal',
-		intro: 'Longer service life, better in hail. Higher up-front. Standing seam or stamped-profile panel.',
-		gradient: 'linear-gradient(135deg, #7d8b9e 0%, #4a5566 60%, #2a3035 100%)',
-		imageSrc: imagery.metal.hero.url,
-		imageAlt: imagery.metal.hero.alt,
-		specs: [
-			{ label: 'Service life', value: '40–60 years' },
-			{ label: 'Hail rating', value: 'Standing seam: Class 4 standard' },
-			{ label: 'Repair', value: 'Panel replacement; seam-level fixes possible' },
-			{ label: 'Cost band', value: 'Roughly 2–3× asphalt up-front, lower lifetime cost.' },
-		],
-		manufacturerPlaceholder: 'Metal panel brand Heritage installs most often (e.g. McElroy, Mueller, Berridge) and standard gauges offered. See Founder Input page §2.',
-	},
-	{
-		id: 'tile',
-		name: 'Tile',
-		intro: 'Slate-look, tile-look, or real concrete tile. Niche but worth the conversation if the roof line and the budget are right.',
-		gradient: 'linear-gradient(135deg, #b8a78c 0%, #8a7d63 60%, #4a4239 100%)',
-		imageSrc: imagery.tile.hero.url,
-		imageAlt: imagery.tile.hero.alt,
-		specs: [
-			{ label: 'Service life', value: '40–50 years (synthetic); 50+ (real tile)' },
-			{ label: 'Hail rating', value: 'Synthetic: Class 4 standard. Real tile varies.' },
-			{ label: 'Repair', value: 'Tile-by-tile or panel; specialty install.' },
-			{ label: 'Cost band', value: '3–5× asphalt up-front. Worth it on the right home.' },
-		],
-		manufacturerPlaceholder: 'Synthetic-tile or composite brand Heritage installs (e.g. DaVinci Roofscapes, Brava). See Founder Input page §2.',
-	},
+	{ heading: 'Asphalt shingle', body: 'GAF, Owens Corning, CertainTeed, Atlas, Malarkey. The default for East Texas.', href: '/residential/asphalt-shingle-roofs', photo: v2.materialTiles.asphalt, eyebrow: 'Material' },
+	{ heading: 'Metal', body: 'Standing seam and exposed-fastener. 40+ year service life.', href: '/residential/metal-roofs', photo: v2.materialTiles.metal, eyebrow: 'Material' },
+	{ heading: 'Tile', body: 'Concrete and synthetic. 50+ year roofs, but structural feasibility first.', href: '/residential/tile-roofs', photo: v2.materialTiles.tile, eyebrow: 'Material' },
 ];
 
-const faqs = [
-	{ q: 'Do you handle small repairs, or only full replacements?', a: 'Both. A missing shingle, a piece of flashing, a leak around a chimney — those are fast jobs and we do not pad them into a tear-off pitch. If the roof is genuinely past repair, we say so and put numbers next to both options.' },
-	{ q: 'How long will my install take?', a: 'Most residential roofs install in one day. Larger or steeper roofs can run two. Weather can stretch the schedule by a day; we tell you before we start, not after.' },
-	{ q: 'What does your warranty cover, and for how long?', a: 'There are two warranties on every Heritage Co. roof — workmanship from us, and material pass-through from the manufacturer. Specific years and transferability are below.', placeholderFact: 'Workmanship warranty length (years), manufacturer pass-through length (years), transferable on home sale Y/N. See Founder Input page §1.' },
-	{ q: 'Do you take insurance jobs, or only out-of-pocket?', a: 'Both. Storm-damage claims are common in East Texas — see the storm damage page for how that process runs. Out-of-pocket replacements use the same crew, same materials, same warranty.' },
-	{ q: 'Do I have to be home for the inspection or install?', a: 'For the inspection, no — we work outside and the attic when accessible. For the install, no, but it helps if we can reach you for any judgment call. We coordinate access in advance either way.' },
-	{ q: 'Is there financing if my deductible is large or I am paying out-of-pocket?', a: 'Financing options vary by job. The specifics are below.', placeholderFact: 'Financing partners (GreenSky, Service Finance, Hearth, in-house, none) and typical promo terms (e.g. 0% for 18 months). Insurance-deductible payment plans Y/N. See Founder Input page §4.' },
-	{ q: 'What happens if I have a leak again three years from now?', a: 'You call us. The workmanship warranty covers our install for the term, and we are 30 minutes away. We do not disappear after the truck pulls out.' },
-	{ q: 'What other homes in my zip code have you done?', a: 'Specific addresses go to references on request. Recent named jobs are below.', placeholderFact: 'Named recent residential jobs Heritage has permission to publish — city and rough month/year is enough. See Founder Input page §5.' },
+const process = [
+	{ heading: 'Free inspection', body: 'Real person on the ladder. Photos, decking, ventilation, flashings — fully documented.' },
+	{ heading: 'Same-day quote', body: 'Written quote with system, warranty, and timeline. No high-pressure upsell.' },
+	{ heading: 'Install', body: 'Most residential roofs install in one day. Our crew lives in your area.' },
+	{ heading: 'Workmanship + material warranty', body: 'Manufacturer warranty plus Heritage workmanship warranty on every job.' },
 ];
 ---
 
-<BaseLayout title="Residential Roofing — Heritage Co.">
-	<!-- Hero (unchanged) -->
-	<section class="hero">
-		<div class="hero-photo" aria-hidden="true"></div>
-		<div class="hero-overlay" aria-hidden="true"></div>
-		<div class="hero-content">
-			<p class="hero-eyebrow">For homeowners</p>
-			<h1 class="hero-h1">Roofs for your home.</h1>
-			<p class="hero-sub">
-				Replacement, repair, and storm damage. Insurance accepted. Free inspections. The same shop is still around if something needs attention next year.
-			</p>
-			<div class="hero-cta-row">
-				<a class="cta-primary" href="/#inspection">Get my free inspection</a>
-				<a class="cta-secondary" href="tel:9032428102">Call 903-242-8102</a>
-			</div>
-		</div>
-	</section>
+<BaseLayout
+	title="Residential roofing — Heritage Co. Roofing & Construction"
+	description="Residential roofing in East Texas and Central Arkansas. Replacement, repair, storm damage, inspection. Asphalt, metal, and tile."
+>
+	<HeroFlagship
+		eyebrow="Residential roofing"
+		heading="Roofs for your home."
+		lede="Replacement, repair, and storm damage. Insurance accepted. Free inspections, same-day quotes. Most residential roofs install in a single day."
+		photo={v2.pageHeros.residential}
+		bullets={['Free inspection from a real person', 'Insurance claim handling', 'Workmanship + material warranties']}
+		primaryCta={{ label: 'Get my free inspection', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+	/>
 
-	<!-- One continuous flow on off-white. No band swaps until the page-end CTA. -->
-	<div class="flow">
+	<TrustMarquee items={v2.trustItems} />
 
-		<!-- Intro: photo-left + headline-right + service grid below, on the same bg -->
-		<section class="block intro">
-			<div class="intro-row">
-				<div class="intro-photo has-zoom-photo" aria-hidden="true">
-					<img src={imagery.heroCandidates.residentialRoofB.url} alt={imagery.heroCandidates.residentialRoofB.alt} loading="lazy" class="zoom-photo" />
-				</div>
-				<div class="intro-content">
-					<p class="eyebrow">What we do</p>
-					<h2 class="block-h">Residential services.</h2>
-					<p class="block-sub">Six things we are good at, on every house. The first three are the most common in East Texas; the last three are how we keep a roof out of trouble in the first place.</p>
-					<a class="rust-cta" href="/#inspection">Get my free inspection</a>
-				</div>
-			</div>
-			<div class="service-grid">
-				{services.map((s) => <ServiceTile label={s.label} body={s.body} href={s.href} imageSrc={s.imageSrc} imageAlt={s.imageAlt} />)}
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<PromiseStrip items={['Insurance accepted', 'Workmanship + material warranties', 'Locally owned + crewed']} />
 			</div>
 		</section>
+	</Reveal>
 
-		<!-- Materials, no band break above. Tabs sit directly under the service grid on the same bg. -->
-		<section class="block materials">
-			<p class="eyebrow">Materials</p>
-			<h2 class="block-h">What we install.</h2>
-			<p class="block-sub">A short read, not a manufacturer brochure. We talk trade-offs at the inspection.</p>
-			<MaterialTabs materials={materials} />
-			<div class="colors-inline">
-				<p class="eyebrow eyebrow-soft">Color options on asphalt</p>
-				<div class="colors-card">
-					<ColorSwatchGrid />
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="Services"
+					heading="What we do on a residential roof."
+					lede="Eight services on the residential side. Pick the one you need or call us and we'll figure out which it is."
+					maxWidth="780px"
+				/>
+				<div class="grid-spacer">
+					<TileGrid tiles={services} cols={4} style="photo-card" />
 				</div>
 			</div>
 		</section>
+	</Reveal>
 
-		<!-- Why local: photo-right + content-left + 3 flat columns (no LocalItem cards) -->
-		<section class="block why-local">
-			<div class="why-row">
-				<div class="why-content">
-					<p class="eyebrow">Why local matters</p>
-					<h2 class="block-h">We're not a national chain.</h2>
-					<p class="block-sub">When the big roofing companies finish a job, they're gone. We don't go anywhere.</p>
-				</div>
-				<div class="why-photo has-zoom-photo" aria-hidden="true">
-					<img src={imagery.heroCandidates.residentialRoofC.url} alt={imagery.heroCandidates.residentialRoofC.alt} loading="lazy" class="zoom-photo" />
-				</div>
-			</div>
-			<div class="why-points">
-				<div class="why-point">
-					<p class="why-point-h">We live here.</p>
-					<p class="why-point-body">Crews live in your area, work in your area, send their kids to school in your area.</p>
-				</div>
-				<div class="why-point">
-					<p class="why-point-h">We answer the phone.</p>
-					<p class="why-point-body">When you call, you get us. Not a 1-800 number routing through three states to a script-reader.</p>
-				</div>
-				<div class="why-point">
-					<p class="why-point-h">We're 30 minutes away.</p>
-					<p class="why-point-body">After the install, we're not gone. Call the owner direct if something needs attention.</p>
+	<PhotoBleed
+		photo={v2.bleeds.workmanship}
+		heading="Most residential roofs<br />install in one day."
+		caption="Tear off in the morning, dry-in by midday, finished and cleaned up before sundown. Same crew start to finish."
+		overlay={true}
+		heightVw={64}
+	/>
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="Materials"
+					heading="Three roof materials.<br />East Texas reality, not a catalog."
+					lede="The right material for an East Texas home depends on the structure, the roof slope, the budget, and how long you're staying. We tell you which makes sense before we quote it."
+					maxWidth="780px"
+				/>
+				<div class="grid-spacer">
+					<TileGrid tiles={materials} cols={3} style="photo-card" />
 				</div>
 			</div>
 		</section>
+	</Reveal>
 
-		<!-- Technical block: what's actually on every Heritage Co. residential roof -->
-		<section class="block tech-block">
-			<TechnicalFeatures
-				eyebrow="On every roof we install"
-				heading="Six things that go on the deck before the shingle does."
-				sub="A roof is more than the top layer. The details below are what separates a roof that lasts 25 years from one that lasts 12."
-				columns={3}
-				features={[
-					{ icon: 'shield', title: 'Class 4 impact rating available', body: 'Hail-rated shingles take a 2-inch ice ball at 90 mph without splitting. Your insurer may discount premiums on a Class 4 install — most do in Texas.' },
-					{ icon: 'water', title: 'Ice & water shield at the eaves + valleys', body: 'A self-sealing membrane runs the bottom 3 feet and through every valley. Stops wind-driven rain from getting under shingles when storms blow sideways.' },
-					{ icon: 'wind', title: '130 mph wind warranty on architectural', body: 'Architectural shingles hand-nailed to the spec carry a 130 mph wind warranty from the manufacturer. We sealed-strip the perimeter for the extra grip during East Texas spring storms.' },
-					{ icon: 'layers', title: 'Synthetic underlayment, not 15-lb felt', body: 'Tear-resistant, walks dry, and sheds water on its own if a tarp ever has to come off mid-job. Felt cracks in cold and pulls on nails — we do not use it.' },
-					{ icon: 'flame', title: 'Drip edge on every eave + rake', body: 'A bent metal flashing under the shingle that directs water into the gutter, not behind the fascia. Standard on us, not on every quote you will see in East Texas.' },
-					{ icon: 'gauge', title: 'Ridge + soffit ventilation balanced', body: 'A roof that cannot breathe cooks the deck and shortens the shingle life. We balance intake at the soffit with exhaust at the ridge. Math, not guesswork.' },
-				]}
-			/>
-		</section>
-
-		<!-- Process: ProcessFlow with a photo flush to one side (asymmetric rhythm) -->
-		<section class="block process-block">
-			<div class="process-row">
-				<div class="process-photo has-zoom-photo" aria-hidden="true">
-					<img src={imagery.beforeAfterPairs.hailAfter.url} alt="Recently installed residential roof" loading="lazy" class="zoom-photo" />
-				</div>
-				<div class="process-content">
-					<p class="eyebrow">How we work</p>
-					<h2 class="block-h">Four steps. No surprises.</h2>
-					<p class="block-sub">Most residential roofs install in one day. The four steps below are the same on every job.</p>
-				</div>
-			</div>
-			<ProcessFlow steps={[
-				{ label: 'Inspect', caption: 'Free. We climb the roof, take photos, write it up.' },
-				{ label: 'Quote', caption: 'Clear scope, clear pricing. No surprise line items.' },
-				{ label: 'Install', caption: 'Most residential roofs install in one day.' },
-				{ label: 'Stand by', caption: 'Workmanship + material warranties. Owner-direct line.' },
-			]} />
-			<div class="process-sla">
-				<HeritagePlaceholder fact="Free-inspection turnaround SLA in plain words. Same-crew on warranty visits Y/N. See Founder Input page §6 + §8." />
-			</div>
-		</section>
-
-		<!-- Guarantee + warranty + financing combined into one continuous block. -->
-		<section class="block guarantee">
-			<LayeredCard
-				eyebrow="The guarantee"
-				heading="Every Heritage Co. roof comes with a written guarantee."
-				body="Workmanship from us. Manufacturer pass-through on the materials. The two warranty terms are listed below; named-guarantee phrase and money-back conditions get filled in by the founders."
-				gradient="linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)"
-				ctaHref="/about"
-				ctaLabel="See full warranty terms"
-			/>
-			<div class="warranty-inline">
-				<WarrantyBlock
-					theme="light"
-					heading=""
-					cards={[
-						{ label: 'Workmanship warranty', fact: 'Workmanship warranty length on residential installs (years). State as a single sentence. See Founder Input page §1.' },
-						{ label: 'Material pass-through', fact: 'Manufacturer pass-through warranty (which manufacturer, how long, transferable on home sale Y/N). See Founder Input page §1.' },
-					]}
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<PhotoLede
+					photo={v2.bleeds.storm}
+					eyebrow="Storm damage"
+					heading="Hail or wind?<br />We handle the whole roof."
+					body="Free inspection, full damage documentation, direct work with your adjuster. We handle the back-and-forth. You pay your deductible. We do the rest."
+					bullets={['Insurance claim documentation', 'Adjuster meetings on-site', 'Same crew on the install']}
+					cta={{ label: 'Storm damage details →', href: '/residential/storm-damage-roofing' }}
+					photoSide="right"
 				/>
 			</div>
-			<div class="financing-inline">
-				<p class="eyebrow eyebrow-soft">Paying for it</p>
-				<dl class="data-list">
-					<div class="data-row">
-						<dt class="data-row-label">Insurance jobs</dt>
-						<dd class="data-row-value">For storm-damage claims, your deductible is the only out-of-pocket on most jobs. See <a href="/residential/storm-damage-roofing" class="inline-link">storm damage</a> for the full process.</dd>
-					</div>
-					<div class="data-row">
-						<dt class="data-row-label">Financing partners</dt>
-						<dd class="data-row-value">
-							<HeritagePlaceholder fact="Financing partners (GreenSky, Service Finance, Hearth, Aqua Finance, EnerBank, in-house, or none). Typical promo terms. See Founder Input page §4." />
-						</dd>
-					</div>
-					<div class="data-row">
-						<dt class="data-row-label">Deductible payment plans</dt>
-						<dd class="data-row-value">
-							<HeritagePlaceholder fact="Whether Heritage accepts payment plans on the homeowner deductible (Y/N + conditions). See Founder Input page §4 + §8." />
-						</dd>
-					</div>
-				</dl>
+		</section>
+	</Reveal>
+
+	<StatBand stats={[
+		{ value: '30+', label: 'Combined years roofing', numericValue: 30, suffix: '+' },
+		{ value: '1 day', label: 'Typical residential install' },
+		{ value: '14', label: 'Service-area cities · TX + AR', numericValue: 14 },
+		{ value: '5★', label: 'Avg review · pending publish' },
+	]} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="How we work"
+					heading="Free inspection. Real quote. Real warranty."
+					lede="Same person from inspection through warranty. No call-center, no script."
+					maxWidth="720px"
+				/>
+				<div class="grid-spacer">
+					<ProcessSteps steps={process} />
+				</div>
 			</div>
 		</section>
+	</Reveal>
 
-		<!-- Testimonials — slight ivory shift to mark customer voice -->
-		<section class="block reviews">
-			<p class="eyebrow">From our customers</p>
-			<h2 class="block-h">What homeowners have said.</h2>
-			<p class="block-sub">Three named reviews go below as the founders confirm permission to publish.</p>
-			<div class="reviews-grid">
-				<ReviewCard placeholderFact="Residential review #1 — first + last name, city, project type, star rating, 1–2 sentence quote. See Founder Input page §5." />
-				<ReviewCard placeholderFact="Residential review #2 — first + last name, city, project type, star rating, 1–2 sentence quote. See Founder Input page §5." />
-				<ReviewCard placeholderFact="Residential review #3 — first + last name, city, project type, star rating, 1–2 sentence quote. See Founder Input page §5." />
-			</div>
-		</section>
-
-		<!-- FAQ on the same bg, no band break above -->
-		<section class="block faq">
-			<p class="eyebrow">Common questions</p>
-			<h2 class="block-h">What homeowners ask us.</h2>
-			<Accordion items={faqs} />
-		</section>
-
-	</div>
-
-	<!-- Page-end CTA banner — full-bleed photo + big rust pill (the Rofix end-CTA pattern) -->
-	<FullBleedSection
-		imageSrc={imagery.heroCandidates.residentialRoofA.url}
-		imageAlt={imagery.heroCandidates.residentialRoofA.alt}
-		overlayPosition="center"
-		minHeight="440px"
-		overlayDarken={0.65}
-	>
-		<p class="end-cta-eyebrow">Ready when you are</p>
-		<h2 class="end-cta-h">Free inspection on your roof, your schedule.</h2>
-		<p class="end-cta-sub">No obligation. Same-day or next-day quote. The four founders are the four people on the line.</p>
-		<a class="end-cta-button" href="/#inspection">Get my free inspection</a>
-	</FullBleedSection>
+	<PageCTA
+		heading="Ready for a free roof inspection?"
+		lede="Same-day or next-day quote. Real person on the ladder."
+		primaryCta={{ label: 'Schedule online', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.freeInspection}
+	/>
 </BaseLayout>
 
 <style>
-	/* Hero (unchanged) */
-	.hero { position: relative; min-height: 540px; background: #1a1a1a; }
-	.hero-photo {
-		position: absolute; inset: 0;
-		background: linear-gradient(180deg, #6b8aa8 0%, #8fa8c0 38%, #ece7de 38%, #b8a78c 70%, #6b5d4a 100%);
-		opacity: 0.92;
-	}
-	.hero-overlay {
-		position: absolute; inset: 0;
-		background: linear-gradient(90deg, rgba(26,26,26,0.78) 0%, rgba(26,26,26,0.35) 60%, rgba(26,26,26,0.1) 100%);
-	}
-	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
-	.hero-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
-	}
-	.hero-h1 {
-		color: #faf8f4; font-size: 56px; font-weight: 600;
-		line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px;
-	}
-	.hero-sub {
-		color: #d8d2c2; font-size: 17px; line-height: 1.55;
-		margin: 0 0 32px; max-width: 560px;
-	}
-	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
-	.cta-primary {
-		background: #b54620; color: #faf8f4;
-		padding: 14px 28px; font-size: 15px; font-weight: 500;
-		border-radius: var(--radius-pill);
-		transition: background 150ms ease, box-shadow 150ms ease;
-	}
-	.cta-primary:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
-	.cta-secondary {
-		color: #faf8f4; padding: 12px 26px;
-		font-size: 15px; font-weight: 500;
-		border: 2px solid #faf8f4;
-		border-radius: var(--radius-pill);
-		transition: background 150ms ease, color 150ms ease;
-	}
-	.cta-secondary:hover { background: #faf8f4; color: #1a1a1a; }
-
-	/* The continuous flow — single bg, blocks separated by whitespace + subtle dividers, not band swaps */
-	.flow {
-		background: var(--off-white);
-	}
-	.block {
-		padding: 80px 48px;
-		max-width: 1200px;
-		margin: 0 auto;
-	}
-	.block + .block {
-		border-top: 1px solid var(--border);
-	}
-
-	/* Local helpers shared across blocks */
-	.eyebrow {
-		color: var(--rust);
-		font-size: 13px; font-weight: 500;
-		letter-spacing: 1px; text-transform: uppercase;
-		margin: 0 0 16px;
-	}
-	.eyebrow-soft { color: var(--charcoal); opacity: 0.65; margin-bottom: 20px; }
-	.block-h {
-		color: var(--charcoal);
-		font-size: 36px; font-weight: 600;
-		letter-spacing: -0.8px; line-height: 1.15;
-		margin: 0 0 16px;
-	}
-	.block-sub {
-		color: var(--warm-gray);
-		font-size: 17px; line-height: 1.6;
-		margin: 0 0 32px;
-		max-width: 580px;
-	}
-	.rust-cta {
-		display: inline-flex; align-items: center;
-		padding: 14px 28px;
-		background: var(--rust); color: var(--off-white);
-		font-size: 15px; font-weight: 500;
-		border-radius: var(--radius-pill);
-		transition: background 150ms ease, box-shadow 150ms ease;
-	}
-	.rust-cta:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
-
-	/* Intro row: photo + content + grid below */
-	.intro-row {
-		display: grid;
-		grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-		gap: 56px;
-		align-items: center;
-		margin-bottom: 56px;
-	}
-	.intro-photo {
-		aspect-ratio: 4 / 5;
-		border-radius: var(--radius-large);
-		box-shadow: var(--shadow-subtle);
-		overflow: hidden;
-	}
-	.intro-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-	.intro-content {}
-	.service-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 24px;
-	}
-
-	/* Materials block — tabs + color swatches inline (no separate band for color section) */
-	.materials > p.block-sub { margin-bottom: 40px; }
-	.colors-inline {
-		margin-top: 56px;
-		padding-top: 40px;
-		border-top: 1px solid var(--border);
-	}
-	.colors-card {
-		max-width: 1000px;
-		margin: 0 auto;
-		padding: 32px;
-		background: #ffffff;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-large);
-		box-shadow: var(--shadow-subtle);
-	}
-
-	/* Why-local row: content + photo, then LocalItem grid below */
-	.why-row {
-		display: grid;
-		grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-		gap: 56px;
-		align-items: center;
-		margin-bottom: 56px;
-	}
-	.why-content {}
-	.why-photo {
-		aspect-ratio: 3 / 2;
-		border-radius: var(--radius-large);
-		box-shadow: var(--shadow-subtle);
-		overflow: hidden;
-	}
-	.why-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-	/* Flat 3-column "why local" points — no card containers */
-	.why-points {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 0;
-		border-top: 1px solid var(--border);
-	}
-	.why-point {
-		padding: 32px 28px 0 0;
-		position: relative;
-	}
-	.why-point + .why-point {
-		padding-left: 32px;
-		border-left: 1px solid var(--border);
-	}
-	.why-point-h {
-		color: var(--charcoal);
-		font-size: 20px; font-weight: 600;
-		letter-spacing: -0.3px; line-height: 1.2;
-		margin: 0 0 10px;
-	}
-	.why-point-body {
-		color: var(--warm-gray);
-		font-size: 15px; line-height: 1.6;
-		margin: 0;
-	}
-
-	/* Technical features block */
-	.tech-block {}
-
-	/* Process row */
-	.process-row {
-		display: grid;
-		grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-		gap: 56px;
-		align-items: center;
-		margin-bottom: 48px;
-	}
-	.process-photo {
-		aspect-ratio: 4 / 3;
-		border-radius: var(--radius-large);
-		box-shadow: var(--shadow-subtle);
-		overflow: hidden;
-	}
-	.process-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-	.process-content {}
-	.process-sla { max-width: 1100px; margin: 32px auto 0; }
-
-	/* Guarantee + warranty + financing combined */
-	.guarantee {}
-	.warranty-inline { margin-top: 40px; }
-	.warranty-inline > :global(.warranty) {
-		padding: 0;
-		background: transparent;
-		border-top: 1px solid var(--border);
-		padding-top: 40px;
-	}
-	.financing-inline {
-		margin-top: 40px;
-		padding-top: 40px;
-		border-top: 1px solid var(--border);
-	}
-	.data-list {
-		max-width: 880px; margin: 0;
-		display: flex; flex-direction: column; gap: 0;
-	}
-	.data-row {
-		display: grid; grid-template-columns: 240px 1fr;
-		gap: 32px; padding: 18px 0;
-		border-top: 1px solid var(--border);
-		align-items: start;
-	}
-	.data-row:last-child { border-bottom: 1px solid var(--border); }
-	.data-row-label {
-		color: var(--charcoal); font-size: 14px; font-weight: 600;
-		letter-spacing: -0.1px; padding-top: 4px;
-	}
-	.data-row-value { color: var(--warm-gray); font-size: 14px; line-height: 1.6; margin: 0; }
-	.inline-link {
-		color: var(--charcoal); border-bottom: 1px solid var(--charcoal);
-	}
-
-	/* Reviews — tiny bg shift to flag customer voice */
-	.reviews { background: var(--ivory-tint); border-top: 1px solid var(--border); border-radius: 0; max-width: none; padding-left: 48px; padding-right: 48px; }
-	.reviews > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
-	.reviews .block-sub { margin-bottom: 40px; }
-	.reviews-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px;
-	}
-
-	/* FAQ */
-	.faq .block-sub { margin-bottom: 40px; }
-
-	/* Page-end CTA */
-	.end-cta-eyebrow {
-		color: var(--rust);
-		font-size: 13px; font-weight: 500;
-		letter-spacing: 1px; text-transform: uppercase;
-		margin: 0 0 16px;
-	}
-	.end-cta-h {
-		color: var(--off-white);
-		font-size: 44px; font-weight: 600;
-		letter-spacing: -1px; line-height: 1.1;
-		margin: 0 0 14px;
-		max-width: 640px;
-	}
-	.end-cta-sub {
-		color: var(--subhead-dark);
-		font-size: 17px; line-height: 1.55;
-		margin: 0 0 28px;
-		max-width: 580px;
-	}
-	.end-cta-button {
-		display: inline-flex; align-items: center;
-		padding: 18px 36px;
-		background: var(--rust); color: var(--off-white);
-		font-size: 16px; font-weight: 500;
-		border-radius: var(--radius-pill);
-		box-shadow: var(--shadow-active);
-		transition: background 150ms ease, transform 200ms ease;
-	}
-	.end-cta-button:hover { background: #9d3a1a; transform: translateY(-1px); }
+	.page-section { padding: clamp(72px, 8vw, 128px) 0; }
+	.grid-spacer { margin-top: clamp(48px, 5vw, 80px); }
 </style>

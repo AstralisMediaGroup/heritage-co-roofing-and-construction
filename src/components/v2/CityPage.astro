@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from './HeroPage.astro';
+import SectionHead from './SectionHead.astro';
+import PromiseStrip from './PromiseStrip.astro';
+import PhotoLede from './PhotoLede.astro';
+import TileGrid from './TileGrid.astro';
+import CityList from './CityList.astro';
+import PageCTA from './PageCTA.astro';
+import Reveal from './Reveal.astro';
+import { imagery } from '../../content/imagery';
+
+interface Props {
+	city: string;
+	state: 'TX' | 'AR';
+	zip?: string;
+	title?: string;
+	intro: string;
+	localNote: string;
+	driveTime?: string;
+}
+
+const { city, state, title, intro, localNote, driveTime } = Astro.props;
+const v2 = imagery.v2;
+const stateName = state === 'TX' ? 'Texas' : 'Arkansas';
+const pageTitle = title || `Roofing in ${city}, ${state} — Heritage Co. Roofing & Construction`;
+
+const services = [
+	{ heading: 'Roof replacement', body: 'Tear-off and full re-roof for residential homes.', href: '/residential/roof-replacement' },
+	{ heading: 'Storm damage', body: 'Hail and wind damage. We handle the insurance back-and-forth.', href: '/residential/storm-damage-roofing' },
+	{ heading: 'Free inspection', body: 'Real person on the ladder. Same-day or next-day quote.', href: '/free-inspection' },
+];
+---
+
+<BaseLayout title={pageTitle}>
+	<HeroPage
+		eyebrow={`Roofing · ${city}, ${state}`}
+		heading={`Roofers in ${city}.<br />Locally owned.`}
+		lede={intro}
+		primaryCta={{ label: 'Free inspection', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.cityPage}
+		tier={3}
+	/>
+
+	<section class="page-section">
+		<div class="container">
+			<PromiseStrip items={['Free inspections', 'Insurance accepted', 'Locally owned']} />
+		</div>
+	</section>
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<PhotoLede
+					photo={v2.bleeds.crew}
+					eyebrow="Why local matters"
+					heading={`We work in ${city}.`}
+					body={localNote}
+					bullets={[
+						`${driveTime || '30 minutes'} from our Longview HQ`,
+						'Same crew start to warranty',
+						'Owner-direct line if anything needs attention',
+					]}
+					photoSide="right"
+				/>
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="What we do here"
+					heading={`Roofing services in ${city}.`}
+					lede="Same scope as the rest of East Texas and Central Arkansas. Free inspection, fast quote, real warranty."
+				/>
+				<div class="services-spacer">
+					<TileGrid tiles={services} cols={3} style="minimal-card" />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead eyebrow="Service area" heading={`Beyond ${city}.`} lede="We cover the full East Texas + Central Arkansas region." />
+				<div class="cities-spacer">
+					<CityList emphasizeCity={city} />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading={`Free roof inspection in ${city}.`}
+		lede="Same-day or next-day quote. Real person on the ladder, not a salesperson."
+		primaryCta={{ label: 'Schedule online', href: '/free-inspection' }}
+		photo={v2.pageHeros.freeInspection}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(56px, 7vw, 96px) 0; }
+	.services-spacer { margin-top: clamp(40px, 4vw, 56px); }
+	.cities-spacer { margin-top: clamp(40px, 4vw, 56px); }
+</style>

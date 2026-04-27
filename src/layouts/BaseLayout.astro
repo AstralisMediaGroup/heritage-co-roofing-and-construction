@@ -4,21 +4,16 @@ import TopBar from '../components/TopBar.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StickyPhonePill from '../components/StickyPhonePill.astro';
-import StickyAnchor from '../components/StickyAnchor.astro';
 import Lightbox from '../components/Lightbox.astro';
 
 interface Props {
 	title?: string;
-	ctaHeading?: string;
-	ctaSub?: string;
-	ctaButton?: string;
+	description?: string;
 }
 
 const {
 	title = 'Heritage Co. Roofing & Construction',
-	ctaHeading,
-	ctaSub,
-	ctaButton,
+	description = 'Locally owned roofing in East Texas and Central Arkansas. Free inspections, same-day quotes, real warranties. Headquartered in Longview, TX.',
 } = Astro.props;
 ---
 
@@ -27,22 +22,27 @@ const {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#f6f1e7" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
 	<body>
-		<div class="site-frame">
-			<TopBar />
-			<Nav />
+		<TopBar />
+		<Nav />
+		<main>
 			<slot />
-			<Footer ctaHeading={ctaHeading} ctaSub={ctaSub} ctaButton={ctaButton} />
-		</div>
+		</main>
+		<Footer />
 		<StickyPhonePill />
-		<StickyAnchor />
 		<Lightbox />
 	</body>
 </html>
+
+<style is:global>
+	main { display: block; }
+</style>

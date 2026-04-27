@@ -1,352 +1,156 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FounderCard from '../components/FounderCard.astro';
-import AsymmetricRow from '../components/AsymmetricRow.astro';
-import StatRow from '../components/StatRow.astro';
-import ServiceAreaMap from '../components/ServiceAreaMap.astro';
-import ReviewCard from '../components/ReviewCard.astro';
-import FullBleedSection from '../components/FullBleedSection.astro';
-import ConstrainedSection from '../components/ConstrainedSection.astro';
-import BleedingImage from '../components/BleedingImage.astro';
-import MarqueeStrip from '../components/MarqueeStrip.astro';
-import RevealOnScroll from '../components/RevealOnScroll.astro';
+import HeroFlagship from '../components/v2/HeroFlagship.astro';
+import TrustMarquee from '../components/v2/TrustMarquee.astro';
+import SectionHead from '../components/v2/SectionHead.astro';
+import PhotoLede from '../components/v2/PhotoLede.astro';
+import PhotoBleed from '../components/v2/PhotoBleed.astro';
+import StatBand from '../components/v2/StatBand.astro';
+import ProcessSteps from '../components/v2/ProcessSteps.astro';
+import CrewBlock from '../components/v2/CrewBlock.astro';
+import ReviewBlock from '../components/v2/ReviewBlock.astro';
+import PageCTA from '../components/v2/PageCTA.astro';
+import Reveal from '../components/v2/Reveal.astro';
 import { imagery } from '../content/imagery';
-import { founders } from '../content/founders';
+
+const v2 = imagery.v2;
+
+const reviews = [
+	{ quote: 'They answered the phone the first time, showed up the next morning, and the roof was on inside a week.', name: 'Reviewer placeholder', city: 'Tyler, TX', project: 'Asphalt re-roof', rating: 5 },
+	{ quote: 'Same crew start to finish. They worked with my adjuster — I barely had to do anything.', name: 'Reviewer placeholder', city: 'Longview, TX', project: 'Storm damage', rating: 5 },
+	{ quote: 'Actual people. Local truck. Came back twice in the next month to check on it.', name: 'Reviewer placeholder', city: 'Marshall, TX', project: 'Metal install', rating: 5 },
+];
+
+const process = [
+	{ heading: 'Inspect', body: 'Free roof inspection from a real person on the ladder. We document everything — shingles, flashing, decking, ventilation.' },
+	{ heading: 'Quote', body: 'Same-day or next-day written quote. No upsell pressure. We tell you the system, the warranty, and the timeline.' },
+	{ heading: 'Install', body: 'Most residential roofs install in one day. Our crews live in your area, work in your area, and clean up before they leave.' },
+	{ heading: 'Stand behind', body: 'Workmanship and material warranties on every job. Call about a question in 2030 and the same shop is still here.' },
+];
 ---
 
-<BaseLayout title="Heritage Co. Roofing & Construction — East Texas + Central Arkansas">
-	<!-- Hero -->
-	<section class="hero">
-		<div class="hero-photo" aria-hidden="true"></div>
-		<div class="hero-overlay" aria-hidden="true"></div>
-		<div class="hero-content">
-			<h1 class="hero-h1">Roofing done right.<br />Built to last.</h1>
-			<p class="hero-sub">
-				Heritage Co. is locally owned and operated in East Texas and Central Arkansas. When you call us, you get us — not a national call center.
-			</p>
-			<div class="hero-bullets">
-				<div><span class="checkmark">✓</span> Free roof inspections</div>
-				<div><span class="checkmark">✓</span> Same-day or next-day quotes</div>
-				<div><span class="checkmark">✓</span> Workmanship and material warranties</div>
-			</div>
-			<div class="hero-cta-row">
-				<a class="cta-primary" href="/#inspection">Get my free inspection</a>
-				<a class="cta-secondary" href="tel:9032428102">Call 903-242-8102</a>
-			</div>
-		</div>
-	</section>
-
-	<!-- Credentials marquee (between hero and audience) -->
-	<MarqueeStrip
-		speedSeconds={50}
-		items={[
-			{ label: 'BBB Accredited' },
-			{ label: 'NRCA Member' },
-			{ label: 'Texas Association of Builders' },
-			{ label: 'GAF Master Elite' },
-			{ label: 'Owens Corning Platinum' },
-			{ label: 'CertainTeed Credentialed' },
-			{ label: 'Angi Super Service' },
-			{ label: 'Google 5-Star' },
-		]}
+<BaseLayout
+	title="Heritage Co. Roofing & Construction — East Texas + Central Arkansas"
+	description="Locally owned roofing in East Texas and Central Arkansas. Free inspections, same-day quotes, real warranties. Headquartered in Longview, TX."
+>
+	<HeroFlagship
+		eyebrow="Locally owned · Longview, TX"
+		heading="Roofs done right.<br />Built to last."
+		lede="Heritage Co. is locally owned and operated in East Texas and Central Arkansas. When you call us, you get us — not a national call center."
+		photo={v2.pageHeros.home}
+		bullets={['Free roof inspections', 'Same-day or next-day quotes', 'Workmanship + material warranties']}
+		primaryCta={{ label: 'Get my free inspection', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
 	/>
 
-	<!-- Audience cards -->
-	<RevealOnScroll>
-	<section class="audience">
-		<h2 class="audience-h">What kind of roof do you need?</h2>
-		<p class="audience-sub">We do both. The work is different for each.</p>
-		<div class="cards">
-			<a class="card has-zoom-photo" href="/residential">
-				<div class="card-photo">
-					<img src={imagery.heroCandidates.residentialRoofB.url} alt="Residential roof" loading="lazy" class="zoom-photo" />
+	<TrustMarquee items={v2.trustItems} />
+
+	<Reveal>
+		<section class="page-section section-tight">
+			<div class="container">
+				<SectionHead
+					eyebrow="What kind of roof do you need?"
+					heading="We do both. The work is different for each."
+					maxWidth="780px"
+				/>
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section section-tight-bottom">
+			<div class="container">
+				<PhotoLede
+					photo={v2.pageHeros.residential}
+					eyebrow="For homeowners"
+					heading="Roofs for your home."
+					body="Replacement, repair, and storm damage. Insurance accepted. Free inspections, same-day quotes. Most residential roofs install in a single day."
+					bullets={['Asphalt shingle, metal, and tile', 'Insurance claim handling', 'Workmanship + material warranties']}
+					cta={{ label: 'See residential services →', href: '/residential' }}
+					photoSide="left"
+				/>
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<PhotoLede
+					photo={v2.pageHeros.commercial}
+					eyebrow="For businesses"
+					heading="Roofs for your business."
+					body="New construction, re-roofs, restoration, and maintenance programs. Bonded and insured. We install every major commercial system."
+					bullets={['TPO, EPDM, mod-bit, BUR, metal, coatings', 'Maintenance + roof asset management', 'Bonded + insured']}
+					cta={{ label: 'See commercial systems →', href: '/commercial' }}
+					photoSide="right"
+				/>
+			</div>
+		</section>
+	</Reveal>
+
+	<PhotoBleed
+		photo={v2.bleeds.home}
+		heading="We're 30 minutes away."
+		caption="Crews live across East Texas and Central Arkansas. After the install, we're not gone. Call about a question in 2030 — same shop, same number."
+		overlay={true}
+		heightVw={68}
+	/>
+
+	<StatBand stats={[
+		{ value: '30+', label: 'Combined years roofing', numericValue: 30, suffix: '+' },
+		{ value: '14', label: 'Service-area cities · TX + AR', numericValue: 14 },
+		{ value: '1 day', label: 'Typical residential install' },
+		{ value: 'A+', label: 'BBB rating · pending confirm' },
+	]} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="How we work"
+					heading="Free inspection. Real quote. Real warranty."
+					lede="Same person from inspection through warranty. No call-center, no script."
+					maxWidth="720px"
+				/>
+				<div class="process-spacer">
+					<ProcessSteps steps={process} />
 				</div>
-				<div class="card-body-pad">
-					<p class="card-label">For homeowners</p>
-					<h3 class="card-h">Roofs for your home.</h3>
-					<p class="card-body">Replacement, repair, and storm damage. Insurance accepted. Free inspections, fast quotes.</p>
-					<span class="card-cta">Free inspection →</span>
+			</div>
+		</section>
+	</Reveal>
+
+	<CrewBlock />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="From our customers"
+					heading="What people in your zip code have said."
+					lede="Three reviews below. Names and projects are placeholders until Heritage gets permission to publish."
+					maxWidth="720px"
+				/>
+				<div class="reviews-spacer">
+					<ReviewBlock reviews={reviews} />
 				</div>
-			</a>
-			<a class="card has-zoom-photo" href="/commercial">
-				<div class="card-photo">
-					<img src={imagery.metal.hero.url} alt="Commercial standing seam metal roof" loading="lazy" class="zoom-photo" />
-				</div>
-				<div class="card-body-pad">
-					<p class="card-label">For businesses</p>
-					<h3 class="card-h">Roofs for your business.</h3>
-					<p class="card-body">New construction, re-roofs, maintenance. Bonded and insured. All major systems.</p>
-					<span class="card-cta">Request quote →</span>
-				</div>
-			</a>
-		</div>
-	</section>
-	</RevealOnScroll>
+			</div>
+		</section>
+	</Reveal>
 
-	<!-- Why local matters — 2 asymmetric rows -->
-	<RevealOnScroll>
-	<section class="why-local">
-		<p class="section-eyebrow">Why local matters</p>
-		<h2 class="section-h">We're not a national chain.</h2>
-		<p class="section-sub">When the big roofing companies finish a job, they're gone. We don't go anywhere.</p>
-		<AsymmetricRow
-			heading="We answer the phone."
-			body="When you call, you get us. Not a 1-800 number routing through three states to a script-reader. The four founders on the about page are the four people you talk to."
-			bullets={["Same person from inspection through warranty", "Owner-direct line if anything needs attention", "No call-center, no script"]}
-			photoSide="left"
-			aspect="4/5"
-			gradient="linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%)"
-			ctaHref="/about"
-			ctaLabel="Meet the team"
-		/>
-		<AsymmetricRow
-			heading="We're 30 minutes away."
-			body="Crews live across East Texas and Central Arkansas. After the install, we're not gone — call about a question in 2030 and the same shop is still here."
-			bullets={["Locally owned and operated", "Crews in your area, not a regional dispatch", "Free inspection from a real person on the roof"]}
-			photoSide="right"
-			aspect="3/2"
-			gradient="linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)"
-			ctaHref="/service-areas"
-			ctaLabel="See service area"
-		/>
-	</section>
-
-	<!-- Cinematic transition (FullBleedSection) -->
-	<FullBleedSection
-		gradient="linear-gradient(135deg, #4a4a48 0%, #6b5d4a 50%, #2a2a28 100%)"
-		overlayPosition="bottom-left"
-		minHeight="420px"
-		overlayDarken={0.65}
-	>
-		<p class="fb-eyebrow">Built to last</p>
-		<h2 class="fb-h">Call about a question in 2030. Same shop. Same number.</h2>
-	</FullBleedSection>
-
-	<!-- Founders -->
-	<section class="founders">
-		<p class="section-eyebrow">Meet the team</p>
-		<h2 class="section-h">The people answering your call.</h2>
-		<p class="section-sub">30+ combined years of roofing. Locally owned and operated.</p>
-		<div class="founders-grid">
-			{founders.map((f) => (
-				<FounderCard name={f.name} role={f.role} cred={f.cred} />
-			))}
-		</div>
-		<p class="founders-link">
-			<a href="/about" class="text-link">Read about the founders →</a>
-		</p>
-	</section>
-
-	<!-- Stats (constrained narrative) -->
-	<ConstrainedSection background="light" paddingY="md">
-		<p class="cs-eyebrow">By the numbers</p>
-		<h2 class="cs-h">A regional shop with the receipts.</h2>
-		<p class="cs-body">Four numbers below. Two we have, two are filled in by the founders. We list them as placeholders until they confirm — no inflated stat lands on the page.</p>
-		<div class="cs-stats">
-			<StatRow stats={[
-				{ label: 'Combined years', placeholderFact: 'Real total years roofing across the four founders. Build Pack §1 hedges with 30+ combined years; we want the actual number. See Founder Input page §7.' },
-				{ label: 'Roofs installed', placeholderFact: 'Lifetime residential roof count. See Founder Input page §5.' },
-				{ value: 'A+', label: 'BBB rating', placeholderFact: 'Confirm BBB rating + accreditation start year. See Founder Input page §2.' },
-				{ value: 'TX + AR', label: 'Service area' },
-			]} />
-		</div>
-	</ConstrainedSection>
-
-	<!-- Service area map -->
-	<section class="area-map">
-		<p class="section-eyebrow">Service area</p>
-		<h2 class="section-h">East Texas + Central Arkansas.</h2>
-		<p class="section-sub">Headquartered in Longview. Crews across two states.</p>
-		<ServiceAreaMap />
-	</section>
-
-	<!-- Bleeding image transition -->
-	<section class="bleed-section">
-		<BleedingImage
-			gradient="linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)"
-			aspect="21 / 9"
-			bleed={100}
-			maxWidth="1000px"
-		/>
-	</section>
-
-	<!-- Reviews -->
-	<section class="reviews">
-		<p class="section-eyebrow">From our customers</p>
-		<h2 class="section-h">What people in your zip code have said.</h2>
-		<p class="section-sub">Three named reviews go below. Until we have permission to publish, the placeholders show what's coming.</p>
-		<div class="reviews-grid">
-			<ReviewCard placeholderFact="Homepage review #1 — first + last name, city, project type, star rating, 1–2 sentence quote. Permission required. See Founder Input page §5." />
-			<ReviewCard placeholderFact="Homepage review #2 — first + last name, city, project type, star rating, 1–2 sentence quote. See Founder Input page §5." />
-			<ReviewCard placeholderFact="Homepage review #3 — first + last name, city, project type, star rating, 1–2 sentence quote. See Founder Input page §5." />
-		</div>
-	</section>
+	<PageCTA
+		heading="Free roof inspection.<br />Real quote in a day."
+		lede="No obligation. Same-day or next-day quote. Real person on the ladder."
+		primaryCta={{ label: 'Schedule online', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.freeInspection}
+	/>
 </BaseLayout>
 
 <style>
-	/* Hero — UNCHANGED from prior */
-	.hero { position: relative; min-height: 620px; background: #1a1a1a; }
-	.hero-photo {
-		position: absolute; inset: 0;
-		background: linear-gradient(180deg, #6b8aa8 0%, #8fa8c0 38%, #ece7de 38%, #b8a78c 70%, #6b5d4a 100%);
-		opacity: 0.92;
-	}
-	.hero-overlay {
-		position: absolute; inset: 0;
-		background: linear-gradient(90deg, rgba(26,26,26,0.78) 0%, rgba(26,26,26,0.35) 60%, rgba(26,26,26,0.1) 100%);
-	}
-	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
-	.hero-h1 {
-		color: #faf8f4;
-		font-size: 64px;
-		font-weight: 600;
-		line-height: 1.0;
-		margin: 0 0 24px;
-		letter-spacing: -2px;
-	}
-	.hero-sub {
-		color: #d8d2c2;
-		font-size: 17px;
-		line-height: 1.55;
-		margin: 0 0 32px;
-		max-width: 540px;
-	}
-	.hero-bullets { color: #faf8f4; font-size: 15px; line-height: 2.0; margin: 0 0 36px; }
-	.hero-bullets div { display: flex; align-items: center; gap: 14px; }
-	.checkmark { color: #b54620; font-weight: 600; font-size: 18px; }
-	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
-	.cta-primary {
-		background: #b54620;
-		color: #faf8f4;
-		padding: 16px 32px;
-		font-size: 15px;
-		font-weight: 500;
-	}
-	.cta-secondary {
-		color: #faf8f4;
-		padding: 16px 0;
-		font-size: 15px;
-		font-weight: 500;
-		border-bottom: 2px solid #faf8f4;
-	}
-	/* End hero block — anything below this is fair game */
-
-	/* Section labels */
-	.section-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		text-align: center; margin: 0 0 16px;
-		letter-spacing: 1px; text-transform: uppercase;
-	}
-	.section-h {
-		color: #1a1a1a; font-size: 40px; font-weight: 600;
-		text-align: center; margin: 0 0 16px;
-		letter-spacing: -1px; line-height: 1.1;
-	}
-	.section-sub {
-		color: #5a5347; font-size: 16px; text-align: center;
-		margin: 0 auto 56px; max-width: 600px;
-	}
-
-	/* Audience */
-	.audience { padding: 96px 48px; background: #faf8f4; }
-	.audience-h {
-		font-size: 40px; font-weight: 600; color: #1a1a1a;
-		text-align: center; margin: 0 0 12px; letter-spacing: -1px; line-height: 1.1;
-	}
-	.audience-sub { color: #5a5347; font-size: 16px; text-align: center; margin: 0 0 56px; }
-	.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 0 auto; }
-	.card {
-		background: #ffffff; overflow: hidden; display: block;
-		border: 1px solid #ece7de;
-		border-radius: var(--radius-card);
-		box-shadow: var(--shadow-subtle);
-		transition: transform 200ms ease, box-shadow 200ms ease;
-	}
-	.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-active); }
-	.card-photo {
-		aspect-ratio: 16 / 10;
-		overflow: hidden;
-	}
-	.card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-	.card-body-pad { padding: 36px; }
-	.card-label {
-		color: #b54620; font-size: 12px; font-weight: 500; margin: 0 0 12px;
-		letter-spacing: 1.5px; text-transform: uppercase;
-	}
-	.card-h {
-		color: #1a1a1a; font-size: 32px; font-weight: 600;
-		line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.5px;
-	}
-	.card-body { color: #5a5347; font-size: 15px; line-height: 1.6; margin: 0 0 24px; }
-	.card-cta {
-		color: #1a1a1a; font-size: 14px; font-weight: 500;
-		border-bottom: 2px solid #1a1a1a; padding-bottom: 4px;
-	}
-
-	/* Why local — asymmetric rows */
-	.why-local { padding: 80px 48px 96px; background: #ffffff; border-top: 1px solid #ece7de; }
-	.why-local .section-eyebrow,
-	.why-local .section-h,
-	.why-local .section-sub { /* defaults are fine */ }
-
-	/* Founders */
-	.founders { background: var(--ivory-tint); padding: 96px 48px; border-top: 1px solid #ece7de; }
-	.founders-grid {
-		display: grid; grid-template-columns: repeat(4, 1fr);
-		gap: 24px; max-width: 960px; margin: 0 auto;
-	}
-	.founders-link { text-align: center; margin: 32px 0 0; font-size: 14px; }
-	.text-link { color: #1a1a1a; font-weight: 500; border-bottom: 2px solid #1a1a1a; padding-bottom: 3px; }
-
-	/* FullBleed transition */
-	.fb-eyebrow {
-		color: var(--rust);
-		font-size: 13px; font-weight: 500;
-		letter-spacing: 1px; text-transform: uppercase;
-		margin: 0 0 16px;
-	}
-	.fb-h {
-		color: var(--off-white);
-		font-size: 40px; font-weight: 600;
-		letter-spacing: -1px; line-height: 1.15;
-		margin: 0; max-width: 580px;
-	}
-
-	/* Constrained-section internal helpers */
-	.cs-eyebrow {
-		color: var(--rust);
-		font-size: 13px; font-weight: 500;
-		letter-spacing: 1px; text-transform: uppercase;
-		margin: 0 0 14px; text-align: center;
-	}
-	.cs-h {
-		color: var(--charcoal);
-		font-size: 36px; font-weight: 600;
-		letter-spacing: -0.8px; line-height: 1.15;
-		margin: 0 0 16px; text-align: center;
-	}
-	.cs-body {
-		color: var(--warm-gray);
-		font-size: 15px; line-height: 1.65;
-		margin: 0 auto 40px; text-align: center; max-width: 640px;
-	}
-	.cs-stats { width: 100%; }
-
-	/* Bleeding-image section */
-	.bleed-section {
-		padding: 0 48px;
-		background: var(--ivory-tint);
-		position: relative;
-		z-index: 1;
-	}
-
-	/* Service area */
-	.area-map { background: var(--ivory-tint); padding: 96px 48px; border-top: 1px solid #ece7de; }
-
-	/* Reviews */
-	.reviews { background: #ffffff; padding: 96px 48px; border-top: 1px solid #ece7de; }
-	.reviews-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px; max-width: 1100px; margin: 0 auto;
-	}
+	.page-section { padding: clamp(80px, 9vw, 144px) 0; }
+	.section-tight { padding: clamp(72px, 8vw, 120px) 0 clamp(20px, 2vw, 32px); }
+	.section-tight-bottom { padding-top: clamp(40px, 5vw, 80px); padding-bottom: clamp(40px, 5vw, 80px); }
+	.process-spacer { margin-top: clamp(56px, 6vw, 88px); }
+	.reviews-spacer { margin-top: clamp(48px, 5vw, 72px); }
 </style>

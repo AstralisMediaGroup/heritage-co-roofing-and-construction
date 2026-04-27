@@ -1,0 +1,30 @@
+---
+interface Props {
+	eyebrow?: string;
+	heading: string;
+	lede?: string;
+	align?: 'left' | 'center';
+	maxWidth?: string;
+	tone?: 'light' | 'dark';
+}
+const { eyebrow, heading, lede, align = 'left', maxWidth = '900px', tone = 'light' } = Astro.props;
+---
+
+<header class={`section-head align-${align} tone-${tone}`} style={`--max-w: ${maxWidth};`}>
+	{eyebrow && <p class="eyebrow">{eyebrow}</p>}
+	<h2 class="h2 sh-h" set:html={heading} />
+	{lede && <p class="lede sh-lede">{lede}</p>}
+</header>
+
+<style>
+	.section-head {
+		max-width: var(--max-w);
+	}
+	.align-center { margin-left: auto; margin-right: auto; text-align: center; }
+	.section-head .eyebrow { margin-bottom: 18px; display: block; }
+	.sh-h { color: var(--ink); }
+	.tone-dark .sh-h { color: var(--bg); }
+	.sh-lede { margin-top: 22px; max-width: 680px; }
+	.align-center .sh-lede { margin-left: auto; margin-right: auto; }
+	.tone-dark .sh-lede { color: var(--ink-bg-mute); }
+</style>

@@ -1,67 +1,55 @@
 ---
-import SystemDetailLayout from '../../layouts/SystemDetailLayout.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const faqs = [
-	{ q: 'Why two layers?', a: 'Redundancy. The base sheet is the primary waterproof layer. The cap sheet is the second waterproof layer plus the UV-resistant top surface. If the cap fails, the base still seals. Single-ply membranes have one layer; mod-bit has two. That redundancy is the whole point.' },
-	{ q: 'Is torch-down still safe?', a: 'When done correctly, yes — but torch-down install carries fire risk during the install itself. Many spec writers now require cold-applied or self-adhered mod-bit on occupied buildings to eliminate the open-flame risk. Heritage does both.' },
-	{ q: 'How does mod-bit compare to TPO?', a: 'TPO is single-ply, white, energy-reflective, faster install. Mod-bit is multi-ply, asphalt-colored (or with reflective cap sheets), more redundant, slower install. Mod-bit shines on buildings where redundancy beats reflectivity — schools, hospitals, parapet-heavy roofs.' },
-	{ q: 'What\'s the difference between APP and SBS?', a: 'APP (Atactic Polypropylene) is rigid, heat-applied with a torch. SBS (Styrene Butadiene Styrene) is flexible, can be torch / cold / self-adhered. SBS is the modern default — more flexible, more install options, similar lifespan.' },
-	{ q: 'How is cap sheet color chosen?', a: 'Cap sheets come in granulated finishes — typically black, gray, white, or with reflective mineral surfaces. White cap reflects heat (cool-roof rated). Custom colors available; black is the default and cheapest.' },
-	{ q: 'Can mod-bit be installed in winter?', a: 'Torch-down: yes, with substrate prep. Self-adhered SBS: only above \\~50°F substrate temperature for proper adhesion. Cold-applied: yes year-round. The install method depends on weather window.' },
-];
+const v2 = imagery.v2;
 ---
 
-<SystemDetailLayout
-	title="Modified Bitumen Roofing — Heritage Co. Commercial"
-	heroEyebrow="Commercial · Modified bitumen"
-	heroH1="Modified bitumen. Multi-ply asphalt with polymer reinforcement."
-	heroSub="Two layers for redundancy. Torch-down, self-adhered, or cold-applied. The workhorse for institutional buildings."
-	heroPhoto={imagery.metal.hero.url}
-	heroPhotoAlt="Commercial building"
-	whatItIsHeading="Asphalt-based, polymer-reinforced, applied in two layers."
-	whatItIsParagraphs={[
-		'Modified bitumen is asphalt with polymers added (APP or SBS) to improve flexibility and UV resistance. It is applied in two or more layers — a base sheet that bonds to the substrate, and a cap sheet with a granulated mineral surface that takes the weather.',
-		'Each layer is a complete waterproof membrane on its own. If the cap sheet fails (UV degradation, mechanical damage), the base sheet still seals. That two-layer redundancy is mod-bit\'s main advantage over single-ply membranes.',
+<SystemPage
+	title="Modified bitumen commercial roofing"
+	heroEyebrow="Commercial · multi-ply"
+	heroHeading="Modified bitumen.<br />Heavy-duty asphalt."
+	heroLede="Multi-ply asphaltic membrane reinforced with polymer modifiers. Built for foot-traffic, HVAC-dense, and high-stress commercial roofs. The system that doesn't get punctured."
+	heroPhoto={v2.pageHeros.modifiedBitumen}
+	bleedPhoto={v2.bleeds.commercial}
+	bleedHeading="Two plies thick.<br />Built to take a beating."
+	overview={{
+		eyebrow: 'What mod-bit is',
+		heading: 'Asphalt + polymer, installed in plies.',
+		body: "Modified bitumen is a multi-ply asphaltic system — a base sheet plus one or two cap sheets, each reinforced with polyester or fiberglass and modified with SBS (rubber-like) or APP (plastic-like) polymers. Heat-welded with a torch, hot-mopped with asphalt, or self-adhered. The result is a thick, redundant membrane that takes foot traffic and rooftop equipment service without puncturing."
+	}}
+	keyPoints={[
+		{
+			heading: 'Where mod-bit is the right call.',
+			body: "Mod-bit fits buildings with heavy rooftop equipment, frequent service traffic, or owners who prioritize puncture resistance over reflectivity. Hospitals, data centers, manufacturing — anywhere people are walking the roof regularly.",
+			bullets: ['Foot-traffic-heavy roofs', 'HVAC-dense, equipment-heavy buildings', 'Hospitals, manufacturing, data centers', 'Where puncture-resistance > reflectivity'],
+			photo: v2.systemTiles.modBit,
+			photoSide: 'left',
+		},
+		{
+			heading: 'SBS vs APP — and how we install.',
+			body: "SBS modifiers are flexible — easier to install in cold weather, friendlier to torch crews, more forgiving on rolling decks. APP modifiers are stiffer and more heat-resistant — preferred for hot-mop or torch-down on flat decks with no movement. Heritage runs cold-applied, hot-applied, or torch installs depending on the specification and the building.",
+			bullets: ['SBS modifier (flexible, cold-friendly)', 'APP modifier (stiff, heat-resistant)', 'Cold-applied, hot-applied, or torched'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'right',
+		},
 	]}
-	bestFitHeading="Where modified bitumen is the right call."
-	bestFitItems={[
-		{ title: 'Schools', body: 'Districts and private. Multi-ply redundancy suits long-hold institutional buildings.' },
-		{ title: 'Hospitals + healthcare', body: 'Buildings where roof failure has high downstream cost. Two layers of waterproofing.' },
-		{ title: 'Parapet-heavy roofs', body: 'Mod-bit details well at parapet walls and pitch transitions.' },
-		{ title: 'Mid-size commercial', body: 'Office buildings, government, mixed-use ground floors.' },
-		{ title: 'Existing mod-bit replacement', body: 'Matching the existing system means easier tear-off + install transitions.' },
-		{ title: 'Cold-climate spec', body: 'SBS-modified mod-bit stays flexible in cold weather better than APP.' },
+	stats={[
+		{ value: '20–25', label: 'Years typical service life' },
+		{ value: '2-ply', label: 'Standard system thickness' },
+		{ value: 'Class A', label: 'Fire rating · UL 790' },
+		{ value: 'High', label: 'Puncture resistance' },
 	]}
-	specsHeading="Modified bitumen at a glance."
-	specRows={[
-		{ label: 'Service life', value: '20 years (typical)' },
-		{ label: 'Plies', value: '2-ply (base + cap) or 3-ply systems' },
-		{ label: 'Fire rating', value: 'Class A (with proper assembly)' },
-		{ label: 'Polymer type', value: 'APP (rigid, torch-applied) or SBS (flexible, multi-method)' },
-		{ label: 'Cap sheet finish', value: 'Mineral granule (gray, black, white, reflective)' },
-		{ label: 'Install method', value: 'Torch-down / hot-mop / cold-applied / self-adhered' },
+	projectPhotos={[v2.projects[5], v2.projects[6], v2.projects[3], v2.projects[7]]}
+	projectCaptions={['Mod-bit, healthcare', 'Mod-bit + parapet detail', '2-ply replacement, manufacturing', 'Mod-bit with rooftop equipment']}
+	faq={[
+		{ q: 'Mod-bit vs TPO — which is the right call?', a: "<p>Foot traffic. If people are on the roof regularly — HVAC service, satellite work, plumbing access — mod-bit takes the abuse better. TPO can puncture under hard-edged tools dropped on it; a 2-ply mod-bit shrugs them off. If foot traffic is rare, TPO usually wins on reflectivity and install cost.</p>" },
+		{ q: 'Are torch installs still common?', a: '<p>Less than they used to be. Cold-applied and self-adhered systems have eaten a big chunk of the torch market because they remove the open-flame hazard. Heritage runs torch installs on jobs where the spec calls for it and the building tolerates it; otherwise we default to cold-applied or hot-mopped.</p>' },
+		{ q: 'How does it compare to BUR (built-up)?', a: "<p>BUR is the predecessor — multiple plies of asphalt-saturated felt with hot asphalt between them, topped with gravel. Mod-bit replaced most BUR work because the polymer-modified cap sheets carry better tensile strength and the install is less labor-intensive. BUR is still alive on some specs, but mod-bit is what we install on new construction.</p>" },
+		{ q: 'How long does mod-bit last?', a: '<p>20–25 years on a properly-installed 2-ply system, longer on systems with a granulated cap or with periodic flood-coating maintenance. Like any roof, the failure point is usually flashings and penetrations, not the field membrane.</p>' },
+		{ q: 'Can you install over my existing roof?', a: '<p>Sometimes. Mod-bit recovers well over an existing built-up or smooth-surface roof if the deck is sound. We tell you yes or no on the inspection.</p>' },
 	]}
-	manufacturerPlaceholder="Heritage's preferred mod-bit manufacturer (GAF Ruberoid / Siplast / Johns Manville). See Founder Input page §2."
-	howInstallHeading="How a mod-bit install runs."
-	howInstallBody="Substrate prep — clean, dry, primed. Base sheet rolled out and bonded (torch / hot-mop / cold-adhesive / self-adhered depending on spec). Cap sheet over the base, with seams offset from the base seams for redundancy. Flashings at every penetration use the same multi-ply approach. A 20,000 sq ft mod-bit re-roof runs 7–12 working days — slower than single-ply due to the two-layer build-up."
-	maintenanceHeading="What mod-bit needs over its life."
-	maintenanceBody="Annual inspection of cap sheet condition, seam integrity, and flashing details. Mineral granule loss is normal but progressive — when the cap is balding, restoration coatings can extend life. Punctures or tears patch with hot-applied or cold-applied modified bitumen patches. Heritage maintenance covers all of the above."
-	tradeoffsHeading="Where modified bitumen shines, and where it doesn't."
-	tradeoffs={[
-		{ kind: 'pro', body: 'Multi-layer redundancy — two waterproof layers' },
-		{ kind: 'pro', body: 'Excellent at parapets and pitch transitions' },
-		{ kind: 'pro', body: 'Multiple install methods to fit the building' },
-		{ kind: 'pro', body: 'Battle-tested on institutional buildings' },
-		{ kind: 'con', body: 'Heavier than single-ply (matters on weak decks)' },
-		{ kind: 'con', body: 'Slower install than TPO/EPDM' },
-		{ kind: 'con', body: 'Torch-down install carries fire risk during install' },
-		{ kind: 'con', body: 'Black/gray cap sheets absorb heat (white cap solves this)' },
-	]}
-	faqItems={faqs}
-	endCtaPhoto={imagery.metal.secondary.url}
-	endCtaHeading="Walkthrough, scope, and mod-bit bid within the week."
-	endCtaSub="Bonded estimate ready for procurement."
-	endCtaLabel="Request consultation"
-	endCtaHref="/free-inspection"
+	ctaHeading="Mod-bit walkthrough,<br />scope, and bid in a week."
+	ctaLede="Free roof assessment. Real answer on whether mod-bit fits your building."
+	ctaPhoto={v2.pageHeros.commercial}
 />

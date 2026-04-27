@@ -1,67 +1,54 @@
 ---
-import SystemDetailLayout from '../../layouts/SystemDetailLayout.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const faqs = [
-	{ q: 'Is BUR still installed today?', a: 'Yes, but less often than in the 1980s. New BUR installs are typically on buildings being matched (existing BUR replacement) or where the redundancy of multi-ply systems matters more than install speed. Most new commercial defaults to single-ply now.' },
-	{ q: 'Why would I choose BUR over modified bitumen?', a: 'Mod-bit is essentially BUR\'s modern descendant — same multi-ply principle, but with polymer-modified asphalt for flexibility. BUR uses straight asphalt with felt reinforcement. Mod-bit installs faster and stays flexible longer. New specs almost always go mod-bit unless the building is being matched.' },
-	{ q: 'How heavy is BUR vs single-ply?', a: 'BUR with gravel ballast can run 4–7 lbs per sq ft. TPO is under 1 lb per sq ft. On structurally weak decks, the weight matters. We assess substrate capacity at the inspection.' },
-	{ q: 'Can BUR be re-coated?', a: 'Yes — and re-coating extends life dramatically. Aluminum reflective coatings or silicone restoration coatings can add 10–15 years to an otherwise tired BUR. Cheaper than tear-off if the membrane is still sound.' },
-	{ q: 'What\'s the gravel actually doing?', a: 'Three jobs: protects the asphalt from UV degradation, provides fire resistance (Class A rating), and adds ballast weight for wind uplift. Smooth-surface BUR (no gravel) is also available but loses the UV protection.' },
-	{ q: 'Is BUR more fire-resistant?', a: 'Gravel-surface BUR carries Class A fire ratings without additional assembly. Single-ply systems can also achieve Class A but typically require specific underlayment + cover board combinations to do so. BUR is fire-rated by design.' },
-];
+const v2 = imagery.v2;
 ---
 
-<SystemDetailLayout
-	title="Built-Up Roofing (BUR) — Heritage Co. Commercial"
-	heroEyebrow="Commercial · Built-up (BUR)"
-	heroH1="Built-up roofing. The traditional commercial spec."
-	heroSub="Multi-ply asphalt and reinforcing fabric with gravel ballast. Battle-tested for 100 years. Still the right call on the right building."
-	heroPhoto={imagery.metal.hero.url}
-	heroPhotoAlt="Commercial roof"
-	whatItIsHeading="Tar and gravel — built up in alternating layers."
-	whatItIsParagraphs={[
-		'Built-up roofing (BUR) is the original commercial flat-roof system: alternating layers of hot asphalt and reinforcing fabric (felt or fiberglass), built up to 3–4 plies, then capped with either gravel ballast or a smooth surface. It has been the default commercial spec since the 1920s.',
-		'Modern single-ply systems have overtaken BUR for new construction, but BUR is still installed on existing-building matches, very low-slope buildings, and projects where the multi-ply redundancy matters more than install speed. Heritage installs both — the right system depends on the building.',
+<SystemPage
+	title="Built-up commercial roofing (BUR)"
+	heroEyebrow="Commercial · multi-ply"
+	heroHeading="Built-up roofing.<br />The classic that still holds."
+	heroLede="Multiple plies of asphalt-saturated felt + hot asphalt + a gravel or granulated cap. The original commercial flat roof. Still right for some buildings — we tell you when."
+	heroPhoto={v2.pageHeros.builtUpRoofing}
+	bleedPhoto={v2.bleeds.commercial}
+	bleedHeading="Three to five plies.<br />Redundancy in the membrane itself."
+	overview={{
+		eyebrow: 'What BUR is',
+		heading: 'Asphalt + felt + ballast.',
+		body: "Built-up roofing layers asphalt-saturated felts with hot asphalt between them, three to five plies thick, then finishes with a flood coat of asphalt embedded with gravel or a granulated cap sheet. It predates single-ply by decades and was the dominant flat-roof system from the 1920s through the 1990s. A correctly-installed BUR runs 20–30 years, sometimes longer."
+	}}
+	keyPoints={[
+		{
+			heading: "Where BUR still fits.",
+			body: "BUR is right for buildings where the spec calls for it, where puncture resistance and ballast weight are advantages, and where the budget tolerates a labor-intensive install. Industrial sites, public buildings, and historical structures with existing BUR roofs are the typical fits.",
+			bullets: ['Industrial, manufacturing, government', 'Heavy-duty roof environments', 'Existing BUR re-roof candidates', 'Specifications that explicitly call for BUR'],
+			photo: v2.systemTiles.bur,
+			photoSide: 'left',
+		},
+		{
+			heading: 'Hot vs cold-applied.',
+			body: "Hot-mopped BUR uses a kettle on-site to melt asphalt and bond each ply — the original method, still used where feasibility permits. Cold-applied uses adhesive in place of hot asphalt, removes the kettle hazard, and works on jobs where hot work isn't allowed.",
+			bullets: ['Hot-mopped (traditional)', 'Cold-applied (adhesive-bonded)', 'Aggregate-surfaced or smooth cap'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'right',
+		},
 	]}
-	bestFitHeading="Where BUR is the right call."
-	bestFitItems={[
-		{ title: 'Existing BUR replacement', body: 'Matching the existing system on a long-hold building. Easier transitions, faster install crew familiarity.' },
-		{ title: 'Very low-slope buildings', body: 'Roofs under 1/4-inch per foot slope where multi-ply redundancy is critical.' },
-		{ title: 'Older institutional buildings', body: 'Schools, government, hospitals built in the 1970s-90s where the original BUR is being replaced.' },
-		{ title: 'Heritage / retrofit buildings', body: 'Where the original specification calls for BUR and code or covenants require matching.' },
-		{ title: 'Redundancy-critical specs', body: 'Buildings where a single-ply failure would have outsized downstream cost.' },
-		{ title: 'Fire-rating-mandatory specs', body: 'Where Class A fire rating is required without complex assembly. Gravel-surface BUR is Class A by default.' },
+	stats={[
+		{ value: '20–30', label: 'Years typical service life' },
+		{ value: '3–5', label: 'Plies in the membrane' },
+		{ value: 'Class A', label: 'Fire rating · UL 790' },
+		{ value: 'High', label: 'Ballast weight (psf)' },
 	]}
-	specsHeading="BUR at a glance."
-	specRows={[
-		{ label: 'Service life', value: '20–30 years' },
-		{ label: 'Plies', value: '3-ply (typical) or 4-ply' },
-		{ label: 'Fire rating', value: 'Class A (with gravel surface)' },
-		{ label: 'Surface', value: 'Gravel ballast or smooth-surface' },
-		{ label: 'Weight', value: '4–7 lbs per sq ft (heaviest commercial system)' },
-		{ label: 'Install method', value: 'Hot-mopped multi-ply' },
+	projectPhotos={[v2.projects[6], v2.projects[5], v2.projects[3], v2.projects[8]]}
+	projectCaptions={['BUR restoration, industrial', 'Built-up replacement, multi-tenant', 'BUR + flashing rebuild', 'Aggregate-surfaced BUR']}
+	faq={[
+		{ q: 'Why is BUR still on the spec sheet?', a: "<p>Because it works. A 3- to 5-ply BUR is mechanically the most redundant membrane you can install. Public buildings, industrial sites, and some historic specifications still call for BUR explicitly. We don't push it on jobs where mod-bit or single-ply would be a better fit, but where it's right, it's right.</p>" },
+		{ q: 'Is the kettle a problem?', a: '<p>It can be. Hot-mopped BUR requires a kettle, hot-pipe, and trained crew, and hot work isn\'t allowed on every site. Cold-applied BUR removes the kettle while keeping the multi-ply membrane structure. We use the method the site allows.</p>' },
+		{ q: 'BUR vs mod-bit?', a: "<p>Mod-bit is BUR's modern successor — fewer plies, polymer-modified for tensile strength, faster to install. Mod-bit wins on most jobs. BUR wins where the spec calls for it, where the existing roof is BUR and a like-replacement is the easiest path, and where ballast weight is an asset (it is, on some industrial roofs).</p>" },
+		{ q: 'How long does it last?', a: "<p>20–30 years properly installed. Longer with periodic flood-coating and ballast maintenance. The failure point on BUR is almost never the field — it's flashings, drains, and edges.</p>" },
 	]}
-	manufacturerPlaceholder="Heritage's preferred BUR asphalt + felt manufacturer. See Founder Input page §2."
-	howInstallHeading="How a BUR install runs."
-	howInstallBody="Substrate prep — clean and dry. Insulation board fastened. First layer: hot asphalt mopped onto the substrate. Felt rolled into the hot asphalt. Repeat for 2–3 more plies, with each layer offset for redundancy. Final flood coat of asphalt + gravel ballast embedded into it (or smooth-surface cap depending on spec). A 20,000 sq ft BUR install runs 10–15 working days — slowest of any commercial system due to the multi-ply build-up."
-	maintenanceHeading="What BUR needs over its life."
-	maintenanceBody="Annual inspection of the gravel coverage (gravel migration is normal but progressive), seam integrity, and flashing details. Spot patches are field-repairable with hot-applied or cold-applied modified bitumen. Re-coating with aluminum or silicone in years 15–25 extends life by 10–15 years. Heritage maintenance covers all of the above."
-	tradeoffsHeading="Where BUR shines, and where it doesn't."
-	tradeoffs={[
-		{ kind: 'pro', body: '100 years of installed track record' },
-		{ kind: 'pro', body: 'Multi-layer redundancy beats every single-ply' },
-		{ kind: 'pro', body: 'Gravel surface adds fire and UV protection' },
-		{ kind: 'pro', body: 'Re-coating extends life dramatically vs replacement' },
-		{ kind: 'con', body: 'Heaviest commercial system — substrate capacity matters' },
-		{ kind: 'con', body: 'Slowest install of any commercial system' },
-		{ kind: 'con', body: 'Hot-applied install is messy and weather-sensitive' },
-		{ kind: 'con', body: 'New construction increasingly defaults to mod-bit instead' },
-	]}
-	faqItems={faqs}
-	endCtaPhoto={imagery.metal.secondary.url}
-	endCtaHeading="Walkthrough, scope, and BUR bid within the week."
-	endCtaSub="Bonded estimate. Match-existing or new install — both."
-	endCtaLabel="Request consultation"
-	endCtaHref="/free-inspection"
+	ctaHeading="BUR walkthrough,<br />scope, and bid in a week."
+	ctaLede="Free roof assessment. Honest answer on whether to stay with built-up or move to mod-bit."
+	ctaPhoto={v2.pageHeros.commercial}
 />

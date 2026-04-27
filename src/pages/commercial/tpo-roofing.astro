@@ -1,68 +1,58 @@
 ---
-import SystemDetailLayout from '../../layouts/SystemDetailLayout.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const faqs = [
-	{ q: 'How does TPO compare to EPDM?', a: 'TPO is white (high reflectivity, lowers cooling cost), heat-weldable seams (stronger than glued seams), and slightly cheaper to install. EPDM is black (absorbs heat) or available in white at premium, glued seams, and has 50+ years of field history. TPO is the modern default; EPDM is the proven workhorse.' },
-	{ q: 'Does white really save energy?', a: 'On a flat commercial roof in Texas, yes — measurably. White TPO reflects 70%+ of solar radiation. Black EPDM reflects under 10%. Cooling-dominated buildings see 10–25% summer cooling reductions after switching from black to white.' },
-	{ q: 'How long do TPO seams last?', a: 'Heat-welded TPO seams are stronger than the membrane itself — they fuse the two sheets into one continuous piece. Lifetime of the seam = lifetime of the membrane. Cold-glued seams (avoid these) fail within 10 years.' },
-	{ q: 'Can TPO be installed over an existing roof?', a: 'Sometimes. If the existing roof is structurally sound, dry, and not pooling — yes, with a cover board and the right insulation. If the existing roof is wet, soft, or failing — no, tear-off is the right call.' },
-	{ q: 'What thickness should I get?', a: '60-mil is the standard commercial spec. 80-mil for high-traffic roofs (lots of HVAC techs walking on it) or where puncture resistance matters. 45-mil is rare on new commercial — too thin for the warranty length most owners want.' },
-	{ q: 'What manufacturer do you use?', a: 'See the placeholder below — Heritage works with several major TPO manufacturers; the primary depends on building spec and bid.', placeholderFact: "Heritage's preferred TPO manufacturer (Carlisle SureWeld / GAF EverGuard / Johns Manville TPO / Versico). See Founder Input page §2." },
-	{ q: 'How is TPO installed in cold weather?', a: 'TPO can be installed in cold weather as long as the substrate is dry and the welder reaches operating temperature. Below \\~40°F we slow the install pace and pre-heat seams longer. Below freezing we usually reschedule.' },
-];
+const v2 = imagery.v2;
 ---
 
-<SystemDetailLayout
-	title="TPO Roofing — Heritage Co. Commercial"
-	heroEyebrow="Commercial · TPO"
-	heroH1="TPO. White, heat-welded, energy-reflective."
-	heroSub="Single-ply thermoplastic membrane. The default spec for retail, warehouse, and light commercial in East Texas."
-	heroPhoto={imagery.metal.hero.url}
-	heroPhotoAlt="Commercial roof"
-	whatItIsHeading="Single-ply thermoplastic, heat-welded together."
-	whatItIsParagraphs={[
-		'TPO (Thermoplastic Polyolefin) is a single-ply membrane — one continuous sheet of white plastic, typically 60-mil thick, fastened to the building deck and welded together at every seam. The seam is the key: a robotic welder runs at •1,100°F to fuse two sheets into one continuous piece. Done right, the seam is stronger than the membrane itself.',
-		'TPO replaced EPDM as the commercial default in the early 2000s because of two things: heat-welded seams (vs glued) and white reflectivity (vs black). Both meaningfully extend the roof\'s life and reduce cooling costs in hot climates.',
+<SystemPage
+	title="TPO commercial roofing"
+	heroEyebrow="Commercial · single-ply"
+	heroHeading="TPO. White, heat-welded,<br />energy-reflective."
+	heroLede="The default re-roof for retail, light commercial, and cooling-dominated buildings across East Texas. Single-ply thermoplastic membrane, heat-welded seams, 20+ year service life."
+	heroPhoto={v2.pageHeros.tpoRoofing}
+	bleedPhoto={v2.bleeds.commercial}
+	bleedHeading="Heat-welded seams.<br />Stronger than the membrane itself."
+	overview={{
+		eyebrow: 'What TPO is',
+		heading: 'Single-ply thermoplastic, heat-welded together.',
+		body: "TPO (thermoplastic polyolefin) is a single-ply membrane installed in 8–12 ft sheets and welded together at every overlap with a hot-air gun running at ~1,100°F. The result is a continuous white surface with no rubber seam tape, no gasket failures, and reflectivity high enough to drop summer cooling loads measurably. It's been the dominant new-construction membrane in commercial since the mid-2000s, replacing a generation of EPDM."
+	}}
+	keyPoints={[
+		{
+			heading: 'Where TPO is the right call.',
+			body: 'TPO fits buildings where reflectivity and reroof cost matter more than absolute longevity. Retail, light industrial, restaurants, schools, government — anything with a flat or low-slope deck and a meaningful HVAC bill in the summer.',
+			bullets: ['Low-slope retail and warehousing', 'Cooling-dominated buildings (East TX summers)', 'Re-roof candidates over an existing single-ply', 'Schools, government, restaurants'],
+			photo: v2.systemTiles.tpo,
+			photoSide: 'left',
+		},
+		{
+			heading: 'Install methods we run.',
+			body: 'Mechanically-fastened over insulation is the most common — fastest install, lowest material cost. Adhered installs use bonding adhesive and trade install speed for higher wind-uplift performance. Ballasted is mostly historical at this point.',
+			bullets: ['Mechanically-fastened (most common)', 'Fully-adhered (high wind uplift, premium)', 'Induction-welded (concealed fasteners)'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'right',
+		},
 	]}
-	bestFitHeading="Where TPO is the right call."
-	bestFitItems={[
-		{ title: 'Low-slope retail + warehouse', body: 'The default spec for big-box and strip-center re-roofs. Wide flat surfaces where reflectivity matters.' },
-		{ title: 'Light commercial', body: 'Office buildings, MOBs, mixed-use ground floors with flat roofs.' },
-		{ title: 'Cooling-dominated buildings', body: 'Anywhere AC load is the bigger energy concern. White reflectivity pays off in summer.' },
-		{ title: 'Restaurants + QSR locations', body: 'Quick-service restaurant roofs. Commonly TPO due to heavy HVAC + grease venting.' },
-		{ title: 'Schools and government', body: 'Bid-spec friendly. Fire-rated, impact-rated, well-warranted by major manufacturers.' },
-		{ title: 'Re-roof candidates', body: 'When the existing roof is salvageable, TPO can install over with a cover board.' },
+	stats={[
+		{ value: '20+', label: 'Years service life · 60-mil' },
+		{ value: '78%', label: 'Solar reflectivity · white TPO' },
+		{ value: '1,100°F', label: 'Heat-weld seam temperature' },
+		{ value: 'Class A', label: 'Fire rating · UL 790' },
 	]}
-	specsHeading="TPO at a glance."
-	specRows={[
-		{ label: 'Service life', value: '20–30 years (depends on thickness + spec)' },
-		{ label: 'Membrane thickness', value: '45 mil / 60 mil / 80 mil (60 is standard)' },
-		{ label: 'Fire rating', value: 'Class A (with proper underlayment)' },
-		{ label: 'Wind rating', value: 'Up to FM 1-90 (110+ mph design)' },
-		{ label: 'Reflectivity', value: 'SRI 78+ on white; Class 1 cool-roof' },
-		{ label: 'Install method', value: 'Mechanically attached / fully adhered / induction-welded' },
-		{ label: 'Color options', value: 'White (default); gray, tan, black available' },
+	projectPhotos={[v2.projects[4], v2.projects[8], v2.projects[5], v2.projects[7]]}
+	projectCaptions={['Multi-building TPO, Longview', 'TPO + parapet detail, retail', 'Re-roof over existing membrane, Tyler', 'Mechanically-fastened, school addition']}
+	faq={[
+		{ q: 'TPO or EPDM — which makes sense?', a: '<p>For most East Texas buildings: TPO. The reflectivity matters in our climate and the heat-welded seams hold up longer than EPDM seam tape. EPDM is still the right call for cold-climate jobs, certain re-roof scenarios, and buildings where the existing roof is EPDM and a tear-off is overkill.</p>' },
+		{ q: 'How much do energy bills actually drop?', a: '<p>Documented studies on TPO vs dark-membrane roofs in southern climates land cooling-cost savings in the 10–20% range on the building\'s HVAC. The exact number depends on insulation, building envelope, and HVAC efficiency. We don\'t over-promise — we tell you the spec is reflective and the savings are real but bounded.</p>' },
+		{ q: 'How long do seams last?', a: '<p>Heat-welded TPO seams are stronger than the membrane itself when installed correctly. The seam is the most-tested part of any single-ply system — when TPO fails, it\'s almost always at penetrations or details, not the field seams.</p>' },
+		{ q: 'Can I install TPO over my existing roof?', a: '<p>Sometimes. We can recover an existing single-ply or built-up roof with a separator sheet and a new TPO membrane if the existing system is sound and the deck is dry. We tell you yes or no on the inspection. Recover saves tear-off cost; tear-off resets the warranty clock.</p>' },
+		{ q: '45-mil, 60-mil, or 80-mil?', a: '<p>60-mil is the standard. 45-mil is end-of-life on the spec — most manufacturers no longer offer 20+ year warranties on it. 80-mil is for foot-traffic-heavy roofs (HVAC-dense, rooftop-equipment service) or owners who want extended warranty terms. We default-spec 60-mil and price 80-mil as an option.</p>' },
+		{ q: 'Can you install TPO in cold weather?', a: '<p>Yes — adhered TPO is temperature-sensitive (substrate has to be above ~40°F for the bonding adhesive to set), but mechanically-fastened installs run year-round. East Texas winters rarely block TPO work.</p>' },
+		{ q: 'What manufacturer do you install?', a: '<p>Heritage installs the manufacturer that fits the job and the warranty Heritage has access to. Confirmation of the specific stocked SKU and warranty tier lands on the proposal once we know the building.</p>' },
 	]}
-	manufacturerPlaceholder="Heritage's preferred TPO manufacturer + warranty length offered. Confirm Carlisle SureWeld / GAF EverGuard / Johns Manville / Versico relationship. See Founder Input page §2."
-	howInstallHeading="How a TPO install runs."
-	howInstallBody="Substrate prep first — clean, dry, even. Cover board over the insulation (1/4-inch high-density). Membrane rolled out, mechanically fastened or fully adhered to the spec. Seams welded with a robotic welder at •1,100°F. Flashings detailed at every penetration. Final probe-test of every seam before sign-off. A 20,000 sq ft re-roof typically runs 5–8 working days."
-	maintenanceHeading="What TPO needs over its life."
-	maintenanceBody="Annual inspection — debris removal, drain clearing, seam check, flashing detail check. Punctures from foot traffic or fallen branches need spot welds within 60 days. Heritage's maintenance program covers all of the above on a semi-annual cadence."
-	tradeoffsHeading="Where TPO shines, and where it doesn't."
-	tradeoffs={[
-		{ kind: 'pro', body: 'Excellent reflectivity — meaningful summer cooling savings' },
-		{ kind: 'pro', body: 'Heat-welded seams are stronger than the membrane' },
-		{ kind: 'pro', body: 'Modern manufacturer warranties up to 30 years' },
-		{ kind: 'pro', body: 'Bid-spec friendly across most commercial jobs' },
-		{ kind: 'con', body: 'Punctures more easily than EPDM — cover board mandatory' },
-		{ kind: 'con', body: 'White surface shows dirt and biological growth' },
-		{ kind: 'con', body: 'Cold-weather installation slows the work' },
-	]}
-	faqItems={faqs}
-	endCtaPhoto={imagery.metal.secondary.url}
-	endCtaHeading="Walkthrough, scope, and TPO bid within the week."
-	endCtaSub="Bonded estimate ready for procurement. The system spec depends on the building."
-	endCtaLabel="Request consultation"
-	endCtaHref="/free-inspection"
+	ctaHeading="TPO walkthrough,<br />scope, and bid in a week."
+	ctaLede="Free roof assessment. We tell you whether TPO is the right call for your building before we quote it."
+	ctaPhoto={v2.pageHeros.commercial}
+	promises={['Bonded + insured', 'Workmanship warranty', '20+ yr service life', 'Heat-welded seams']}
 />

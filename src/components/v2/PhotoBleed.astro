@@ -1,0 +1,82 @@
+---
+import type { ImageRef } from '../../content/imagery';
+
+interface Props {
+	photo: ImageRef;
+	caption?: string;
+	heading?: string;
+	heightVw?: number;
+	overlay?: boolean;
+}
+
+const { photo, caption, heading, heightVw = 70, overlay = false } = Astro.props;
+---
+
+<section class="photo-bleed" style={`--height: ${heightVw}vh;`}>
+	<div class="photo-bleed-inner">
+		{photo.url ? (
+			<img src={photo.url} alt={photo.alt} loading="lazy" />
+		) : (
+			<div class="photo-bleed-fallback" />
+		)}
+		{overlay && <div class="photo-bleed-overlay" />}
+		{heading && (
+			<div class="photo-bleed-text container">
+				<h2 class="h2 pb-h" set:html={heading} />
+				{caption && <p class="pb-caption">{caption}</p>}
+			</div>
+		)}
+	</div>
+	{caption && !heading && <p class="photo-bleed-caption container">{caption}</p>}
+</section>
+
+<style>
+	.photo-bleed {
+		--height: 70vh;
+		width: 100%;
+	}
+	.photo-bleed-inner {
+		position: relative;
+		width: 100%;
+		height: var(--height);
+		min-height: 320px;
+		max-height: 90vh;
+		overflow: hidden;
+		background: var(--ink-bg);
+	}
+	.photo-bleed-inner img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+	.photo-bleed-fallback {
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(180deg, #4a4a48 0%, #2a2826 100%);
+	}
+	.photo-bleed-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(21,20,15,0.05) 0%, rgba(21,20,15,0.55) 100%);
+	}
+	.photo-bleed-text {
+		position: absolute;
+		left: 0; right: 0; bottom: clamp(40px, 6vw, 88px);
+		color: var(--bg);
+	}
+	.pb-h { color: var(--bg); max-width: 720px; }
+	.pb-caption {
+		color: var(--bg);
+		opacity: 0.85;
+		font-size: 17px;
+		max-width: 540px;
+		margin-top: 16px;
+	}
+	.photo-bleed-caption {
+		font-size: 13px;
+		color: var(--ink-3);
+		text-align: center;
+		padding-top: 14px;
+	}
+</style>

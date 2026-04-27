@@ -1,32 +1,57 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────────────────
+   Heritage Co — v2 design tokens (Build Pack v2 — Design Reset)
+   See .claude/skills/heritage-design-system/SKILL.md
+   Rule 1: One base background. Visual rhythm comes from photos and type
+   contrast, not section bg swaps.
+   ───────────────────────────────────────────────────────────────────────── */
+
 :root {
-  --charcoal: #1a1a1a;
-  --off-white: #faf8f4;
-  --rust: #b54620;
-  --warm-gray: #5a5347;
-  --subhead-dark: #d8d2c2;
-  --body-dark: #c4c1ba;
-  --border: #ece7de;
-  --card: #ffffff;
-  --footer-text: #8a8580;
-  --footer-border: #2a2a28;
-  --body-wrap: #f0ebe0;
+	/* Surfaces — single warm off-white for the entire site */
+	--bg: #f6f1e7;                /* THE base background (entire site) */
+	--bg-deep: #efe8d8;           /* Subtle inset for occasional emphasis bands */
+	--ink: #15140f;               /* Primary text — slightly warmer than pure black */
+	--ink-2: #45413a;             /* Body text on light bg */
+	--ink-3: #76716a;             /* Muted, captions, fine print */
 
-  /* Sectional background variations — derived from locked tokens, no new colors */
-  --ivory-tint: #f5f0e3;          /* off-white shifted toward body-wrap warmth */
-  --charcoal-deep: #141413;       /* charcoal slightly darker for photo-overlay sections */
-  --inset-surface: #f1ecdf;       /* card-on-card secondary surface, between off-white and body-wrap */
+	/* Dark island (≤1 per page) */
+	--ink-bg: #15140f;            /* Charcoal section bg, e.g. final CTA */
+	--ink-bg-text: #f6f1e7;       /* Body on charcoal */
+	--ink-bg-mute: #b0aba0;       /* Subhead on charcoal */
 
-  /* Plan 005 — radius scale */
-  --radius-card: 8px;             /* default card + photo container */
-  --radius-large: 12px;           /* large surface cards (material comparison, named project) */
-  --radius-pill: 999px;           /* buttons, badges, tags */
-  --radius-input: 6px;            /* form inputs */
+	/* Accent */
+	--rust: #b54620;              /* CTAs, eyebrows, accents */
+	--rust-deep: #8e3717;         /* CTA hover */
+	--rust-soft: rgba(181, 70, 32, 0.08);  /* Tinted callouts */
 
-  /* Plan 005 — shadows (light surfaces only) */
-  --shadow-subtle: 0 1px 2px rgba(26,26,26,0.04), 0 2px 8px rgba(26,26,26,0.06);
-  --shadow-active: 0 4px 12px rgba(26,26,26,0.08), 0 8px 24px rgba(26,26,26,0.06);
+	/* Lines */
+	--rule: rgba(21, 20, 15, 0.10);
+	--rule-strong: rgba(21, 20, 15, 0.22);
+
+	/* Type scale — v2: 4–5x display:body ratio */
+	--fs-display: clamp(56px, 9vw, 132px);    /* Hero H1 */
+	--fs-h1: clamp(44px, 6vw, 84px);          /* Page hero H1 */
+	--fs-h2: clamp(36px, 4.5vw, 64px);        /* Section H2 */
+	--fs-h3: clamp(22px, 2.2vw, 30px);        /* Card / item H3 */
+	--fs-h4: 18px;                             /* Small block heading */
+	--fs-eyebrow: 12px;
+	--fs-body-lg: 19px;
+	--fs-body: 17px;
+	--fs-small: 14px;
+	--fs-stat: clamp(48px, 5.6vw, 88px);      /* Big counter numbers */
+
+	/* Radius */
+	--r-sharp: 0;
+	--r-soft: 6px;
+	--r-pill: 999px;
+
+	/* Shadow */
+	--shadow-lift: 0 1px 2px rgba(21,20,15,0.04), 0 12px 28px rgba(21,20,15,0.08);
+
+	/* Container */
+	--container: 1320px;
+	--gutter: clamp(20px, 4vw, 56px);
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,49 +60,196 @@ html {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	scroll-behavior: smooth;
+	background: var(--bg);
 }
 @media (prefers-reduced-motion: reduce) {
 	html { scroll-behavior: auto; }
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: var(--off-white);
-  color: var(--charcoal);
-  font-size: 15px;
-  line-height: 1.6;
-  padding: 0;
-  margin: 0;
-}
-
-/* Plan 012.4 — site-frame is now a passive flow container, no painted edges. */
-.site-frame {
-  width: 100%;
-}
-
-/* Plan 007.1 — marquee keyframes (used by MarqueeStrip) */
-@keyframes marquee-scroll {
-	from { transform: translateX(0); }
-	to { transform: translateX(-50%); }
-}
-
-/* Plan 007.1 — gentle photo zoom inside cards on hover (cards opt in via .has-zoom-photo) */
-.has-zoom-photo .zoom-photo,
-.has-zoom-photo img,
-.has-zoom-photo .zoom-photo-bg {
-	transition: transform 350ms ease-out;
-}
-.has-zoom-photo:hover .zoom-photo,
-.has-zoom-photo:hover img,
-.has-zoom-photo:hover .zoom-photo-bg {
-	transform: scale(1.05);
-}
-@media (prefers-reduced-motion: reduce) {
-	.has-zoom-photo:hover .zoom-photo,
-	.has-zoom-photo:hover img,
-	.has-zoom-photo:hover .zoom-photo-bg { transform: none; }
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	background: var(--bg);
+	color: var(--ink);
+	font-size: var(--fs-body);
+	line-height: 1.55;
+	letter-spacing: -0.005em;
+	font-feature-settings: "ss01", "cv11";
+	overflow-x: hidden;
 }
 
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
 img { max-width: 100%; display: block; }
+
+/* ─── Display type ─── */
+.display, .h-display {
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	font-size: var(--fs-display);
+	line-height: 0.92;
+	letter-spacing: -0.04em;
+	color: var(--ink);
+}
+.h1 {
+	font-weight: 600;
+	font-size: var(--fs-h1);
+	line-height: 0.98;
+	letter-spacing: -0.035em;
+}
+.h2 {
+	font-weight: 600;
+	font-size: var(--fs-h2);
+	line-height: 1.02;
+	letter-spacing: -0.028em;
+}
+.h3 {
+	font-weight: 600;
+	font-size: var(--fs-h3);
+	line-height: 1.18;
+	letter-spacing: -0.018em;
+}
+.h4 {
+	font-weight: 600;
+	font-size: var(--fs-h4);
+	line-height: 1.3;
+	letter-spacing: -0.01em;
+}
+.eyebrow {
+	font-size: var(--fs-eyebrow);
+	font-weight: 600;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--rust);
+}
+.lede { font-size: var(--fs-body-lg); line-height: 1.5; color: var(--ink-2); }
+.body { font-size: var(--fs-body); line-height: 1.6; color: var(--ink-2); }
+.small { font-size: var(--fs-small); line-height: 1.5; color: var(--ink-3); }
+
+/* ─── Container ─── */
+.container {
+	width: 100%;
+	max-width: var(--container);
+	margin: 0 auto;
+	padding-left: var(--gutter);
+	padding-right: var(--gutter);
+}
+.container-wide {
+	width: 100%;
+	max-width: 1640px;
+	margin: 0 auto;
+	padding-left: var(--gutter);
+	padding-right: var(--gutter);
+}
+
+/* ─── Section base — every block uses var(--bg). No alternating. ─── */
+section {
+	background: transparent;
+}
+
+/* ─── Buttons ─── */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	padding: 18px 28px;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: -0.005em;
+	border-radius: var(--r-pill);
+	transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+	white-space: nowrap;
+}
+.btn-primary {
+	background: var(--rust);
+	color: var(--bg);
+}
+.btn-primary:hover {
+	background: var(--rust-deep);
+	transform: translateY(-1px);
+	box-shadow: var(--shadow-lift);
+}
+.btn-ghost-dark {
+	background: transparent;
+	color: var(--ink);
+	border: 1.5px solid var(--ink);
+}
+.btn-ghost-dark:hover {
+	background: var(--ink);
+	color: var(--bg);
+}
+.btn-ghost-light {
+	background: transparent;
+	color: var(--bg);
+	border: 1.5px solid var(--bg);
+}
+.btn-ghost-light:hover {
+	background: var(--bg);
+	color: var(--ink);
+}
+.btn-arrow::after {
+	content: '→';
+	display: inline-block;
+	transition: transform 180ms ease;
+}
+.btn:hover .btn-arrow::after,
+.btn-arrow:hover::after { transform: translateX(4px); }
+
+/* ─── Text-link ─── */
+.text-link {
+	color: var(--ink);
+	font-weight: 600;
+	letter-spacing: -0.005em;
+	border-bottom: 1.5px solid var(--ink);
+	padding-bottom: 2px;
+	transition: color 180ms ease, border-color 180ms ease;
+}
+.text-link:hover { color: var(--rust); border-color: var(--rust); }
+.text-link-light {
+	color: var(--bg);
+	border-bottom-color: var(--bg);
+}
+.text-link-light:hover { color: var(--rust); border-color: var(--rust); }
+
+/* ─── Reveal-on-scroll utility ─── */
+.reveal {
+	opacity: 0;
+	transform: translateY(12px);
+	transition: opacity 700ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+	.reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ─── Marquee keyframes ─── */
+@keyframes marquee-scroll {
+	from { transform: translateX(0); }
+	to { transform: translateX(-50%); }
+}
+
+/* ─── Photo zoom on card hover ─── */
+.has-zoom-photo .zoom-photo,
+.has-zoom-photo img {
+	transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.has-zoom-photo:hover .zoom-photo,
+.has-zoom-photo:hover img {
+	transform: scale(1.04);
+}
+@media (prefers-reduced-motion: reduce) {
+	.has-zoom-photo:hover .zoom-photo,
+	.has-zoom-photo:hover img { transform: none; }
+}
+
+/* ─── Hairline rules ─── */
+.rule {
+	border: 0;
+	border-top: 1px solid var(--rule);
+	margin: 0;
+}
+
+/* ─── Selection ─── */
+::selection { background: var(--rust); color: var(--bg); }

@@ -1,539 +1,133 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ServiceTile from '../components/ServiceTile.astro';
-import TrustStrip from '../components/TrustStrip.astro';
-import FilterableProjectGrid from '../components/FilterableProjectGrid.astro';
-import StatRow from '../components/StatRow.astro';
-import LayeredCard from '../components/LayeredCard.astro';
-import FullBleedSection from '../components/FullBleedSection.astro';
-import ProcessFlow from '../components/ProcessFlow.astro';
-import MaterialTabs from '../components/MaterialTabs.astro';
-import TechnicalFeatures from '../components/TechnicalFeatures.astro';
-import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
+import HeroFlagship from '../components/v2/HeroFlagship.astro';
+import TrustMarquee from '../components/v2/TrustMarquee.astro';
+import SectionHead from '../components/v2/SectionHead.astro';
+import PromiseStrip from '../components/v2/PromiseStrip.astro';
+import TileGrid from '../components/v2/TileGrid.astro';
+import PhotoBleed from '../components/v2/PhotoBleed.astro';
+import PhotoLede from '../components/v2/PhotoLede.astro';
+import StatBand from '../components/v2/StatBand.astro';
+import ProjectShowcase from '../components/v2/ProjectShowcase.astro';
+import PageCTA from '../components/v2/PageCTA.astro';
+import Reveal from '../components/v2/Reveal.astro';
 import { imagery } from '../content/imagery';
 
-const services = [
-	{ label: 'New construction', body: 'Single-source coordination from deck-up. Ground-up builds, on schedule.', imageSrc: imagery.metal.hero.url, imageAlt: 'Standing seam metal roof' },
-	{ label: 'Re-roofs', body: 'Tear-off and replacement on existing buildings. Minimum tenant disruption.', imageSrc: imagery.metal.secondary.url, imageAlt: 'Modern building with metal roof' },
-	{ label: 'Maintenance', body: 'Scheduled inspections and small repairs. Stops the leak before it starts.', imageSrc: imagery.projectGallery[3].url, imageAlt: 'Stacks of roofing tiles' },
-	{ label: 'Repairs', body: 'Targeted fixes for known issues. Same-week response for active leaks.', imageSrc: imagery.beforeAfterPairs.windBefore.url, imageAlt: 'Roof during a storm' },
-	{ label: 'Roof systems', body: 'TPO, EPDM, modified bitumen, metal, built-up, coatings. We spec to the building.', imageSrc: imagery.projectGallery[1].url, imageAlt: 'Tiled rooftops from above' },
-	{ label: 'Project portfolio', body: 'Past commercial work across schools, retail, healthcare, and industrial.', imageSrc: imagery.projectGallery[4].url, imageAlt: 'Aerial view of a roof' },
+const v2 = imagery.v2;
+
+const systems = [
+	{ heading: 'TPO', body: 'White, heat-welded, energy-reflective. The default for re-roofs in cooling-dominated buildings.', href: '/commercial/tpo-roofing', photo: v2.systemTiles.tpo, eyebrow: 'System' },
+	{ heading: 'EPDM', body: 'Black rubber. The original single-ply. Cold-weather installable. Long-proven track record.', href: '/commercial/epdm-roofing', photo: v2.systemTiles.epdm, eyebrow: 'System' },
+	{ heading: 'Modified bitumen', body: 'Multi-ply asphalt. Heavy-duty for foot-traffic and HVAC-dense roofs.', href: '/commercial/modified-bitumen-roofing', photo: v2.systemTiles.modBit, eyebrow: 'System' },
+	{ heading: 'Metal', body: 'Standing seam. 40–60 year service life. The long-term answer.', href: '/commercial/metal-roofing', photo: v2.systemTiles.metal, eyebrow: 'System' },
+	{ heading: 'Built-up (BUR)', body: 'Multi-ply asphalt + ballast. The classic. Still right for some buildings.', href: '/commercial/built-up-roofing', photo: v2.systemTiles.bur, eyebrow: 'System' },
+	{ heading: 'Coatings + restorations', body: 'Silicone or acrylic over an existing roof. Buys 10–15 years on a sound deck.', href: '/commercial/roof-coatings-and-restorations', photo: v2.systemTiles.coatings, eyebrow: 'System' },
+	{ heading: 'Maintenance programs', body: 'Annual inspection + repair contract. Protects warranties; cuts emergency calls.', href: '/commercial/maintenance-programs', photo: v2.systemTiles.maintenance, eyebrow: 'Program' },
 ];
 
-const systemsDetail = [
-	{
-		id: 'tpo',
-		name: 'TPO',
-		intro: 'Single-ply thermoplastic. Bright white, reflective, weldable seams. The default spec for retail and warehouse re-roofs in East Texas.',
-		gradient: 'linear-gradient(180deg, #c4c1ba 0%, #8a8580 50%, #4a4a48 100%)',
-		specs: [
-			{ label: 'Thickness', value: '45 mil / 60 mil / 80 mil' },
-			{ label: 'Service life', value: '20–30 years (depends on thickness + spec)' },
-			{ label: 'Reflectivity', value: 'Class 1 cool-roof; SRI 78+ on white' },
-			{ label: 'Common on', value: 'Retail, warehouse, light industrial, MOBs' },
-		],
-		manufacturerPlaceholder: 'Heritage\'s preferred TPO manufacturer (Carlisle SureWeld / GAF EverGuard / Johns Manville TPO / Versico). See Founder Input page §2.',
-	},
-	{
-		id: 'epdm',
-		name: 'EPDM',
-		intro: 'Single-ply rubber. Long service life, forgiving install, well understood by every facility manager. Common on flat commercial.',
-		gradient: 'linear-gradient(180deg, #4a4a48 0%, #2a2a28 100%)',
-		specs: [
-			{ label: 'Thickness', value: '45 mil / 60 mil / 90 mil' },
-			{ label: 'Service life', value: '25–35 years' },
-			{ label: 'Reflectivity', value: 'Black absorbs heat; white EPDM available' },
-			{ label: 'Common on', value: 'Office, government, older institutional' },
-		],
-		manufacturerPlaceholder: 'Heritage\'s preferred EPDM manufacturer (Carlisle Sure-Seal / Firestone RubberGard / Versico). See Founder Input page §2.',
-	},
-	{
-		id: 'modified-bitumen',
-		name: 'Modified bitumen',
-		intro: 'Asphalt-based, multi-ply. Torch-down, self-adhered, or hot-mopped. Workhorse for institutional buildings with parapet detailing.',
-		gradient: 'linear-gradient(180deg, #5a4836 0%, #2a2a28 100%)',
-		specs: [
-			{ label: 'Plies', value: '2-ply or 3-ply systems' },
-			{ label: 'Service life', value: '20–25 years' },
-			{ label: 'Install method', value: 'Torch / cold-process / self-adhered' },
-			{ label: 'Common on', value: 'Schools, hospitals, parapet-heavy buildings' },
-		],
-		manufacturerPlaceholder: 'Heritage\'s preferred mod-bit manufacturer (GAF Ruberoid / Siplast / Johns Manville). See Founder Input page §2.',
-	},
-	{
-		id: 'metal',
-		name: 'Metal',
-		intro: 'Standing seam, R-panel, structural. Long life, high wind ratings. The right call on schools, ag, and any building where lifecycle cost matters more than upfront.',
-		gradient: 'linear-gradient(180deg, #7d8b9e 0%, #4a5566 100%)',
-		imageSrc: imagery.metal.hero.url,
-		imageAlt: imagery.metal.hero.alt,
-		specs: [
-			{ label: 'Profile', value: 'Standing seam (1.5"–3"), R-panel, structural' },
-			{ label: 'Service life', value: '40–60 years' },
-			{ label: 'Wind rating', value: 'UL 580 / FM 4471 standard on standing seam' },
-			{ label: 'Common on', value: 'Schools, agricultural, manufacturing' },
-		],
-		manufacturerPlaceholder: 'Heritage\'s preferred metal panel brand (McElroy / Drexel / Mueller / Berridge). See Founder Input page §2.',
-	},
-	{
-		id: 'built-up',
-		name: 'Built-up',
-		intro: 'Tar-and-gravel BUR systems. Older spec but still installed where the building calls for it — heavy substrates, parapet-detailed roofs.',
-		gradient: 'linear-gradient(180deg, #8a7d63 0%, #4a4239 100%)',
-		specs: [
-			{ label: 'Plies', value: '3-ply or 4-ply' },
-			{ label: 'Surface', value: 'Gravel cap or smooth-surface' },
-			{ label: 'Service life', value: '20–30 years' },
-			{ label: 'Common on', value: 'Older institutional, government, heritage buildings' },
-		],
-	},
-	{
-		id: 'coatings',
-		name: 'Coatings',
-		intro: 'Acrylic, silicone, urethane. Restoration over an existing roof to extend life and reflect heat. The right move when tear-off is not in the budget yet.',
-		gradient: 'linear-gradient(180deg, #faf8f4 0%, #c4b89e 50%, #8a7d63 100%)',
-		specs: [
-			{ label: 'Chemistry', value: 'Acrylic / silicone / urethane / aluminum' },
-			{ label: 'Service life', value: '10–20 years per recoat cycle' },
-			{ label: 'Reflectivity', value: 'High-SRI silicone or acrylic available' },
-			{ label: 'Common on', value: 'Aging metal, smooth BUR, mod-bit restoration' },
-		],
-		manufacturerPlaceholder: 'Heritage\'s preferred coating manufacturer (GAF UniSeal / GE Enduris / Henry Enviroshield). See Founder Input page §2.',
-	},
-];
-
-const industries = [
-	{ label: 'Schools', body: 'Districts and private. Summer-window installs.' },
-	{ label: 'Healthcare', body: 'Clinics, MOBs, hospitals. Negative-pressure-aware.' },
-	{ label: 'Retail', body: 'Strip centers, big-box, mixed-use.' },
-	{ label: 'Industrial', body: 'Warehouses, manufacturing, distribution.' },
-	{ label: 'Office', body: 'Class A, B, multi-tenant.' },
-	{ label: 'Government', body: 'Municipal, county, federal. Bid-compliant.' },
-];
-
-const bondingItems = [
-	{ label: 'Bonding capacity (single)', fact: 'Single-project bonding capacity (e.g. $2M). See Founder Input page §3.' },
-	{ label: 'Bonding capacity (aggregate)', fact: 'Aggregate bonding capacity. See Founder Input page §3.' },
-	{ label: 'General liability', fact: 'GL coverage limit per occurrence + aggregate. See Founder Input page §3.' },
-	{ label: 'Umbrella', fact: 'Umbrella policy limit. See Founder Input page §3.' },
-	{ label: "Workers' comp", fact: "Workers' comp carrier name. See Founder Input page §3." },
-	{ label: 'Roofing license #', fact: 'Texas roofing license # and Arkansas equivalent if applicable. See Founder Input page §3.' },
-];
+const projects = v2.projects.slice(0, 8).map((p, i) => ({
+	photo: p,
+	caption: ['TPO re-roof, retail · Tyler', 'Mod-bit replacement, healthcare · Longview', 'Standing seam, light commercial · Marshall', 'Metal over brick, retail · Kilgore', 'Multi-building TPO project, Longview', 'Built-up restoration, manufacturing', 'Asphalt commercial, multi-tenant', 'Coating restoration, warehouse'][i] || p.alt,
+}));
 ---
 
 <BaseLayout
-	title="Commercial Roofing — Heritage Co."
-	ctaHeading="Need a quote on a commercial roof?"
-	ctaSub="Walkthrough, scope, and pricing within the week."
-	ctaButton="Request consultation"
+	title="Commercial roofing — Heritage Co. Roofing & Construction"
+	description="Commercial roofing in East Texas and Central Arkansas. TPO, EPDM, metal, modified bitumen, built-up, coatings. Maintenance programs. Bonded and insured."
 >
-	<!-- Hero (unchanged) -->
-	<section class="hero">
-		<div class="hero-photo" aria-hidden="true"></div>
-		<div class="hero-overlay" aria-hidden="true"></div>
-		<div class="hero-content">
-			<p class="hero-eyebrow">For businesses</p>
-			<h1 class="hero-h1">Roofs for your business.</h1>
-			<p class="hero-sub">
-				New construction, re-roofs, maintenance. Bonded and insured. All major roof systems, spec'd to the building and the budget.
-			</p>
-			<div class="hero-cta-row">
-				<a class="cta-primary" href="/#inspection">Request quote</a>
-				<a class="cta-secondary" href="tel:9032428102">Call 903-242-8102</a>
-			</div>
-		</div>
-	</section>
+	<HeroFlagship
+		eyebrow="Commercial roofing"
+		heading="Every major<br />commercial system."
+		lede="New construction, re-roofs, restoration, and maintenance for commercial buildings across East Texas and Central Arkansas. Bonded and insured."
+		photo={v2.pageHeros.commercial}
+		bullets={['TPO, EPDM, mod-bit, BUR, metal, coatings', 'Maintenance + roof asset management', 'Bonded + insured · workmanship warranty']}
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+	/>
 
-	<!-- Continuous flow on off-white. Single dark island for systems-detail. -->
-	<div class="flow">
+	<TrustMarquee items={v2.trustItems} />
 
-		<!-- Intro: facility-manager focus, photo on right + content + service grid below -->
-		<section class="block intro">
-			<div class="intro-row">
-				<div class="intro-content">
-					<p class="eyebrow">For facility managers</p>
-					<h2 class="block-h">One walkthrough. One bid. One crew.</h2>
-					<p class="block-sub">From spec through installation through warranty. Single-source coordination, bonded estimate ready for procurement, and crews that work around tenants — not over them.</p>
-					<a class="rust-cta" href="/#inspection">Request consultation</a>
-				</div>
-				<div class="intro-photo has-zoom-photo" aria-hidden="true">
-					<img src={imagery.metal.hero.url} alt={imagery.metal.hero.alt} loading="lazy" class="zoom-photo" />
-				</div>
-			</div>
-			<div class="service-grid">
-				{services.map((s) => <ServiceTile label={s.label} body={s.body} imageSrc={s.imageSrc} imageAlt={s.imageAlt} />)}
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<PromiseStrip items={['Bonded + insured', 'Workmanship warranty', 'All major systems', 'Maintenance programs']} />
 			</div>
 		</section>
+	</Reveal>
 
-		<!-- Industries — pill tags + compact rows on same bg, no break -->
-		<section class="block industries">
-			<p class="eyebrow">Industries served</p>
-			<h2 class="block-h">We've worked the building you're in.</h2>
-			<p class="block-sub">Six common building types. Plenty of less common ones too.</p>
-			<div class="industry-tags">
-				{industries.map((i) => <span class="industry-tag">{i.label}</span>)}
-			</div>
-			<div class="industry-rows">
-				{industries.map((i) => (
-					<div class="industry-row">
-						<span class="industry-row-label">{i.label}</span>
-						<span class="industry-row-body">{i.body}</span>
-					</div>
-				))}
-			</div>
-		</section>
-
-		<!-- Roof systems — interactive tabs (click a system → photo + spec breakdown). On the same off-white flow. -->
-		<section class="block systems">
-			<p class="eyebrow">Roof systems</p>
-			<h2 class="block-h">Six systems. We spec to the building.</h2>
-			<p class="block-sub">Click a tab. Each system has a different lifespan, install method, and best-fit building type. The right one depends on slope, occupancy, climate, and budget — we walk through trade-offs at the inspection.</p>
-			<MaterialTabs materials={systemsDetail} />
-			<div class="systems-cert">
-				<HeritagePlaceholder fact="Heritage's system-level manufacturer certifications (Carlisle SureWeld, Firestone Red Shield, GAF EverGuard, Johns Manville Peak Advantage, etc.). Plain-text list. See Founder Input page §2." />
-			</div>
-		</section>
-
-		<!-- Technical block: what's actually on every Heritage commercial roof -->
-		<section class="block tech-block">
-			<TechnicalFeatures
-				eyebrow="What's under the membrane"
-				heading="The details that decide whether a 25-year roof actually lasts 25 years."
-				sub="The seams, the flashings, the drainage — that's where commercial roofs fail. Spec each one right and the roof outlasts the warranty."
-				columns={3}
-				features={[
-					{ icon: 'flame', title: 'Heat-welded seams on every TPO + PVC install', body: 'A robotic welder runs the seam at 1,100°F to fuse the membrane into one continuous sheet. Cold-glued seams are the #1 commercial roof failure point — we do not use them.' },
-					{ icon: 'wind', title: '110+ mph wind uplift rating', body: 'Mechanically fastened systems carry FM 4471 ratings up to 1-90 (110 mph design). Adhered systems run higher. We spec the rating that matches the building location, not the cheapest path.' },
-					{ icon: 'water', title: 'Tapered insulation for positive drainage', body: 'Flat roofs are not actually flat — they need a slope to the drains. We spec tapered ISO insulation in 1/4-inch / 1/2-inch profiles to push water off the roof, not pond on it.' },
-					{ icon: 'shield', title: 'Walkway pads at every roof-access point', body: 'HVAC techs and building maintenance walk the roof. Walkway pads protect the membrane at access points and around units. Skipping them is how a 20-year roof dies in 8.' },
-					{ icon: 'layers', title: 'Cover board over the insulation', body: 'A 1/4-inch high-density cover board between insulation and membrane. Improves wind uplift, walkability, and impact resistance — and is the spec the manufacturer warranty assumes.' },
-					{ icon: 'gauge', title: 'Annual maintenance inspection included', body: 'Every install ships with a year-one inspection. Caulks reseated, seams checked, drains cleared. Most commercial roof problems are caught before they become claims.' },
-				]}
-			/>
-		</section>
-
-		<!-- Why Heritage for commercial — LayeredCard + StatRow combined -->
-		<section class="block why-commercial">
-			<LayeredCard
-				eyebrow="Why Heritage for commercial"
-				heading="Bonded, insured, and on the roof when the bid is awarded."
-				body="Single-source coordination from walkthrough to closeout. We work around tenants, not over them. Procurement-ready paperwork below."
-				gradient="linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%)"
-				ctaHref="/#inspection"
-				ctaLabel="Request consultation"
-			/>
-			<div class="stats-inline">
-				<StatRow stats={[
-					{ label: 'Bonding (single)', placeholderFact: 'Single-project bonding capacity in dollars. See Founder Input page §3.' },
-					{ label: 'GL coverage', placeholderFact: 'General liability per-occurrence limit. See Founder Input page §3.' },
-					{ label: 'Years in business', placeholderFact: 'Year Heritage Co. was founded → years in business as of 2026. See Founder Input page §7.' },
-					{ label: 'Sq ft installed', placeholderFact: 'Lifetime commercial sq ft installed. See Founder Input page §5.' },
-				]} />
-			</div>
-		</section>
-
-		<!-- Bonding + insurance — flat 2-col data list -->
-		<section class="block bonding">
-			<p class="eyebrow eyebrow-soft">The numbers procurement wants</p>
-			<dl class="data-list">
-				{bondingItems.map((b) => (
-					<div class="data-row">
-						<dt class="data-row-label">{b.label}</dt>
-						<dd class="data-row-value">
-							<HeritagePlaceholder fact={b.fact} />
-						</dd>
-					</div>
-				))}
-			</dl>
-		</section>
-
-		<!-- Re-roof process — photo + ProcessFlow -->
-		<section class="block reroof">
-			<div class="reroof-row">
-				<div class="reroof-photo has-zoom-photo" aria-hidden="true">
-					<img src={imagery.projectGallery[3].url} alt={imagery.projectGallery[3].alt} loading="lazy" class="zoom-photo" />
-				</div>
-				<div class="reroof-content">
-					<p class="eyebrow">How a re-roof runs</p>
-					<h2 class="block-h">Five phases on an occupied building.</h2>
-					<p class="block-sub">We tell tenants what to expect before we tell them to expect it.</p>
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="Systems"
+					heading="Seven systems. We tell you which one fits."
+					lede="The right system for a commercial roof depends on the deck, the slope, the foot traffic, the building's remaining life, and the budget. We don't lead with the system that has our biggest margin."
+					maxWidth="800px"
+				/>
+				<div class="grid-spacer">
+					<TileGrid tiles={systems} cols={3} style="photo-card" />
 				</div>
 			</div>
-			<div class="reroof-flow">
-				<ProcessFlow steps={[
-					{ label: 'Walkthrough', caption: 'On-roof survey with the facility manager.' },
-					{ label: 'Spec + bid', caption: 'Written scope, system rec, bonded estimate.' },
-					{ label: 'Pre-construction', caption: 'Tenant notice plan, staging, working hours.' },
-					{ label: 'Tear-off + install', caption: 'Phased on occupied buildings.' },
-					{ label: 'Closeout', caption: 'Final walk, warranty hand-off, paperwork.' },
-				]} />
+		</section>
+	</Reveal>
+
+	<PhotoBleed
+		photo={v2.bleeds.commercial}
+		heading="Walkthrough, scope,<br />bid in a week."
+		caption="Free roof assessment. Drone-aided where it makes sense. Honest answer on whether to recover, restore, or replace."
+		overlay={true}
+		heightVw={66}
+	/>
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<PhotoLede
+					photo={v2.systemTiles.maintenance}
+					eyebrow="Maintenance"
+					heading="Catch the leak before it's a leak."
+					body="Annual inspection, twice-yearly for ballasted and TPO. Sealant maintenance, drain cleaning, and a written report. Protects manufacturer warranties; turns emergency calls into scheduled work."
+					bullets={['Annual + biannual inspection cadence', 'Drone + thermal imaging where useful', 'Repair-first, replace-when-justified']}
+					cta={{ label: 'Maintenance programs →', href: '/commercial/maintenance-programs' }}
+					photoSide="right"
+				/>
 			</div>
 		</section>
+	</Reveal>
 
-		<!-- Project gallery — FilterableProjectGrid with lightbox triggers -->
-		<section class="block projects">
-			<p class="eyebrow">Past projects</p>
-			<h2 class="block-h">Buildings we've roofed.</h2>
-			<p class="block-sub">Filter by industry. Click a card to view full size. Specific named projects fill in as the founders confirm permission to publish.</p>
-			<FilterableProjectGrid
-				filters={[
-					{ key: 'all', label: 'All' },
-					{ key: 'schools', label: 'Schools' },
-					{ key: 'healthcare', label: 'Healthcare' },
-					{ key: 'retail', label: 'Retail' },
-					{ key: 'industrial', label: 'Industrial' },
-					{ key: 'office', label: 'Office' },
-				]}
-				projects={[
-					{ industry: 'Schools', industryKey: 'schools', imageSrc: imagery.projectGallery[0].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named school project (district, building, city, year, system, sq ft). See Founder Input §5.' },
-					{ industry: 'Healthcare', industryKey: 'healthcare', imageSrc: imagery.projectGallery[1].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named healthcare project. See Founder Input §5.' },
-					{ industry: 'Retail', industryKey: 'retail', imageSrc: imagery.projectGallery[2].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named retail project. See Founder Input §5.' },
-					{ industry: 'Industrial', industryKey: 'industrial', imageSrc: imagery.projectGallery[3].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named industrial project. See Founder Input §5.' },
-					{ industry: 'Office', industryKey: 'office', imageSrc: imagery.projectGallery[4].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with named office project. See Founder Input §5.' },
-					{ industry: 'Schools', industryKey: 'schools', imageSrc: imagery.projectGallery[5].url, placeholderFact: 'Illustrative — Unsplash stand-in. Replace with second named school project. See Founder Input §5.' },
-				]}
-			/>
-			<div class="projects-stats">
-				<HeritagePlaceholder fact="Lifetime sq ft of commercial roof installed. Oldest active commercial roof Heritage installed. See Founder Input page §5." />
+	<StatBand stats={[
+		{ value: '7', label: 'Commercial systems installed', numericValue: 7 },
+		{ value: '40–60', label: 'Years · standing seam metal' },
+		{ value: '20+', label: 'Years · single-ply systems' },
+		{ value: '1 wk', label: 'Walkthrough → bid · typical' },
+	]} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="Recent work"
+					heading="Across the region."
+					lede="Real Heritage commercial install photography lands once the project library is supplied. Captions reflect the work; photos are placeholder."
+					maxWidth="780px"
+				/>
+				<div class="grid-spacer">
+					<ProjectShowcase projects={projects} group="commercial-projects" />
+				</div>
 			</div>
 		</section>
+	</Reveal>
 
-		<!-- Maintenance contracts — same flow, no separate band -->
-		<section class="block maintenance">
-			<p class="eyebrow">Maintenance contracts</p>
-			<h2 class="block-h">Caught small beats fixed expensive.</h2>
-			<p class="block-sub">Scheduled inspections, small repairs, and a documented roof history. Quoted by building.</p>
-			<HeritagePlaceholder fact="Maintenance contract structure: typical visit frequency (semi-annual / quarterly), what's included, typical price band. See Founder Input page §5." />
-			<div class="trust-inline">
-				<TrustStrip items={["Bonded and insured", "All major systems", "Locally owned"]} />
-			</div>
-		</section>
-
-	</div>
-
-	<!-- Page-end CTA -->
-	<FullBleedSection
-		imageSrc={imagery.heroCandidates.residentialRoofC.url}
-		imageAlt="Aerial view of a commercial roof"
-		overlayPosition="center"
-		minHeight="440px"
-		overlayDarken={0.65}
-	>
-		<p class="end-cta-eyebrow">Bid-ready</p>
-		<h2 class="end-cta-h">Walkthrough, scope, and pricing within the week.</h2>
-		<p class="end-cta-sub">Send a building address. We send a roofer.</p>
-		<a class="end-cta-button" href="/#inspection">Request consultation</a>
-	</FullBleedSection>
+	<PageCTA
+		heading="Free commercial roof assessment.<br />Honest answer on what to do."
+		lede="We tell you whether to restore, recover, or replace before we put a number to it."
+		primaryCta={{ label: 'Request a walkthrough', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.metalRoofing}
+	/>
 </BaseLayout>
 
 <style>
-	/* Hero */
-	.hero { position: relative; min-height: 540px; background: #1a1a1a; }
-	.hero-photo {
-		position: absolute; inset: 0;
-		background: linear-gradient(180deg, #7d8b9e 0%, #a8a89c 50%, #4a4a48 100%);
-		opacity: 0.92;
-	}
-	.hero-overlay {
-		position: absolute; inset: 0;
-		background: linear-gradient(90deg, rgba(26,26,26,0.78) 0%, rgba(26,26,26,0.35) 60%, rgba(26,26,26,0.1) 100%);
-	}
-	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
-	.hero-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
-	}
-	.hero-h1 {
-		color: #faf8f4; font-size: 56px; font-weight: 600;
-		line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px;
-	}
-	.hero-sub {
-		color: #d8d2c2; font-size: 17px; line-height: 1.55;
-		margin: 0 0 32px; max-width: 560px;
-	}
-	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
-	.cta-primary {
-		background: #b54620; color: #faf8f4;
-		padding: 14px 28px; font-size: 15px; font-weight: 500;
-		border-radius: var(--radius-pill);
-		transition: background 150ms ease, box-shadow 150ms ease;
-	}
-	.cta-primary:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
-	.cta-secondary {
-		color: #faf8f4; padding: 12px 26px;
-		font-size: 15px; font-weight: 500;
-		border: 2px solid #faf8f4;
-		border-radius: var(--radius-pill);
-		transition: background 150ms ease, color 150ms ease;
-	}
-	.cta-secondary:hover { background: #faf8f4; color: #1a1a1a; }
-
-	/* Continuous flow */
-	.flow { background: var(--off-white); }
-	.block {
-		padding: 80px 48px;
-		max-width: 1200px;
-		margin: 0 auto;
-	}
-	.block + .block { border-top: 1px solid var(--border); }
-
-	.eyebrow {
-		color: var(--rust);
-		font-size: 13px; font-weight: 500;
-		letter-spacing: 1px; text-transform: uppercase;
-		margin: 0 0 16px;
-	}
-	.eyebrow.on-dark { color: var(--rust); }
-	.eyebrow-soft { color: var(--charcoal); opacity: 0.65; margin-bottom: 20px; }
-	.block-h {
-		color: var(--charcoal);
-		font-size: 36px; font-weight: 600;
-		letter-spacing: -0.8px; line-height: 1.15;
-		margin: 0 0 16px;
-	}
-	.block-h.on-dark { color: var(--off-white); }
-	.block-sub {
-		color: var(--warm-gray);
-		font-size: 17px; line-height: 1.6;
-		margin: 0 0 32px;
-		max-width: 580px;
-	}
-	.block-sub.on-dark { color: var(--subhead-dark); }
-	.rust-cta {
-		display: inline-flex; align-items: center;
-		padding: 14px 28px;
-		background: var(--rust); color: var(--off-white);
-		font-size: 15px; font-weight: 500;
-		border-radius: var(--radius-pill);
-		transition: background 150ms ease, box-shadow 150ms ease;
-	}
-	.rust-cta:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
-
-	/* Intro row */
-	.intro-row {
-		display: grid;
-		grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-		gap: 56px;
-		align-items: center;
-		margin-bottom: 56px;
-	}
-	.intro-photo {
-		aspect-ratio: 4 / 3;
-		border-radius: var(--radius-large);
-		box-shadow: var(--shadow-subtle);
-		overflow: hidden;
-	}
-	.intro-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-	.service-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 24px;
-	}
-
-	/* Industries */
-	.industry-tags {
-		display: flex; flex-wrap: wrap; gap: 10px;
-		margin-bottom: 32px;
-	}
-	.industry-tag {
-		display: inline-flex; padding: 10px 22px;
-		background: var(--charcoal); color: var(--off-white);
-		font-size: 14px; font-weight: 500; letter-spacing: 0.2px;
-		border-radius: var(--radius-pill);
-	}
-	.industry-rows {
-		display: grid; grid-template-columns: 1fr 1fr;
-		gap: 14px 56px; max-width: 1000px;
-	}
-	.industry-row {
-		display: grid; grid-template-columns: 130px 1fr;
-		gap: 16px; padding: 14px 0;
-		border-bottom: 1px solid var(--border);
-	}
-	.industry-row-label { color: var(--charcoal); font-size: 14px; font-weight: 600; }
-	.industry-row-body { color: var(--warm-gray); font-size: 14px; line-height: 1.5; }
-
-	/* Systems tabs sit on the off-white flow; cert placeholder underneath */
-	.systems-cert { max-width: 1100px; margin: 28px auto 0; }
-
-	/* Why commercial — LayeredCard + StatRow */
-	.stats-inline { margin-top: 56px; }
-
-	/* Bonding — flat data list */
-	.data-list {
-		max-width: 880px; margin: 0;
-		display: flex; flex-direction: column; gap: 0;
-	}
-	.data-row {
-		display: grid; grid-template-columns: 240px 1fr;
-		gap: 32px; padding: 18px 0;
-		border-top: 1px solid var(--border);
-		align-items: start;
-	}
-	.data-row:last-child { border-bottom: 1px solid var(--border); }
-	.data-row-label {
-		color: var(--charcoal); font-size: 14px; font-weight: 600;
-		letter-spacing: -0.1px; padding-top: 4px;
-	}
-	.data-row-value { margin: 0; }
-
-	/* Re-roof row */
-	.reroof-row {
-		display: grid;
-		grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-		gap: 56px;
-		align-items: center;
-		margin-bottom: 48px;
-	}
-	.reroof-photo {
-		aspect-ratio: 4 / 3;
-		border-radius: var(--radius-large);
-		box-shadow: var(--shadow-subtle);
-		overflow: hidden;
-	}
-	.reroof-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-	.reroof-flow { --cols: 5; }
-
-	/* Projects */
-	.projects-stats { max-width: 1100px; margin: 32px auto 0; }
-
-	/* Maintenance */
-	.trust-inline { margin-top: 32px; }
-	.trust-inline > :global(.trust) {
-		background: transparent;
-		border-top: 0;
-		border-bottom: 0;
-		padding: 0;
-	}
-
-	/* End CTA */
-	.end-cta-eyebrow {
-		color: var(--rust);
-		font-size: 13px; font-weight: 500;
-		letter-spacing: 1px; text-transform: uppercase;
-		margin: 0 0 16px;
-	}
-	.end-cta-h {
-		color: var(--off-white);
-		font-size: 44px; font-weight: 600;
-		letter-spacing: -1px; line-height: 1.1;
-		margin: 0 0 14px;
-		max-width: 640px;
-	}
-	.end-cta-sub {
-		color: var(--subhead-dark);
-		font-size: 17px; line-height: 1.55;
-		margin: 0 0 28px;
-		max-width: 580px;
-	}
-	.end-cta-button {
-		display: inline-flex; align-items: center;
-		padding: 18px 36px;
-		background: var(--rust); color: var(--off-white);
-		font-size: 16px; font-weight: 500;
-		border-radius: var(--radius-pill);
-		box-shadow: var(--shadow-active);
-		transition: background 150ms ease, transform 200ms ease;
-	}
-	.end-cta-button:hover { background: #9d3a1a; transform: translateY(-1px); }
+	.page-section { padding: clamp(72px, 8vw, 128px) 0; }
+	.grid-spacer { margin-top: clamp(48px, 5vw, 80px); }
 </style>
