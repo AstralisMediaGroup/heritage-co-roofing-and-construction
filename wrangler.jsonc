@@ -3,6 +3,9 @@
 	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "former-field",
 	"main": "@astrojs/cloudflare/entrypoints/server",
+	"build": {
+		"command": "npm run build"
+	},
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS"
