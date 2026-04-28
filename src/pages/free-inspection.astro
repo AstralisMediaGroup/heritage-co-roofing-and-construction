@@ -16,10 +16,10 @@ const v2 = imagery.v2;
 		<div class="container inspect-hero-grid">
 			<div class="inspect-hero-text">
 				<p class="eyebrow">Free inspection</p>
-				<h1 class="display inspect-h1">Free roof inspection.<br />Real person on the ladder.</h1>
-				<p class="lede inspect-lede">Same-day or next-day. Written report and a real quote whether you need work or not. No high-pressure close.</p>
+				<h1 class="display inspect-h1">Free roof inspection.<br />Next day, real person on the ladder.</h1>
+				<p class="lede inspect-lede">Next day in the service area. Written report and a real quote whether you need work or not. No high-pressure close.</p>
 				<div class="inspect-promise">
-					<PromiseStrip items={['Real person, not a salesperson', 'Written report', 'No obligation', 'Same-day or next-day']} />
+					<PromiseStrip items={['Real person, not a salesperson', 'Written report', 'No obligation', 'Next day · region-wide']} />
 				</div>
 			</div>
 			<div class="inspect-hero-photo">
@@ -43,6 +43,10 @@ const v2 = imagery.v2;
 						<a href="tel:9032428102" class="form-call">
 							<span class="form-call-label">Or call us direct</span>
 							<span class="form-call-num">903-242-8102</span>
+						</a>
+						<a href="mailto:contact@heritagecoroofing.com" class="form-email">
+							<span class="form-call-label">Email</span>
+							<span class="form-email-addr">contact@heritagecoroofing.com</span>
 						</a>
 					</div>
 				</div>
@@ -170,6 +174,18 @@ const v2 = imagery.v2;
 	.form-call:hover { border-color: var(--rust); background: var(--rust-soft); }
 	.form-call-label { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); }
 	.form-call-num { font-size: clamp(28px, 3vw, 36px); font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+	.form-email {
+		display: inline-flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 18px 24px;
+		margin-top: 12px;
+		border: 1px solid var(--rule-strong);
+		border-radius: var(--r-soft);
+		transition: border-color 220ms ease, background 220ms ease;
+	}
+	.form-email:hover { border-color: var(--rust); background: var(--rust-soft); }
+	.form-email-addr { font-size: 16px; font-weight: 600; color: var(--ink); }
 
 	.inspect-form {
 		display: flex;

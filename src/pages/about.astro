@@ -30,7 +30,7 @@ const v2 = imagery.v2;
 
 	<section class="page-section">
 		<div class="container">
-			<PromiseStrip items={['Locally owned + operated', '30+ combined years', 'Headquartered in Longview, TX']} />
+			<PromiseStrip items={['Locally owned + operated', 'Heritage Standard · 10-year workmanship', '4,000+ residential roofs', 'Headquartered in Longview, TX']} />
 		</div>
 	</section>
 
@@ -43,7 +43,8 @@ const v2 = imagery.v2;
 				/>
 				<div class="story-body">
 					<p>Heritage Co. was started by people who'd worked in the roofing trade long enough to see what was wrong with how it was being done in East Texas. National chains buying up local shops, sending out commission-paid inspectors, pushing replacements that weren't necessary, disappearing after the install when something went wrong.</p>
-					<p>We figured a region this size deserved a contractor that took its name seriously. Locally owned. Founders take calls. Crews live in the area. The four founders hold 30+ combined years on East Texas roofs between them. The work is being done by people who'll still be here in ten years.</p>
+					<p>We figured a region this size deserved a contractor that took its name seriously. Locally owned. Founders take calls. Crews live in the area. The work is being done by people who'll still be here in ten years.</p>
+					<p>4,000+ residential roofs installed. 100,000+ square feet of commercial roof installed. The oldest roof on our books — installed in 2016 — is still on the house.</p>
 					<p>The voice on this site is plainspoken on purpose. We don't write "industry-leading." We don't say "trusted partner." We say what we actually do, in the words a roofer would use, and we let the work speak for itself.</p>
 				</div>
 			</div>
@@ -58,7 +59,7 @@ const v2 = imagery.v2;
 		heightVw={62}
 	/>
 
-	<CrewBlock heading="The four founders." eyebrow="Who you actually talk to" lede="30+ combined years on East Texas roofs. The phone, the inspection, the install, and the warranty all run through the same four people." />
+	<CrewBlock heading="The four founders." eyebrow="Who you actually talk to" lede="The phone, the inspection, the install, and the warranty all run through the same four people. Same crew shows up if anything needs attention later." />
 
 	<Reveal>
 		<section class="page-section">
@@ -75,11 +76,26 @@ const v2 = imagery.v2;
 		</section>
 	</Reveal>
 
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<PhotoLede
+					photo={v2.bleeds.workmanship}
+					eyebrow="The Heritage Standard"
+					heading="What we stand behind."
+					body="Heritage Standard is the named guarantee on every job. 10-year Heritage workmanship warranty on residential installs, manufacturer material warranties pass through to the homeowner, transferable once on resale, same warranty terms on storm-damage installs as a standard re-roof. Heritage carries general liability and our crews are covered by workers' comp."
+					bullets={['10-year Heritage workmanship warranty', 'Material warranty transferable on home sale (1x)', 'Same warranty on storm-damage installs', 'Insured + workers\' comp covered']}
+					photoSide="left"
+				/>
+			</div>
+		</section>
+	</Reveal>
+
 	<StatBand stats={[
-		{ value: '30+', label: 'Combined years roofing', numericValue: 30, suffix: '+' },
-		{ value: '4', label: 'Founders · same names you call', numericValue: 4 },
-		{ value: '14', label: 'Service-area cities · TX + AR', numericValue: 14 },
-		{ value: '1', label: 'HQ · Longview, TX', numericValue: 1 },
+		{ value: '4,000+', label: 'Residential roofs installed', numericValue: 4000, suffix: '+' },
+		{ value: '100k+', label: 'Sq ft commercial installed' },
+		{ value: '2016', label: 'Oldest active install · still on the house' },
+		{ value: '10 yr', label: 'Workmanship warranty · Heritage Standard' },
 	]} />
 
 	<PageCTA

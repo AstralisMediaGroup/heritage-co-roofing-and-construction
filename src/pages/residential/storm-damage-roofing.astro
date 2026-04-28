@@ -9,51 +9,60 @@ const v2 = imagery.v2;
 	title="Storm damage roofing"
 	heroEyebrow="Residential · storm damage"
 	heroHeading="Storm damage?<br />We handle the whole roof."
-	heroLede="Hail, wind, tree fall, water intrusion. Free inspection, full damage documentation, direct work with your insurance adjuster. You pay your deductible. We do the rest."
+	heroLede="Hail, wind, tree fall, water intrusion. Next-day inspection, full damage documentation, work with any carrier. You pay your deductible. We do the rest."
 	heroPhoto={v2.pageHeros.stormDamage}
 	heroCta={{ label: 'Storm damage inspection', href: '/free-inspection' }}
 	bleedPhoto={v2.bleeds.storm}
 	bleedHeading="Hail. Wind. Tree fall.<br />We handle the whole job."
 	overview={{
 		eyebrow: 'What we do on a storm claim',
-		heading: 'Inspection. Documentation. Adjuster meeting. Install.',
-		body: "Heritage handles storm damage as an end-to-end job: free roof inspection within 24–48 hours of your call, full photo and video documentation of damage, direct meeting with your insurance adjuster on-site, supplement requests when the initial estimate undervalues scope, and the install once the claim is approved. You handle your deductible. We handle everything else."
+		heading: 'Inspection. Documentation. Install. Heritage Standard warranty.',
+		body: "Heritage handles storm damage as an end-to-end job: free next-day roof inspection, full photo and video documentation, on-site adjuster meeting on request, supplement requests when the initial estimate undervalues scope, and the install once the claim is approved. Same 10-year workmanship warranty as a standard install. You handle your deductible. We handle everything else."
 	}}
 	keyPoints={[
 		{
 			heading: 'How insurance claims actually work.',
-			body: "You report damage to your insurer. They send an adjuster. The adjuster writes a scope and a number. Heritage meets the adjuster on-site, walks the roof together, and makes sure the scope is complete. If the carrier's number is short, we file a supplement with the documentation. The carrier issues payment minus your deductible. We do the work.",
-			bullets: ['Free inspection within 24–48 hours', 'On-site adjuster meeting', 'Photo + video documentation', 'Supplement requests when needed'],
+			body: "You report damage to your insurer. They send an adjuster. The adjuster writes a scope and a number. We attend the adjuster meeting on request, walk the roof together, and make sure the scope is complete. If the carrier's number is short, we file a supplement with the documentation. The carrier issues payment minus your deductible. We do the work.",
+			bullets: ['Free next-day inspection', 'Adjuster meeting on request', 'Photo + video documentation', 'Supplement requests when needed', 'We attend the re-inspection if the claim is denied'],
 			photo: v2.serviceTiles.storm,
 			photoSide: 'left',
 		},
 		{
 			heading: 'What gets covered.',
-			body: "Hail damage to shingles (granule loss, fractures, exposed mat). Wind damage (lifted, missing, or torn shingles). Tree fall (puncture, structural). Water intrusion from any of the above. Insurance covers the roof replacement; coverage for related items (interior ceiling damage, gutters, fence) depends on your policy.",
-			bullets: ['Hail damage (granule loss, mat exposure)', 'Wind damage (missing, lifted, torn shingles)', 'Tree fall + impact', 'Water intrusion + ceiling damage'],
+			body: "Hail damage to shingles (granule loss, fractures, exposed mat). Wind damage (lifted, missing, or torn shingles). Tree fall (puncture, structural). Water intrusion from any of the above. Insurance covers the roof replacement; coverage for related items (interior ceiling damage, gutters, fence) depends on your policy. We work with every major carrier — State Farm, Allstate, USAA, Farmers, Texas Farm Bureau, Liberty Mutual, anything you've got.",
+			bullets: ['Hail damage (granule loss, mat exposure)', 'Wind damage (missing, lifted, torn shingles)', 'Tree fall + impact', 'Water intrusion + ceiling damage', 'Every major carrier'],
 			photo: v2.bleeds.workmanship,
 			photoSide: 'right',
 		},
+		{
+			heading: 'Deductible. Payment plans. No surprise costs.',
+			body: "Your deductible is the only out-of-pocket on a covered claim. Heritage offers payment plans on the deductible — split it across the install timeline if cash flow is tight. Anything beyond your deductible is between Heritage and the carrier; you don't see those numbers and you don't pay them.",
+			bullets: ['Deductible payment plans available', 'Nothing out-of-pocket beyond deductible on covered claims', 'GoodLeap financing if you want longer terms'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'left',
+		},
 	]}
 	stats={[
-		{ value: '24–48', label: 'Hours to first inspection' },
+		{ value: 'Next day', label: 'Free inspection turnaround' },
 		{ value: '$0', label: 'Out-of-pocket beyond deductible' },
-		{ value: '100%', label: 'Adjuster on-site for documented claims' },
-		{ value: '7 days', label: 'Typical claim → install · Heritage average' },
+		{ value: '10 yr', label: 'Workmanship warranty · Heritage Standard' },
+		{ value: 'Any', label: 'Insurance carrier · we work with all' },
 	]}
 	projectPhotos={[v2.projects[0], v2.projects[1], v2.projects[6], v2.projects[7]]}
 	projectCaptions={['Hail damage replacement, Tyler', 'Wind damage claim, Longview', 'Tree fall + roof rebuild, Marshall', 'Insurance install, Kilgore']}
 	faq={[
-		{ q: "Will my premium go up?", a: '<p>In Texas, premiums don\'t go up on a single weather-related claim filed properly. (General guidance — your specific carrier and policy govern. We\'re not insurance professionals; talk to your agent on this.)</p>' },
-		{ q: "Do I pay anything upfront?", a: '<p>Your deductible is what you pay out of pocket. Some carriers send the deductible directly to the contractor; some send it to you. Heritage works with both arrangements. Anything beyond your deductible is between Heritage and the carrier.</p>' },
-		{ q: "How long does the whole process take?", a: '<p>Free inspection: 24–48 hours from your call. Adjuster meeting: typically within a week of your claim being filed. Approval: 1–2 weeks after the adjuster visit. Install: same week as approval, weather permitting. Most full claims close inside 30 days.</p>' },
-		{ q: "What if my claim is denied?", a: '<p>If the adjuster sees no covered damage, we write up our findings independently — sometimes that re-opens the claim with a different adjuster. If the damage is real but the carrier disagrees on scope, we file a supplement. If there\'s genuinely no covered damage, we tell you that and you don\'t pay us anything.</p>' },
-		{ q: "Do you handle the paperwork?", a: '<p>Yes. We handle the adjuster meeting, the scope discussion, supplement requests with photo evidence, and most of the back-and-forth. You sign the documents and stay informed; we do the work.</p>' },
-		{ q: "What about emergency tarping?", a: '<p>Available 24/7. If your roof is actively leaking, we tarp first to stop the water, then handle the inspection and claim process during business hours.</p>' },
+		{ q: 'How fast do you come out?', a: '<p>Next day on storm-damage calls in our service area, weather and daylight permitting. Inspection is free and the report comes with photos.</p>' },
+		{ q: 'How long does the whole process take?', a: '<p>As fast as the insurance side moves. Free inspection: next day. Adjuster meeting: usually inside a week of the claim being filed. Approval: 1–2 weeks after the adjuster visit. Install: same week as approval, weather permitting. The carrier sets the pace; Heritage shows up the day they say go.</p>' },
+		{ q: 'Will my premium go up?', a: "<p>In Texas, premiums don't typically go up on a single weather-related claim filed properly. (General guidance — your specific carrier and policy govern. We're not insurance professionals; talk to your agent on this.)</p>" },
+		{ q: 'Do I pay anything upfront?', a: '<p>Your deductible is the only out-of-pocket on a covered claim. We can split the deductible across a payment plan if cash flow is tight. Some carriers send the deductible directly to the contractor; some send it to you. Heritage works with both arrangements.</p>' },
+		{ q: 'Will you attend my adjuster meeting?', a: "<p>Yes — on request. Many homeowners ask us to be there to walk the roof with the adjuster and make sure nothing gets missed. We're happy to do it. If you'd rather handle the meeting yourself, that's fine too — we still document the damage and stay in the loop.</p>" },
+		{ q: 'What if my claim is denied?', a: "<p>We attend the re-inspection. If the adjuster sees no covered damage, we write up our findings independently and request a re-inspection — sometimes that re-opens the claim with a different adjuster. If the damage is real but the carrier disagrees on scope, we file a supplement. If there's genuinely no covered damage, we tell you that and you don't pay us anything.</p>" },
+		{ q: 'Do you handle the paperwork?', a: '<p>Yes. We handle the adjuster meeting, the scope discussion, supplement requests with photo evidence, and most of the back-and-forth. You sign the documents and stay informed; we do the work.</p>' },
+		{ q: 'What about emergency tarping?', a: "<p>If your roof is actively leaking, call and we'll get a tarp on it. We tarp first to stop the water, then handle the inspection and claim process.</p>" },
 	]}
-	ctaHeading="Storm damage?<br />Inspection in 24 hours."
-	ctaLede="Free inspection. We handle the adjuster, the scope, and the install."
+	ctaHeading="Storm damage?<br />Next-day inspection."
+	ctaLede="Free inspection. We handle the adjuster on request, the scope, and the install. 10-year workmanship warranty on the new roof."
 	ctaPhoto={v2.pageHeros.stormDamage}
 	ctaPrimary={{ label: 'Storm damage inspection', href: '/free-inspection' }}
-	promises={['Insurance accepted · all carriers', '24/7 emergency tarp', 'Adjuster on-site · documented claims']}
+	promises={['Every major carrier', 'Deductible payment plans', '10-year workmanship warranty']}
 />

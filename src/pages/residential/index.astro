@@ -33,10 +33,10 @@ const materials = [
 ];
 
 const process = [
-	{ heading: 'Free inspection', body: 'Real person on the ladder. Photos, decking, ventilation, flashings — fully documented.' },
-	{ heading: 'Same-day quote', body: 'Written quote with system, warranty, and timeline. No high-pressure upsell.' },
-	{ heading: 'Install', body: 'Most residential roofs install in one day. Our crew lives in your area.' },
-	{ heading: 'Workmanship + material warranty', body: 'Manufacturer warranty plus Heritage workmanship warranty on every job.' },
+	{ heading: 'Next-day inspection', body: 'Real person on the ladder. Photos, decking, ventilation, flashings — fully documented.' },
+	{ heading: 'Same-day quote', body: 'Written quote with system, warranty, and timeline. GoodLeap financing if you need it. No high-pressure upsell.' },
+	{ heading: 'Install', body: 'Most residential roofs install in one day. Same crew start to finish.' },
+	{ heading: 'Heritage Standard warranty', body: '10-year Heritage workmanship warranty plus manufacturer material warranty. Transferable once on home sale.' },
 ];
 ---
 
@@ -49,7 +49,7 @@ const process = [
 		heading="Roofs for your home."
 		lede="Replacement, repair, and storm damage. Insurance accepted. Free inspections, same-day quotes. Most residential roofs install in a single day."
 		photo={v2.pageHeros.residential}
-		bullets={['Free inspection from a real person', 'Insurance claim handling', 'Workmanship + material warranties']}
+		bullets={['Next-day free inspection', '10-year Heritage workmanship warranty', 'Insurance claim handling · GoodLeap financing']}
 		primaryCta={{ label: 'Get my free inspection', href: '/free-inspection' }}
 		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
 	/>
@@ -59,7 +59,7 @@ const process = [
 	<Reveal>
 		<section class="page-section">
 			<div class="container">
-				<PromiseStrip items={['Insurance accepted', 'Workmanship + material warranties', 'Locally owned + crewed']} />
+				<PromiseStrip items={['Heritage Standard · 10-year workmanship', 'Insurance accepted · all carriers', 'GoodLeap financing · 0% up to 12 mo', 'Locally owned + crewed']} />
 			</div>
 		</section>
 	</Reveal>
@@ -121,10 +121,10 @@ const process = [
 	</Reveal>
 
 	<StatBand stats={[
-		{ value: '30+', label: 'Combined years roofing', numericValue: 30, suffix: '+' },
+		{ value: '4,000+', label: 'Residential roofs installed', numericValue: 4000, suffix: '+' },
+		{ value: '10 yr', label: 'Workmanship warranty · Heritage Standard' },
 		{ value: '1 day', label: 'Typical residential install' },
-		{ value: '14', label: 'Service-area cities · TX + AR', numericValue: 14 },
-		{ value: '5★', label: 'Avg review · pending publish' },
+		{ value: 'Next day', label: 'Free inspection turnaround' },
 	]} />
 
 	<Reveal>

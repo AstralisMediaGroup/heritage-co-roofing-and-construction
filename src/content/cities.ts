@@ -1,6 +1,8 @@
-// Authoritative city list per Build Pack §6.
-// The "+ 25 more cities" hedge from §6 is not encoded here — Service Areas page
-// surfaces a HeritagePlaceholder for the real list (Founder Input §9).
+// Authoritative city list. East Texas list is the named-cities subset
+// (full surrounding-cities research per Founder Input §9 still pending).
+// Central Arkansas list updated with cities Heritage actually covers
+// per founder confirmation: Conway, Little Rock, Fort Smith, Clarksville,
+// Russellville (Founder Input §9).
 export const eastTexas: string[] = [
 	'Longview',
 	'Tyler',
@@ -17,6 +19,7 @@ export const eastTexas: string[] = [
 export const centralArkansas: string[] = [
 	'Little Rock',
 	'Conway',
+	'Fort Smith',
 	'Russellville',
 	'Clarksville',
 ];

@@ -140,18 +140,19 @@ export const imagery = {
 			chimney: ROOF_WEATHERED,
 		},
 
-		// ── Trust marquee logos — text-based for now
+		// ── Trust marquee logos — text-based.
+		//    Cert list per Founder Input §2.
 		trustItems: [
-			{ label: 'BBB Accredited' },
 			{ label: 'NRCA Member' },
 			{ label: 'Texas Association of Builders' },
-			{ label: 'GAF Certified' },
-			{ label: 'Owens Corning Preferred' },
+			{ label: 'GAF Master Elite · commercial' },
 			{ label: 'CertainTeed Credentialed' },
-			{ label: 'Atlas Pro+' },
-			{ label: 'Malarkey Emerald Pro' },
-			{ label: 'Insured + bonded' },
-			{ label: 'Workmanship warranty' },
+			{ label: 'IKO Certified' },
+			{ label: '10-year workmanship warranty' },
+			{ label: 'Heritage Standard' },
+			{ label: 'Insured + workers\' comp' },
+			{ label: '4,000+ residential roofs' },
+			{ label: 'Locally owned · East TX + Central AR' },
 		],
 
 		// ── Crew + process photos (placeholder slots — Heritage owns these)

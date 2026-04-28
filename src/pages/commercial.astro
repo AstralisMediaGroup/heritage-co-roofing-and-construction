@@ -25,9 +25,21 @@ const systems = [
 	{ heading: 'Maintenance programs', body: 'Annual inspection + repair contract. Protects warranties; cuts emergency calls.', href: '/commercial/maintenance-programs', photo: v2.systemTiles.maintenance, eyebrow: 'Program' },
 ];
 
+// Named projects per Founder Input §5 — three Braum's PVC roofs on the books.
+// Real Heritage install photography to follow once Founder Input §10 is supplied;
+// captions are accurate today.
 const projects = v2.projects.slice(0, 8).map((p, i) => ({
 	photo: p,
-	caption: ['TPO re-roof, retail · Tyler', 'Mod-bit replacement, healthcare · Longview', 'Standing seam, light commercial · Marshall', 'Metal over brick, retail · Kilgore', 'Multi-building TPO project, Longview', 'Built-up restoration, manufacturing', 'Asphalt commercial, multi-tenant', 'Coating restoration, warehouse'][i] || p.alt,
+	caption: [
+		"Braum's · Longview, TX · PVC",
+		"Braum's · Anna, AR · PVC",
+		"Braum's · Clarksville, AR · PVC",
+		'Standing seam metal, light commercial · Marshall, TX',
+		'Multi-building TPO project, Longview, TX',
+		'Built-up restoration, manufacturing',
+		'TPO re-roof, retail · Tyler, TX',
+		'Coating restoration, warehouse',
+	][i] || p.alt,
 }));
 ---
 
@@ -50,7 +62,7 @@ const projects = v2.projects.slice(0, 8).map((p, i) => ({
 	<Reveal>
 		<section class="page-section">
 			<div class="container">
-				<PromiseStrip items={['Bonded + insured', 'Workmanship warranty', 'All major systems', 'Maintenance programs']} />
+				<PromiseStrip items={['GAF Master Elite · commercial', 'Insured + workers\' comp', 'Heritage Standard workmanship warranty', 'All major systems']} />
 			</div>
 		</section>
 	</Reveal>
@@ -96,9 +108,9 @@ const projects = v2.projects.slice(0, 8).map((p, i) => ({
 	</Reveal>
 
 	<StatBand stats={[
+		{ value: '100k+', label: 'Sq ft commercial installed' },
 		{ value: '7', label: 'Commercial systems installed', numericValue: 7 },
-		{ value: '40–60', label: 'Years · standing seam metal' },
-		{ value: '20+', label: 'Years · single-ply systems' },
+		{ value: 'GAF', label: 'Master Elite · commercial certified' },
 		{ value: '1 wk', label: 'Walkthrough → bid · typical' },
 	]} />
 
@@ -106,9 +118,9 @@ const projects = v2.projects.slice(0, 8).map((p, i) => ({
 		<section class="page-section">
 			<div class="container">
 				<SectionHead
-					eyebrow="Recent work"
-					heading="Across the region."
-					lede="Real Heritage commercial install photography lands once the project library is supplied. Captions reflect the work; photos are placeholder."
+					eyebrow="Named work"
+					heading="Real Heritage commercial jobs."
+					lede="Three Braum's PVC roofs across East Texas and Arkansas. More commercial projects on the books — drone-aided install photography lands once the project library is supplied."
 					maxWidth="780px"
 				/>
 				<div class="grid-spacer">
