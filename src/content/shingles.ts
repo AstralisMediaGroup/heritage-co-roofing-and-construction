@@ -1,14 +1,22 @@
 // Asphalt shingle product browser data — types, brands, color palettes.
 //
-// Color names and hex codes are industry-typical for each tier. Heritage's
-// stocked SKU list and exact brand color matches stay HeritagePlaceholder
-// until Founder Input §2 confirms dealer-portal access (per Build Pack v2
-// factual-integrity rule). The categories themselves are real.
+// Color names are pulled from each tier's representative manufacturer
+// product line so the visual matches reality:
+//   3-tab        → IKO Marathon Plus AR
+//   Architectural → IKO Cambridge
+//   Designer     → IKO Royal Estate
+// Swatch image URLs hot-link to IKO's CDN — no copies stored locally.
+// The brands list still includes every manufacturer Heritage installs;
+// the on-screen swatches just pick one canonical product line per tier
+// to show real product texture instead of generic stock photos.
+// Hex codes are visual fallbacks when a swatch image isn't available.
 
 export interface ShingleColor {
 	name: string;
 	hex: string;
 	popular?: boolean;
+	/** Manufacturer-CDN swatch image URL (hot-linked, never copied). */
+	imgUrl?: string;
 }
 
 export interface ShingleType {
@@ -25,6 +33,9 @@ export interface ShingleType {
 	brands: string[];
 	colors: ShingleColor[];
 	bestFor: string;
+	/** Tier-representative shingle photo (manufacturer CDN). */
+	heroUrl: string;
+	heroAlt: string;
 }
 
 export const shingleTypes: ShingleType[] = [
@@ -39,11 +50,14 @@ export const shingleTypes: ShingleType[] = [
 		wind: '60 mph',
 		life: '15–18 yrs',
 		priceTier: '$',
-		brands: ['GAF Royal Sovereign', 'Owens Corning Supreme', 'CertainTeed XT 25'],
+		brands: ['GAF Royal Sovereign', 'Owens Corning Supreme', 'CertainTeed XT 25', 'IKO Marathon Plus AR'],
 		bestFor: 'Rentals · short-stay homes · like-for-like matches',
+		heroUrl: 'https://www.iko.com/na/wp-content/uploads/2024/11/IKO_CRC_3TAB_SWCH_Dual-Black-2.webp',
+		heroAlt: 'IKO Marathon Plus AR Dual Black 3-tab shingle close-up',
 		colors: [
-			{ name: 'Charcoal', hex: '#2c2c2e', popular: true },
-			{ name: 'Weathered Wood', hex: '#5a4f42' },
+			{ name: 'Dual Black', hex: '#1c1c1e', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/11/IKO_CRC_3TAB_SWCH_Dual-Black-2.webp' },
+			{ name: 'Weatherwood', hex: '#5a4f42', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/11/IKO_CRC_3TAB_SWCH_WTWD.webp' },
+			{ name: 'Charcoal', hex: '#2c2c2e' },
 			{ name: 'Driftwood', hex: '#7a6c58' },
 			{ name: 'Estate Gray', hex: '#787673' },
 			{ name: 'Autumn Brown', hex: '#5e4030' },
@@ -61,21 +75,21 @@ export const shingleTypes: ShingleType[] = [
 		wind: '110–130 mph',
 		life: '20–25 yrs',
 		priceTier: '$$',
-		brands: ['GAF Timberline HDZ', 'Owens Corning Duration', 'CertainTeed Landmark', 'Atlas Pinnacle Pristine', 'Malarkey Highlander'],
+		brands: ['GAF Timberline HDZ', 'Owens Corning Duration', 'CertainTeed Landmark', 'IKO Cambridge', 'Atlas Pinnacle Pristine', 'Malarkey Highlander'],
 		bestFor: 'Default for nearly every East Texas home',
+		heroUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/2048_IKO_CRC_CAMB_SWCH_DBLK.webp',
+		heroAlt: 'IKO Cambridge Dual Black architectural shingle close-up',
 		colors: [
-			{ name: 'Charcoal', hex: '#262628', popular: true },
-			{ name: 'Pewter Gray', hex: '#6b6f70', popular: true },
-			{ name: 'Weathered Wood', hex: '#5a4f42', popular: true },
-			{ name: 'Driftwood', hex: '#7a6c58' },
-			{ name: 'Hickory', hex: '#6b4628' },
-			{ name: 'Mission Brown', hex: '#4a2f20' },
-			{ name: 'Slate', hex: '#414858' },
-			{ name: 'Hunter Green', hex: '#2d4733' },
-			{ name: 'Barkwood', hex: '#3a2820' },
-			{ name: 'Shakewood', hex: '#7d6149' },
-			{ name: 'Sand Dune', hex: '#a89878' },
-			{ name: 'Birchwood', hex: '#8a7964' },
+			{ name: 'Dual Black', hex: '#1c1c1e', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/2048_IKO_CRC_CAMB_SWCH_DBLK.webp' },
+			{ name: 'Charcoal Grey', hex: '#3a3a3c', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/CHGY_IKO_CRC_CAMB_SWCH-upd-min.webp' },
+			{ name: 'Dual Grey', hex: '#5a5a5c', imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/2048_IKO_CRC_CAMB_SWCH_DGRY-min.webp' },
+			{ name: 'Harvard Slate', hex: '#414858', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/2048_IKO_CRC_CAMB_SWCH_HRVD_SLTE-min.webp' },
+			{ name: 'Weatherwood', hex: '#5a4f42', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/RGB-WTWD_IKO_CRC_CAMB_SWCH-upd-min.webp' },
+			{ name: 'Driftwood', hex: '#7a6c58', imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/IKO_Cambridge_Driftwood.webp' },
+			{ name: 'Beachwood', hex: '#a89878', imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/IKO_Cambridge_Beachwood.webp' },
+			{ name: 'Earthtone Cedar', hex: '#7d5a3b', imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/RGB-ETC_IKO_CRC_CAMB_SWCH-upd-min.webp' },
+			{ name: 'Dual Brown', hex: '#4a2f20', imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/2048_IKO_CRC_CAMB_SWCH_DBWN-min.webp' },
+			{ name: 'Dove White', hex: '#dfd9c8', imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/IKO_CRC_CAMB_SWCH_DOVE_WHTE_2048-min.webp' },
 		],
 	},
 	{
@@ -89,19 +103,21 @@ export const shingleTypes: ShingleType[] = [
 		wind: '130–150 mph',
 		life: '30+ yrs',
 		priceTier: '$$$',
-		brands: ['GAF Camelot II', 'GAF Grand Sequoia', 'Owens Corning Berkshire', 'CertainTeed Presidential', 'Atlas StormMaster Shake', 'Atlas Pinnacle Impact', 'Malarkey Legacy'],
+		brands: ['GAF Camelot II', 'GAF Grand Sequoia', 'Owens Corning Berkshire', 'CertainTeed Presidential', 'IKO Royal Estate', 'IKO Crowne Slate', 'Atlas StormMaster Shake', 'Atlas Pinnacle Impact', 'Malarkey Legacy'],
 		bestFor: 'Long-stay homes · hail-prone zips · architectural intent',
+		heroUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/IKO_Royal-Estate-Harvest-Slate-min.webp',
+		heroAlt: 'IKO Royal Estate Harvest Slate designer shingle close-up',
 		colors: [
-			{ name: 'Slate', hex: '#3a4555', popular: true },
-			{ name: 'Cedar', hex: '#7d5a3b', popular: true },
-			{ name: 'Black Granite', hex: '#1c1c1e', popular: true },
-			{ name: 'Weathered Wood', hex: '#5a4f42' },
-			{ name: 'Stonewood', hex: '#5a4d3d' },
+			{ name: 'Harvest Slate', hex: '#5a4f42', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/IKO_Royal-Estate-Harvest-Slate-min.webp' },
+			{ name: 'Mountain Slate', hex: '#3a4555', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/IKO_Royal-Estate-Mountain-Slate.webp' },
+			{ name: 'Shadow Slate', hex: '#2c2f33', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/IKO_Royal-Estate-Shadow-Slate-min.webp' },
+			{ name: 'Taupe Slate', hex: '#7d6149', imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/IKO_Royal-Estate-Taupe-Slate-min.webp' },
+			{ name: 'Royal Granite', hex: '#4a4f5e', imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/05/Crowne-Slate_Royal-Granite-min-1.webp' },
+			{ name: 'Black Granite', hex: '#1c1c1e' },
+			{ name: 'Cedar', hex: '#7d5a3b' },
 			{ name: 'Aged Cedar', hex: '#4a382a' },
 			{ name: 'Hunter Green', hex: '#2d4733' },
-			{ name: 'Antique Slate', hex: '#4a4f5e' },
 			{ name: 'Burnt Sienna', hex: '#7a3a26' },
-			{ name: 'Driftwood', hex: '#8a7964' },
 		],
 	},
 ];

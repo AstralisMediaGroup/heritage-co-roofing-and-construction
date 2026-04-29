@@ -1,13 +1,5 @@
 ---
 import { shingleTypes } from '../../content/shingles';
-import { imagery } from '../../content/imagery';
-
-const v2 = imagery.v2;
-const typePhotos = {
-	'3-tab': v2.bleeds.workmanship,
-	'architectural': v2.materialTiles.asphalt,
-	'designer': v2.bleeds.home,
-};
 ---
 
 <div class="se" data-shingle-explorer>
@@ -29,18 +21,27 @@ const typePhotos = {
 	</div>
 
 	{shingleTypes.map((t, i) => {
-		const photo = typePhotos[t.id];
+		const initialColor = t.colors[0];
+		const initialPhoto = initialColor.imgUrl ?? t.heroUrl;
+		const initialAlt = initialColor.imgUrl ? `${t.brands[0]} ${initialColor.name} swatch` : t.heroAlt;
+		const hasInitialImg = Boolean(initialColor.imgUrl);
 		return (
 			<div
 				class={`se-panel ${i === 0 ? 'is-active' : ''}`}
 				data-tab-panel={t.id}
 				role="tabpanel"
+				data-tier-hero={t.heroUrl}
+				data-tier-hero-alt={t.heroAlt}
 			>
 				<div class="se-grid">
 					<div class="se-photo-side">
 						<div class="se-photo">
-							{photo.url && <img src={photo.url} alt={photo.alt} loading="lazy" />}
-							<div class="se-photo-overlay" data-photo-overlay style={`background: ${t.colors[0].hex};`} />
+							<img src={initialPhoto} alt={initialAlt} loading="lazy" data-photo-img />
+							<div
+								class="se-photo-overlay"
+								data-photo-overlay
+								style={`background: ${initialColor.hex}; opacity: ${hasInitialImg ? '0' : '0.55'};`}
+							/>
 						</div>
 						<div class="se-photo-meta">
 							<div class="se-photo-meta-color">
@@ -72,10 +73,12 @@ const typePhotos = {
 										data-swatch
 										data-color-name={c.name}
 										data-color-hex={c.hex}
+										data-color-img={c.imgUrl ?? ''}
 										style={`background: ${c.hex};`}
 										aria-label={`${c.name} (${c.hex})`}
 										title={c.name}
 									>
+										{c.imgUrl && <img src={c.imgUrl} alt="" loading="lazy" />}
 										{c.popular && <span class="se-swatch-pop" aria-label="Popular"></span>}
 									</button>
 								))}
@@ -289,6 +292,14 @@ const typePhotos = {
 		cursor: pointer;
 		transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
 	}
+	.se-swatch > img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
 	.se-swatch:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
 	.se-swatch.is-active {
 		border-color: var(--rust);
@@ -355,20 +366,41 @@ const typePhotos = {
 				});
 			});
 
-			// Per-panel swatch behavior — clicking a swatch updates the photo overlay tint and meta.
+			// Per-panel swatch behavior — clicking a swatch swaps the photo to the
+			// real manufacturer swatch image when one is available, otherwise falls
+			// back to tinting the tier's hero photo with the color's hex.
 			panels.forEach((panel) => {
 				const swatches = panel.querySelectorAll('[data-swatch]');
+				const photoImg = panel.querySelector('[data-photo-img]');
 				const overlay = panel.querySelector('[data-photo-overlay]');
 				const photoSwatch = panel.querySelector('[data-photo-swatch]');
 				const nameEl = panel.querySelector('[data-photo-name]');
 				const hexEl = panel.querySelector('[data-photo-hex]');
+				const heroUrl = panel.getAttribute('data-tier-hero') || '';
+				const heroAlt = panel.getAttribute('data-tier-hero-alt') || '';
 
 				swatches.forEach((sw) => {
 					sw.addEventListener('click', () => {
 						const hex = sw.getAttribute('data-color-hex');
 						const name = sw.getAttribute('data-color-name');
+						const imgUrl = sw.getAttribute('data-color-img') || '';
 						swatches.forEach((s) => s.classList.toggle('is-active', s === sw));
-						if (overlay) overlay.style.background = hex;
+
+						if (photoImg) {
+							if (imgUrl) {
+								photoImg.src = imgUrl;
+								photoImg.alt = name + ' swatch';
+							} else {
+								photoImg.src = heroUrl;
+								photoImg.alt = heroAlt;
+							}
+						}
+						if (overlay) {
+							overlay.style.background = hex;
+							// Real swatch images already show the actual color — drop the tint.
+							// No swatch image → tint the hero photo so the tile still reads.
+							overlay.style.opacity = imgUrl ? '0' : '0.55';
+						}
 						if (photoSwatch) photoSwatch.style.background = hex;
 						if (nameEl) nameEl.textContent = name;
 						if (hexEl) hexEl.textContent = hex.toUpperCase();
