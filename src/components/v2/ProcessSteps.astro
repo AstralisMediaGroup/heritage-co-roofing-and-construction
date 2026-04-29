@@ -11,8 +11,8 @@ const { steps } = Astro.props;
 
 <ol class="process-steps" style={`--cols: ${steps.length};`}>
 	{steps.map((s, i) => (
-		<li class="process-step">
-			<span class="process-num">{String(i + 1).padStart(2, '0')}</span>
+		<li class="process-card">
+			<span class="process-badge" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
 			<h3 class="h3 process-h">{s.heading}</h3>
 			<p class="process-body">{s.body}</p>
 		</li>
@@ -24,24 +24,51 @@ const { steps } = Astro.props;
 		list-style: none;
 		display: grid;
 		grid-template-columns: repeat(var(--cols), 1fr);
-		gap: clamp(28px, 3vw, 56px);
-		counter-reset: step;
+		gap: clamp(16px, 1.6vw, 24px);
+		padding: 0;
+		margin: 0;
 	}
-	.process-step {
+	.process-card {
+		position: relative;
 		display: flex;
 		flex-direction: column;
-		padding-top: 28px;
-		border-top: 1px solid var(--rule-strong);
+		background: #fff;
+		border: 1px solid var(--rule);
+		border-radius: var(--r-soft);
+		padding: clamp(28px, 2.6vw, 40px) clamp(24px, 2.4vw, 36px) clamp(28px, 2.6vw, 40px);
+		box-shadow: 0 1px 2px rgba(21, 20, 15, 0.03);
+		transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
 	}
-	.process-num {
-		font-size: 13px;
+	.process-card:hover {
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-lift);
+		border-color: var(--rule-strong);
+	}
+	.process-badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 56px;
+		height: 56px;
+		border-radius: var(--r-pill);
+		background: var(--rust);
+		color: var(--ink-bg-text);
+		font-size: 18px;
 		font-weight: 600;
-		letter-spacing: 0.08em;
-		color: var(--rust);
-		margin-bottom: 16px;
+		letter-spacing: 0.04em;
+		font-feature-settings: 'tnum';
+		margin-bottom: clamp(20px, 2vw, 28px);
+		box-shadow: 0 6px 16px rgba(181, 70, 32, 0.22);
 	}
-	.process-h { margin-bottom: 12px; }
-	.process-body { font-size: 15px; line-height: 1.6; color: var(--ink-2); max-width: 320px; }
+	.process-h {
+		margin: 0 0 12px;
+	}
+	.process-body {
+		font-size: 15px;
+		line-height: 1.6;
+		color: var(--ink-2);
+		margin: 0;
+	}
 	@media (max-width: 880px) {
 		.process-steps { grid-template-columns: 1fr 1fr; }
 	}

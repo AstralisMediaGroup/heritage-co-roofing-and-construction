@@ -113,6 +113,10 @@ const process = [
 				<div class="process-spacer">
 					<ProcessSteps steps={process} />
 				</div>
+				<div class="process-cta">
+					<a class="process-cta-primary" href="/free-inspection">Schedule my free inspection →</a>
+					<a class="process-cta-secondary" href="tel:9032428102">or call 903-242-8102</a>
+				</div>
 			</div>
 		</section>
 	</Reveal>
@@ -148,6 +152,39 @@ const process = [
 	.page-section { padding: clamp(80px, 9vw, 144px) 0; }
 	.section-tight { padding: clamp(96px, 10vw, 160px) 0 clamp(20px, 2vw, 32px); }
 	.process-spacer { margin-top: clamp(56px, 6vw, 88px); }
+	.process-cta {
+		display: flex;
+		align-items: center;
+		gap: 28px;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin-top: clamp(40px, 4vw, 64px);
+	}
+	.process-cta-primary {
+		display: inline-flex;
+		align-items: center;
+		background: var(--rust);
+		color: var(--ink-bg-text);
+		padding: 16px 28px;
+		border-radius: var(--r-soft);
+		font-size: 15px;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		text-decoration: none;
+		transition: background 180ms ease, transform 180ms ease;
+	}
+	.process-cta-primary:hover {
+		background: var(--rust-deep);
+		transform: translateY(-1px);
+	}
+	.process-cta-secondary {
+		color: var(--ink-2);
+		font-size: 15px;
+		text-decoration: none;
+		border-bottom: 1px solid var(--rule-strong);
+		padding-bottom: 2px;
+	}
+	.process-cta-secondary:hover { color: var(--ink); }
 	.reviews-spacer { margin-top: clamp(48px, 5vw, 72px); }
 
 	/* Trust marquee bleeds up over the hero's bottom edge.
