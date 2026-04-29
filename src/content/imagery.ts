@@ -42,6 +42,17 @@ const ROOFTOPS_TWO: ImageRef = { url: u('1760544137552-b225c3379c76', 1800), alt
 const ROOFTOPS_CITY: ImageRef = { url: u('1774281332843-264f649e8a8a', 1800), alt: 'City rooftops bathed in warm golden sunlight', source: 'unsplash', photographer: 'Marc Wieland' };
 const TILE_STACK_YELLOW: ImageRef = { url: uPlus('1683140940649-71864ae8156e', 1800), alt: 'Stacks of yellow ceramic roofing tiles', source: 'unsplash', photographer: 'Getty Images via Unsplash' };
 
+// Real architectural-shingle install — CertainTeed Landmark Driftwood on
+// a light-brick home. Hot-linked from CertainTeed's widen.net asset CDN.
+// Aspect requested as 4:5 portrait to match HeroPage's desktop crop.
+const CERTAINTEED_LANDMARK_HOUSE: ImageRef = {
+	url: 'https://certainteed.widen.net/content/t8a2qybnkx/web/landmark-drift-B12-lightbrick-dml.tif?crop=yes&k=c&w=1280&h=1600',
+	alt: 'Two-story home with CertainTeed Landmark Driftwood architectural shingles',
+	source: 'manufacturer',
+	manufacturer: 'CertainTeed',
+	productName: 'Landmark Driftwood',
+};
+
 export const imagery = {
 	// ════════════════════════════════════════════════════════════════════
 	// V2 — page hero + supporting slots (Build Pack v2)
@@ -63,7 +74,7 @@ export const imagery = {
 			maintenance: ROOF_WEATHERED,
 
 			// Tier 2 — residential materials
-			asphaltShingle: ASPHALT_CLOSEUP,
+			asphaltShingle: CERTAINTEED_LANDMARK_HOUSE,
 			metalRoofs: METAL_STANDING_SEAM,
 			tileRoofs: TILE_STACK_YELLOW,
 
