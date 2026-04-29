@@ -53,6 +53,18 @@ const CERTAINTEED_LANDMARK_HOUSE: ImageRef = {
 	productName: 'Landmark Driftwood',
 };
 
+// Wide-aspect Texas multifamily home with IKO Cambridge Weatherwood
+// architectural shingles. Hot-linked from IKO's CDN. Used for the
+// "Most residential roofs install in one day" PhotoBleed which needs
+// a panoramic crop (~3:1 viewport).
+const IKO_CAMBRIDGE_TX_MULTIFAMILY: ImageRef = {
+	url: 'https://www.iko.com/na/wp-content/uploads/2024/05/RGB-IKO_CAMB_SHGL_HOME_WTWD_TX_MultiFamily_F-upd-min.webp',
+	alt: 'Texas multifamily home roofed in IKO Cambridge Weatherwood architectural shingles',
+	source: 'manufacturer',
+	manufacturer: 'IKO',
+	productName: 'Cambridge Weatherwood',
+};
+
 export const imagery = {
 	// ════════════════════════════════════════════════════════════════════
 	// V2 — page hero + supporting slots (Build Pack v2)
@@ -104,7 +116,7 @@ export const imagery = {
 			projects: ROOFTOPS_GOLDEN,
 			crew: HOUSE_BROWN_WHITE,
 			storm: STORM_DAMAGE,
-			workmanship: ASPHALT_CLOSEUP,
+			workmanship: IKO_CAMBRIDGE_TX_MULTIFAMILY,
 		},
 
 		// ── Project showcase pool — cycle for project grids
