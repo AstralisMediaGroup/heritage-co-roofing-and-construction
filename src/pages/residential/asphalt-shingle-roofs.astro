@@ -5,6 +5,7 @@ import TrustMarquee from '../../components/v2/TrustMarquee.astro';
 import SectionHead from '../../components/v2/SectionHead.astro';
 import PromiseStrip from '../../components/v2/PromiseStrip.astro';
 import ShingleExplorer from '../../components/v2/ShingleExplorer.astro';
+import FeaturedShinglesGrid from '../../components/v2/FeaturedShinglesGrid.astro';
 import PhotoBleed from '../../components/v2/PhotoBleed.astro';
 import StatBand from '../../components/v2/StatBand.astro';
 import FAQAccordion from '../../components/v2/FAQAccordion.astro';
@@ -62,6 +63,22 @@ const faq = [
 		</section>
 	</Reveal>
 
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="Brands we install"
+					heading="Three flagship lines.<br />The shingles on most Heritage roofs."
+					lede="GAF Timberline HDZ, CertainTeed Landmark, and IKO Cambridge cover the architectural tier we install most often. Color names link to the manufacturer for full palette and warranty terms."
+					maxWidth="800px"
+				/>
+				<div class="featured-spacer">
+					<FeaturedShinglesGrid />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
 	<PhotoBleed
 		photo={v2.bleeds.workmanship}
 		heading="Most residential roofs<br />install in one day."
@@ -98,6 +115,7 @@ const faq = [
 <style>
 	.page-section { padding: clamp(72px, 8vw, 128px) 0; }
 	.explorer-spacer { margin-top: clamp(48px, 5vw, 72px); }
+	.featured-spacer { margin-top: clamp(48px, 5vw, 72px); }
 	.faq-grid {
 		display: grid;
 		grid-template-columns: 0.8fr 1fr;
