@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "rm -rf dist .wrangler",
+    "prebuild": "rm -rf dist .wrangler node_modules/@astrojs/cloudflare node_modules/@cloudflare/vite-plugin",
     "build": "astro build",
     "preview": "npm run build && wrangler dev",
     "astro": "astro",
