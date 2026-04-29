@@ -1,10 +1,11 @@
 // Asphalt shingle product browser data — types, brands, color palettes.
 //
-// Color names are pulled from each tier's representative manufacturer
-// product line so the visual matches reality:
-//   3-tab        → IKO Marathon Plus AR
+// Heritage no longer features 3-tab on the site (architectural is the
+// default install on every residential job). The two tiers shown here
+// pull color names from a representative manufacturer product line per
+// tier so the visual matches reality:
 //   Architectural → IKO Cambridge
-//   Designer     → IKO Royal Estate
+//   Designer      → IKO Royal Estate
 // Swatch image URLs hot-link to IKO's CDN — no copies stored locally.
 // The brands list still includes every manufacturer Heritage installs;
 // the on-screen swatches just pick one canonical product line per tier
@@ -20,7 +21,7 @@ export interface ShingleColor {
 }
 
 export interface ShingleType {
-	id: '3-tab' | 'architectural' | 'designer';
+	id: 'architectural' | 'designer';
 	name: string;
 	tagline: string;
 	tier: string;
@@ -40,37 +41,12 @@ export interface ShingleType {
 
 export const shingleTypes: ShingleType[] = [
 	{
-		id: '3-tab',
-		name: '3-tab',
-		tagline: 'The basic shingle.',
-		tier: 'Budget',
-		headline: 'Single-layer. Single warranty cycle.',
-		blurb: 'Three flat tabs per shingle, one layer of asphalt. Cheapest material on the market and the shortest service life. Right for rentals, short-stay homes, and like-for-like repair matches on existing 3-tab roofs.',
-		warranty: '25 years',
-		wind: '60 mph',
-		life: '15–18 yrs',
-		priceTier: '$',
-		brands: ['GAF Royal Sovereign', 'Owens Corning Supreme', 'CertainTeed XT 25', 'IKO Marathon Plus AR'],
-		bestFor: 'Rentals · short-stay homes · like-for-like matches',
-		heroUrl: 'https://www.iko.com/na/wp-content/uploads/2024/11/IKO_CRC_3TAB_SWCH_Dual-Black-2.webp',
-		heroAlt: 'IKO Marathon Plus AR Dual Black 3-tab shingle close-up',
-		colors: [
-			{ name: 'Dual Black', hex: '#1c1c1e', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/11/IKO_CRC_3TAB_SWCH_Dual-Black-2.webp' },
-			{ name: 'Weatherwood', hex: '#5a4f42', popular: true, imgUrl: 'https://www.iko.com/na/wp-content/uploads/2024/11/IKO_CRC_3TAB_SWCH_WTWD.webp' },
-			{ name: 'Charcoal', hex: '#2c2c2e' },
-			{ name: 'Driftwood', hex: '#7a6c58' },
-			{ name: 'Estate Gray', hex: '#787673' },
-			{ name: 'Autumn Brown', hex: '#5e4030' },
-			{ name: 'White', hex: '#dfd9c8' },
-		],
-	},
-	{
 		id: 'architectural',
 		name: 'Architectural',
 		tagline: 'The default for East Texas.',
 		tier: 'Standard',
 		headline: 'Two layers. The Heritage default.',
-		blurb: 'Laminated dual-layer construction creates depth and dimensionality, doubles the wind and impact rating of 3-tab, and pushes service life into the 20–25 year band. The default install on every Heritage residential job unless you specifically pick something else.',
+		blurb: 'Laminated dual-layer construction creates real visual depth and pushes service life into the 20–25 year band with 110–130 mph wind ratings. The default install on every Heritage residential job unless you specifically pick something else.',
 		warranty: '30 yr to limited lifetime',
 		wind: '110–130 mph',
 		life: '20–25 yrs',

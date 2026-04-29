@@ -2,7 +2,7 @@
 import { shingleTypes } from '../../content/shingles';
 ---
 
-<div class="se" data-shingle-explorer>
+<div class="se" data-shingle-explorer style={`--tab-cols: ${shingleTypes.length};`}>
 	<div class="se-tabs" role="tablist">
 		{shingleTypes.map((t, i) => (
 			<button
@@ -109,7 +109,7 @@ import { shingleTypes } from '../../content/shingles';
 	/* Tabs */
 	.se-tabs {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(var(--tab-cols, 2), 1fr);
 		gap: 0;
 		border-top: 1px solid var(--rule);
 		border-bottom: 1px solid var(--rule);
