@@ -1,58 +1,121 @@
 ---
-import SystemPage from '../../components/v2/SystemPage.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from '../../components/v2/HeroPage.astro';
+import PromiseStrip from '../../components/v2/PromiseStrip.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
+import PageCTA from '../../components/v2/PageCTA.astro';
+import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
 
 const v2 = imagery.v2;
+
+const otherSystems = [
+	{
+		eyebrow: 'EPDM',
+		heading: 'EPDM single-ply.',
+		body: 'Black rubber membrane. The right call for certain re-roofs.',
+		href: '/commercial/epdm-roofing',
+		photo: v2.systemTiles.epdm,
+	},
+	{
+		eyebrow: 'Modified bitumen',
+		heading: 'Modified bitumen.',
+		body: 'Multi-ply asphalt-based system with strong puncture resistance.',
+		href: '/commercial/modified-bitumen-roofing',
+		photo: v2.systemTiles.modBit,
+	},
+	{
+		eyebrow: 'Built-up roofing',
+		heading: 'BUR (tar and gravel).',
+		body: 'Multi-layer asphalt-and-gravel. Decades of proven service.',
+		href: '/commercial/built-up-roofing',
+		photo: v2.systemTiles.bur,
+	},
+	{
+		eyebrow: 'Metal',
+		heading: 'Standing seam metal.',
+		body: 'Concealed-fastener panels. The longest-warranty option.',
+		href: '/commercial/metal-roofing',
+		photo: v2.systemTiles.metal,
+	},
+	{
+		eyebrow: 'Coatings',
+		heading: 'Coatings + restoration.',
+		body: 'Silicone or acrylic recoats over an existing system. Adds 10–15 years.',
+		href: '/commercial/roof-coatings-and-restorations',
+		photo: v2.systemTiles.coatings,
+	},
+	{
+		eyebrow: 'Maintenance',
+		heading: 'Maintenance programs.',
+		body: 'Scheduled inspection + minor-repair cadence. Protects the warranty.',
+		href: '/commercial/maintenance-programs',
+		photo: v2.systemTiles.maintenance,
+	},
+];
 ---
 
-<SystemPage
-	title="TPO commercial roofing"
-	heroEyebrow="Commercial · single-ply"
-	heroHeading="TPO. White, heat-welded,<br />energy-reflective."
-	heroLede="The default re-roof for retail, light commercial, and cooling-dominated buildings across East Texas. Single-ply thermoplastic membrane, heat-welded seams, 20+ year service life."
-	heroPhoto={v2.pageHeros.tpoRoofing}
-	bleedPhoto={v2.bleeds.commercial}
-	bleedHeading="Heat-welded seams.<br />Stronger than the membrane itself."
-	overview={{
-		eyebrow: 'What TPO is',
-		heading: 'Single-ply thermoplastic, heat-welded together.',
-		body: "TPO (thermoplastic polyolefin) is a single-ply membrane installed in 8–12 ft sheets and welded together at every overlap with a hot-air gun running at ~1,100°F. The result is a continuous white surface with no rubber seam tape, no gasket failures, and reflectivity high enough to drop summer cooling loads measurably. It's been the dominant new-construction membrane in commercial since the mid-2000s, replacing a generation of EPDM."
-	}}
-	keyPoints={[
-		{
-			heading: 'Where TPO is the right call.',
-			body: 'TPO fits buildings where reflectivity and reroof cost matter more than absolute longevity. Retail, light industrial, restaurants, schools, government — anything with a flat or low-slope deck and a meaningful HVAC bill in the summer.',
-			bullets: ['Low-slope retail and warehousing', 'Cooling-dominated buildings (East TX summers)', 'Re-roof candidates over an existing single-ply', 'Schools, government, restaurants'],
-			photo: v2.systemTiles.tpo,
-			photoSide: 'left',
-		},
-		{
-			heading: 'Install methods we run.',
-			body: 'Mechanically-fastened over insulation is the most common — fastest install, lowest material cost. Adhered installs use bonding adhesive and trade install speed for higher wind-uplift performance. Ballasted is mostly historical at this point.',
-			bullets: ['Mechanically-fastened (most common)', 'Fully-adhered (high wind uplift, premium)', 'Induction-welded (concealed fasteners)'],
-			photo: v2.bleeds.workmanship,
-			photoSide: 'right',
-		},
-	]}
-	stats={[
-		{ value: '20+', label: 'Years service life · 60-mil' },
-		{ value: '78%', label: 'Solar reflectivity · white TPO' },
-		{ value: '1,100°F', label: 'Heat-weld seam temperature' },
-		{ value: 'Class A', label: 'Fire rating · UL 790' },
-	]}
-	projectPhotos={[v2.projects[4], v2.projects[8], v2.projects[5], v2.projects[7]]}
-	projectCaptions={['Multi-building TPO, Longview', 'TPO + parapet detail, retail', 'Re-roof over existing membrane, Tyler', 'Mechanically-fastened, school addition']}
-	faq={[
-		{ q: 'TPO or EPDM — which makes sense?', a: '<p>For most East Texas buildings: TPO. The reflectivity matters in our climate and the heat-welded seams hold up longer than EPDM seam tape. EPDM is still the right call for cold-climate jobs, certain re-roof scenarios, and buildings where the existing roof is EPDM and a tear-off is overkill.</p>' },
-		{ q: 'How much do energy bills actually drop?', a: '<p>Documented studies on TPO vs dark-membrane roofs in southern climates land cooling-cost savings in the 10–20% range on the building\'s HVAC. The exact number depends on insulation, building envelope, and HVAC efficiency. We don\'t over-promise — we tell you the spec is reflective and the savings are real but bounded.</p>' },
-		{ q: 'How long do seams last?', a: '<p>Heat-welded TPO seams are stronger than the membrane itself when installed correctly. The seam is the most-tested part of any single-ply system — when TPO fails, it\'s almost always at penetrations or details, not the field seams.</p>' },
-		{ q: 'Can I install TPO over my existing roof?', a: '<p>Sometimes. We can recover an existing single-ply or built-up roof with a separator sheet and a new TPO membrane if the existing system is sound and the deck is dry. We tell you yes or no on the inspection. Recover saves tear-off cost; tear-off resets the warranty clock.</p>' },
-		{ q: '45-mil, 60-mil, or 80-mil?', a: '<p>60-mil is the standard. 45-mil is end-of-life on the spec — most manufacturers no longer offer 20+ year warranties on it. 80-mil is for foot-traffic-heavy roofs (HVAC-dense, rooftop-equipment service) or owners who want extended warranty terms. We default-spec 60-mil and price 80-mil as an option.</p>' },
-		{ q: 'Can you install TPO in cold weather?', a: '<p>Yes — adhered TPO is temperature-sensitive (substrate has to be above ~40°F for the bonding adhesive to set), but mechanically-fastened installs run year-round. East Texas winters rarely block TPO work.</p>' },
-		{ q: 'What manufacturer do you install?', a: '<p>Heritage installs the manufacturer that fits the job and the warranty Heritage has access to. Confirmation of the specific stocked SKU and warranty tier lands on the proposal once we know the building.</p>' },
-	]}
-	ctaHeading="TPO walkthrough,<br />scope, and bid in a week."
-	ctaLede="Free roof assessment. We tell you whether TPO is the right call for your building before we quote it."
-	ctaPhoto={v2.pageHeros.commercial}
-	promises={['Bonded + insured', 'Workmanship warranty', '20+ yr service life', 'Heat-welded seams']}
-/>
+<BaseLayout
+	title="TPO commercial roofing — Heritage Co."
+	description="Heritage Co. installs TPO single-ply membrane on commercial roofs across East Texas. White, heat-welded, energy-reflective."
+>
+	<HeroPage
+		eyebrow="Commercial · single-ply"
+		heading="TPO."
+		lede="White single-ply membrane with heat-welded seams. The default re-roof for retail, light commercial, and cooling-dominated buildings across East Texas."
+		photo={v2.pageHeros.tpoRoofing}
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		tier={2}
+	/>
+
+	<PromiseStrip items={['We install TPO', 'Heat-welded seams', '20+ yr service life', 'Bonded + insured']} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container narrow">
+				<p class="lede">
+					TPO is a thermoplastic membrane installed in wide sheets and welded together at every overlap. The reflective white surface drops summer cooling load. We spec it on most flat or low-slope re-roofs unless the building calls for something different. Free assessment tells you whether it's the right call.
+				</p>
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section section-tight">
+			<div class="container">
+				<SectionHead
+					eyebrow="Other commercial systems"
+					heading="Not TPO?<br />Here's the rest."
+					lede="We install every major commercial roof type. Pick the one that fits the building."
+					maxWidth="780px"
+				/>
+				<div class="systems-spacer">
+					<TileGrid tiles={otherSystems} cols={3} style="photo-card" />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading="Free roof assessment.<br />Real recommendation in a week."
+		lede="We tell you whether TPO is the right call before we quote it."
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.commercial}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
+	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
+	.container.narrow { max-width: 760px; }
+	.lede {
+		font-size: clamp(18px, 1.6vw, 21px);
+		line-height: 1.55;
+		color: var(--ink-2);
+		margin: 0;
+	}
+	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
+</style>

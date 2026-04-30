@@ -41,6 +41,7 @@ const ROOFTOPS_GOLDEN: ImageRef = { url: u('1771479755055-6a305f50845e', 1800), 
 const ROOFTOPS_TWO: ImageRef = { url: u('1760544137552-b225c3379c76', 1800), alt: 'Two angled tiled rooftops viewed from above', source: 'unsplash', photographer: 'engin akyurt' };
 const ROOFTOPS_CITY: ImageRef = { url: u('1774281332843-264f649e8a8a', 1800), alt: 'City rooftops bathed in warm golden sunlight', source: 'unsplash', photographer: 'Marc Wieland' };
 const TILE_STACK_YELLOW: ImageRef = { url: uPlus('1683140940649-71864ae8156e', 1800), alt: 'Stacks of yellow ceramic roofing tiles', source: 'unsplash', photographer: 'Getty Images via Unsplash' };
+const COMMERCIAL_ROOFTOP_FLAT: ImageRef = { url: u('1577495508048-b635879837f1', 1800), alt: 'Commercial flat-roof building with rooftop equipment', source: 'unsplash' };
 
 // Real architectural-shingle install — CertainTeed Landmark Driftwood on
 // a light-brick home. Hot-linked from CertainTeed's widen.net asset CDN.
@@ -111,7 +112,7 @@ export const imagery = {
 			metalRoofing: METAL_STANDING_SEAM,
 
 			// Tier 2 — commercial systems
-			tpoRoofing: ROOFTOPS_CITY,
+			tpoRoofing: COMMERCIAL_ROOFTOP_FLAT,
 			epdmRoofing: ROOF_WEATHERED,
 			modifiedBitumen: ROOFTOPS_TWO,
 			builtUpRoofing: ROOFTOPS_GOLDEN,
