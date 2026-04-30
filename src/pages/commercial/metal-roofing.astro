@@ -1,145 +1,66 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import HeroFlagship from '../../components/v2/HeroFlagship.astro';
-import TrustMarquee from '../../components/v2/TrustMarquee.astro';
-import SectionHead from '../../components/v2/SectionHead.astro';
+import HeroPage from '../../components/v2/HeroPage.astro';
 import PromiseStrip from '../../components/v2/PromiseStrip.astro';
-import PhotoLede from '../../components/v2/PhotoLede.astro';
-import PhotoBleed from '../../components/v2/PhotoBleed.astro';
-import StatBand from '../../components/v2/StatBand.astro';
-import ProjectShowcase from '../../components/v2/ProjectShowcase.astro';
-import FAQAccordion from '../../components/v2/FAQAccordion.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import ToggleFacts from '../../components/v2/ToggleFacts.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
 import PageCTA from '../../components/v2/PageCTA.astro';
 import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
+import { otherSystems } from '../../content/commercialSystems';
 
 const v2 = imagery.v2;
-
-const projects = [
-	{ photo: v2.projects[2], caption: 'Standing seam — light commercial, Tyler' },
-	{ photo: v2.projects[3], caption: 'Standing seam over brick, retail' },
-	{ photo: v2.projects[4], caption: 'Multi-building TPO + metal hybrid, Longview' },
-	{ photo: v2.projects[8], caption: 'Pre-painted Galvalume, mid-slope' },
-];
-
-const faq = [
-	{ q: 'Standing seam vs. through-fastened — which makes sense?', a: '<p>Standing seam is the long-term answer for any building you plan to keep. Concealed fasteners mean no rubber gaskets degrading in the sun, no panel-to-panel water path, and a 40–60 year service life. Through-fastened (R-panel, exposed-fastener) is cheaper up front and right for ag buildings and short-life structures, but you re-fasten or re-skin in 15–25 years.</p><p>Heritage installs both. We tell you which is right for your building, not which margin we want.</p>' },
-	{ q: 'Steel or aluminum?', a: '<p>Steel for most East Texas commercial buildings — Galvalume substrate with a PVDF (Kynar 500) finish. 30–40 year paint warranty is industry standard from McElroy, Drexel, Mueller, and Berridge. Aluminum makes sense within ~5 miles of the coast where chloride exposure eats steel — not a factor for most of the service area.</p>' },
-	{ q: 'What approvals does the system carry?', a: '<p>The systems we install carry UL 580 / FM 4471 wind-uplift ratings, Class A fire (UL 790), and Class 4 impact (UL 2218). Specific approvals depend on the manufacturer and the panel — we pull the data sheets on the spec call once we know the building.</p>' },
-	{ q: 'Will it leak in 10 years?', a: '<p>A standing seam roof installed correctly does not leak from the field. Where metal roofs leak is at the penetrations — pipe boots, curbs, and skylight flashing. Heritage installs all penetrations with engineered boots and properly hemmed flashings, and the warranty covers them.</p>' },
-	{ q: 'Can you install over my existing roof?', a: '<p>Sometimes. We can recover some single-ply systems with a hat-channel sub-frame and a metal panel system if the existing roof is structurally sound. We tell you yes or no on the inspection — recover saves tear-off cost; tear-off resets the warranty clock and lets us see the deck.</p>' },
-	{ q: "What's the warranty?", a: '<p>Three layers: manufacturer paint warranty (30–40 years on PVDF), manufacturer panel warranty (substrate-dependent), and Heritage workmanship warranty on the install. Specific terms depend on the system. Heritage warranty length and any extended-tier options are confirmed on the proposal.</p>' },
-];
+const m = imagery.metal;
 ---
 
 <BaseLayout
-	title="Commercial metal roofing — Heritage Co. Roofing & Construction"
-	description="Standing seam and architectural metal roofing for commercial buildings in East Texas and Central Arkansas. Steel + aluminum. Class 4 impact, Class A fire, 40–60 year service life."
+	title="Commercial metal roofing — Heritage Co."
+	description="Heritage Co. installs standing seam metal roofs on commercial buildings across East Texas. Concealed-fastener panels, 30–40 year paint warranty."
 >
-	<HeroFlagship
-		eyebrow="Commercial · metal systems"
-		heading="Standing seam.<br />40–60 years on a roof."
-		lede="Concealed-fastener metal roofing for commercial buildings across East Texas and Central Arkansas. Steel or aluminum. Class 4 impact. Class A fire. 30–40 year paint warranty."
-		photo={v2.pageHeros.metalRoofing}
-		bullets={['Standing seam + architectural panels', 'McElroy / Drexel / Mueller / Berridge', 'Bonded + insured · Heritage workmanship warranty']}
+	<HeroPage
+		eyebrow="Commercial · metal"
+		heading="Standing seam metal."
+		lede="Concealed-fastener metal panels. The longest-warranty commercial roof on the market — 30–40 year paint, 40+ year service life. The roof you only buy once."
+		photo={m.standingSeam}
 		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
 		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		tier={2}
 	/>
 
-	<TrustMarquee items={v2.trustItems} />
+	<PromiseStrip items={['We install standing seam', 'Concealed fasteners', '30–40 yr paint warranty', 'Bonded + insured']} />
 
 	<Reveal>
 		<section class="page-section">
 			<div class="container">
-				<PromiseStrip items={['Bonded + insured', 'Workmanship warranty', '40–60 yr service life', 'PVDF paint · 30–40 yr warranty']} />
+				<ToggleFacts facts={[
+					{ label: 'What it is', body: 'Galvalume steel panels with PVDF (Kynar 500) finish, mechanically seamed at vertical ribs with no fasteners exposed in the field of the roof. Class 4 impact, Class A fire, 30–40 year paint warranty. The longest-warranty commercial roof on the market.' },
+					{ label: 'When we spec it', body: 'Owner-occupied buildings with a long horizon — the up-front premium pays back over the time you keep the building. Steep-slope commercial where the visual matters. Re-roofs where the existing system has already failed twice and the owner wants the last roof they will ever buy.' },
+					{ label: 'When we skip it', body: 'Tight-budget re-roofs that just need 15–20 more years usually go TPO or coatings. Heavily penetrated roofs with lots of HVAC service trade well to mod-bit. The free assessment tells you which — see the other commercial systems below.' },
+				]} />
 			</div>
 		</section>
 	</Reveal>
 
 	<Reveal>
-		<section class="page-section">
-			<div class="container overview-grid">
-				<SectionHead eyebrow="Why metal" heading="Built for the building you're keeping." />
-				<p class="overview-body lede">
-					Metal is the answer for commercial buildings you plan to own past the next refinance. A correctly-installed standing seam system outlasts the membrane systems by 2–3x, carries impact and wind ratings that single-ply can't match, and reflects enough heat to drop cooling loads measurably in East Texas summers. The trade-off is up-front cost. We don't try to talk anyone into metal who shouldn't be in metal.
-				</p>
-			</div>
-		</section>
-	</Reveal>
-
-	<PhotoBleed
-		photo={v2.pageHeros.metalRoofing}
-		heading="Concealed fasteners.<br />No exposed gaskets to fail."
-		caption="Standing seam clips ride the panel ribs. The deck breathes. The fasteners stay out of the weather. That's why the roof outlasts the building."
-		overlay={true}
-		heightVw={66}
-	/>
-
-	<Reveal>
-		<section class="page-section">
-			<div class="container">
-				<PhotoLede
-					photo={v2.projects[2]}
-					eyebrow="Standing seam"
-					heading="The long-term answer."
-					body="Concealed clips, no exposed fasteners, factory-formed or site-rolled in panels up to 40+ feet long. Substrate is Galvalume steel or aluminum, depending on the environment. PVDF finish carries 30–40 year color and chalk warranties from McElroy, Drexel, Mueller, and Berridge."
-					bullets={['UL 580 / FM 4471 wind uplift', 'Class A fire (UL 790)', 'Class 4 impact resistance (UL 2218)', '40–60 year service life']}
-					photoSide="left"
-				/>
-			</div>
-		</section>
-	</Reveal>
-
-	<Reveal>
-		<section class="page-section">
-			<div class="container">
-				<PhotoLede
-					photo={v2.projects[3]}
-					eyebrow="Through-fastened (R-panel)"
-					heading="When budget rules and the building is shorter-life."
-					body="Exposed-fastener panels — R-panel, PBR, AG-panel — are the right call on ag and short-life structures where the lower install cost is the priority. Service life lands in the 15–25 year band before re-fastening. We install both systems and tell you which is right for your building."
-					bullets={['Cheaper up-front', '15–25 year window before re-fastening', 'Right for ag, warehouses with planned redevelopment']}
-					photoSide="right"
-				/>
-			</div>
-		</section>
-	</Reveal>
-
-	<StatBand stats={[
-		{ value: '40–60', label: 'Years service life · standing seam' },
-		{ value: '40 yr', label: 'PVDF paint warranty', numericValue: 40, suffix: ' yr' },
-		{ value: '180mph', label: 'Wind uplift · Miami-Dade rated systems' },
-		{ value: 'Class 4', label: 'Impact resistance · UL 2218' },
-	]} />
-
-	<Reveal>
-		<section class="page-section">
+		<section class="page-section section-tight">
 			<div class="container">
 				<SectionHead
-					eyebrow="Recent work"
-					heading="Standing seam projects across the region."
-					lede="Click any photo. Captions show building type, system, and city. Real Heritage install photos land once the project library is supplied."
+					eyebrow="Other commercial systems"
+					heading="Not metal?<br />Here's the rest."
+					lede="We install every major commercial roof type. Pick the one that fits the building."
 					maxWidth="780px"
 				/>
-				<div class="projects-spacer">
-					<ProjectShowcase projects={projects} group="metal-projects" />
+				<div class="systems-spacer">
+					<TileGrid tiles={otherSystems('metal')} cols={3} style="photo-card" />
 				</div>
 			</div>
 		</section>
 	</Reveal>
 
-	<Reveal>
-		<section class="page-section">
-			<div class="container faq-grid">
-				<SectionHead eyebrow="Common questions" heading="What facility owners ask us about metal." />
-				<FAQAccordion items={faq} />
-			</div>
-		</section>
-	</Reveal>
-
 	<PageCTA
-		heading="Walkthrough, scope,<br />and metal bid in a week."
-		lede="Free roof assessment. We tell you whether metal is right for your building before we quote it."
+		heading="Free roof assessment.<br />Real recommendation in a week."
+		lede="We tell you whether metal is the right call before we quote it."
 		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
 		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
 		photo={v2.pageHeros.commercial}
@@ -147,23 +68,7 @@ const faq = [
 </BaseLayout>
 
 <style>
-	.page-section { padding: clamp(72px, 8vw, 128px) 0; }
-	.overview-grid {
-		display: grid;
-		grid-template-columns: 1fr 1.1fr;
-		gap: clamp(32px, 5vw, 80px);
-		align-items: start;
-	}
-	.overview-body { color: var(--ink-2); font-size: clamp(19px, 1.5vw, 22px); line-height: 1.55; }
-	.faq-grid {
-		display: grid;
-		grid-template-columns: 0.8fr 1fr;
-		gap: clamp(40px, 5vw, 96px);
-		align-items: start;
-	}
-	.projects-spacer { margin-top: clamp(40px, 4vw, 64px); }
-	@media (max-width: 880px) {
-		.overview-grid,
-		.faq-grid { grid-template-columns: 1fr; gap: 32px; }
-	}
+	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
+	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
+	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
 </style>

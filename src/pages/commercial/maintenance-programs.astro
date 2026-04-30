@@ -1,56 +1,73 @@
 ---
-import SystemPage from '../../components/v2/SystemPage.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from '../../components/v2/HeroPage.astro';
+import PromiseStrip from '../../components/v2/PromiseStrip.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import ToggleFacts from '../../components/v2/ToggleFacts.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
+import PageCTA from '../../components/v2/PageCTA.astro';
+import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
+import { otherSystems } from '../../content/commercialSystems';
 
 const v2 = imagery.v2;
 ---
 
-<SystemPage
-	title="Commercial roof maintenance programs"
-	heroEyebrow="Commercial · maintenance"
-	heroHeading="Maintenance programs.<br />Catch leaks before they're leaks."
-	heroLede="Annual or semi-annual inspection contracts for commercial buildings across East Texas and Central Arkansas. Protects manufacturer warranties, cuts emergency calls, extends roof life."
-	heroPhoto={v2.pageHeros.maintenance}
-	bleedPhoto={v2.bleeds.commercial}
-	bleedHeading="Scheduled work, not emergency calls."
-	overview={{
-		eyebrow: 'What the program is',
-		heading: 'A standing inspection + repair contract.',
-		body: "Heritage's maintenance program is a standing contract: annual or semi-annual inspection of every roof on the contract, written report with photos, sealant maintenance, drain cleaning, and repair work scheduled into the program rather than billed as emergencies. Most manufacturer warranties require documented maintenance to stay in force — the program covers that too."
-	}}
-	keyPoints={[
-		{
-			heading: 'What gets done at every visit.',
-			body: "Visual inspection of the field membrane, all penetrations, edges, drains, and parapets. Sealant maintenance at metal flashings, pitch pans, and curbs. Drain and scupper cleaning. Photo documentation of any concerns. Written report delivered to the building owner.",
-			bullets: ['Field + flashing inspection', 'Sealant maintenance at penetrations', 'Drain + scupper cleaning', 'Photo report + recommendations'],
-			photo: v2.systemTiles.maintenance,
-			photoSide: 'left',
-		},
-		{
-			heading: 'Where the savings come from.',
-			body: "Two places. First: caught leaks are cheap to fix; ignored leaks are expensive (membrane damage, wet insulation, interior tenant claims). Second: documented maintenance keeps manufacturer warranties in force — without it, a 20-year warranty becomes a piece of paper. Owners on the program report 30–50% lower repair spend over the roof's life.",
-			bullets: ['Repair-first, not replace', 'Manufacturer warranty preservation', 'Tenant-claim avoidance', 'Capex deferral'],
-			photo: v2.bleeds.workmanship,
-			photoSide: 'right',
-		},
-	]}
-	stats={[
-		{ value: '2x', label: 'Visits/year · single-ply + ballasted' },
-		{ value: '30–50%', label: 'Lower repair spend over life' },
-		{ value: '100%', label: 'Warranty maintenance compliance' },
-		{ value: '24/7', label: 'Emergency call response · contract holders' },
-	]}
-	projectPhotos={[v2.projects[5], v2.projects[6], v2.projects[8], v2.projects[3]]}
-	projectCaptions={['Annual inspection, retail', 'Drain cleaning + sealant maintenance', 'Photo-report sample, manufacturing', 'Maintenance route, multi-building']}
-	faq={[
-		{ q: 'How much does the program cost?', a: "<p>Per-roof, scaled to building size and system type. Single-ply costs less to maintain than mod-bit, which costs less than ballasted BUR. We give you a per-visit and an annual number on the contract — no per-call surprises during the year.</p>" },
-		{ q: 'Does this replace warranty?', a: "<p>No — it preserves the warranty. Most manufacturer warranties (GAF, Carlisle, Versico, Firestone) require documented annual or biennial maintenance. The program does that documentation. Without it, a covered failure can come back as 'lack of maintenance' and the warranty doesn't apply.</p>" },
-		{ q: 'What if I have a system you didn\'t install?', a: '<p>We maintain it anyway. Heritage can carry maintenance on a roof regardless of who installed it, as long as the system is one we know (TPO, EPDM, mod-bit, BUR, metal, coatings). We document the existing condition on the first visit so the baseline is clear.</p>' },
-		{ q: 'What about emergency leaks?', a: '<p>Contract holders get priority response — typically same-day for during-business-hours calls, next-morning for after-hours. The repair cost is either covered by the program (small leaks, sealant work) or billed at the program rate (larger repairs).</p>' },
-		{ q: 'Can I cancel?', a: '<p>Yes — the contract is annual and renewable. No multi-year lock-in.</p>' },
-	]}
-	ctaHeading="Roof asset management,<br />not roof emergencies."
-	ctaLede="Free initial assessment. We tell you the program scope and the per-roof number before you sign."
-	ctaPhoto={v2.pageHeros.commercial}
-	promises={['Bonded + insured', 'Warranty maintenance documentation', 'Same-day emergency response']}
-/>
+<BaseLayout
+	title="Commercial roof maintenance programs — Heritage Co."
+	description="Scheduled inspection, minor-repair cadence, and warranty protection for commercial roofs across East Texas."
+>
+	<HeroPage
+		eyebrow="Commercial · maintenance"
+		heading="Maintenance programs."
+		lede="Scheduled inspection and minor-repair cadence. Catches problems before they leak. Protects the manufacturer warranty. The difference between a 20-year roof and a 30-year roof."
+		photo={v2.pageHeros.maintenance}
+		primaryCta={{ label: 'Request a program quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		tier={2}
+	/>
+
+	<PromiseStrip items={['Scheduled inspections', 'Minor-repair cadence', 'Warranty protection', 'Bonded + insured']} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<ToggleFacts facts={[
+					{ label: 'What it is', body: 'A scheduled cadence of roof inspections (annual, semi-annual, or quarterly) plus minor-repair work — sealing penetrations, clearing drains, fixing flashing — that compounds into significant life extension. Most manufacturer warranties require regular maintenance to stay valid.' },
+					{ label: 'When we spec it', body: 'Owners with a portfolio of buildings who want a single point of contact and predictable annual roof spend. Newer roofs under manufacturer warranty that require documented inspections to stay valid. Older roofs where deferred maintenance is starting to compound.' },
+					{ label: 'When we skip it', body: 'A roof that is past its useful life and leaking now usually needs full replacement, not maintenance. Coatings or recovers may be a better next-step there. The free assessment tells you which — see the other commercial systems below.' },
+				]} />
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section section-tight">
+			<div class="container">
+				<SectionHead
+					eyebrow="Other commercial systems"
+					heading="Need a new roof,<br />not maintenance?"
+					lede="We install every major commercial roof type. Pick the one that fits the building."
+					maxWidth="780px"
+				/>
+				<div class="systems-spacer">
+					<TileGrid tiles={otherSystems('maintenance')} cols={3} style="photo-card" />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading="Free roof assessment.<br />Maintenance plan in a week."
+		lede="We tell you whether a maintenance program makes sense for your building before we quote it."
+		primaryCta={{ label: 'Request a program quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.commercial}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
+	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
+	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
+</style>

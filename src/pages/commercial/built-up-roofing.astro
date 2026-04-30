@@ -1,54 +1,73 @@
 ---
-import SystemPage from '../../components/v2/SystemPage.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from '../../components/v2/HeroPage.astro';
+import PromiseStrip from '../../components/v2/PromiseStrip.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import ToggleFacts from '../../components/v2/ToggleFacts.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
+import PageCTA from '../../components/v2/PageCTA.astro';
+import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
+import { otherSystems } from '../../content/commercialSystems';
 
 const v2 = imagery.v2;
 ---
 
-<SystemPage
-	title="Built-up commercial roofing (BUR)"
-	heroEyebrow="Commercial · multi-ply"
-	heroHeading="Built-up roofing.<br />The classic that still holds."
-	heroLede="Multiple plies of asphalt-saturated felt + hot asphalt + a gravel or granulated cap. The original commercial flat roof. Still right for some buildings — we tell you when."
-	heroPhoto={v2.pageHeros.builtUpRoofing}
-	bleedPhoto={v2.bleeds.commercial}
-	bleedHeading="Three to five plies.<br />Redundancy in the membrane itself."
-	overview={{
-		eyebrow: 'What BUR is',
-		heading: 'Asphalt + felt + ballast.',
-		body: "Built-up roofing layers asphalt-saturated felts with hot asphalt between them, three to five plies thick, then finishes with a flood coat of asphalt embedded with gravel or a granulated cap sheet. It predates single-ply by decades and was the dominant flat-roof system from the 1920s through the 1990s. A correctly-installed BUR runs 20–30 years, sometimes longer."
-	}}
-	keyPoints={[
-		{
-			heading: "Where BUR still fits.",
-			body: "BUR is right for buildings where the spec calls for it, where puncture resistance and ballast weight are advantages, and where the budget tolerates a labor-intensive install. Industrial sites, public buildings, and historical structures with existing BUR roofs are the typical fits.",
-			bullets: ['Industrial, manufacturing, government', 'Heavy-duty roof environments', 'Existing BUR re-roof candidates', 'Specifications that explicitly call for BUR'],
-			photo: v2.systemTiles.bur,
-			photoSide: 'left',
-		},
-		{
-			heading: 'Hot vs cold-applied.',
-			body: "Hot-mopped BUR uses a kettle on-site to melt asphalt and bond each ply — the original method, still used where feasibility permits. Cold-applied uses adhesive in place of hot asphalt, removes the kettle hazard, and works on jobs where hot work isn't allowed.",
-			bullets: ['Hot-mopped (traditional)', 'Cold-applied (adhesive-bonded)', 'Aggregate-surfaced or smooth cap'],
-			photo: v2.bleeds.workmanship,
-			photoSide: 'right',
-		},
-	]}
-	stats={[
-		{ value: '20–30', label: 'Years typical service life' },
-		{ value: '3–5', label: 'Plies in the membrane' },
-		{ value: 'Class A', label: 'Fire rating · UL 790' },
-		{ value: 'High', label: 'Ballast weight (psf)' },
-	]}
-	projectPhotos={[v2.projects[6], v2.projects[5], v2.projects[3], v2.projects[8]]}
-	projectCaptions={['BUR restoration, industrial', 'Built-up replacement, multi-tenant', 'BUR + flashing rebuild', 'Aggregate-surfaced BUR']}
-	faq={[
-		{ q: 'Why is BUR still on the spec sheet?', a: "<p>Because it works. A 3- to 5-ply BUR is mechanically the most redundant membrane you can install. Public buildings, industrial sites, and some historic specifications still call for BUR explicitly. We don't push it on jobs where mod-bit or single-ply would be a better fit, but where it's right, it's right.</p>" },
-		{ q: 'Is the kettle a problem?', a: '<p>It can be. Hot-mopped BUR requires a kettle, hot-pipe, and trained crew, and hot work isn\'t allowed on every site. Cold-applied BUR removes the kettle while keeping the multi-ply membrane structure. We use the method the site allows.</p>' },
-		{ q: 'BUR vs mod-bit?', a: "<p>Mod-bit is BUR's modern successor — fewer plies, polymer-modified for tensile strength, faster to install. Mod-bit wins on most jobs. BUR wins where the spec calls for it, where the existing roof is BUR and a like-replacement is the easiest path, and where ballast weight is an asset (it is, on some industrial roofs).</p>" },
-		{ q: 'How long does it last?', a: "<p>20–30 years properly installed. Longer with periodic flood-coating and ballast maintenance. The failure point on BUR is almost never the field — it's flashings, drains, and edges.</p>" },
-	]}
-	ctaHeading="BUR walkthrough,<br />scope, and bid in a week."
-	ctaLede="Free roof assessment. Honest answer on whether to stay with built-up or move to mod-bit."
-	ctaPhoto={v2.pageHeros.commercial}
-/>
+<BaseLayout
+	title="Built-up roofing (BUR) — Heritage Co."
+	description="Heritage Co. installs built-up tar-and-gravel roofing on commercial buildings across East Texas. Decades of proven service life on flat roofs."
+>
+	<HeroPage
+		eyebrow="Commercial · multi-ply"
+		heading="Built-up roofing."
+		lede="Tar-and-gravel multi-layer system. Decades of proven service life. The legacy commercial standard — still the right answer on certain buildings."
+		photo={v2.pageHeros.builtUpRoofing}
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		tier={2}
+	/>
+
+	<PromiseStrip items={['We install BUR', 'Multi-layer redundancy', '20–30 yr service life', 'Bonded + insured']} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<ToggleFacts facts={[
+					{ label: 'What it is', body: 'Multiple plies of asphalt-saturated felt or fabric, bonded with hot or cold asphalt, topped with a layer of mineral aggregate (gravel) for UV and impact protection. The original commercial flat-roof system, dating back to the late 1800s.' },
+					{ label: 'When we spec it', body: 'Re-roofs over an existing BUR where a like-for-like recover is the cleanest path. Buildings where the owner wants multi-ply redundancy and is OK with a heavier system. Roofs where the existing structure was specced for the dead load.' },
+					{ label: 'When we skip it', body: 'Most new construction goes single-ply (TPO or EPDM) or modified bitumen now — lighter, faster install, comparable life. Coating restoration sometimes wins on tight budgets. The free assessment tells you which — see the other commercial systems below.' },
+				]} />
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section section-tight">
+			<div class="container">
+				<SectionHead
+					eyebrow="Other commercial systems"
+					heading="Not BUR?<br />Here's the rest."
+					lede="We install every major commercial roof type. Pick the one that fits the building."
+					maxWidth="780px"
+				/>
+				<div class="systems-spacer">
+					<TileGrid tiles={otherSystems('bur')} cols={3} style="photo-card" />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading="Free roof assessment.<br />Real recommendation in a week."
+		lede="We tell you whether built-up is the right call before we quote it."
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.commercial}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
+	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
+	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
+</style>

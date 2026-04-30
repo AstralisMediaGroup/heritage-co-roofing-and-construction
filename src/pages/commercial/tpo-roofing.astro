@@ -8,53 +8,9 @@ import TileGrid from '../../components/v2/TileGrid.astro';
 import PageCTA from '../../components/v2/PageCTA.astro';
 import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
+import { otherSystems } from '../../content/commercialSystems';
 
 const v2 = imagery.v2;
-
-const otherSystems = [
-	{
-		eyebrow: 'EPDM',
-		heading: 'EPDM single-ply.',
-		body: 'Black rubber membrane. The right call for certain re-roofs.',
-		href: '/commercial/epdm-roofing',
-		photo: v2.systemTiles.epdm,
-	},
-	{
-		eyebrow: 'Modified bitumen',
-		heading: 'Modified bitumen.',
-		body: 'Multi-ply asphalt-based system with strong puncture resistance.',
-		href: '/commercial/modified-bitumen-roofing',
-		photo: v2.systemTiles.modBit,
-	},
-	{
-		eyebrow: 'Built-up roofing',
-		heading: 'BUR (tar and gravel).',
-		body: 'Multi-layer asphalt-and-gravel. Decades of proven service.',
-		href: '/commercial/built-up-roofing',
-		photo: v2.systemTiles.bur,
-	},
-	{
-		eyebrow: 'Metal',
-		heading: 'Standing seam metal.',
-		body: 'Concealed-fastener panels. The longest-warranty option.',
-		href: '/commercial/metal-roofing',
-		photo: v2.systemTiles.metal,
-	},
-	{
-		eyebrow: 'Coatings',
-		heading: 'Coatings + restoration.',
-		body: 'Silicone or acrylic recoats over an existing system. Adds 10–15 years.',
-		href: '/commercial/roof-coatings-and-restorations',
-		photo: v2.systemTiles.coatings,
-	},
-	{
-		eyebrow: 'Maintenance',
-		heading: 'Maintenance programs.',
-		body: 'Scheduled inspection + minor-repair cadence. Protects the warranty.',
-		href: '/commercial/maintenance-programs',
-		photo: v2.systemTiles.maintenance,
-	},
-];
 ---
 
 <BaseLayout
@@ -77,18 +33,9 @@ const otherSystems = [
 		<section class="page-section">
 			<div class="container">
 				<ToggleFacts facts={[
-					{
-						label: 'What it is',
-						body: 'Thermoplastic single-ply membrane installed in wide sheets and heat-welded at every overlap. Reflective white surface drops summer cooling load. The dominant new-construction membrane in commercial since the mid-2000s.',
-					},
-					{
-						label: 'When we spec it',
-						body: "Cooling-dominated buildings — retail, light commercial, restaurants, schools, government. Anything flat or low-slope with a meaningful summer HVAC bill. Most re-roofs over a sound existing single-ply qualify too.",
-					},
-					{
-						label: 'When we skip it',
-						body: "Cold-climate jobs sometimes favor EPDM. Heavy rooftop foot traffic favors mod-bit. Tight budget on a small re-roof might land on a coating system instead. The free assessment tells you which — see the other commercial systems below.",
-					},
+					{ label: 'What it is', body: 'Thermoplastic single-ply membrane installed in wide sheets and heat-welded at every overlap. Reflective white surface drops summer cooling load. The dominant new-construction membrane in commercial since the mid-2000s.' },
+					{ label: 'When we spec it', body: 'Cooling-dominated buildings — retail, light commercial, restaurants, schools, government. Anything flat or low-slope with a meaningful summer HVAC bill. Most re-roofs over a sound existing single-ply qualify too.' },
+					{ label: 'When we skip it', body: 'Cold-climate jobs sometimes favor EPDM. Heavy rooftop foot traffic favors mod-bit. Tight budget on a small re-roof might land on a coating system instead. The free assessment tells you which — see the other commercial systems below.' },
 				]} />
 			</div>
 		</section>
@@ -104,7 +51,7 @@ const otherSystems = [
 					maxWidth="780px"
 				/>
 				<div class="systems-spacer">
-					<TileGrid tiles={otherSystems} cols={3} style="photo-card" />
+					<TileGrid tiles={otherSystems('tpo')} cols={3} style="photo-card" />
 				</div>
 			</div>
 		</section>

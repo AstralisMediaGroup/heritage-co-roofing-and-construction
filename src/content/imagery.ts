@@ -51,6 +51,16 @@ const COMMERCIAL_ROOFTOP_FLAT: ImageRef = {
 	photographer: 'Harrison Haines via Pexels',
 };
 
+// Aerial photo of a dark commercial flat roof with rooftop HVAC and parapets.
+// Reads as EPDM, modified bitumen, or BUR depending on context. Used as the
+// canonical "dark single-ply" photo across those system pages.
+const COMMERCIAL_ROOFTOP_DARK: ImageRef = {
+	url: 'https://images.pexels.com/photos/19895916/pexels-photo-19895916.jpeg?auto=compress&cs=tinysrgb&w=1800',
+	alt: 'Aerial view of a dark single-ply commercial flat roof with rooftop HVAC equipment',
+	source: 'unsplash',
+	photographer: 'ThisIsEngineering via Pexels',
+};
+
 // Real architectural-shingle install — CertainTeed Landmark Driftwood on
 // a light-brick home. Hot-linked from CertainTeed's widen.net asset CDN.
 // Aspect requested as 4:5 portrait to match HeroPage's desktop crop.
@@ -121,11 +131,11 @@ export const imagery = {
 
 			// Tier 2 — commercial systems
 			tpoRoofing: COMMERCIAL_ROOFTOP_FLAT,
-			epdmRoofing: ROOF_WEATHERED,
-			modifiedBitumen: ROOFTOPS_TWO,
-			builtUpRoofing: ROOFTOPS_GOLDEN,
-			coatings: ROOFTOPS_GOLDEN,
-			maintenance: ROOF_WEATHERED,
+			epdmRoofing: COMMERCIAL_ROOFTOP_DARK,
+			modifiedBitumen: COMMERCIAL_ROOFTOP_DARK,
+			builtUpRoofing: COMMERCIAL_ROOFTOP_DARK,
+			coatings: COMMERCIAL_ROOFTOP_FLAT,
+			maintenance: COMMERCIAL_ROOFTOP_DARK,
 
 			// Tier 2 — residential materials
 			asphaltShingle: CERTAINTEED_LANDMARK_HOUSE,
@@ -175,15 +185,17 @@ export const imagery = {
 			{ ...ASPHALT_CLOSEUP, alt: 'Asphalt detail, recent install' },
 		] as ImageRef[],
 
-		// ── System tiles (Greenwood-style — small thumb per system)
+		// ── System tiles (small thumb per system) — used by cross-link grids.
+		// Real type-appropriate photos. Some are reused across visually-similar
+		// systems (dark flat = EPDM/mod-bit/BUR/maintenance; white flat = TPO/coatings).
 		systemTiles: {
-			tpo: ROOFTOPS_CITY,
-			epdm: ROOF_WEATHERED,
-			modBit: ROOFTOPS_TWO,
+			tpo: COMMERCIAL_ROOFTOP_FLAT,
+			epdm: COMMERCIAL_ROOFTOP_DARK,
+			modBit: COMMERCIAL_ROOFTOP_DARK,
 			metal: METAL_STANDING_SEAM,
-			bur: ROOFTOPS_GOLDEN,
-			coatings: ROOFTOPS_GOLDEN,
-			maintenance: ROOF_WEATHERED,
+			bur: COMMERCIAL_ROOFTOP_DARK,
+			coatings: COMMERCIAL_ROOFTOP_FLAT,
+			maintenance: COMMERCIAL_ROOFTOP_DARK,
 		},
 
 		// ── Material tiles (residential)

@@ -1,55 +1,73 @@
 ---
-import SystemPage from '../../components/v2/SystemPage.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from '../../components/v2/HeroPage.astro';
+import PromiseStrip from '../../components/v2/PromiseStrip.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import ToggleFacts from '../../components/v2/ToggleFacts.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
+import PageCTA from '../../components/v2/PageCTA.astro';
+import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
+import { otherSystems } from '../../content/commercialSystems';
 
 const v2 = imagery.v2;
 ---
 
-<SystemPage
-	title="EPDM commercial roofing"
-	heroEyebrow="Commercial · single-ply"
-	heroHeading="EPDM rubber.<br />The original single-ply."
-	heroLede="Black synthetic-rubber membrane. 50+ year proven track record. Cold-weather installable. The right call for the right building — we tell you when that's the case."
-	heroPhoto={v2.pageHeros.epdmRoofing}
-	bleedPhoto={v2.bleeds.commercial}
-	bleedHeading="Synthetic rubber.<br />Decades of field history."
-	overview={{
-		eyebrow: 'What EPDM is',
-		heading: 'Vulcanized synthetic rubber, in big sheets.',
-		body: "EPDM (ethylene propylene diene monomer) is a black synthetic-rubber membrane installed in sheets up to 50 ft wide with seam tape or bonding adhesive at the overlaps. It's the original single-ply system — in commercial use since the 1960s — and the longest field history of any membrane on the market. The trade-off versus TPO is reflectivity: EPDM is dark and absorbs heat where TPO reflects it."
-	}}
-	keyPoints={[
-		{
-			heading: 'Where EPDM is still the right call.',
-			body: "EPDM still wins for cold-climate buildings, heating-dominated structures, and re-roof scenarios where the existing roof is EPDM and the tear-off math doesn't pencil. It also wins on raw longevity — the 50+ year service-life record on EPDM is real.",
-			bullets: ['Heating-dominated buildings', 'Cold-climate installs (no minimum substrate temp)', 'Existing-EPDM re-cover candidates', '50+ year proven track record'],
-			photo: v2.systemTiles.epdm,
-			photoSide: 'left',
-		},
-		{
-			heading: 'How it gets installed.',
-			body: "Three main methods. Mechanically-attached is the fastest and lowest-cost. Fully-adhered uses bonding adhesive across the whole surface for high wind-uplift performance. Ballasted (river rock or pavers) is mostly historical but still in service on a lot of 1990s-era buildings.",
-			bullets: ['Mechanically-attached (fastest)', 'Fully-adhered (high uplift)', 'Ballasted (mostly legacy at this point)'],
-			photo: v2.bleeds.workmanship,
-			photoSide: 'right',
-		},
-	]}
-	stats={[
-		{ value: '50+', label: 'Years field history' },
-		{ value: '20–30', label: 'Years typical warranty' },
-		{ value: '40°F', label: 'Min ambient temp · adhered' },
-		{ value: 'Class A', label: 'Fire rating · ballasted UL 790' },
-	]}
-	projectPhotos={[v2.projects[5], v2.projects[7], v2.projects[6], v2.projects[3]]}
-	projectCaptions={['EPDM re-roof, manufacturing', 'EPDM with ballast removal, Tyler', 'Adhered EPDM, healthcare', 'EPDM-to-TPO conversion bid']}
-	faq={[
-		{ q: 'Why would I pick EPDM over TPO in 2026?', a: "<p>If your existing roof is EPDM and structurally sound, sticking with EPDM avoids tear-off cost and lets us spot-repair instead of full replacement. If you're in a heating-dominated building (rare in East Texas, common in Arkansas hill country), the dark surface helps in winter. Otherwise, TPO is usually the answer.</p>" },
-		{ q: 'How long does EPDM actually last?', a: '<p>50+ years documented in real-world installs. The membrane itself doesn\'t fail — what fails is seam tape, flashings, and ballast scour at edges. Maintained, an EPDM roof outlasts most of the buildings it\'s on.</p>' },
-		{ q: 'Can you install EPDM in winter?', a: '<p>Yes — mechanically-attached EPDM has no temperature minimum. Adhered installs need substrate above ~40°F for the bonding adhesive. Ballasted installs run year-round.</p>' },
-		{ q: 'What\'s the warranty?', a: '<p>Manufacturer warranties on EPDM run 20–30 years. Heritage adds a workmanship warranty on the install. Specific tier and length lands on the proposal once we know the system and the warranty path Heritage carries with that manufacturer.</p>' },
-		{ q: 'Will it leak in 10 years?', a: '<p>If installed correctly and the seams are properly tape- or adhesive-bonded, no. EPDM leaks where the seams are weak or the flashings around penetrations have failed. Heritage installs all seams to manufacturer spec and the warranty covers them.</p>' },
-	]}
-	ctaHeading="EPDM walkthrough,<br />scope, and bid in a week."
-	ctaLede="Free roof assessment. We tell you whether EPDM still makes sense for your building."
-	ctaPhoto={v2.pageHeros.commercial}
-/>
+<BaseLayout
+	title="EPDM commercial roofing — Heritage Co."
+	description="Heritage Co. installs EPDM single-ply rubber membrane on commercial roofs across East Texas. Black synthetic rubber, 25+ year service life."
+>
+	<HeroPage
+		eyebrow="Commercial · single-ply"
+		heading="EPDM."
+		lede="Black synthetic-rubber single-ply membrane. The cold-climate workhorse and the right call on certain re-roofs where the existing system is already EPDM."
+		photo={v2.pageHeros.epdmRoofing}
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		tier={2}
+	/>
+
+	<PromiseStrip items={['We install EPDM', 'Seam-taped + adhered', '25+ yr service life', 'Bonded + insured']} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<ToggleFacts facts={[
+					{ label: 'What it is', body: 'Single-ply rubber membrane (ethylene propylene diene monomer) installed in wide sheets and bonded with seam tape or adhesive. Excellent flexibility across temperature swings, proven 40-year track record on commercial roofs.' },
+					{ label: 'When we spec it', body: 'Cold-climate jobs where TPO seam reliability is a question. Re-roofs where the existing system is already EPDM and a like-for-like recover is the cleanest path. Buildings where black absorptive surface is acceptable or preferred (heating-dominated load).' },
+					{ label: 'When we skip it', body: 'East Texas summer load usually favors a reflective TPO membrane over EPDM. Heavy foot traffic favors mod-bit. The free assessment tells you which — see the other commercial systems below.' },
+				]} />
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section section-tight">
+			<div class="container">
+				<SectionHead
+					eyebrow="Other commercial systems"
+					heading="Not EPDM?<br />Here's the rest."
+					lede="We install every major commercial roof type. Pick the one that fits the building."
+					maxWidth="780px"
+				/>
+				<div class="systems-spacer">
+					<TileGrid tiles={otherSystems('epdm')} cols={3} style="photo-card" />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading="Free roof assessment.<br />Real recommendation in a week."
+		lede="We tell you whether EPDM is the right call before we quote it."
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.commercial}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
+	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
+	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
+</style>

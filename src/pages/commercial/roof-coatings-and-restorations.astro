@@ -1,55 +1,73 @@
 ---
-import SystemPage from '../../components/v2/SystemPage.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from '../../components/v2/HeroPage.astro';
+import PromiseStrip from '../../components/v2/PromiseStrip.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import ToggleFacts from '../../components/v2/ToggleFacts.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
+import PageCTA from '../../components/v2/PageCTA.astro';
+import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
+import { otherSystems } from '../../content/commercialSystems';
 
 const v2 = imagery.v2;
 ---
 
-<SystemPage
-	title="Roof coatings and restorations"
-	heroEyebrow="Commercial · restoration"
-	heroHeading="Coatings + restorations.<br />Buy 10–15 years."
-	heroLede="Silicone, acrylic, or polyurethane elastomeric coatings over an existing commercial roof. The right move when the deck is sound and a full tear-off is overkill."
-	heroPhoto={v2.pageHeros.coatings}
-	bleedPhoto={v2.bleeds.commercial}
-	bleedHeading="Sound deck. Sound membrane.<br />Stretch the asset."
-	overview={{
-		eyebrow: 'What restoration is',
-		heading: 'Recoat over a roof that still has bones.',
-		body: "Coating restoration is a recover system — a fluid-applied elastomeric membrane (silicone, acrylic, or polyurethane) sprayed or rolled over an existing commercial roof in good structural condition. It seals the existing surface, restores reflectivity, extends warranty coverage, and avoids the cost and downtime of a full tear-off. Done on the right roof, it adds 10–15 years of service life."
-	}}
-	keyPoints={[
-		{
-			heading: 'When restoration makes sense.',
-			body: "If your existing roof is structurally sound, the deck is dry, and the membrane is intact but aging — restoration is the math. If the deck is wet, the membrane has multiple penetrations, or the insulation is compromised — restoration is hiding a problem and we'll tell you so.",
-			bullets: ['Existing membrane intact, deck dry', '10+ year-old single-ply roofs', 'Pre-tax-deduction expense vs capex', 'Warehouse, retail, schools, government'],
-			photo: v2.systemTiles.coatings,
-			photoSide: 'left',
-		},
-		{
-			heading: 'Silicone vs acrylic vs urethane.',
-			body: "Silicone holds up best in standing-water conditions and reflects heat well. Acrylic is cheaper, breathable, and easy to recoat. Polyurethane is the most impact-resistant but the most expensive. We pick the chemistry that fits the building and the warranty Heritage carries.",
-			bullets: ['Silicone — best for ponding water', 'Acrylic — cheapest, breathable', 'Polyurethane — toughest, costliest'],
-			photo: v2.bleeds.workmanship,
-			photoSide: 'right',
-		},
-	]}
-	stats={[
-		{ value: '10–15', label: 'Years added · typical' },
-		{ value: '40–60%', label: 'Cost vs full replacement' },
-		{ value: '85%+', label: 'Solar reflectivity · white silicone' },
-		{ value: '0', label: 'Days of building downtime' },
-	]}
-	projectPhotos={[v2.projects[8], v2.projects[5], v2.projects[6], v2.projects[3]]}
-	projectCaptions={['Silicone restoration, warehouse', 'Acrylic recoat, retail', 'Urethane on high-traffic roof', 'Full restoration, multi-building']}
-	faq={[
-		{ q: 'How do I know if my roof is restoration-ready?', a: "<p>We pull cores. A roof with intact insulation, sound membrane, and a dry deck is a candidate. A roof with wet insulation, multiple membrane failures, or structural deck damage isn't — restoration over a compromised system locks the moisture in and the building owner pays twice. We do the inspection before we pitch the restoration.</p>" },
-		{ q: 'What about the warranty?', a: '<p>Manufacturer warranties on silicone restoration land in the 10–20 year band depending on system thickness (mil rating) and the existing-roof condition. Heritage adds a workmanship warranty on the install. The exact terms come with the proposal.</p>' },
-		{ q: 'Restoration or full replacement — how do I decide?', a: "<p>Math. Restoration runs 40–60% of full replacement cost and adds 10–15 years. If you're keeping the building 5–10 more years, restoration usually wins. If you're keeping it 20+ years, full replacement may pencil better over time. We run both numbers on the proposal.</p>" },
-		{ q: 'Will the building have to shut down?', a: "<p>No. Coating restoration is a non-disruptive process — sprayed or rolled from above, no tear-off, no exposed deck. Tenants and operations stay active throughout."},
-		{ q: 'Does it work on metal roofs?', a: '<p>Yes. Silicone and acrylic restoration over a structurally-sound metal roof seals seams, restores reflectivity, and extends life. The metal panel system has to be structurally sound — restoration over corroded metal is a band-aid.</p>' },
-	]}
-	ctaHeading="Restoration assessment,<br />scope, and bid in a week."
-	ctaLede="Free core sample. Real answer on whether restoration is the right move for your building."
-	ctaPhoto={v2.pageHeros.commercial}
-/>
+<BaseLayout
+	title="Roof coatings + restoration — Heritage Co."
+	description="Silicone and acrylic roof coatings restore existing commercial roofs across East Texas. Adds 10–15 years without a tear-off."
+>
+	<HeroPage
+		eyebrow="Commercial · restoration"
+		heading="Coatings + restoration."
+		lede="Silicone or acrylic spray-applied coating over your existing roof. Adds 10–15 years of life and reflective surface. No tear-off, no disposal cost, building stays open."
+		photo={v2.pageHeros.coatings}
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		tier={2}
+	/>
+
+	<PromiseStrip items={['We coat + restore', 'No tear-off', '10–15 yr life extension', 'Bonded + insured']} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<ToggleFacts facts={[
+					{ label: 'What it is', body: 'A liquid-applied membrane (silicone, acrylic, or polyurethane) sprayed or rolled over an existing flat or low-slope roof. Bonds to the existing surface, seals seams and minor punctures, and adds a fresh reflective topcoat with manufacturer-backed warranty.' },
+					{ label: 'When we spec it', body: 'The existing roof has 60%+ life remaining structurally but the surface is failing. Owner wants to defer a full re-roof. Building cannot tolerate the noise/disruption of tear-off. Tight budget that needs a 10–15 year solution rather than 25+.' },
+					{ label: 'When we skip it', body: "Wet insulation underneath, ponding water that won't resolve, or substrate that has already failed — coatings cannot fix structural problems. Those need tear-off and replacement. The free assessment tells you which — see the other commercial systems below." },
+				]} />
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section section-tight">
+			<div class="container">
+				<SectionHead
+					eyebrow="Other commercial systems"
+					heading="Not coatings?<br />Here's the rest."
+					lede="We install every major commercial roof type. Pick the one that fits the building."
+					maxWidth="780px"
+				/>
+				<div class="systems-spacer">
+					<TileGrid tiles={otherSystems('coatings')} cols={3} style="photo-card" />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading="Free roof assessment.<br />Real recommendation in a week."
+		lede="We tell you whether a coating is the right call before we quote it."
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.commercial}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
+	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
+	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
+</style>

@@ -1,55 +1,73 @@
 ---
-import SystemPage from '../../components/v2/SystemPage.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from '../../components/v2/HeroPage.astro';
+import PromiseStrip from '../../components/v2/PromiseStrip.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import ToggleFacts from '../../components/v2/ToggleFacts.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
+import PageCTA from '../../components/v2/PageCTA.astro';
+import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
+import { otherSystems } from '../../content/commercialSystems';
 
 const v2 = imagery.v2;
 ---
 
-<SystemPage
-	title="Modified bitumen commercial roofing"
-	heroEyebrow="Commercial · multi-ply"
-	heroHeading="Modified bitumen.<br />Heavy-duty asphalt."
-	heroLede="Multi-ply asphaltic membrane reinforced with polymer modifiers. Built for foot-traffic, HVAC-dense, and high-stress commercial roofs. The system that doesn't get punctured."
-	heroPhoto={v2.pageHeros.modifiedBitumen}
-	bleedPhoto={v2.bleeds.commercial}
-	bleedHeading="Two plies thick.<br />Built to take a beating."
-	overview={{
-		eyebrow: 'What mod-bit is',
-		heading: 'Asphalt + polymer, installed in plies.',
-		body: "Modified bitumen is a multi-ply asphaltic system — a base sheet plus one or two cap sheets, each reinforced with polyester or fiberglass and modified with SBS (rubber-like) or APP (plastic-like) polymers. Heat-welded with a torch, hot-mopped with asphalt, or self-adhered. The result is a thick, redundant membrane that takes foot traffic and rooftop equipment service without puncturing."
-	}}
-	keyPoints={[
-		{
-			heading: 'Where mod-bit is the right call.',
-			body: "Mod-bit fits buildings with heavy rooftop equipment, frequent service traffic, or owners who prioritize puncture resistance over reflectivity. Hospitals, data centers, manufacturing — anywhere people are walking the roof regularly.",
-			bullets: ['Foot-traffic-heavy roofs', 'HVAC-dense, equipment-heavy buildings', 'Hospitals, manufacturing, data centers', 'Where puncture-resistance > reflectivity'],
-			photo: v2.systemTiles.modBit,
-			photoSide: 'left',
-		},
-		{
-			heading: 'SBS vs APP — and how we install.',
-			body: "SBS modifiers are flexible — easier to install in cold weather, friendlier to torch crews, more forgiving on rolling decks. APP modifiers are stiffer and more heat-resistant — preferred for hot-mop or torch-down on flat decks with no movement. Heritage runs cold-applied, hot-applied, or torch installs depending on the specification and the building.",
-			bullets: ['SBS modifier (flexible, cold-friendly)', 'APP modifier (stiff, heat-resistant)', 'Cold-applied, hot-applied, or torched'],
-			photo: v2.bleeds.workmanship,
-			photoSide: 'right',
-		},
-	]}
-	stats={[
-		{ value: '20–25', label: 'Years typical service life' },
-		{ value: '2-ply', label: 'Standard system thickness' },
-		{ value: 'Class A', label: 'Fire rating · UL 790' },
-		{ value: 'High', label: 'Puncture resistance' },
-	]}
-	projectPhotos={[v2.projects[5], v2.projects[6], v2.projects[3], v2.projects[7]]}
-	projectCaptions={['Mod-bit, healthcare', 'Mod-bit + parapet detail', '2-ply replacement, manufacturing', 'Mod-bit with rooftop equipment']}
-	faq={[
-		{ q: 'Mod-bit vs TPO — which is the right call?', a: "<p>Foot traffic. If people are on the roof regularly — HVAC service, satellite work, plumbing access — mod-bit takes the abuse better. TPO can puncture under hard-edged tools dropped on it; a 2-ply mod-bit shrugs them off. If foot traffic is rare, TPO usually wins on reflectivity and install cost.</p>" },
-		{ q: 'Are torch installs still common?', a: '<p>Less than they used to be. Cold-applied and self-adhered systems have eaten a big chunk of the torch market because they remove the open-flame hazard. Heritage runs torch installs on jobs where the spec calls for it and the building tolerates it; otherwise we default to cold-applied or hot-mopped.</p>' },
-		{ q: 'How does it compare to BUR (built-up)?', a: "<p>BUR is the predecessor — multiple plies of asphalt-saturated felt with hot asphalt between them, topped with gravel. Mod-bit replaced most BUR work because the polymer-modified cap sheets carry better tensile strength and the install is less labor-intensive. BUR is still alive on some specs, but mod-bit is what we install on new construction.</p>" },
-		{ q: 'How long does mod-bit last?', a: '<p>20–25 years on a properly-installed 2-ply system, longer on systems with a granulated cap or with periodic flood-coating maintenance. Like any roof, the failure point is usually flashings and penetrations, not the field membrane.</p>' },
-		{ q: 'Can you install over my existing roof?', a: '<p>Sometimes. Mod-bit recovers well over an existing built-up or smooth-surface roof if the deck is sound. We tell you yes or no on the inspection.</p>' },
-	]}
-	ctaHeading="Mod-bit walkthrough,<br />scope, and bid in a week."
-	ctaLede="Free roof assessment. Real answer on whether mod-bit fits your building."
-	ctaPhoto={v2.pageHeros.commercial}
-/>
+<BaseLayout
+	title="Modified bitumen roofing — Heritage Co."
+	description="Heritage Co. installs modified bitumen multi-ply roofing on commercial buildings across East Texas. Strong puncture resistance, foot-traffic-tolerant."
+>
+	<HeroPage
+		eyebrow="Commercial · multi-ply"
+		heading="Modified bitumen."
+		lede="Multi-ply asphalt-based system reinforced with polymer modifiers. Strong puncture and foot-traffic resistance — the right call where rooftop equipment service is heavy."
+		photo={v2.pageHeros.modifiedBitumen}
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		tier={2}
+	/>
+
+	<PromiseStrip items={['We install mod-bit', 'Heat-welded or cold-applied', 'Puncture-resistant', 'Bonded + insured']} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<ToggleFacts facts={[
+					{ label: 'What it is', body: 'Asphalt-based membrane modified with SBS or APP polymers and reinforced with a fiberglass or polyester mat. Installed in two or three plies via heat-welded torch, cold-applied adhesive, or self-adhered. Granule-surfaced top sheet provides UV protection.' },
+					{ label: 'When we spec it', body: 'Buildings with heavy rooftop foot traffic — HVAC service, restaurant-vent maintenance, telecom equipment. Re-roofs where the existing system is mod-bit and a recover beats a tear-off. Owners who want the multi-ply redundancy single-ply does not provide.' },
+					{ label: 'When we skip it', body: 'Cooling-dominated buildings usually do better with a reflective TPO. Tight budgets sometimes land on a coating restoration instead. The free assessment tells you which — see the other commercial systems below.' },
+				]} />
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section section-tight">
+			<div class="container">
+				<SectionHead
+					eyebrow="Other commercial systems"
+					heading="Not mod-bit?<br />Here's the rest."
+					lede="We install every major commercial roof type. Pick the one that fits the building."
+					maxWidth="780px"
+				/>
+				<div class="systems-spacer">
+					<TileGrid tiles={otherSystems('modBit')} cols={3} style="photo-card" />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading="Free roof assessment.<br />Real recommendation in a week."
+		lede="We tell you whether mod-bit is the right call before we quote it."
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.commercial}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
+	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
+	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
+</style>
