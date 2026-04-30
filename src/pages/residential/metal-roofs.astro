@@ -3,16 +3,17 @@ import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
 const v2 = imagery.v2;
+const m = imagery.metal;
 ---
 
 <SystemPage
 	title="Metal roofs · residential"
 	heroEyebrow="Residential · materials"
 	heroHeading="Metal roofs.<br />40 years on a house."
-	heroLede="Standing seam and exposed-fastener metal for East Texas homes. Steel or aluminum. Class 4 impact, Class A fire, 30–40 year paint warranty. The roof you only buy once."
-	heroPhoto={v2.pageHeros.metalRoofs}
+	heroLede="Standing seam is the Heritage default for residential metal — the longest-warranty, longest-life option, no exposed fasteners, no gaskets to fail. We also install metal shingle and R-panel where they're the right call. Steel or aluminum. Class 4 impact. Class A fire."
+	heroPhoto={m.standingSeam}
 	heroCta={{ label: 'Get my free inspection', href: '/free-inspection' }}
-	bleedPhoto={v2.bleeds.crew}
+	bleedPhoto={m.standingSeamBleed}
 	bleedHeading="Concealed fasteners.<br />No gaskets to fail."
 	overview={{
 		eyebrow: 'Why metal',
@@ -21,18 +22,25 @@ const v2 = imagery.v2;
 	}}
 	keyPoints={[
 		{
-			heading: 'Standing seam — the long-term answer.',
-			body: "Concealed-fastener panels with no exposed screws or gaskets in the field of the roof. Steel substrate (Galvalume) with PVDF (Kynar 500) finish. McElroy Maxima/138T/238T, Drexel, Mueller, and Berridge are the primary product lines. 30–40 year paint warranties standard.",
+			heading: 'Standing seam — the Heritage default.',
+			body: "Concealed-fastener panels with no exposed screws or gaskets in the field of the roof. Steel substrate (Galvalume) with PVDF (Kynar 500) finish. McElroy Maxima/138T/238T, Mueller MSL/MTL, Drexel, Berridge are the primary product lines. 30–40 year paint warranties standard. This is what we recommend on every residential metal job unless you've got a specific reason to go elsewhere.",
 			bullets: ['Concealed fasteners, no exposed gaskets', 'PVDF paint · 30–40 yr warranty', 'Class 4 impact · UL 2218', 'Class A fire · UL 790'],
-			photo: v2.materialTiles.metal,
+			photo: m.standingSeam,
 			photoSide: 'left',
 		},
 		{
-			heading: 'Exposed-fastener (R-panel).',
-			body: "R-panel, PBR, or Max-Rib panels with screws through the rib. Cheaper up-front, faster install, but the rubber gaskets under the screw heads degrade over time. Right for outbuildings, ag, detached shops. We install both — but on the main house, we usually steer to standing seam.",
-			bullets: ['Cheaper up-front', 'Right for shops, outbuildings, ag', '15–25 yr window before re-fastening', 'Easier color match for repairs'],
-			photo: v2.bleeds.workmanship,
+			heading: 'Metal shingle — slate or shake look, steel performance.',
+			body: "Stone-coated steel pressed into shake, slate, or tile profiles. DECRA Shingle XD, Shake XD, and Tile lines are the dominant brands. Lifetime warranty, Class 4 impact, Class A fire. Higher cost than standing seam but right for HOAs that require a traditional shingle look or homes where slate/shake aesthetics drive the spec.",
+			bullets: ['Looks like shake, slate, or tile', 'Lifetime warranty · Class 4 impact', '50+ yr realistic service life', 'Insurance-discount eligible in hail zips'],
+			photo: m.metalShingle,
 			photoSide: 'right',
+		},
+		{
+			heading: 'R-panel (exposed-fastener) — for shops and outbuildings.',
+			body: "PBR, R-panel, or Max-Rib panels with screws through the rib. Cheaper up-front, faster install, but the rubber gaskets under the screw heads degrade over 15–25 years and need re-fastening. Right for outbuildings, ag, detached shops. We install it — but on the main house, we steer to standing seam because the warranty math doesn't work out long-term.",
+			bullets: ['Cheaper up-front', 'Best for shops, outbuildings, ag', '15–25 yr re-fasten window', 'We do not recommend on primary residence'],
+			photo: m.rPanel,
+			photoSide: 'left',
 		},
 	]}
 	stats={[
@@ -41,10 +49,10 @@ const v2 = imagery.v2;
 		{ value: 'Class 4', label: 'Impact rating · UL 2218' },
 		{ value: '0', label: 'Exposed fasteners · standing seam' },
 	]}
-	projectPhotos={[v2.projects[2], v2.projects[3], v2.projects[7], v2.projects[8]]}
-	projectCaptions={['Standing seam over architectural roof', 'Metal accent + asphalt main, Tyler', 'Full standing seam re-roof', 'Pre-painted Galvalume, Kilgore']}
+	projectPhotos={[m.standingSeam, m.standingSeamBleed, m.metalShingle, m.rPanel]}
+	projectCaptions={['Standing seam install · concealed fasteners', 'Standing seam re-roof, residential', 'DECRA stone-coated metal shingle', 'PBR exposed-fastener R-panel']}
 	faq={[
-		{ q: 'Standing seam or exposed-fastener?', a: "<p>For your house: standing seam, almost always. The longer warranty, no exposed gaskets, and cleaner look pay back the cost difference over the time you're going to be in the house. Exposed-fastener belongs on the shop, the barn, or a detached structure where the budget rules and the roof failure window is acceptable.</p>" },
+		{ q: 'Standing seam, metal shingle, or R-panel?', a: "<p>For your house: standing seam. The longer warranty, no exposed gaskets, and cleaner look pay back the cost difference over the time you're going to be in the house. Metal shingle makes sense if you want the slate or shake aesthetic. R-panel belongs on the shop, the barn, or a detached structure where the budget rules and the 15–25 year re-fasten window is acceptable.</p>" },
 		{ q: 'Will it dent in hail?', a: "<p>Class 4 impact rating means a 2-inch steel ball dropped from 20 feet without cracking the panel. Cosmetic denting is possible in significant hail (1.5\"+) but functional failure is rare. Most insurers offer hail-claim discounts on Class 4 metal.</p>" },
 		{ q: 'Is metal louder when it rains?', a: '<p>No, when installed over a residential deck. The decking, underlayment, and attic insulation absorb impact noise — properly installed metal roofs are no louder inside the house than asphalt. The "metal roofs are loud" idea comes from un-decked metal on barns and pole buildings.</p>' },
 		{ q: 'How does the cost compare to asphalt?', a: "<p>Roughly 2–3x per square. So an asphalt re-roof at $X is a metal re-roof at $2–3X. The math depends on how long you're staying — over 30 years, metal usually wins on total cost; over 10 years, asphalt does.</p>" },

@@ -65,6 +65,39 @@ const IKO_CAMBRIDGE_TX_MULTIFAMILY: ImageRef = {
 	productName: 'Cambridge Weatherwood',
 };
 
+// ─── Metal-roofing manufacturer photos ───
+// Standing seam = concealed-fastener panels, the long-term install.
+// R-panel = exposed-fastener corrugated panels, budget tier.
+// Metal shingle = stone-coated steel that mimics shake/slate/tile.
+const MUELLER_STANDING_SEAM: ImageRef = {
+	url: 'https://www.muellerinc.com/documents/20143/161095/MSL+Hero+4.jpg/d34a5149-95c6-5634-3393-1c3555ce9a44?version=1.0&t=1532696755260&imageThumbnail=4',
+	alt: 'Mueller MSL standing seam metal roof installed on a residential home',
+	source: 'manufacturer',
+	manufacturer: 'Mueller Inc.',
+	productName: 'MSL Standing Seam',
+};
+const MUELLER_PBR_RPANEL: ImageRef = {
+	url: 'https://www.muellerinc.com/documents/20143/161095/PBR+Hero.jpg/ffe1ac11-a29b-9a3f-ade1-b37828b69be8?version=1.0&t=1531825802332&imageThumbnail=4',
+	alt: 'Mueller PBR exposed-fastener R-panel metal roof installed',
+	source: 'manufacturer',
+	manufacturer: 'Mueller Inc.',
+	productName: 'PBR Panel',
+};
+const DECRA_SHINGLE_XD: ImageRef = {
+	url: 'https://www.decra.com/hs-fs/hubfs/decra_metal_roofing_web_shingle_xd_old_hickory_residential-1.webp',
+	alt: 'Home roofed in DECRA Shingle XD stone-coated metal shingle, Old Hickory color',
+	source: 'manufacturer',
+	manufacturer: 'DECRA',
+	productName: 'Shingle XD Old Hickory',
+};
+const DECRA_SHAKE_XD: ImageRef = {
+	url: 'https://www.decra.com/hs-fs/hubfs/decra_metal_roofing_web_shake_xd_pinnacle_grey_residential.webp',
+	alt: 'Home roofed in DECRA Shake XD stone-coated metal shingle, Pinnacle Grey',
+	source: 'manufacturer',
+	manufacturer: 'DECRA',
+	productName: 'Shake XD Pinnacle Grey',
+};
+
 export const imagery = {
 	// ════════════════════════════════════════════════════════════════════
 	// V2 — page hero + supporting slots (Build Pack v2)
@@ -235,6 +268,15 @@ export const imagery = {
 		atlasPinnacleSun: { url: 'https://www.atlasroofing.com/img/product-logos/LOGO-Pinnacle-Sun-BL.png', alt: 'Atlas Pinnacle Sun (cool roof)', source: 'manufacturer', manufacturer: 'Atlas Roofing' } satisfies ImageRef,
 		malarkeyLegacy: { url: 'https://www.malarkeyroofing.com/app/uploads/2021/02/legacy-midnight-black_camas-wa-20210119_Malarkey_0737-600x400.jpg', alt: 'Malarkey Legacy Scotchgard installed roof', source: 'manufacturer', manufacturer: 'Malarkey' } satisfies ImageRef,
 		malarkeyWindsor: { url: 'https://www.malarkeyroofing.com/app/uploads/2021/04/windsor-scotchgard-natural-wood-16031-parker-CO-8-malarkey-600x448.jpg', alt: 'Malarkey Windsor Scotchgard installed roof', source: 'manufacturer', manufacturer: 'Malarkey' } satisfies ImageRef,
+	},
+	// ─── Metal-roofing typology photos (residential) ───
+	// Used by the metal-roofs page to show real examples of each type.
+	metal: {
+		standingSeam: MUELLER_STANDING_SEAM,
+		standingSeamBleed: MUELLER_STANDING_SEAM,
+		metalShingle: DECRA_SHINGLE_XD,
+		metalShake: DECRA_SHAKE_XD,
+		rPanel: MUELLER_PBR_RPANEL,
 	},
 	heritage: {
 		founders: { url: null, alt: '', source: null, placeholderFact: 'Real founder portraits — Jordy, Peyton, Nishil, Vivek. See Founder Input §10.' } satisfies ImageRef,
