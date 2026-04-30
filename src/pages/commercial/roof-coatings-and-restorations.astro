@@ -1,67 +1,73 @@
 ---
-import SystemDetailLayout from '../../layouts/SystemDetailLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from '../../components/v2/HeroPage.astro';
+import PromiseStrip from '../../components/v2/PromiseStrip.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import ToggleFacts from '../../components/v2/ToggleFacts.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
+import PageCTA from '../../components/v2/PageCTA.astro';
+import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
+import { otherSystems } from '../../content/commercialSystems';
 
-const faqs = [
-	{ q: 'Is a coating right for my roof?', a: 'Coatings work on roofs that are structurally sound but starting to show surface wear. Asphalt-based roofs (mod-bit, BUR), aging metal, and weathered single-ply are all coating candidates. Roofs with active leaks, soft decking, or saturated insulation need replacement, not coating.' },
-	{ q: 'How do you decide coat vs replace?', a: 'We pull core samples from the existing roof to check substrate moisture and insulation condition. If the cores are dry and the substrate is sound, coating is the cheaper play. If the cores are wet or the deck has degraded, tear-off + replacement is the only honest answer. We tell you what the cores show.' },
-	{ q: 'How long does a silicone coating last?', a: 'Modern high-solids silicone coatings carry 10–15 year warranties when installed at the right thickness (typically 25+ wet mils). Acrylic coatings are cheaper but need recoating every 5–10 years. Polyurethane coatings sit in between.' },
-	{ q: 'Will it stop a leak?', a: 'A coating over an active leak will hide it temporarily. The right move is to find and repair the leak first (membrane patch, flashing fix), then coat the whole roof to extend its life. Coating is preventive maintenance, not leak repair.' },
-	{ q: 'Does it void existing warranties?', a: 'Sometimes — depends on the original system\'s manufacturer terms. Some manufacturers approve coatings as life-extension; others void warranty when a non-OEM coating is applied. We check the original system warranty before quoting.' },
-	{ q: 'Can it be installed in any weather?', a: 'Coatings need dry substrate and ambient temperatures within the manufacturer\'s window (typically 50–95°F for application). Rain within 24 hours of application can wash off uncured coating. We schedule around dry windows.' },
-];
+const v2 = imagery.v2;
 ---
 
-<SystemDetailLayout
-	title="Roof Coatings + Restorations — Heritage Co. Commercial"
-	heroEyebrow="Commercial · Coatings + restorations"
-	heroH1="Coatings. Extend the roof you have."
-	heroSub="Liquid-applied silicone, acrylic, or urethane that adds 10–15 years to a sound but aging commercial roof. Cheaper than tear-off, faster to install, less disruption."
-	heroPhoto={imagery.metal.hero.url}
-	heroPhotoAlt="Commercial roof"
-	whatItIsHeading="A liquid membrane sprayed or rolled over an existing roof."
-	whatItIsParagraphs={[
-		'Roof coatings are liquid-applied membranes — silicone, acrylic, polyurethane, or asphalt emulsion — that go on top of an existing commercial roof. They cure into a continuous waterproof layer that adds years to the roof\'s life and (in white finishes) reflects heat. They are not a replacement for a failed roof, but they are an effective life-extension on a sound one.',
-		'The honest version: coatings buy time. A 20-year-old TPO with 5–10 years of life left can be coated for a fraction of the cost of replacement and last another 10–15 years. When tear-off is not in the budget yet, coating is the right move.',
-	]}
-	bestFitHeading="Where coatings are the right call."
-	bestFitItems={[
-		{ title: 'Roofs with 5–10 years of life left', body: 'When the roof is sound but starting to show surface wear. Coating buys 10–15 more years cheaply.' },
-		{ title: 'Aging metal roofs', body: 'Standing seam or through-fastened metal where the paint has chalked but the panels are sound. Acrylic or silicone restoration.' },
-		{ title: 'Weathered mod-bit + BUR', body: 'When the cap sheet or gravel is balding but the underlying plies are dry. Aluminum reflective or silicone.' },
-		{ title: 'Energy-efficiency upgrades', body: 'White silicone coatings turn a black or gray roof into a Class 1 cool-roof. Measurable cooling savings.' },
-		{ title: 'Budget-constrained projects', body: 'When replacement is not in this year\'s budget. Coating defers the replacement decision 10+ years.' },
-		{ title: 'Older institutional buildings', body: 'Schools, government, where capital budget cycles favor maintenance over replacement.' },
-	]}
-	specsHeading="Coatings at a glance."
-	specRows={[
-		{ label: 'Service life extension', value: '10–15 years per coat cycle' },
-		{ label: 'Chemistry options', value: 'Silicone / acrylic / polyurethane / aluminum / asphalt emulsion' },
-		{ label: 'Application thickness', value: '20–35 wet mils (depends on chemistry + warranty)' },
-		{ label: 'Reflectivity', value: 'High-SRI silicone or acrylic available' },
-		{ label: 'Install method', value: 'Spray or roll' },
-		{ label: 'Substrate prep required', value: 'Cleaning, primer, and any leak repair before coating' },
-	]}
-	manufacturerPlaceholder="Heritage's preferred coating manufacturer (GAF UniSeal / GE Enduris / Henry Enviroshield / Western Colloid). See Founder Input page §2."
-	howInstallHeading="How a coating install runs."
-	howInstallBody="Substrate prep first — pressure wash, repair any active leaks, prime as required. Coating applied via spray or roller in measured passes — silicone typically goes on in two coats with cure time between. Total process for 20,000 sq ft: 4–8 working days depending on chemistry and weather. The roof is not walkable until full cure."
-	maintenanceHeading="What a coated roof needs over its life."
-	maintenanceBody="Annual inspection of the coating surface, drains, and flashings. Silicone coatings stay flexible and shed dirt; acrylic coatings need re-cleaning to maintain reflectivity. Recoat is typically scheduled 10–15 years after initial application — at that point the roof is essentially refreshed for another decade."
-	tradeoffsHeading="Where coatings shine, and where they don't."
-	tradeoffs={[
-		{ kind: 'pro', body: 'Cheaper than tear-off + replacement (often 30–50% the cost)' },
-		{ kind: 'pro', body: 'Faster install, less business disruption' },
-		{ kind: 'pro', body: 'White silicone delivers Class 1 cool-roof reflectivity' },
-		{ kind: 'pro', body: 'Recoatable — extends life indefinitely on sound substrates' },
-		{ kind: 'con', body: 'Only works on roofs that are still structurally sound' },
-		{ kind: 'con', body: 'Not a fix for active leaks or saturated insulation' },
-		{ kind: 'con', body: 'Some manufacturer warranties void when non-OEM coating applied' },
-		{ kind: 'con', body: 'Weather-sensitive install — needs dry windows' },
-	]}
-	faqItems={faqs}
-	endCtaPhoto={imagery.metal.secondary.url}
-	endCtaHeading="Free roof core sample + coating quote."
-	endCtaSub="We tell you whether the roof is a coating candidate or a replacement."
-	endCtaLabel="Request consultation"
-	endCtaHref="/free-inspection"
-/>
+<BaseLayout
+	title="Roof coatings + restoration — Heritage Co."
+	description="Silicone and acrylic roof coatings restore existing commercial roofs across East Texas. Adds 10–15 years without a tear-off."
+>
+	<HeroPage
+		eyebrow="Commercial · restoration"
+		heading="Coatings + restoration."
+		lede="Silicone or acrylic spray-applied coating over your existing roof. Adds 10–15 years of life and reflective surface. No tear-off, no disposal cost, building stays open."
+		photo={v2.pageHeros.coatings}
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		tier={2}
+	/>
+
+	<PromiseStrip items={['We coat + restore', 'No tear-off', '10–15 yr life extension', 'Bonded + insured']} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<ToggleFacts facts={[
+					{ label: 'What it is', body: 'A liquid-applied membrane (silicone, acrylic, or polyurethane) sprayed or rolled over an existing flat or low-slope roof. Bonds to the existing surface, seals seams and minor punctures, and adds a fresh reflective topcoat with manufacturer-backed warranty.' },
+					{ label: 'When we spec it', body: 'The existing roof has 60%+ life remaining structurally but the surface is failing. Owner wants to defer a full re-roof. Building cannot tolerate the noise/disruption of tear-off. Tight budget that needs a 10–15 year solution rather than 25+.' },
+					{ label: 'When we skip it', body: "Wet insulation underneath, ponding water that won't resolve, or substrate that has already failed — coatings cannot fix structural problems. Those need tear-off and replacement. The free assessment tells you which — see the other commercial systems below." },
+				]} />
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section section-tight">
+			<div class="container">
+				<SectionHead
+					eyebrow="Other commercial systems"
+					heading="Not coatings?<br />Here's the rest."
+					lede="We install every major commercial roof type. Pick the one that fits the building."
+					maxWidth="780px"
+				/>
+				<div class="systems-spacer">
+					<TileGrid tiles={otherSystems('coatings')} cols={3} style="photo-card" />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading="Free roof assessment.<br />Real recommendation in a week."
+		lede="We tell you whether a coating is the right call before we quote it."
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.commercial}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
+	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
+	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
+</style>

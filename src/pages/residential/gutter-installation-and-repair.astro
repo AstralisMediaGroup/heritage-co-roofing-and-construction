@@ -1,91 +1,48 @@
 ---
-import ServiceDetailLayout from '../../layouts/ServiceDetailLayout.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const gutterTypes = [
-	{ title: 'K-style aluminum (standard)', body: 'The default. Decorative front profile, holds more water than half-round, available in 5" and 6". Most East Texas homes have this.' },
-	{ title: 'Half-round', body: 'Older / historic homes, copper or galvanized steel. Drains slightly slower but ages with patina. Costs more.' },
-	{ title: 'Copper', body: 'Long-life and architectural. Develops a green patina over 5–10 years. Premium homes only — 4–5× the price of aluminum.' },
-	{ title: 'Seamless vs sectional', body: 'Seamless = one continuous run from corner to corner, fewer leak points. Sectional = pre-cut lengths joined at seams. Heritage installs seamless on every replacement.' },
-	{ title: 'Gutter guards', body: 'Mesh or hooded covers that keep leaves out. East Texas has heavy oak and pine — guards are usually worth the spend.' },
-	{ title: 'Downspout extensions', body: 'Roll-out tubes, splash blocks, or buried drainage. Anything to push water at least 4 feet from the foundation.' },
-];
-
-const faqs = [
-	{ q: 'Seamless vs sectional — does it matter?', a: 'Yes. Sectional gutters leak at the seams within 5–10 years. Seamless runs are one continuous piece per side, with seams only at corners. Heritage installs seamless on every replacement — sectional is only used for short runs where a seamless cut does not make sense.' },
-	{ q: 'Aluminum vs copper?', a: 'Aluminum for 95% of homes. It is durable, paintable, and runs about a quarter the price of copper. Copper is for historic restoration or premium architectural work — beautiful but a different budget.' },
-	{ q: 'Are gutter guards worth it?', a: 'In East Texas, yes — oak and pine drop heavily. Without guards, gutters fill within a year and overflow. Mesh guards run about 30–40% of the gutter cost itself. The math works on the first cleaning saved.' },
-	{ q: 'How often should gutters be cleaned?', a: 'Twice a year without guards (spring + fall). Once a year with guards. We do not offer cleaning as a separate service, but every Heritage maintenance visit includes a gutter check.' },
-	{ q: 'Can you match my existing gutters?', a: 'Yes — we identify your color and profile, order matching stock. K-style aluminum has \\~25 standard colors carried by most distributors. Discontinued colors are the only edge case — we tell you up front.' },
-	{ q: 'Do you handle downspout extensions?', a: 'Always. A downspout that dumps at the foundation is a basement / crawlspace problem in slow motion. Roll-out tubes, splash blocks, or buried drainage to daylight — we spec what fits the yard.' },
-];
+const v2 = imagery.v2;
 ---
 
-<ServiceDetailLayout
-	title="Gutter Installation + Repair — Heritage Co."
-	heroEyebrow="Residential · Gutters"
-	heroH1="Gutters that drain to where they should."
-	heroSub="Seamless aluminum, half-round, copper. Installation, repair, and gutter guards. Plus downspout extensions to keep water away from the foundation."
-	heroPhoto={imagery.heroCandidates.residentialRoofB.url}
-	heroPhotoAlt="House with gutters"
-	whatWeMeanHeading="Gutters are infrastructure, not decoration."
-	whatWeMeanParagraphs={[
-		'Gutters move water from your roof to a place that is not your foundation. When they fail — overflow at corners, leak at seams, sag away from the fascia — water ends up in the wrong place. Wet siding, rotted fascia, basement seepage, and yard erosion all trace back to gutters.',
-		'We replace gutters when they have outlived their useful life, repair them when a single section fails, and add gutter guards when the homeowner is tired of cleaning them out twice a year. The fix depends on which problem is in front of us.',
+<SystemPage
+	title="Gutter installation and repair"
+	heroEyebrow="Residential · service"
+	heroHeading="Seamless gutters.<br />The roof's drainage system."
+	heroLede="Seamless aluminum and steel gutters. Gutter guards. Repair, re-pitch, and full installation. The system that determines whether your fascia rots or holds for 30 years."
+	heroPhoto={v2.pageHeros.gutter}
+	heroCta={{ label: 'Get my free inspection', href: '/free-inspection' }}
+	bleedPhoto={v2.bleeds.workmanship}
+	bleedHeading="Seamless. Site-formed.<br />No factory-cut joints."
+	overview={{
+		eyebrow: 'Why gutters matter',
+		heading: 'Where the water goes after the roof.',
+		body: "Gutters are the infrastructure between your roof and your foundation. Properly-pitched, properly-sized, and free-flowing gutters move every gallon off the roof to a place that doesn't damage the house. Failed gutters back water onto the fascia, behind the siding, or pool at the foundation. Most fascia rot we see in East Texas traces to a gutter problem, not a roof problem."
+	}}
+	keyPoints={[
+		{
+			heading: 'Seamless installation.',
+			body: "Aluminum (most common) or steel. Site-formed in continuous lengths up to 80+ feet on a portable gutter machine — no factory-cut joints to fail. Pitched 1/4 inch per 10 feet toward downspouts. Hidden hangers (not spike-and-ferrule) for long-term holding power.",
+			bullets: ['Aluminum or steel · site-formed', 'No factory joints in long runs', 'Pitched 1/4" per 10 ft to downspouts', 'Hidden hangers, not nails'],
+			photo: v2.serviceTiles.gutter,
+			photoSide: 'left',
+		},
+		{
+			heading: 'Gutter guards — when they\'re worth it.',
+			body: "Gutter guards (mesh, micro-mesh, foam, or solid-cover) reduce cleaning frequency in pine-heavy or oak-heavy yards. Worth it if you have lots of trees overhead. Skippable if you don't. We don't push them on every job — we tell you whether your tree cover justifies the upgrade.",
+			bullets: ['Worth it: pine + oak coverage overhead', 'Skip: clear roofline, no trees overhead', 'Micro-mesh > foam > brush > solid-cover'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'right',
+		},
 	]}
-	whenYouNeedHeading="The signs gutters are failing."
-	whenYouNeedItems={[
-		{ title: 'Overflow during heavy rain', body: 'Water sheets over the front edge instead of running through. Either undersized for the roof area, or clogged at the downspout.' },
-		{ title: 'Leaks at seams or corners', body: 'Visible drip patterns under joints. Sectional gutters typically fail at seams within 8–12 years.' },
-		{ title: 'Sagging away from the fascia', body: 'Gutter pulled forward at the top. Hanger spacing wrong, fascia rot, or weight from collected debris.' },
-		{ title: 'Fascia or soffit damage', body: 'Black streaks, peeling paint, or rotted wood right behind the gutter run. Water has been getting where it should not.' },
-		{ title: 'Foundation or crawlspace water', body: 'Downspout dumping at the base of the wall. Extending the discharge 4+ feet usually fixes the problem alone.' },
-		{ title: 'No guards + heavy tree cover', body: 'Cleaning twice a year and still finding cups full of pine straw. Guards pay for themselves on the maintenance saved.' },
+	faq={[
+		{ q: "How big do my gutters need to be?", a: '<p>5-inch K-style is standard for most residential roofs. 6-inch K-style is recommended for steeper roofs, larger surface areas, and any house with significant rooflines feeding a single downspout. We size based on roof area and rainfall intensity for East Texas.</p>' },
+		{ q: "What about gutter guards?", a: '<p>Worth it if you have significant tree cover overhead. Micro-mesh systems are the most effective. We don\'t recommend solid-cover (one-piece) systems on most roofs — they tend to lose water in high-flow events.</p>' },
+		{ q: "How often should I clean my gutters?", a: '<p>Twice a year if you have trees overhead — late spring after pollen drop and late fall after leaf drop. Once a year on clear-roof homes. With micro-mesh guards: rinse only, every 1–2 years.</p>' },
+		{ q: "Why is my fascia rotting?", a: '<p>Most likely a gutter problem. Either the gutters are pitched wrong (water sitting at the back lip), the back of the gutter has detached and is feeding water down the fascia, or the gutters are oversized for the hangers and pulling away. We diagnose on the inspection.</p>' },
 	]}
-	processHeading="Four steps. Most installs done in a day."
-	processSteps={[
-		{ label: 'Inspect', caption: 'Free. We measure runs, check fascia, spec downspouts.' },
-		{ label: 'Quote', caption: 'Linear-foot pricing. Color match, guards optional.' },
-		{ label: 'Install', caption: 'Most homes done in one day. Fascia repair if needed.' },
-		{ label: 'Stand by', caption: 'Workmanship warranty on the install.' },
-	]}
-	materialsHeading="Six gutter options."
-	materialsSub="From standard aluminum K-style to copper half-round. We talk through fit at the inspection."
-	costHeading="Linear-foot pricing."
-	costPriceBandFact={`Typical residential gutter installation cost — dollars per linear foot for standard 5" K-style aluminum, with separate adders for downspouts, gutter guards, and copper / half-round upgrades. See Founder Input page §4.`}
-	costFactors={[
-		'Total linear feet of gutter run',
-		'Number of downspouts + extensions',
-		'Color and profile (K-style aluminum, then half-round, then copper)',
-		'Gutter guard add-on (per linear foot)',
-		'Fascia repair if discovered during install',
-		'Two-story access difficulty',
-	]}
-	warrantyHeading="Workmanship + material warranty on every install."
-	faqItems={faqs}
-	endCtaPhoto={imagery.heroCandidates.residentialRoofA.url}
-	endCtaHeading="Free gutter inspection."
-	endCtaSub="We measure, spec, and quote. No pressure."
-	endCtaLabel="Get my free inspection"
-	endCtaHref="/free-inspection"
->
-	<div slot="materials">
-		<div class="gt-grid">
-			{gutterTypes.map((g) => (
-				<div class="gt-item">
-					<p class="gt-title">{g.title}</p>
-					<p class="gt-body">{g.body}</p>
-				</div>
-			))}
-		</div>
-	</div>
-</ServiceDetailLayout>
-
-<style>
-	.gt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--border); }
-	.gt-item { padding: 24px 28px 0 0; }
-	.gt-item + .gt-item { padding-left: 28px; border-left: 1px solid var(--border); }
-	.gt-item:nth-child(n+4) { padding-top: 24px; border-top: 1px solid var(--border); margin-top: 24px; }
-	.gt-title { color: var(--charcoal); font-size: 16px; font-weight: 600; margin: 0 0 8px; }
-	.gt-body { color: var(--warm-gray); font-size: 14px; line-height: 1.55; margin: 0; }
-</style>
+	ctaHeading="Gutter inspection.<br />Free with any roof inspection."
+	ctaLede="We look at the gutters when we look at the roof. No extra charge."
+	ctaPhoto={v2.pageHeros.freeInspection}
+	ctaPrimary={{ label: 'Get my free inspection', href: '/free-inspection' }}
+/>

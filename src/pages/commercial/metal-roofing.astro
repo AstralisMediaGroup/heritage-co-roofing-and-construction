@@ -1,68 +1,74 @@
 ---
-import SystemDetailLayout from '../../layouts/SystemDetailLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from '../../components/v2/HeroPage.astro';
+import PromiseStrip from '../../components/v2/PromiseStrip.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import ToggleFacts from '../../components/v2/ToggleFacts.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
+import PageCTA from '../../components/v2/PageCTA.astro';
+import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
+import { otherSystems } from '../../content/commercialSystems';
 
-const faqs = [
-	{ q: 'Standing seam vs through-fastened?', a: 'Standing seam = vertical ribs that interlock with concealed fasteners. No screws penetrating the panel face. The premium spec, longest-lifespan, and the right call for most commercial. Through-fastened = exposed-screw R-panel. Cheaper, faster, but the screws + neoprene washers are the failure point — they back out and leak around year 15–20.' },
-	{ q: 'How long does the paint last?', a: 'Modern PVDF (Kynar) finishes carry 30–40 year color warranties. SMP (Silicone Modified Polyester) finishes carry 20–25. The paint usually outlasts the panel\'s structural life. Fading and chalking happen but coverage is intact.' },
-	{ q: 'Will I hear rain on a metal roof?', a: 'Less than people think. With proper underlayment (synthetic + ice & water shield), insulation in the building cavity, and a fully decked substrate underneath, the rain noise is comparable to a shingle roof. Open-bar metal on a barn — yes, you hear it. Insulated commercial — no.' },
-	{ q: 'Can metal go over an existing roof?', a: 'Sometimes. Existing roof must be structurally sound, dry, and the building deck has to handle the additional weight. We assess at the inspection. If the existing roof is failing, tear-off is the right call regardless.' },
-	{ q: 'Steel vs aluminum?', a: 'Steel is the default — Galvalume coating gives 40+ year corrosion resistance. Aluminum is for coastal / chemical-exposure environments where galvanized steel rusts. Aluminum is more expensive and softer (denting). Steel for 95% of East Texas commercial.' },
-	{ q: 'What about hail damage?', a: 'Standing seam metal carries Class 4 impact ratings. It dents in heavy hail but very rarely fails functionally. Insurance often offers premium discounts for Class 4 metal roofs. Cosmetic damage from hail is the most-common claim.' },
-];
+const v2 = imagery.v2;
+const m = imagery.metal;
 ---
 
-<SystemDetailLayout
-	title="Metal Roofing — Heritage Co. Commercial"
-	heroEyebrow="Commercial · Metal"
-	heroH1="Metal. The 50-year commercial roof."
-	heroSub="Standing seam panels in steel or aluminum. Concealed fasteners. The longest-lifespan commercial system available — and the strongest portfolio area Heritage runs."
-	heroPhoto={imagery.metal.hero.url}
-	heroPhotoAlt="Standing seam metal roof"
-	whatItIsHeading="Metal panels with concealed fasteners and interlocking seams."
-	whatItIsParagraphs={[
-		'Standing seam metal is the gold standard of commercial roofing. Vertical ribs run from eave to ridge; adjacent panels interlock at the rib with a mechanical seam. All fasteners are concealed under the seam — no exposed screws, no neoprene washers to age out, no annual re-tightening. The roof is essentially weatherproof from year one to year fifty.',
-		'For agricultural buildings, metal-building re-roofs, and any commercial property where lifecycle cost matters more than upfront cost, metal is the right call. The math beats every alternative on a 30-year ownership horizon.',
-	]}
-	bestFitHeading="Where metal is the right call."
-	bestFitItems={[
-		{ title: 'Agricultural structures', body: 'Barns, equipment buildings, ag operations. The traditional metal use case.' },
-		{ title: 'Metal-building re-roofs', body: 'Pre-engineered metal buildings where the original metal has aged out. Direct replacement spec.' },
-		{ title: 'Long-hold owners', body: 'Buildings staying in the same hands for 20+ years. The lifecycle math beats every alternative.' },
-		{ title: 'High-wind regions', body: 'Standing seam carries the highest wind ratings in commercial roofing. Critical near coastal or storm-corridor zones.' },
-		{ title: 'Schools + government', body: 'Metal-roof spec on schools and ag facilities is common in the East Texas footprint.' },
-		{ title: 'Industrial + manufacturing', body: 'Long spans, low maintenance, and the durability to match the building lifespan.' },
-	]}
-	specsHeading="Metal at a glance."
-	specRows={[
-		{ label: 'Service life', value: '40–60 years' },
-		{ label: 'Profile', value: 'Standing seam (1.5"–3" rib), R-panel, structural' },
-		{ label: 'Fire rating', value: 'Class A standard' },
-		{ label: 'Wind rating', value: 'UL 580 / FM 4471 standard on standing seam' },
-		{ label: 'Substrate', value: 'Steel (Galvalume coated) or aluminum' },
-		{ label: 'Finish', value: 'PVDF (Kynar 500) — 30–40 year color warranty' },
-		{ label: 'Install method', value: 'Concealed-fastener (premium) / through-fastened (budget)' },
-	]}
-	manufacturerPlaceholder="Heritage's preferred metal panel brand (McElroy / Drexel / Mueller / Berridge). See Founder Input page §2."
-	howInstallHeading="How a metal install runs."
-	howInstallBody="Substrate prep — clean, level, with proper underlayment (synthetic + ice & water shield at eaves). Panels measured and roll-formed on-site for long runs (eliminates seams on tall buildings). Concealed clip fastening at each rib. Adjacent panels mechanically seamed together. Flashings detailed at ridge, eave, valley, and every penetration. A 20,000 sq ft metal re-roof runs 8–14 working days depending on penetration count."
-	maintenanceHeading="What metal needs over its life."
-	maintenanceBody="Almost nothing. Annual inspection of seams, flashings, and any penetration boots. Through-fastened panels need the screws checked — neoprene washers age out around year 15–20 and need re-driving or replacement. Standing seam has no exposed fasteners — nothing to retighten. Heritage's maintenance program covers both."
-	tradeoffsHeading="Where metal shines, and where it doesn't."
-	tradeoffs={[
-		{ kind: 'pro', body: 'Longest-lifespan commercial system — 50+ years' },
-		{ kind: 'pro', body: 'Concealed fasteners — no annual re-tightening' },
-		{ kind: 'pro', body: 'Class 4 impact rating + UL 580 wind' },
-		{ kind: 'pro', body: '100% recyclable at end of life' },
-		{ kind: 'pro', body: 'Lowest lifecycle cost over 30 years' },
-		{ kind: 'con', body: 'Higher upfront cost than single-ply membranes' },
-		{ kind: 'con', body: 'Expansion + contraction requires careful clip + flashing detailing' },
-		{ kind: 'con', body: 'Cosmetic hail damage is the most common claim' },
-	]}
-	faqItems={faqs}
-	endCtaPhoto={imagery.metal.secondary.url}
-	endCtaHeading="Walkthrough, scope, and metal bid within the week."
-	endCtaSub="Bonded estimate. Standing seam, R-panel, or structural metal — spec'd to the building."
-	endCtaLabel="Request consultation"
-	endCtaHref="/free-inspection"
-/>
+<BaseLayout
+	title="Commercial metal roofing — Heritage Co."
+	description="Heritage Co. installs standing seam metal roofs on commercial buildings across East Texas. Concealed-fastener panels, 30–40 year paint warranty."
+>
+	<HeroPage
+		eyebrow="Commercial · metal"
+		heading="Standing seam metal."
+		lede="Concealed-fastener metal panels. The longest-warranty commercial roof on the market — 30–40 year paint, 40+ year service life. The roof you only buy once."
+		photo={m.standingSeam}
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		tier={2}
+	/>
+
+	<PromiseStrip items={['We install standing seam', 'Concealed fasteners', '30–40 yr paint warranty', 'Bonded + insured']} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<ToggleFacts facts={[
+					{ label: 'What it is', body: 'Galvalume steel panels with PVDF (Kynar 500) finish, mechanically seamed at vertical ribs with no fasteners exposed in the field of the roof. Class 4 impact, Class A fire, 30–40 year paint warranty. The longest-warranty commercial roof on the market.' },
+					{ label: 'When we spec it', body: 'Owner-occupied buildings with a long horizon — the up-front premium pays back over the time you keep the building. Steep-slope commercial where the visual matters. Re-roofs where the existing system has already failed twice and the owner wants the last roof they will ever buy.' },
+					{ label: 'When we skip it', body: 'Tight-budget re-roofs that just need 15–20 more years usually go TPO or coatings. Heavily penetrated roofs with lots of HVAC service trade well to mod-bit. The free assessment tells you which — see the other commercial systems below.' },
+				]} />
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section section-tight">
+			<div class="container">
+				<SectionHead
+					eyebrow="Other commercial systems"
+					heading="Not metal?<br />Here's the rest."
+					lede="We install every major commercial roof type. Pick the one that fits the building."
+					maxWidth="780px"
+				/>
+				<div class="systems-spacer">
+					<TileGrid tiles={otherSystems('metal')} cols={3} style="photo-card" />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading="Free roof assessment.<br />Real recommendation in a week."
+		lede="We tell you whether metal is the right call before we quote it."
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.commercial}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
+	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
+	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
+</style>

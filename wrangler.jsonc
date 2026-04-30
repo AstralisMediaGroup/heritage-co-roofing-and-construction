@@ -1,0 +1,12 @@
+{
+	"compatibility_date": "2026-04-26",
+	"compatibility_flags": ["global_fetch_strictly_public"],
+	"name": "former-field",
+	"main": "./worker.js",
+	"assets": {
+		"directory": "./dist"
+	},
+	"observability": {
+		"enabled": true
+	}
+}

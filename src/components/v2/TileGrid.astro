@@ -1,0 +1,101 @@
+---
+import type { ImageRef } from '../../content/imagery';
+
+interface Tile {
+	heading: string;
+	body?: string;
+	href: string;
+	photo?: ImageRef;
+	eyebrow?: string;
+}
+interface Props {
+	tiles: Tile[];
+	cols?: number;
+	heading?: string;
+	style?: 'photo-card' | 'minimal-card' | 'large-tile';
+}
+const { tiles, cols = 3, style = 'photo-card' } = Astro.props;
+---
+
+<div class={`tile-grid style-${style}`} style={`--cols: ${cols};`}>
+	{tiles.map((t) => (
+		<a class="tile has-zoom-photo" href={t.href}>
+			{t.photo && (
+				<div class="tile-photo">
+					{t.photo.url ? (
+						<img src={t.photo.url} alt={t.photo.alt} loading="lazy" class="zoom-photo" />
+					) : (
+						<div class="tile-photo-fallback" />
+					)}
+				</div>
+			)}
+			<div class="tile-body">
+				{t.eyebrow && <p class="eyebrow tile-eyebrow">{t.eyebrow}</p>}
+				<h3 class="h3 tile-h">{t.heading}</h3>
+				{t.body && <p class="tile-body-text">{t.body}</p>}
+				<span class="tile-cta">View <span class="tile-arrow">→</span></span>
+			</div>
+		</a>
+	))}
+</div>
+
+<style>
+	.tile-grid {
+		display: grid;
+		grid-template-columns: repeat(var(--cols), 1fr);
+		gap: clamp(20px, 2vw, 32px);
+	}
+	.tile {
+		display: flex;
+		flex-direction: column;
+		background: transparent;
+		border-top: 1px solid var(--rule);
+		padding-top: 28px;
+		transition: border-color 220ms ease;
+	}
+	.tile:hover { border-top-color: var(--rust); }
+	.style-photo-card .tile { border-top: 0; padding-top: 0; }
+	.tile-photo {
+		aspect-ratio: 5 / 4;
+		overflow: hidden;
+		background: var(--bg-deep);
+		margin-bottom: 22px;
+	}
+	.tile-photo img { width: 100%; height: 100%; object-fit: cover; }
+	.tile-photo-fallback {
+		width: 100%; height: 100%;
+		background: linear-gradient(135deg, #948c7d 0%, #5a5347 100%);
+	}
+	.tile-eyebrow { margin-bottom: 12px; }
+	.tile-h { color: var(--ink); }
+	.tile-body-text {
+		margin-top: 14px;
+		font-size: 15px;
+		line-height: 1.6;
+		color: var(--ink-2);
+	}
+	.tile-cta {
+		margin-top: 22px;
+		font-size: 13px;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		color: var(--ink);
+		text-transform: uppercase;
+		display: inline-flex;
+		gap: 10px;
+		align-items: center;
+	}
+	.tile-arrow { transition: transform 240ms ease; display: inline-block; }
+	.tile:hover .tile-arrow { transform: translateX(6px); color: var(--rust); }
+	.tile:hover .tile-cta { color: var(--rust); }
+
+	.style-large-tile .tile-photo { aspect-ratio: 4 / 5; }
+	.style-large-tile .tile-h { font-size: clamp(28px, 3vw, 40px); }
+
+	@media (max-width: 900px) {
+		.tile-grid { grid-template-columns: repeat(2, 1fr); }
+	}
+	@media (max-width: 560px) {
+		.tile-grid { grid-template-columns: 1fr; }
+	}
+</style>

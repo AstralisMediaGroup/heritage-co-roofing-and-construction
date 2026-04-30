@@ -1,67 +1,73 @@
 ---
-import SystemDetailLayout from '../../layouts/SystemDetailLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from '../../components/v2/HeroPage.astro';
+import PromiseStrip from '../../components/v2/PromiseStrip.astro';
+import SectionHead from '../../components/v2/SectionHead.astro';
+import ToggleFacts from '../../components/v2/ToggleFacts.astro';
+import TileGrid from '../../components/v2/TileGrid.astro';
+import PageCTA from '../../components/v2/PageCTA.astro';
+import Reveal from '../../components/v2/Reveal.astro';
 import { imagery } from '../../content/imagery';
+import { otherSystems } from '../../content/commercialSystems';
 
-const faqs = [
-	{ q: 'Is BUR still installed today?', a: 'Yes, but less often than in the 1980s. New BUR installs are typically on buildings being matched (existing BUR replacement) or where the redundancy of multi-ply systems matters more than install speed. Most new commercial defaults to single-ply now.' },
-	{ q: 'Why would I choose BUR over modified bitumen?', a: 'Mod-bit is essentially BUR\'s modern descendant — same multi-ply principle, but with polymer-modified asphalt for flexibility. BUR uses straight asphalt with felt reinforcement. Mod-bit installs faster and stays flexible longer. New specs almost always go mod-bit unless the building is being matched.' },
-	{ q: 'How heavy is BUR vs single-ply?', a: 'BUR with gravel ballast can run 4–7 lbs per sq ft. TPO is under 1 lb per sq ft. On structurally weak decks, the weight matters. We assess substrate capacity at the inspection.' },
-	{ q: 'Can BUR be re-coated?', a: 'Yes — and re-coating extends life dramatically. Aluminum reflective coatings or silicone restoration coatings can add 10–15 years to an otherwise tired BUR. Cheaper than tear-off if the membrane is still sound.' },
-	{ q: 'What\'s the gravel actually doing?', a: 'Three jobs: protects the asphalt from UV degradation, provides fire resistance (Class A rating), and adds ballast weight for wind uplift. Smooth-surface BUR (no gravel) is also available but loses the UV protection.' },
-	{ q: 'Is BUR more fire-resistant?', a: 'Gravel-surface BUR carries Class A fire ratings without additional assembly. Single-ply systems can also achieve Class A but typically require specific underlayment + cover board combinations to do so. BUR is fire-rated by design.' },
-];
+const v2 = imagery.v2;
 ---
 
-<SystemDetailLayout
-	title="Built-Up Roofing (BUR) — Heritage Co. Commercial"
-	heroEyebrow="Commercial · Built-up (BUR)"
-	heroH1="Built-up roofing. The traditional commercial spec."
-	heroSub="Multi-ply asphalt and reinforcing fabric with gravel ballast. Battle-tested for 100 years. Still the right call on the right building."
-	heroPhoto={imagery.metal.hero.url}
-	heroPhotoAlt="Commercial roof"
-	whatItIsHeading="Tar and gravel — built up in alternating layers."
-	whatItIsParagraphs={[
-		'Built-up roofing (BUR) is the original commercial flat-roof system: alternating layers of hot asphalt and reinforcing fabric (felt or fiberglass), built up to 3–4 plies, then capped with either gravel ballast or a smooth surface. It has been the default commercial spec since the 1920s.',
-		'Modern single-ply systems have overtaken BUR for new construction, but BUR is still installed on existing-building matches, very low-slope buildings, and projects where the multi-ply redundancy matters more than install speed. Heritage installs both — the right system depends on the building.',
-	]}
-	bestFitHeading="Where BUR is the right call."
-	bestFitItems={[
-		{ title: 'Existing BUR replacement', body: 'Matching the existing system on a long-hold building. Easier transitions, faster install crew familiarity.' },
-		{ title: 'Very low-slope buildings', body: 'Roofs under 1/4-inch per foot slope where multi-ply redundancy is critical.' },
-		{ title: 'Older institutional buildings', body: 'Schools, government, hospitals built in the 1970s-90s where the original BUR is being replaced.' },
-		{ title: 'Heritage / retrofit buildings', body: 'Where the original specification calls for BUR and code or covenants require matching.' },
-		{ title: 'Redundancy-critical specs', body: 'Buildings where a single-ply failure would have outsized downstream cost.' },
-		{ title: 'Fire-rating-mandatory specs', body: 'Where Class A fire rating is required without complex assembly. Gravel-surface BUR is Class A by default.' },
-	]}
-	specsHeading="BUR at a glance."
-	specRows={[
-		{ label: 'Service life', value: '20–30 years' },
-		{ label: 'Plies', value: '3-ply (typical) or 4-ply' },
-		{ label: 'Fire rating', value: 'Class A (with gravel surface)' },
-		{ label: 'Surface', value: 'Gravel ballast or smooth-surface' },
-		{ label: 'Weight', value: '4–7 lbs per sq ft (heaviest commercial system)' },
-		{ label: 'Install method', value: 'Hot-mopped multi-ply' },
-	]}
-	manufacturerPlaceholder="Heritage's preferred BUR asphalt + felt manufacturer. See Founder Input page §2."
-	howInstallHeading="How a BUR install runs."
-	howInstallBody="Substrate prep — clean and dry. Insulation board fastened. First layer: hot asphalt mopped onto the substrate. Felt rolled into the hot asphalt. Repeat for 2–3 more plies, with each layer offset for redundancy. Final flood coat of asphalt + gravel ballast embedded into it (or smooth-surface cap depending on spec). A 20,000 sq ft BUR install runs 10–15 working days — slowest of any commercial system due to the multi-ply build-up."
-	maintenanceHeading="What BUR needs over its life."
-	maintenanceBody="Annual inspection of the gravel coverage (gravel migration is normal but progressive), seam integrity, and flashing details. Spot patches are field-repairable with hot-applied or cold-applied modified bitumen. Re-coating with aluminum or silicone in years 15–25 extends life by 10–15 years. Heritage maintenance covers all of the above."
-	tradeoffsHeading="Where BUR shines, and where it doesn't."
-	tradeoffs={[
-		{ kind: 'pro', body: '100 years of installed track record' },
-		{ kind: 'pro', body: 'Multi-layer redundancy beats every single-ply' },
-		{ kind: 'pro', body: 'Gravel surface adds fire and UV protection' },
-		{ kind: 'pro', body: 'Re-coating extends life dramatically vs replacement' },
-		{ kind: 'con', body: 'Heaviest commercial system — substrate capacity matters' },
-		{ kind: 'con', body: 'Slowest install of any commercial system' },
-		{ kind: 'con', body: 'Hot-applied install is messy and weather-sensitive' },
-		{ kind: 'con', body: 'New construction increasingly defaults to mod-bit instead' },
-	]}
-	faqItems={faqs}
-	endCtaPhoto={imagery.metal.secondary.url}
-	endCtaHeading="Walkthrough, scope, and BUR bid within the week."
-	endCtaSub="Bonded estimate. Match-existing or new install — both."
-	endCtaLabel="Request consultation"
-	endCtaHref="/free-inspection"
-/>
+<BaseLayout
+	title="Built-up roofing (BUR) — Heritage Co."
+	description="Heritage Co. installs built-up tar-and-gravel roofing on commercial buildings across East Texas. Decades of proven service life on flat roofs."
+>
+	<HeroPage
+		eyebrow="Commercial · multi-ply"
+		heading="Built-up roofing."
+		lede="Tar-and-gravel multi-layer system. Decades of proven service life. The legacy commercial standard — still the right answer on certain buildings."
+		photo={v2.pageHeros.builtUpRoofing}
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		tier={2}
+	/>
+
+	<PromiseStrip items={['We install BUR', 'Multi-layer redundancy', '20–30 yr service life', 'Bonded + insured']} />
+
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<ToggleFacts facts={[
+					{ label: 'What it is', body: 'Multiple plies of asphalt-saturated felt or fabric, bonded with hot or cold asphalt, topped with a layer of mineral aggregate (gravel) for UV and impact protection. The original commercial flat-roof system, dating back to the late 1800s.' },
+					{ label: 'When we spec it', body: 'Re-roofs over an existing BUR where a like-for-like recover is the cleanest path. Buildings where the owner wants multi-ply redundancy and is OK with a heavier system. Roofs where the existing structure was specced for the dead load.' },
+					{ label: 'When we skip it', body: 'Most new construction goes single-ply (TPO or EPDM) or modified bitumen now — lighter, faster install, comparable life. Coating restoration sometimes wins on tight budgets. The free assessment tells you which — see the other commercial systems below.' },
+				]} />
+			</div>
+		</section>
+	</Reveal>
+
+	<Reveal>
+		<section class="page-section section-tight">
+			<div class="container">
+				<SectionHead
+					eyebrow="Other commercial systems"
+					heading="Not BUR?<br />Here's the rest."
+					lede="We install every major commercial roof type. Pick the one that fits the building."
+					maxWidth="780px"
+				/>
+				<div class="systems-spacer">
+					<TileGrid tiles={otherSystems('bur')} cols={3} style="photo-card" />
+				</div>
+			</div>
+		</section>
+	</Reveal>
+
+	<PageCTA
+		heading="Free roof assessment.<br />Real recommendation in a week."
+		lede="We tell you whether built-up is the right call before we quote it."
+		primaryCta={{ label: 'Request a quote', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.commercial}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
+	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
+	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
+</style>

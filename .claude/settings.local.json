@@ -19,7 +19,17 @@
       "Bash(git push *)",
       "mcp__188c0f74-b512-44de-8f93-fe263605e24b__notion-fetch",
       "mcp__188c0f74-b512-44de-8f93-fe263605e24b__notion-create-pages",
-      "mcp__188c0f74-b512-44de-8f93-fe263605e24b__notion-update-page"
+      "mcp__188c0f74-b512-44de-8f93-fe263605e24b__notion-update-page",
+      "WebFetch(domain:heritage-co-roofing-and-construction.alec-5ef.workers.dev)",
+      "WebFetch(domain:www.iko.com)",
+      "WebSearch",
+      "WebFetch(domain:www.gaf.com)",
+      "WebFetch(domain:www.carlislesyntec.com)",
+      "WebFetch(domain:greenwoodindustries.com)",
+      "WebFetch(domain:bakerroofing.com)",
+      "Read(//Users/onlybangers/heritage-co-roofing/.claude/**)",
+      "Read(//Users/onlybangers/heritage-co-roofing/.claude/skills/**)",
+      "Read(//Users/onlybangers/heritage-co-roofing/**)"
     ]
   }
 }

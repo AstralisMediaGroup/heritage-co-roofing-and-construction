@@ -1,0 +1,412 @@
+---
+import { shingleTypes } from '../../content/shingles';
+---
+
+<div class="se" data-shingle-explorer style={`--tab-cols: ${shingleTypes.length};`}>
+	<div class="se-tabs" role="tablist">
+		{shingleTypes.map((t, i) => (
+			<button
+				type="button"
+				role="tab"
+				class={`se-tab ${i === 0 ? 'is-active' : ''}`}
+				data-tab-trigger={t.id}
+				aria-selected={i === 0 ? 'true' : 'false'}
+			>
+				<span class="se-tab-tier">{t.tier}</span>
+				<span class="se-tab-name">{t.name}</span>
+				<span class="se-tab-tagline">{t.tagline}</span>
+				<span class="se-tab-price">{t.priceTier}</span>
+			</button>
+		))}
+	</div>
+
+	{shingleTypes.map((t, i) => {
+		const initialColor = t.colors[0];
+		const initialPhoto = initialColor.imgUrl ?? t.heroUrl;
+		const initialAlt = initialColor.imgUrl ? `${t.brands[0]} ${initialColor.name} swatch` : t.heroAlt;
+		const hasInitialImg = Boolean(initialColor.imgUrl);
+		return (
+			<div
+				class={`se-panel ${i === 0 ? 'is-active' : ''}`}
+				data-tab-panel={t.id}
+				role="tabpanel"
+				data-tier-hero={t.heroUrl}
+				data-tier-hero-alt={t.heroAlt}
+			>
+				<div class="se-grid">
+					<div class="se-photo-side">
+						<div class="se-photo">
+							<img src={initialPhoto} alt={initialAlt} loading="lazy" data-photo-img />
+							<div
+								class="se-photo-overlay"
+								data-photo-overlay
+								style={`background: ${initialColor.hex}; opacity: ${hasInitialImg ? '0' : '0.55'};`}
+							/>
+						</div>
+						<div class="se-photo-meta">
+							<div class="se-photo-meta-color">
+								<span class="se-photo-swatch" data-photo-swatch style={`background: ${t.colors[0].hex};`} />
+								<div>
+									<p class="se-photo-name" data-photo-name>{t.colors[0].name}</p>
+									<p class="se-photo-type">{t.name} · {t.tier}</p>
+								</div>
+							</div>
+							<p class="se-photo-hex" data-photo-hex>{t.colors[0].hex}</p>
+						</div>
+					</div>
+
+					<div class="se-content">
+						<div class="se-stats">
+							<div><span class="se-stat-label">Warranty</span><span class="se-stat-value">{t.warranty}</span></div>
+							<div><span class="se-stat-label">Wind</span><span class="se-stat-value">{t.wind}</span></div>
+							<div><span class="se-stat-label">Service life</span><span class="se-stat-value">{t.life}</span></div>
+							<div><span class="se-stat-label">Best for</span><span class="se-stat-value">{t.bestFor}</span></div>
+						</div>
+
+						<div class="se-section">
+							<p class="se-section-h">Color palette · {t.colors.length}</p>
+							<div class="se-palette">
+								{t.colors.map((c, ci) => (
+									<button
+										type="button"
+										class={`se-swatch ${ci === 0 ? 'is-active' : ''}`}
+										data-swatch
+										data-color-name={c.name}
+										data-color-hex={c.hex}
+										data-color-img={c.imgUrl ?? ''}
+										style={`background: ${c.hex};`}
+										aria-label={`${c.name} (${c.hex})`}
+										title={c.name}
+									>
+										{c.imgUrl && <img src={c.imgUrl} alt="" loading="lazy" />}
+										{c.popular && <span class="se-swatch-pop" aria-label="Popular"></span>}
+									</button>
+								))}
+							</div>
+							<p class="se-palette-hint">Click any color to preview · star = most-installed</p>
+						</div>
+
+						<div class="se-section">
+							<p class="se-section-h">Brands we install</p>
+							<div class="se-brands">
+								{t.brands.map((b) => <span class="se-brand">{b}</span>)}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	})}
+</div>
+
+<style>
+	.se {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(28px, 3vw, 48px);
+	}
+
+	/* Tabs */
+	.se-tabs {
+		display: grid;
+		grid-template-columns: repeat(var(--tab-cols, 2), 1fr);
+		gap: 0;
+		border-top: 1px solid var(--rule);
+		border-bottom: 1px solid var(--rule);
+	}
+	.se-tab {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		grid-template-rows: auto auto auto;
+		grid-template-areas:
+			"tier price"
+			"name name"
+			"tag tag";
+		gap: 6px 12px;
+		padding: 28px 32px;
+		text-align: left;
+		background: transparent;
+		border-right: 1px solid var(--rule);
+		cursor: pointer;
+		transition: background 200ms ease, color 200ms ease;
+		position: relative;
+	}
+	.se-tab:last-child { border-right: 0; }
+	.se-tab:hover { background: var(--bg-deep); }
+	.se-tab.is-active {
+		background: var(--ink);
+		color: var(--bg);
+	}
+	.se-tab.is-active::after {
+		content: '';
+		position: absolute;
+		left: 0; right: 0;
+		bottom: -1px;
+		height: 3px;
+		background: var(--rust);
+	}
+	.se-tab-tier {
+		grid-area: tier;
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--rust);
+	}
+	.se-tab.is-active .se-tab-tier { color: var(--rust); }
+	.se-tab-price {
+		grid-area: price;
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--ink-3);
+		letter-spacing: 0.04em;
+	}
+	.se-tab.is-active .se-tab-price { color: var(--bg); opacity: 0.6; }
+	.se-tab-name {
+		grid-area: name;
+		font-size: clamp(22px, 2.2vw, 30px);
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		line-height: 1.05;
+		color: inherit;
+	}
+	.se-tab-tagline {
+		grid-area: tag;
+		font-size: 13px;
+		color: var(--ink-2);
+		line-height: 1.4;
+	}
+	.se-tab.is-active .se-tab-tagline { color: var(--ink-bg-mute); }
+
+	/* Panels */
+	.se-panel { display: none; }
+	.se-panel.is-active { display: block; animation: se-fade 250ms ease; }
+	@keyframes se-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+	@media (prefers-reduced-motion: reduce) {
+		.se-panel.is-active { animation: none; }
+	}
+
+	.se-grid {
+		display: grid;
+		grid-template-columns: 1fr 1.1fr;
+		gap: clamp(24px, 3vw, 56px);
+		align-items: start;
+	}
+
+	/* Photo side */
+	.se-photo-side { display: flex; flex-direction: column; gap: 16px; }
+	.se-photo {
+		position: relative;
+		aspect-ratio: 4 / 5;
+		overflow: hidden;
+		background: var(--ink-bg);
+	}
+	.se-photo img { width: 100%; height: 100%; object-fit: cover; }
+	.se-photo-overlay {
+		position: absolute;
+		inset: 0;
+		mix-blend-mode: multiply;
+		opacity: 0.55;
+		transition: background 380ms ease, opacity 380ms ease;
+	}
+	.se-photo-meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 14px 0;
+		border-bottom: 1px solid var(--rule-strong);
+	}
+	.se-photo-meta-color { display: inline-flex; align-items: center; gap: 14px; }
+	.se-photo-swatch {
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		border: 1px solid var(--rule-strong);
+		transition: background 280ms ease;
+	}
+	.se-photo-name {
+		font-size: 17px;
+		font-weight: 600;
+		color: var(--ink);
+		letter-spacing: -0.012em;
+	}
+	.se-photo-type {
+		font-size: 12px;
+		color: var(--ink-3);
+		letter-spacing: 0.04em;
+		margin-top: 2px;
+	}
+	.se-photo-hex {
+		font-size: 12px;
+		font-weight: 600;
+		font-feature-settings: "tnum";
+		letter-spacing: 0.04em;
+		color: var(--ink-2);
+		text-transform: uppercase;
+	}
+
+	/* Content side */
+	.se-content { display: flex; flex-direction: column; gap: 32px; }
+
+	.se-stats {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 16px 24px;
+		padding-bottom: 24px;
+		border-bottom: 1px solid var(--rule);
+	}
+	.se-stats > div { display: flex; flex-direction: column; gap: 6px; }
+	.se-stat-label {
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--ink-3);
+	}
+	.se-stat-value {
+		font-size: 17px;
+		font-weight: 600;
+		color: var(--ink);
+		letter-spacing: -0.012em;
+		line-height: 1.25;
+	}
+
+	.se-section { display: flex; flex-direction: column; gap: 14px; }
+	.se-section-h {
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--ink-3);
+	}
+
+	.se-palette {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 8px;
+	}
+	.se-swatch {
+		position: relative;
+		aspect-ratio: 1 / 1;
+		border: 1px solid var(--rule-strong);
+		cursor: pointer;
+		transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+	}
+	.se-swatch > img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.se-swatch:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+	.se-swatch.is-active {
+		border-color: var(--rust);
+		box-shadow: 0 0 0 2px var(--rust);
+	}
+	.se-swatch-pop {
+		position: absolute;
+		top: 6px;
+		right: 6px;
+		width: 6px;
+		height: 6px;
+		background: var(--rust);
+		border-radius: 50%;
+		box-shadow: 0 0 0 2px var(--bg);
+	}
+	.se-palette-hint {
+		font-size: 12px;
+		color: var(--ink-3);
+	}
+
+	.se-brands {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+	.se-brand {
+		display: inline-block;
+		padding: 8px 14px;
+		font-size: 13px;
+		font-weight: 500;
+		color: var(--ink-2);
+		border: 1px solid var(--rule-strong);
+		border-radius: var(--r-pill);
+		background: var(--bg);
+	}
+
+	@media (max-width: 880px) {
+		.se-grid { grid-template-columns: 1fr; }
+		.se-tabs { grid-template-columns: 1fr; }
+		.se-tab { border-right: 0; border-bottom: 1px solid var(--rule); }
+		.se-tab:last-child { border-bottom: 0; }
+		.se-stats { grid-template-columns: 1fr 1fr; }
+		.se-palette { grid-template-columns: repeat(5, 1fr); }
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		document.querySelectorAll('[data-shingle-explorer]').forEach((root) => {
+			const tabs = root.querySelectorAll('[data-tab-trigger]');
+			const panels = root.querySelectorAll('[data-tab-panel]');
+
+			tabs.forEach((tab) => {
+				tab.addEventListener('click', () => {
+					const id = tab.getAttribute('data-tab-trigger');
+					tabs.forEach((t) => {
+						const active = t === tab;
+						t.classList.toggle('is-active', active);
+						t.setAttribute('aria-selected', active ? 'true' : 'false');
+					});
+					panels.forEach((p) => {
+						p.classList.toggle('is-active', p.getAttribute('data-tab-panel') === id);
+					});
+				});
+			});
+
+			// Per-panel swatch behavior — clicking a swatch swaps the photo to the
+			// real manufacturer swatch image when one is available, otherwise falls
+			// back to tinting the tier's hero photo with the color's hex.
+			panels.forEach((panel) => {
+				const swatches = panel.querySelectorAll('[data-swatch]');
+				const photoImg = panel.querySelector('[data-photo-img]');
+				const overlay = panel.querySelector('[data-photo-overlay]');
+				const photoSwatch = panel.querySelector('[data-photo-swatch]');
+				const nameEl = panel.querySelector('[data-photo-name]');
+				const hexEl = panel.querySelector('[data-photo-hex]');
+				const heroUrl = panel.getAttribute('data-tier-hero') || '';
+				const heroAlt = panel.getAttribute('data-tier-hero-alt') || '';
+
+				swatches.forEach((sw) => {
+					sw.addEventListener('click', () => {
+						const hex = sw.getAttribute('data-color-hex');
+						const name = sw.getAttribute('data-color-name');
+						const imgUrl = sw.getAttribute('data-color-img') || '';
+						swatches.forEach((s) => s.classList.toggle('is-active', s === sw));
+
+						if (photoImg) {
+							if (imgUrl) {
+								photoImg.src = imgUrl;
+								photoImg.alt = name + ' swatch';
+							} else {
+								photoImg.src = heroUrl;
+								photoImg.alt = heroAlt;
+							}
+						}
+						if (overlay) {
+							overlay.style.background = hex;
+							// Real swatch images already show the actual color — drop the tint.
+							// No swatch image → tint the hero photo so the tile still reads.
+							overlay.style.opacity = imgUrl ? '0' : '0.55';
+						}
+						if (photoSwatch) photoSwatch.style.background = hex;
+						if (nameEl) nameEl.textContent = name;
+						if (hexEl) hexEl.textContent = hex.toUpperCase();
+					});
+				});
+			});
+		});
+	})();
+</script>

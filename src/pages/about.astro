@@ -1,215 +1,128 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FounderCard from '../components/FounderCard.astro';
-import CertificationsBlock from '../components/CertificationsBlock.astro';
-import WarrantyBlock from '../components/WarrantyBlock.astro';
-import TrustBadgeRow from '../components/TrustBadgeRow.astro';
-import AsymmetricRow from '../components/AsymmetricRow.astro';
-import StatRow from '../components/StatRow.astro';
-import LayeredCard from '../components/LayeredCard.astro';
-import ConstrainedSection from '../components/ConstrainedSection.astro';
-import FullBleedSection from '../components/FullBleedSection.astro';
-import BleedingImage from '../components/BleedingImage.astro';
-import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
-import { founders } from '../content/founders';
+import HeroPage from '../components/v2/HeroPage.astro';
+import SectionHead from '../components/v2/SectionHead.astro';
+import PromiseStrip from '../components/v2/PromiseStrip.astro';
+import PhotoLede from '../components/v2/PhotoLede.astro';
+import PhotoBleed from '../components/v2/PhotoBleed.astro';
+import StatBand from '../components/v2/StatBand.astro';
+import CrewBlock from '../components/v2/CrewBlock.astro';
+import PageCTA from '../components/v2/PageCTA.astro';
+import Reveal from '../components/v2/Reveal.astro';
+import { imagery } from '../content/imagery';
+
+const v2 = imagery.v2;
 ---
 
-<BaseLayout title="About Heritage Co. — Built by operators, not marketers.">
-	<!-- Hero -->
-	<section class="hero">
-		<div class="hero-photo" aria-hidden="true"></div>
-		<div class="hero-overlay" aria-hidden="true"></div>
-		<div class="hero-content">
-			<p class="hero-eyebrow">About Heritage Co.</p>
-			<h1 class="hero-h1">Built by operators,<br />not marketers.</h1>
-			<p class="hero-sub">
-				Locally owned. Headquartered in Longview, Texas. Crews across East Texas and Central Arkansas. The four people who founded the company are the four people you talk to.
-			</p>
+<BaseLayout
+	title="About — Heritage Co. Roofing & Construction"
+	description="Built by operators, not marketers. Heritage Co. is a locally-owned roofing company in East Texas and Central Arkansas. Headquartered in Longview, TX."
+>
+	<HeroPage
+		eyebrow="About Heritage Co."
+		heading="Built by operators,<br />not marketers."
+		lede="Heritage Co. is locally owned and operated by four people whose names are on the about page and whose phones are on the call list. We don't outsource the inspection. We don't outsource the install. We don't outsource the warranty."
+		primaryCta={{ label: 'Free inspection', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.about}
+		tier={2}
+	/>
+
+	<section class="page-section">
+		<div class="container">
+			<PromiseStrip items={['Locally owned + operated', 'Heritage Standard · 10-year workmanship', '4,000+ residential roofs', 'Headquartered in Longview, TX']} />
 		</div>
 	</section>
 
-	<!-- Bleeding image transition from hero to story -->
-	<section class="bleed-bridge">
-		<BleedingImage
-			gradient="linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%)"
-			aspect="21 / 9"
-			bleed={120}
-			maxWidth="900px"
-		/>
-	</section>
-
-	<!-- Founding story — 2 asymmetric rows -->
-	<section class="story">
-		<p class="section-eyebrow">Why we built it</p>
-		<h2 class="section-h">We did the work for someone else first.</h2>
-		<AsymmetricRow
-			heading="Years on East Texas roofs first."
-			body="The four founders — Jordy, Peyton, Nishil, and Vivek — between them have years on East Texas roofs, years running commercial projects, and years running operations and finance. They started Heritage Co. to build a roofing company that answers the phone, stands behind its work, and is still 30 minutes away when you need it."
-			photoSide="left"
-			aspect="4/5"
-			gradient="linear-gradient(180deg, #6b5d4a 0%, #4a4239 100%)"
-		/>
-		<div class="story-placeholder">
-			<HeritagePlaceholder fact="Real founding story — actual year of founding, what triggered it (specific incident, gap in market, prior shop they left), where the four founders met, and the one or two sentences that capture why in their own words. 2–3 short paragraphs. See Founder Input page §7." />
-		</div>
-		<AsymmetricRow
-			heading="What you can count on."
-			body="The same name on the truck and the contract. The same crew on the install and the warranty visit. A number that goes to a person."
-			bullets={["Locally owned and operated", "Crews live in the area they work", "Owner-direct line for warranty visits"]}
-			photoSide="right"
-			aspect="3/2"
-			gradient="linear-gradient(180deg, #6b8aa8 0%, #b8a78c 60%, #6b5d4a 100%)"
-		/>
-	</section>
-
-	<!-- Founders (inset card-on-card on ivory-tint) -->
-	<section class="founders">
-		<p class="section-eyebrow">Meet the team</p>
-		<h2 class="section-h">The people answering your call.</h2>
-		<p class="section-sub">Locally owned and operated. The role today is below; the paragraph each founder added is being filled in.</p>
-		<div class="founders-inset">
-			<div class="founders-grid">
-				{founders.map((f) => (
-					<FounderCard name={f.name} role={f.role} cred={f.cred} expectBio={true} />
-				))}
+	<Reveal>
+		<section class="page-section">
+			<div class="container story-grid">
+				<SectionHead
+					eyebrow="The story"
+					heading="Why Heritage exists."
+				/>
+				<div class="story-body">
+					<p>Heritage Co. was started by people who'd worked in the roofing trade long enough to see what was wrong with how it was being done in East Texas. National chains buying up local shops, sending out commission-paid inspectors, pushing replacements that weren't necessary, disappearing after the install when something went wrong.</p>
+					<p>We figured a region this size deserved a contractor that took its name seriously. Locally owned. Founders take calls. Crews live in the area. The work is being done by people who'll still be here in ten years.</p>
+					<p>4,000+ residential roofs installed. 100,000+ square feet of commercial roof installed. The oldest roof on our books — installed in 2016 — is still on the house.</p>
+					<p>The voice on this site is plainspoken on purpose. We don't write "industry-leading." We don't say "trusted partner." We say what we actually do, in the words a roofer would use, and we let the work speak for itself.</p>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	</Reveal>
 
-	<!-- FullBleed cinematic between founders and badges -->
-	<FullBleedSection
-		gradient="linear-gradient(180deg, #6b5d4a 0%, #4a4239 60%, #2a2a28 100%)"
-		overlayPosition="bottom-right"
-		minHeight="380px"
-		overlayDarken={0.6}
-	>
-		<p class="fb-eyebrow">It is our name on the truck</p>
-		<h2 class="fb-h">Operators on every job, not just on the website.</h2>
-	</FullBleedSection>
+	<PhotoBleed
+		photo={v2.bleeds.crew}
+		heading="Same crew start to warranty.<br />The number on the site is the number we answer."
+		caption="When you call, you get one of the four founders. Not a regional dispatcher, not a national CSR. The same person who books your inspection is on the ladder."
+		overlay={true}
+		heightVw={62}
+	/>
 
-	<!-- Quick-glance badges (TrustBadgeRow) -->
-	<section class="badges">
-		<TrustBadgeRow />
-	</section>
+	<CrewBlock heading="The four founders." eyebrow="Who you actually talk to" lede="The phone, the inspection, the install, and the warranty all run through the same four people. Same crew shows up if anything needs attention later." />
 
-	<!-- Stats -->
-	<section class="stats-section">
-		<StatRow stats={[
-			{ label: 'Combined years', placeholderFact: 'Real total years roofing across the four founders. See Founder Input page §7.' },
-			{ label: 'Roofs installed', placeholderFact: 'Lifetime residential roof count. See Founder Input page §5.' },
-			{ label: 'Manufacturer certs', placeholderFact: 'Count of held manufacturer certifications (e.g. 3 — GAF + Owens Corning + CertainTeed). See Founder Input page §2.' },
-			{ value: 'TX + AR', label: 'Service area' },
-		]} />
-	</section>
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<PhotoLede
+					photo={v2.bleeds.workmanship}
+					eyebrow="What we won't do"
+					heading="No high-pressure close. No fabricated damage."
+					body="Heritage's hard rule: we don't sell work that isn't needed. If your roof is fine, we tell you that and write a report saying so. The Founder Input page tracks our 'no-work-needed' inspection rate as a quality metric. Building a long-term reputation in a region this size means saying no to short-term revenue when it's the right call."
+					bullets={['No commission-paid inspectors', "If the roof is fine, we say so", 'Founders are salaried, not chasing close rates']}
+					photoSide="right"
+				/>
+			</div>
+		</section>
+	</Reveal>
 
-	<!-- Certifications detail -->
-	<CertificationsBlock />
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<PhotoLede
+					photo={v2.bleeds.workmanship}
+					eyebrow="The Heritage Standard"
+					heading="What we stand behind."
+					body="Heritage Standard is the named guarantee on every job. 10-year Heritage workmanship warranty on residential installs, manufacturer material warranties pass through to the homeowner, transferable once on resale, same warranty terms on storm-damage installs as a standard re-roof. Heritage carries general liability and our crews are covered by workers' comp."
+					bullets={['10-year Heritage workmanship warranty', 'Material warranty transferable on home sale (1x)', 'Same warranty on storm-damage installs', 'Insured + workers\' comp covered']}
+					photoSide="left"
+				/>
+			</div>
+		</section>
+	</Reveal>
 
-	<!-- Named guarantee callout -->
-	<section class="guarantee-callout">
-		<LayeredCard
-			eyebrow="The guarantee"
-			heading="What every Heritage Co. roof comes with."
-			body="Workmanship from us. Manufacturer pass-through on the materials. Specific years and any branded guarantee phrase are in the warranty block below."
-			gradient="linear-gradient(180deg, #6b5d4a 0%, #4a4239 100%)"
-		/>
-	</section>
+	<StatBand stats={[
+		{ value: '4,000+', label: 'Residential roofs installed', numericValue: 4000, suffix: '+' },
+		{ value: '100k+', label: 'Sq ft commercial installed' },
+		{ value: '2016', label: 'Oldest active install · still on the house' },
+		{ value: '10 yr', label: 'Workmanship warranty · Heritage Standard' },
+	]} />
 
-	<WarrantyBlock theme="dark" />
-
-	<!-- Constrained narrative before credentials band -->
-	<ConstrainedSection background="ivory" paddingY="sm">
-		<p class="cs-eyebrow">In one line</p>
-		<h2 class="cs-h">A regional shop. The four founders on every contract.</h2>
-	</ConstrainedSection>
-
-	<!-- Credentials band -->
-	<section class="creds">
-		<p class="creds-text">
-			Locally owned and operated. East Texas + Central Arkansas. <span class="creds-inline-placeholder"><HeritagePlaceholder inline={true} fact="real total years roofing across the four founders" /></span> on the roof between us.
-		</p>
-	</section>
+	<PageCTA
+		heading="Talk to the founders.<br />Not a call center."
+		lede="Real person on the phone. Real person on the ladder. Real warranty when we're done."
+		primaryCta={{ label: 'Get my free inspection', href: '/free-inspection' }}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={v2.pageHeros.freeInspection}
+	/>
 </BaseLayout>
 
 <style>
-	/* Hero */
-	.hero { position: relative; min-height: 480px; background: #1a1a1a; }
-	.hero-photo {
-		position: absolute; inset: 0;
-		background: linear-gradient(180deg, #6b5d4a 0%, #4a4239 50%, #2a2a28 100%);
-		opacity: 0.92;
+	.page-section { padding: clamp(72px, 8vw, 128px) 0; }
+	.story-grid {
+		display: grid;
+		grid-template-columns: 0.8fr 1fr;
+		gap: clamp(32px, 5vw, 80px);
+		align-items: start;
 	}
-	.hero-overlay {
-		position: absolute; inset: 0;
-		background: linear-gradient(90deg, rgba(26,26,26,0.82) 0%, rgba(26,26,26,0.4) 60%, rgba(26,26,26,0.15) 100%);
+	.story-body p {
+		font-size: clamp(17px, 1.4vw, 19px);
+		line-height: 1.65;
+		color: var(--ink-2);
+		max-width: 580px;
 	}
-	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
-	.hero-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
+	.story-body p + p { margin-top: 18px; }
+	@media (max-width: 880px) {
+		.story-grid { grid-template-columns: 1fr; gap: 32px; }
 	}
-	.hero-h1 {
-		color: #faf8f4; font-size: 56px; font-weight: 600;
-		line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px;
-	}
-	.hero-sub {
-		color: #d8d2c2; font-size: 17px; line-height: 1.55;
-		margin: 0; max-width: 560px;
-	}
-
-	.section-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		text-align: center; margin: 0 0 16px;
-		letter-spacing: 1px; text-transform: uppercase;
-	}
-	.section-eyebrow.on-dark { color: #b54620; }
-	.section-h {
-		color: #1a1a1a; font-size: 40px; font-weight: 600;
-		text-align: center; margin: 0 0 16px;
-		letter-spacing: -1px; line-height: 1.1;
-	}
-	.section-h.on-dark { color: #faf8f4; }
-	.section-sub {
-		color: #5a5347; font-size: 16px; text-align: center;
-		margin: 0 0 56px; max-width: 600px; margin-left: auto; margin-right: auto;
-	}
-
-	/* Story */
-	.story { background: #faf8f4; padding: 96px 48px; }
-	.story-placeholder { max-width: 1100px; margin: 24px auto; }
-
-	/* Plan 006 helpers */
-	.bleed-bridge { padding: 0 48px; background: #faf8f4; position: relative; z-index: 1; }
-	.fb-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
-	.fb-h { color: var(--off-white); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0; max-width: 580px; }
-	.cs-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 14px; text-align: center; }
-	.cs-h { color: var(--charcoal); font-size: 28px; font-weight: 600; letter-spacing: -0.5px; line-height: 1.2; margin: 0; text-align: center; }
-
-	/* Founders (ivory-tint + inset card-on-card) */
-	.founders { background: var(--ivory-tint); padding: 96px 48px; border-top: 1px solid #ece7de; }
-	.founders-inset {
-		max-width: 1040px;
-		margin: 0 auto;
-		padding: 48px;
-		background: #ffffff;
-		border: 1px solid #ece7de;
-	}
-	.founders-grid {
-		display: grid; grid-template-columns: repeat(2, 1fr);
-		gap: 48px;
-	}
-
-	/* Badges */
-	.badges { padding: 64px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
-	.stats-section { padding: 80px 48px; background: var(--ivory-tint); border-top: 1px solid #ece7de; }
-	.guarantee-callout { padding: 96px 48px; background: var(--ivory-tint); border-top: 1px solid #ece7de; }
-
-	/* Credentials band */
-	.creds { background: #faf8f4; padding: 56px 48px; text-align: center; border-top: 1px solid #ece7de; }
-	.creds-text {
-		color: #1a1a1a; font-size: 19px; font-weight: 600;
-		max-width: 800px; margin: 0 auto;
-		letter-spacing: -0.2px; line-height: 1.5;
-	}
-	.creds-inline-placeholder { display: inline-block; vertical-align: middle; }
 </style>

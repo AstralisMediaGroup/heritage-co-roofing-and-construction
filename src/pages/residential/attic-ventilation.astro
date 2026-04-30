@@ -1,91 +1,48 @@
 ---
-import ServiceDetailLayout from '../../layouts/ServiceDetailLayout.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const ventTypes = [
-	{ title: 'Ridge vents', body: 'Continuous vent along the peak. Exhaust side of the system. The standard on every modern roof.' },
-	{ title: 'Soffit vents', body: 'Intake vents at the eaves. Ridge cannot exhaust without soffit pulling. Balanced intake matters more than people realize.' },
-	{ title: 'Gable vents', body: 'End-wall louvers. Older roofs use these in place of ridge vents. Less efficient but functional.' },
-	{ title: 'Powered attic fans (electric)', body: 'Thermostatic exhaust fan in the attic. Pulls air actively. Worth it on roofs without enough passive flow.' },
-	{ title: 'Solar-powered attic fans', body: 'Same idea as electric, but powered by a roof-mounted solar panel. No wiring, no power bill. Slightly less powerful but enough on most homes.' },
-	{ title: 'Continuous soffit + ridge', body: 'The current best-practice spec — continuous soffit intake + continuous ridge exhaust = balanced passive flow with no fans.' },
-];
-
-const faqs = [
-	{ q: 'Do I need ridge AND soffit vents?', a: 'Yes — they work as a system. Ridge vents alone cannot exhaust. They need intake at the soffit to pull air through. Most roofs we replace need soffit intake added; ridge is already there.' },
-	{ q: 'Are powered attic fans worth it?', a: 'On a roof with adequate passive flow, no. On a roof that runs hot with poor soffit intake, yes — until you can fix the underlying intake. We try to fix the system before adding a fan.' },
-	{ q: 'Can ventilation be added without a new roof?', a: 'Yes. Soffit intake can be added from below (cut louvers or replace blocked panels). Ridge vent installation requires removing a strip of cap shingles — minor roof work, not a replacement.' },
-	{ q: 'How does ventilation affect roof warranty?', a: 'Most asphalt shingle warranties require code-compliant ventilation. A roof with poor ventilation that fails early may have its warranty denied. We install to manufacturer-approved spec on every replacement.' },
-	{ q: 'What\'s the right balance?', a: 'Code is 1 sq ft of vent area per 300 sq ft of attic floor, split 50/50 intake and exhaust. Best practice is 1 per 150 in humid climates like East Texas. We measure your attic and spec accordingly.' },
-	{ q: 'Can solar fans replace electric?', a: 'On most homes, yes. Modern solar fans move 800–1500 CFM and run only when the sun is hitting the roof — which is exactly when you need them. No power bill, no wiring.' },
-];
+const v2 = imagery.v2;
 ---
 
-<ServiceDetailLayout
-	title="Attic Ventilation — Heritage Co."
-	heroEyebrow="Residential · Attic ventilation"
-	heroH1="A roof that breathes lasts longer."
-	heroSub="Hot attics shorten roof life, raise energy bills, and grow mold. Ventilation is cheap insurance — usually addable without a new roof."
-	heroPhoto={imagery.heroCandidates.residentialRoofA.url}
-	heroPhotoAlt="Residential roof"
-	whatWeMeanHeading="Ventilation is a system, not a single vent."
-	whatWeMeanParagraphs={[
-		'Attic ventilation is two things working together: intake at the soffit and exhaust at the ridge (or gables). Air has to flow in low and out high. When one side is missing or blocked, the system stalls — the attic overheats, the shingles cook, and energy bills climb in the summer.',
-		'Most ventilation problems we find are not the exhaust side. Ridge vents are usually present and working. The problem is the intake side: blocked soffit panels, paint-clogged louvers, or no soffit vents at all on older homes. Fixing intake is usually a half-day job and dramatically changes how the roof performs.',
+<SystemPage
+	title="Attic ventilation"
+	heroEyebrow="Residential · service"
+	heroHeading="Attic ventilation.<br />The reason roofs fail early."
+	heroLede="Ridge, soffit, gable, and powered ventilation. The single biggest factor in residential roof longevity in East Texas — and the most overlooked. We balance intake and exhaust to manufacturer spec."
+	heroPhoto={v2.pageHeros.atticVentilation}
+	heroCta={{ label: 'Get my free inspection', href: '/free-inspection' }}
+	bleedPhoto={v2.bleeds.workmanship}
+	bleedHeading="Intake at the soffits.<br />Exhaust at the ridge."
+	overview={{
+		eyebrow: 'Why ventilation matters',
+		heading: 'Heat and humidity kill roofs from the underside.',
+		body: "An East Texas attic in July reaches 140–160°F if it's not properly ventilated. That heat cooks the underside of the deck, accelerates shingle aging, and shortens the roof's life by 5–10 years. Humidity adds rot and mold. The fix is balanced ventilation — intake at the soffit, exhaust at the ridge — sized to the attic. Most roofs we replace early traced back to a ventilation problem, not a roof problem."
+	}}
+	keyPoints={[
+		{
+			heading: 'Ridge + soffit (the right answer for most roofs).',
+			body: 'Continuous ridge vent at the peak combined with continuous soffit vent at the eaves. Cool air enters at the soffits, rises through the attic, exits at the ridge. No moving parts, no electricity, works every minute the wind blows or the air column rises. Manufacturer-spec ratio: 1 sq ft net free area per 300 sq ft attic floor, split 50/50 intake/exhaust.',
+			bullets: ['Continuous ridge vent + continuous soffit vent', '1:300 ratio (net free area : attic floor)', 'Split 50/50 intake/exhaust', 'No moving parts, no maintenance'],
+			photo: v2.serviceTiles.attic,
+			photoSide: 'left',
+		},
+		{
+			heading: 'When powered or solar makes sense.',
+			body: 'Powered (electric) and solar attic fans help on roofs where the ridge geometry prevents continuous ridge vent, or where the attic is unusually deep and natural convection isn\'t enough. They\'re a band-aid on roofs with bad soffit intake — adding exhaust without adding intake just sucks conditioned air out of your house. We diagnose first.',
+			bullets: ['Solar attic fans (no electric draw)', 'Powered fans · last resort', 'Always pair with adequate soffit intake'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'right',
+		},
 	]}
-	whenYouNeedHeading="The signs your attic is not breathing."
-	whenYouNeedItems={[
-		{ title: 'Cooling bills high in summer', body: 'A 140°F attic radiates heat down through the ceiling all night. Adequate ventilation keeps the attic within 15–20°F of outside air.' },
-		{ title: 'Ice dams in winter', body: 'A warm attic melts snow on the upper roof; the runoff refreezes at the cold eave. Ice dams. Ventilation keeps the deck cold and the snow uniform.' },
-		{ title: 'Mold smell or visible mold', body: 'Trapped moisture from showers, cooking, and breath has nowhere to go. Mold grows on rafters and decking.' },
-		{ title: 'Premature shingle wear', body: 'Curling, blistering, or granule loss before year 15. Heat from below shortens the shingle life faster than UV from above.' },
-		{ title: 'No ridge vent visible from the ground', body: 'On 2000s+ homes, ridge vent should be visible as a small bump at the peak. Older homes may have gable vents instead — check from the ground.' },
-		{ title: 'Frost on rafters in winter', body: 'Visible frost or moisture on the underside of decking in cold weather. Warm interior moist air condensing on cold wood. Pure ventilation problem.' },
+	faq={[
+		{ q: "What's the right balance?", a: '<p>Code is 1 sq ft of vent area per 300 sq ft of attic floor, split 50/50 intake and exhaust. Best practice in humid climates like East Texas is 1 per 150 (more aggressive). We measure your attic floor and spec accordingly.</p>' },
+		{ q: "How do I know if my attic isn't ventilating?", a: '<p>Telltales: shingles aging unevenly (south face baked, north face fine), nail-pop, attic temperature in summer >140°F, frost on the underside of the deck in winter, mold on rafters, ice damming on the eaves in cold spells. Any one of these means the ventilation is short.</p>' },
+		{ q: "Solar fan vs powered fan?", a: '<p>Solar if you\'re going to add forced exhaust at all — no electric draw, runs only when sun loads the roof (which is when you need it). Powered fans pull conditioned air from your house through any leaks in the ceiling, which often costs more in HVAC than the fan saves.</p>' },
+		{ q: "Will fixing ventilation void my roof warranty?", a: '<p>No — proper ventilation is required by every major manufacturer\'s warranty (GAF, Owens Corning, CertainTeed, Atlas, Malarkey). Inadequate ventilation is what voids warranties. Fixing it brings the warranty back into compliance.</p>' },
 	]}
-	processHeading="Four steps. Most jobs done in a day."
-	processSteps={[
-		{ label: 'Inspect', caption: 'Attic + roof. Measure intake + exhaust against code.' },
-		{ label: 'Quote', caption: 'Soffit / ridge / fan combo. Per-vent pricing.' },
-		{ label: 'Install', caption: 'Soffit cuts + ridge vent + any fan in one day.' },
-		{ label: 'Stand by', caption: 'Workmanship guarantee on the install.' },
-	]}
-	materialsHeading="Six ventilation systems."
-	materialsSub="From passive ridge + soffit (the default) to solar-powered active exhaust."
-	costHeading="Per-system pricing."
-	costPriceBandFact="Typical attic ventilation work — soffit vent retrofit (low end) vs ridge + soffit + fan combo (high end). Plus a separate band for solar-fan installs. See Founder Input page §4."
-	costFactors={[
-		'Attic square footage (drives required vent area)',
-		'Existing intake condition (open soffit vs blocked)',
-		'Ridge vent install (requires roof opening)',
-		'Powered fan add-on (electric vs solar)',
-		'Wiring run for electric fans',
-		'Roof access difficulty',
-	]}
-	warrantyHeading="Workmanship warranty on every install."
-	faqItems={faqs}
-	endCtaPhoto={imagery.heroCandidates.residentialRoofB.url}
-	endCtaHeading="Free attic inspection."
-	endCtaSub="We measure intake + exhaust and tell you what's missing."
-	endCtaLabel="Get my free inspection"
-	endCtaHref="/free-inspection"
->
-	<div slot="materials">
-		<div class="vt-grid">
-			{ventTypes.map((v) => (
-				<div class="vt-item">
-					<p class="vt-title">{v.title}</p>
-					<p class="vt-body">{v.body}</p>
-				</div>
-			))}
-		</div>
-	</div>
-</ServiceDetailLayout>
-
-<style>
-	.vt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--border); }
-	.vt-item { padding: 24px 28px 0 0; }
-	.vt-item + .vt-item { padding-left: 28px; border-left: 1px solid var(--border); }
-	.vt-item:nth-child(n+4) { padding-top: 24px; border-top: 1px solid var(--border); margin-top: 24px; }
-	.vt-title { color: var(--charcoal); font-size: 16px; font-weight: 600; margin: 0 0 8px; }
-	.vt-body { color: var(--warm-gray); font-size: 14px; line-height: 1.55; margin: 0; }
-</style>
+	ctaHeading="Free inspection.<br />We measure your ventilation."
+	ctaLede="If your roof is aging early, ventilation is the first place we look."
+	ctaPhoto={v2.pageHeros.freeInspection}
+	ctaPrimary={{ label: 'Get my free inspection', href: '/free-inspection' }}
+/>

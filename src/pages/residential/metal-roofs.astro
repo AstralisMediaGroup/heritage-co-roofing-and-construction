@@ -1,100 +1,67 @@
 ---
-import MaterialDetailLayout from '../../layouts/MaterialDetailLayout.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const benefits = [
-	{ icon: 'shield' as const, title: 'Class 4 impact rating standard', body: 'Standing seam steel and aluminum carry Class 4 impact ratings out of the box — the highest UL rating. Hail dents the panel cosmetically but very rarely fails functionally.' },
-	{ icon: 'wind' as const, title: 'UL 580 / FM 4471 wind ratings', body: 'Concealed-clip standing seam carries the highest wind ratings in residential roofing. Tested to 110+ mph design wind. Critical near storm-corridor zones in East Texas.' },
-	{ icon: 'flame' as const, title: 'Class A fire rating', body: 'Steel and aluminum panels are non-combustible. Class A fire rating with proper underlayment assembly. Standard on every install.' },
-	{ icon: 'sun' as const, title: 'Cool-roof reflective finishes', body: 'Light-colored PVDF (Kynar 500) finishes carry Class 1 cool-roof ratings. Reflects 25–50% of solar radiation depending on color. Measurable summer cooling savings on south-facing roofs.' },
-	{ icon: 'gauge' as const, title: '40–60 year service life', body: 'Galvalume-coated steel and aluminum outlast every other residential roofing material. The paint finish typically outlasts the panel itself; the panel typically outlasts the home it sits on.' },
-	{ icon: 'check' as const, title: '100% recyclable + low maintenance', body: 'Concealed-fastener standing seam has no exposed screws to retighten, no neoprene washers to age out. Annual visual inspection is the entire maintenance routine. End of life: scrap value.' },
-];
-
-const colorSwatches = [
-	{ name: 'Galvalume (mill finish)' },
-	{ name: 'Charcoal Gray' },
-	{ name: 'Matte Black' },
-	{ name: 'Slate Blue' },
-	{ name: 'Hunter Green' },
-	{ name: 'Burnished Copper' },
-	{ name: 'Regal White' },
-	{ name: 'Bone White' },
-];
-
-const specRows = [
-	{ label: 'Service life', value: '40–60 years (steel / aluminum, residential)' },
-	{ label: 'Profile options', value: 'Standing seam (1.5"–3" rib), through-fastened R-panel, structural panel' },
-	{ label: 'Substrate', value: 'Galvalume-coated steel (default) or aluminum (coastal / chemical exposure)' },
-	{ label: 'Gauge', value: '24-gauge (premium) or 26-gauge (standard residential)' },
-	{ label: 'Wind rating', value: 'UL 580 Class 90 / FM 4471 standard on concealed-fastener standing seam' },
-	{ label: 'Fire rating', value: 'Class A (with proper underlayment assembly)' },
-	{ label: 'Impact rating', value: 'Class 4 (highest UL rating)' },
-	{ label: 'Finish', value: 'PVDF (Kynar 500) with 30–40 year color warranty; SMP for budget tier' },
-	{ label: 'Manufacturer warranty', value: 'Substrate: 25–30 yr typical; Paint: 30–40 yr typical' },
-];
-
-const tradeoffs = [
-	{ kind: 'pro' as const, body: 'Longest-lifespan residential roofing — 40–60 years' },
-	{ kind: 'pro' as const, body: 'Concealed fasteners on standing seam — no annual re-tightening' },
-	{ kind: 'pro' as const, body: 'Class 4 impact + UL 580 wind = lowest insurance risk' },
-	{ kind: 'pro' as const, body: 'Lowest lifecycle cost over 30+ year ownership' },
-	{ kind: 'pro' as const, body: '100% recyclable at end of life' },
-	{ kind: 'pro' as const, body: 'Cool-roof finishes reduce summer cooling costs' },
-	{ kind: 'con' as const, body: '2–3× the up-front cost of architectural asphalt' },
-	{ kind: 'con' as const, body: 'Cosmetic hail dents are common and unsettling (functional integrity holds)' },
-	{ kind: 'con' as const, body: 'Expansion + contraction requires careful clip + flashing detailing' },
-	{ kind: 'con' as const, body: 'Through-fastened (cheap) profile leaks at neoprene washers around year 15–20' },
-];
-
-const faqs = [
-	{ q: 'Standing seam vs through-fastened — does it matter?', a: 'Yes, dramatically. Standing seam = vertical ribs interlocking with concealed clips, no fasteners through the panel face. Through-fastened (R-panel) = exposed screws driven through the panel into the deck. The screws + neoprene washers are the failure point — they back out and leak around year 15–20. Standing seam has no exposed fasteners; nothing to age out. For residential, almost always standing seam.' },
-	{ q: 'Will I hear rain on a metal roof?', a: 'Less than people think. With proper underlayment (synthetic + ice & water shield at eaves), a fully decked substrate, and insulation in the attic — the rain noise is comparable to a shingle roof. The "loud metal roof" stereotype comes from open-bar metal on a barn or carport, not from a properly built residential install.' },
-	{ q: 'Steel vs aluminum?', a: 'Steel for almost every residential install in East Texas. Galvalume coating gives 40+ year corrosion resistance. Aluminum is the right call only in coastal or industrial-chemical environments where galvanized steel rusts. Aluminum costs more, dents more easily, and is overkill for most Texas homes.' },
-	{ q: 'How long does the paint last?', a: 'PVDF (Kynar 500) finishes carry 30–40 year color warranties on premium lines. SMP (Silicone Modified Polyester) finishes carry 20–25. The paint usually outlasts the panel\'s structural life. Fading and chalking happen progressively but coverage stays intact.' },
-	{ q: 'What about hail damage?', a: 'Standing seam metal carries Class 4 impact ratings — the highest available. Hail dents the panel cosmetically but very rarely fails functionally. Insurance often offers 20–35% premium discounts for Class 4 metal roofs in Texas. The most-common metal-roof claim is cosmetic dent damage; functional claims are rare.' },
-	{ q: 'Can metal go over an existing roof?', a: 'Sometimes. Existing roof must be structurally sound, dry, and the building deck has to handle the additional weight. Most residential decks do. We assess at the inspection. If the existing roof is failing, tear-off is the right call regardless.' },
-	{ q: 'What manufacturer do you install?', a: 'We work with several major panel manufacturers and choose by job — McElroy Metal (Maxima, 138T/238T, Max-Rib), Drexel Metals, Mueller, and Berridge. The differences are panel profiles available, paint warranty terms, and lead times. Heritage\'s primary stocked manufacturer is below.', placeholderFact: 'Heritage\'s primary stocked metal panel manufacturer + standard profiles + paint warranty length offered. See Founder Input page §2.' },
-	{ q: 'How long does a metal install take?', a: 'A typical residential standing seam install runs 3–5 working days vs 1 day for an asphalt replacement. The panels are roll-formed on-site for long runs, every flashing detail is custom-fit, and the concealed clip system takes time to do right. The slower install pays back in the 40+ year service life.' },
-];
+const v2 = imagery.v2;
+const m = imagery.metal;
 ---
 
-<MaterialDetailLayout
-	title="Metal Roofs — Heritage Co. Residential"
-	heroEyebrow="Residential · Metal roofs"
-	heroH1="Metal. The 50-year residential roof."
-	heroSub="Standing seam steel or aluminum. Concealed fasteners. The longest-lifespan residential roofing material — and the right call when lifecycle cost beats up-front cost."
-	heroPhoto={imagery.metal.hero.url!}
-	heroPhotoAlt="Standing seam metal residential roof"
-	whatItIsHeading="Roll-formed metal panels with mechanically-seamed ribs."
-	whatItIsParagraphs={[
-		'A residential metal roof is roll-formed steel or aluminum panels running vertically from eave to ridge. Adjacent panels interlock at a raised rib (the "standing seam"), held to the deck by concealed clips fastened underneath. No exposed screws on the panel face, no neoprene washers to age out, no annual maintenance routine beyond a visual inspection.',
-		'For homeowners who plan to stay 20+ years, who deal with East Texas hail every spring, or who simply want the last roof their house will need — metal is the answer. The math beats every alternative on a 30-year ownership horizon, even at 2–3× the up-front cost of asphalt.',
+<SystemPage
+	title="Metal roofs · residential"
+	heroEyebrow="Residential · materials"
+	heroHeading="Metal roofs.<br />40 years on a house."
+	heroLede="Standing seam is the Heritage default for residential metal — the longest-warranty, longest-life option, no exposed fasteners, no gaskets to fail. We also install metal shingle and R-panel where they're the right call. Steel or aluminum. Class 4 impact. Class A fire."
+	heroPhoto={m.standingSeam}
+	heroCta={{ label: 'Get my free inspection', href: '/free-inspection' }}
+	bleedPhoto={m.standingSeamBleed}
+	bleedHeading="Concealed fasteners.<br />No gaskets to fail."
+	overview={{
+		eyebrow: 'Why metal',
+		heading: 'Buy once. Stay 40 years.',
+		body: "Residential metal is the answer when you're staying in the house. A correctly-installed standing seam roof outlasts the house's other systems by decades — most owners replace the HVAC twice and the water heater three times before they touch the roof. The trade-off is up-front cost: metal runs roughly 2–3x the per-square cost of asphalt. Whether that pencils depends on how long you're staying."
+	}}
+	keyPoints={[
+		{
+			heading: 'Standing seam — the Heritage default.',
+			body: "Concealed-fastener panels with no exposed screws or gaskets in the field of the roof. Steel substrate (Galvalume) with PVDF (Kynar 500) finish. McElroy Maxima/138T/238T, Mueller MSL/MTL, Drexel, Berridge are the primary product lines. 30–40 year paint warranties standard. This is what we recommend on every residential metal job unless you've got a specific reason to go elsewhere.",
+			bullets: ['Concealed fasteners, no exposed gaskets', 'PVDF paint · 30–40 yr warranty', 'Class 4 impact · UL 2218', 'Class A fire · UL 790'],
+			photo: m.standingSeam,
+			photoSide: 'left',
+		},
+		{
+			heading: 'Metal shingle — slate or shake look, steel performance.',
+			body: "Stone-coated steel pressed into shake, slate, or tile profiles. DECRA Shingle XD, Shake XD, and Tile lines are the dominant brands. Lifetime warranty, Class 4 impact, Class A fire. Higher cost than standing seam but right for HOAs that require a traditional shingle look or homes where slate/shake aesthetics drive the spec.",
+			bullets: ['Looks like shake, slate, or tile', 'Lifetime warranty · Class 4 impact', '50+ yr realistic service life', 'Insurance-discount eligible in hail zips'],
+			photo: m.metalShingle,
+			photoSide: 'right',
+		},
+		{
+			heading: 'R-panel (exposed-fastener) — for shops and outbuildings.',
+			body: "PBR, R-panel, or Max-Rib panels with screws through the rib. Cheaper up-front, faster install, but the rubber gaskets under the screw heads degrade over 15–25 years and need re-fastening. Right for outbuildings, ag, detached shops. We install it — but on the main house, we steer to standing seam because the warranty math doesn't work out long-term.",
+			bullets: ['Cheaper up-front', 'Best for shops, outbuildings, ag', '15–25 yr re-fasten window', 'We do not recommend on primary residence'],
+			photo: m.rPanel,
+			photoSide: 'left',
+		},
 	]}
-	benefitsHeading="Six things that distinguish a metal install from a shingle install."
-	benefitsSub="Industry-generic specs — these apply to any quality concealed-fastener standing seam install from any major manufacturer."
-	benefits={benefits}
-	colorsHeading="Color families across the major panel manufacturers."
-	colorsSub="PVDF (Kynar 500) finishes carry 30–40 year color warranties. The eight color families below cover what is available across McElroy, Drexel, Mueller, and Berridge. Specific manufacturer color SKUs surface at the inspection."
-	colorSwatches={colorSwatches}
-	colorsPlaceholder="Confirm: Heritage's primary metal panel brand + the actual stocked finish line + standard color range carried locally. Manufacturer color photography (real product close-ups) requires dealer-portal access from McElroy / Drexel / Mueller. See Founder Input page §2."
-	specsHeading="Metal roof specs at a glance."
-	specRows={specRows}
-	manufacturerPlaceholder={`Heritage's primary stocked metal manufacturer + profile (e.g. McElroy Maxima 1.5" rib in 24-gauge Galvalume + PVDF finish). See Founder Input page §2.`}
-	costPriceBandFact="Typical residential metal install price band — through-fastened R-panel on the low end, premium concealed-fastener standing seam on the high end, dollars per square (100 sq ft). Roughly 2–3× the cost of a comparable asphalt install. See Founder Input page §4."
-	costFactors={[
-		'Profile choice (through-fastened R-panel < concealed-fastener standing seam < structural panel)',
-		'Substrate (Galvalume steel < aluminum)',
-		'Gauge (26-gauge < 24-gauge)',
-		'Finish (SMP < PVDF Kynar 500)',
-		'Color (mill finish < standard PVDF colors < specialty / custom)',
-		'Roof complexity (penetrations, valleys, hips — drives custom flashing time)',
-		'Tear-off layers + decking condition',
+	stats={[
+		{ value: '40+', label: 'Years service life · standing seam' },
+		{ value: '40 yr', label: 'PVDF paint warranty', numericValue: 40, suffix: ' yr' },
+		{ value: 'Class 4', label: 'Impact rating · UL 2218' },
+		{ value: '0', label: 'Exposed fasteners · standing seam' },
 	]}
-	tradeoffsHeading="Where metal shines, where it doesn't."
-	tradeoffs={tradeoffs}
-	faqItems={faqs}
-	endCtaPhoto={imagery.metal.secondary.url!}
-	endCtaHeading="Free inspection. We talk through metal vs asphalt at your house."
-	endCtaSub="Lifecycle cost math, profile choice, color match. Honest comparison, not a pitch."
+	projectPhotos={[m.standingSeam, m.standingSeamBleed, m.metalShingle, m.rPanel]}
+	projectCaptions={['Standing seam install · concealed fasteners', 'Standing seam re-roof, residential', 'DECRA stone-coated metal shingle', 'PBR exposed-fastener R-panel']}
+	faq={[
+		{ q: 'Standing seam, metal shingle, or R-panel?', a: "<p>For your house: standing seam. The longer warranty, no exposed gaskets, and cleaner look pay back the cost difference over the time you're going to be in the house. Metal shingle makes sense if you want the slate or shake aesthetic. R-panel belongs on the shop, the barn, or a detached structure where the budget rules and the 15–25 year re-fasten window is acceptable.</p>" },
+		{ q: 'Will it dent in hail?', a: "<p>Class 4 impact rating means a 2-inch steel ball dropped from 20 feet without cracking the panel. Cosmetic denting is possible in significant hail (1.5\"+) but functional failure is rare. Most insurers offer hail-claim discounts on Class 4 metal.</p>" },
+		{ q: 'Is metal louder when it rains?', a: '<p>No, when installed over a residential deck. The decking, underlayment, and attic insulation absorb impact noise — properly installed metal roofs are no louder inside the house than asphalt. The "metal roofs are loud" idea comes from un-decked metal on barns and pole buildings.</p>' },
+		{ q: 'How does the cost compare to asphalt?', a: "<p>Roughly 2–3x per square. So an asphalt re-roof at $X is a metal re-roof at $2–3X. The math depends on how long you're staying — over 30 years, metal usually wins on total cost; over 10 years, asphalt does.</p>" },
+		{ q: 'Will it strip the paint off my car? (lightning)', a: '<p>Metal roofs are no more lightning-prone than any other roof type — actually slightly less, because metal dissipates rather than concentrating energy. Insurance carriers don\'t penalize metal roofs for lightning risk.</p>' },
+		{ q: 'Steel or aluminum?', a: "<p>Steel for nearly every East Texas home. Aluminum's advantage is corrosion resistance in salt-air environments — not a factor more than 50 miles inland. Steel is stronger, cheaper, and the standard from every major manufacturer.</p>" },
+	]}
+	ctaHeading="Free inspection.<br />Honest answer on metal."
+	ctaLede="Same-day or next-day quote. We tell you whether metal makes sense for your house before we quote it."
+	ctaPhoto={v2.pageHeros.freeInspection}
+	ctaPrimary={{ label: 'Get my free inspection', href: '/free-inspection' }}
+	promises={['Insurance accepted', '30–40 yr paint warranty', 'Locally owned + crewed']}
 />

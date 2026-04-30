@@ -1,0 +1,168 @@
+---
+// Full Tier 2 system page template (commercial systems + residential materials).
+// One file, full content shape per page; instantiated by each route via props.
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPage from './HeroPage.astro';
+import SectionHead from './SectionHead.astro';
+import PromiseStrip from './PromiseStrip.astro';
+import PhotoLede from './PhotoLede.astro';
+import PhotoBleed from './PhotoBleed.astro';
+import StatBand from './StatBand.astro';
+import FAQAccordion from './FAQAccordion.astro';
+import ProjectShowcase from './ProjectShowcase.astro';
+import PageCTA from './PageCTA.astro';
+import Reveal from './Reveal.astro';
+import type { ImageRef } from '../../content/imagery';
+
+interface Props {
+	title: string;
+	heroEyebrow: string;
+	heroHeading: string;
+	heroLede: string;
+	heroPhoto: ImageRef;
+	heroCta?: { label: string; href: string };
+	bleedPhoto: ImageRef;
+	bleedHeading: string;
+	overview: { eyebrow: string; heading: string; body: string };
+	keyPoints: { heading: string; body: string; bullets?: string[]; photo: ImageRef; photoSide?: 'left' | 'right' }[];
+	stats?: { value: string; label: string; numericValue?: number; suffix?: string; prefix?: string }[];
+	projectCaptions?: string[];
+	projectPhotos?: ImageRef[];
+	faq: { q: string; a: string }[];
+	ctaHeading: string;
+	ctaLede: string;
+	ctaPhoto?: ImageRef;
+	ctaPrimary?: { label: string; href: string };
+	promises?: string[];
+}
+
+const {
+	title,
+	heroEyebrow,
+	heroHeading,
+	heroLede,
+	heroPhoto,
+	heroCta = { label: 'Request a quote', href: '/free-inspection' },
+	bleedPhoto,
+	bleedHeading,
+	overview,
+	keyPoints,
+	stats,
+	projectCaptions = [],
+	projectPhotos = [],
+	faq,
+	ctaHeading,
+	ctaLede,
+	ctaPhoto,
+	ctaPrimary = { label: 'Get a quote', href: '/free-inspection' },
+	promises = ['Insured + bonded', 'Workmanship warranty', 'Locally owned + crewed'],
+} = Astro.props;
+
+const projects = projectPhotos.map((photo, i) => ({ photo, caption: projectCaptions[i] || photo.alt }));
+---
+
+<BaseLayout title={title}>
+	<HeroPage
+		eyebrow={heroEyebrow}
+		heading={heroHeading}
+		lede={heroLede}
+		primaryCta={heroCta}
+		secondaryCta={{ label: 'Call 903-242-8102', href: 'tel:9032428102' }}
+		photo={heroPhoto}
+		tier={2}
+	/>
+
+	<section class="page-section">
+		<div class="container">
+			<PromiseStrip items={promises} />
+		</div>
+	</section>
+
+	<Reveal>
+		<section class="page-section overview-section">
+			<div class="container overview-grid">
+				<SectionHead eyebrow={overview.eyebrow} heading={overview.heading} />
+				<p class="lede overview-body">{overview.body}</p>
+			</div>
+		</section>
+	</Reveal>
+
+	<PhotoBleed photo={bleedPhoto} heading={bleedHeading} overlay={true} heightVw={62} />
+
+	{keyPoints.map((kp, i) => (
+		<Reveal>
+			<section class="page-section keypoint-section">
+				<div class="container">
+					<PhotoLede
+						photo={kp.photo}
+						heading={kp.heading}
+						body={kp.body}
+						bullets={kp.bullets}
+						photoSide={kp.photoSide || (i % 2 === 0 ? 'left' : 'right')}
+					/>
+				</div>
+			</section>
+		</Reveal>
+	))}
+
+	{stats && (
+		<Reveal>
+			<StatBand stats={stats} />
+		</Reveal>
+	)}
+
+	{projects.length > 0 && (
+		<Reveal>
+			<section class="page-section">
+				<div class="container">
+					<SectionHead eyebrow="Recent work" heading={`Heritage ${title.split(' — ')[0].toLowerCase()} jobs.`} lede="Real installations across East Texas and Central Arkansas. Click any photo to view." maxWidth="780px" />
+					<div class="projects-spacer">
+						<ProjectShowcase projects={projects} group={`projects-${title.replace(/\s+/g, '-').toLowerCase()}`} />
+					</div>
+				</div>
+			</section>
+		</Reveal>
+	)}
+
+	{faq.length > 0 && (
+		<Reveal>
+			<section class="page-section faq-section">
+				<div class="container faq-grid">
+					<SectionHead eyebrow="Common questions" heading="What facility owners and homeowners ask us." />
+					<FAQAccordion items={faq} />
+				</div>
+			</section>
+		</Reveal>
+	)}
+
+	<PageCTA
+		heading={ctaHeading}
+		lede={ctaLede}
+		primaryCta={ctaPrimary}
+		photo={ctaPhoto}
+	/>
+</BaseLayout>
+
+<style>
+	.page-section { padding: clamp(56px, 7vw, 112px) 0; }
+	.overview-section { padding-top: clamp(56px, 6vw, 88px); }
+	.overview-grid {
+		display: grid;
+		grid-template-columns: 1fr 1.1fr;
+		gap: clamp(32px, 5vw, 80px);
+		align-items: start;
+	}
+	.overview-body { color: var(--ink-2); font-size: clamp(19px, 1.5vw, 22px); line-height: 1.55; }
+	.faq-grid {
+		display: grid;
+		grid-template-columns: 0.8fr 1fr;
+		gap: clamp(40px, 5vw, 96px);
+		align-items: start;
+	}
+	.projects-spacer { margin-top: clamp(40px, 4vw, 64px); }
+	@media (max-width: 880px) {
+		.overview-grid,
+		.faq-grid { grid-template-columns: 1fr; gap: 32px; }
+	}
+</style>

@@ -1,0 +1,204 @@
+---
+import { featuredShingles } from '../../content/featuredShingles';
+---
+
+<div class="fs-grid">
+	{featuredShingles.map((s) => (
+		<article class="fs-card">
+			<header class="fs-head">
+				<p class="fs-brand">{s.brand}</p>
+				<h3 class="fs-product">{s.product}</h3>
+				<p class="fs-tagline">{s.tagline}</p>
+			</header>
+
+			{s.heroUrl && (
+				<a class="fs-photo" href={s.productUrl} target="_blank" rel="noopener noreferrer">
+					<img src={s.heroUrl} alt={s.heroAlt ?? `${s.brand} ${s.product}`} loading="lazy" />
+				</a>
+			)}
+
+			<dl class="fs-specs">
+				<div><dt>Warranty</dt><dd>{s.warranty}</dd></div>
+				<div><dt>Wind</dt><dd>{s.wind}</dd></div>
+				{s.impact && <div><dt>Impact</dt><dd>{s.impact}</dd></div>}
+			</dl>
+
+			<div class="fs-colors-block">
+				<p class="fs-colors-h">Colors · {s.colors.length}</p>
+				<ul class="fs-swatches">
+					{s.colors.map((c) => (
+						<li class="fs-swatch-item" title={c.name}>
+							<span class="fs-swatch" style={`background: ${c.hex};`} aria-hidden="true">
+								{c.imgUrl && <img src={c.imgUrl} alt="" loading="lazy" />}
+								{c.popular && <span class="fs-swatch-pop" aria-label="Most installed"></span>}
+							</span>
+							<span class="fs-swatch-name">{c.name}</span>
+						</li>
+					))}
+				</ul>
+			</div>
+
+			{s.notes && <p class="fs-note">{s.notes}</p>}
+
+			<a class="fs-link" href={s.productUrl} target="_blank" rel="noopener noreferrer">
+				View {s.brand} {s.product} on {s.brand}.com →
+			</a>
+		</article>
+	))}
+</div>
+
+<style>
+	.fs-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: clamp(20px, 2.4vw, 32px);
+	}
+	@media (max-width: 1080px) {
+		.fs-grid { grid-template-columns: 1fr 1fr; }
+	}
+	@media (max-width: 720px) {
+		.fs-grid { grid-template-columns: 1fr; }
+	}
+
+	.fs-card {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(20px, 2vw, 28px);
+		padding: clamp(24px, 2.6vw, 36px);
+		background: #fff;
+		border: 1px solid var(--rule);
+		border-radius: var(--r-soft);
+	}
+
+	.fs-head { display: flex; flex-direction: column; gap: 6px; }
+	.fs-brand {
+		font-size: 12px; font-weight: 600;
+		letter-spacing: 0.12em; text-transform: uppercase;
+		color: var(--rust);
+		margin: 0;
+	}
+	.fs-product {
+		font-size: clamp(22px, 2.2vw, 28px);
+		font-weight: 600;
+		letter-spacing: -0.4px;
+		line-height: 1.15;
+		margin: 0;
+		color: var(--ink);
+	}
+	.fs-tagline {
+		font-size: 14px;
+		color: var(--ink-2);
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	.fs-photo {
+		display: block;
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+		border-radius: 4px;
+		background: var(--bg-deep);
+	}
+	.fs-photo img {
+		width: 100%; height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 400ms ease;
+	}
+	.fs-photo:hover img { transform: scale(1.03); }
+
+	.fs-specs {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 12px 20px;
+		margin: 0;
+		padding: 16px 0;
+		border-top: 1px solid var(--rule);
+		border-bottom: 1px solid var(--rule);
+	}
+	.fs-specs > div { display: flex; flex-direction: column; gap: 2px; }
+	.fs-specs dt {
+		font-size: 11px; font-weight: 500;
+		letter-spacing: 0.08em; text-transform: uppercase;
+		color: var(--ink-3);
+		margin: 0;
+	}
+	.fs-specs dd {
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--ink);
+		line-height: 1.35;
+		margin: 0;
+	}
+
+	.fs-colors-block { display: flex; flex-direction: column; gap: 14px; }
+	.fs-colors-h {
+		font-size: 12px; font-weight: 600;
+		letter-spacing: 0.08em; text-transform: uppercase;
+		color: var(--ink-3);
+		margin: 0;
+	}
+	.fs-swatches {
+		list-style: none;
+		padding: 0; margin: 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+		gap: 12px;
+	}
+	.fs-swatch-item {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		text-align: center;
+	}
+	.fs-swatch {
+		position: relative;
+		display: block;
+		aspect-ratio: 1 / 1;
+		border-radius: 4px;
+		overflow: hidden;
+		border: 1px solid var(--rule);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+	}
+	.fs-swatch img {
+		position: absolute; inset: 0;
+		width: 100%; height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.fs-swatch-pop {
+		position: absolute;
+		top: 4px; right: 4px;
+		width: 8px; height: 8px;
+		border-radius: 50%;
+		background: var(--rust);
+		box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.85);
+	}
+	.fs-swatch-name {
+		font-size: 11px;
+		line-height: 1.3;
+		color: var(--ink-2);
+	}
+
+	.fs-note {
+		font-size: 13px;
+		color: var(--ink-3);
+		line-height: 1.55;
+		margin: 0;
+	}
+
+	.fs-link {
+		font-size: 13px;
+		font-weight: 500;
+		color: var(--ink);
+		text-decoration: none;
+		border-bottom: 1px solid var(--rule-strong);
+		padding-bottom: 2px;
+		align-self: flex-start;
+		transition: color 180ms ease, border-color 180ms ease;
+	}
+	.fs-link:hover {
+		color: var(--rust);
+		border-bottom-color: var(--rust);
+	}
+</style>

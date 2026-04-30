@@ -1,0 +1,180 @@
+---
+import type { ImageRef } from '../../content/imagery';
+
+interface Side {
+	href: string;
+	eyebrow: string;
+	heading: string;
+	body: string;
+	bullets?: string[];
+	cta: string;
+	photo: ImageRef;
+}
+
+interface Props {
+	left: Side;
+	right: Side;
+}
+
+const { left, right } = Astro.props;
+---
+
+<section class="split-feature">
+	{[left, right].map((side) => (
+		<a class="split-side has-zoom-photo" href={side.href}>
+			<div class="split-photo">
+				{side.photo.url ? (
+					<img src={side.photo.url} alt={side.photo.alt} loading="lazy" class="zoom-photo" />
+				) : (
+					<div class="split-fallback" />
+				)}
+				<div class="split-overlay" />
+			</div>
+			<div class="split-content">
+				<p class="eyebrow split-eyebrow">{side.eyebrow}</p>
+				<h2 class="split-h" set:html={side.heading} />
+				<p class="split-body">{side.body}</p>
+				{side.bullets && (
+					<ul class="split-bullets">
+						{side.bullets.map((b) => (
+							<li>
+								<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+								<span>{b}</span>
+							</li>
+						))}
+					</ul>
+				)}
+				<span class="split-cta">
+					{side.cta}
+					<span class="split-arrow">→</span>
+				</span>
+			</div>
+		</a>
+	))}
+</section>
+
+<style>
+	.split-feature {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0;
+		width: 100%;
+	}
+	.split-side {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		min-height: 88vh;
+		color: var(--bg);
+		isolation: isolate;
+		text-decoration: none;
+		overflow: hidden;
+	}
+	.split-photo {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		overflow: hidden;
+		background: var(--ink-bg);
+	}
+	.split-photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+	.split-fallback {
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(135deg, #5a5347 0%, #2a2826 100%);
+	}
+	.split-overlay {
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(180deg, rgba(21,20,15,0.15) 0%, rgba(21,20,15,0.30) 40%, rgba(21,20,15,0.85) 100%);
+		transition: background 320ms ease;
+	}
+	.split-side:hover .split-overlay {
+		background:
+			linear-gradient(180deg, rgba(21,20,15,0.25) 0%, rgba(21,20,15,0.40) 40%, rgba(21,20,15,0.90) 100%);
+	}
+
+	.split-content {
+		position: relative;
+		z-index: 1;
+		margin-top: auto;
+		padding: clamp(40px, 5vw, 88px);
+		max-width: 720px;
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+	}
+	.split-eyebrow {
+		color: var(--bg);
+		opacity: 0.85;
+	}
+	.split-h {
+		color: var(--bg);
+		font-size: clamp(40px, 5vw, 76px);
+		font-weight: 600;
+		line-height: 0.96;
+		letter-spacing: -0.035em;
+		max-width: 540px;
+	}
+	.split-body {
+		font-size: clamp(16px, 1.3vw, 19px);
+		line-height: 1.5;
+		color: var(--bg);
+		opacity: 0.92;
+		max-width: 480px;
+	}
+	.split-bullets {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		margin-top: 4px;
+	}
+	.split-bullets li {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		font-size: 14px;
+		color: var(--bg);
+		opacity: 0.9;
+	}
+	.split-bullets svg { color: var(--rust); flex-shrink: 0; }
+
+	.split-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		margin-top: 12px;
+		padding-bottom: 4px;
+		font-size: 14px;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		color: var(--bg);
+		border-bottom: 2px solid var(--bg);
+		align-self: flex-start;
+		transition: color 220ms ease, border-color 220ms ease;
+	}
+	.split-arrow {
+		display: inline-block;
+		transition: transform 280ms ease;
+	}
+	.split-side:hover .split-arrow {
+		transform: translateX(8px);
+	}
+	.split-side:hover .split-cta {
+		color: var(--rust);
+		border-color: var(--rust);
+	}
+
+	@media (max-width: 880px) {
+		.split-feature { grid-template-columns: 1fr; }
+		.split-side { min-height: 64vh; }
+	}
+</style>

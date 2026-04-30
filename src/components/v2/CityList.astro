@@ -1,0 +1,65 @@
+---
+import { eastTexas, centralArkansas } from '../../content/cities';
+
+interface Props {
+	emphasizeCity?: string;
+	compact?: boolean;
+}
+const { emphasizeCity, compact = false } = Astro.props;
+---
+
+<div class={`city-list ${compact ? 'compact' : ''}`}>
+	<div class="city-region">
+		<p class="city-h">East Texas</p>
+		<ul class="city-ul">
+			{eastTexas.map((c) => (
+				<li class={c === emphasizeCity ? 'is-emphasized' : ''}>{c}</li>
+			))}
+			<li class="city-more">+ 25 more cities</li>
+		</ul>
+	</div>
+	<div class="city-region">
+		<p class="city-h">Central Arkansas</p>
+		<ul class="city-ul">
+			{centralArkansas.map((c) => (
+				<li class={c === emphasizeCity ? 'is-emphasized' : ''}>{c}</li>
+			))}
+		</ul>
+	</div>
+</div>
+
+<style>
+	.city-list {
+		display: grid;
+		grid-template-columns: 1.4fr 1fr;
+		gap: clamp(40px, 5vw, 80px);
+	}
+	.city-h {
+		font-size: 14px;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		padding-bottom: 16px;
+		border-bottom: 1px solid var(--rule-strong);
+		margin-bottom: 20px;
+		color: var(--ink);
+	}
+	.city-ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0 18px; }
+	.city-ul li {
+		font-size: 16px;
+		line-height: 2.0;
+		color: var(--ink-2);
+		font-weight: 500;
+	}
+	.city-ul li::after { content: '·'; padding-left: 18px; color: var(--ink-3); }
+	.city-ul li:last-child::after { content: ''; }
+	.city-ul li.is-emphasized {
+		color: var(--rust);
+		font-weight: 600;
+	}
+	.city-more { color: var(--ink-3) !important; font-style: normal; }
+	.compact .city-ul li { font-size: 14px; line-height: 1.85; }
+	@media (max-width: 700px) {
+		.city-list { grid-template-columns: 1fr; gap: 32px; }
+	}
+</style>

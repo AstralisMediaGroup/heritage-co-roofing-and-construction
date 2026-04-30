@@ -1,35 +1,42 @@
 ---
-import HeritagePlaceholder from './HeritagePlaceholder.astro';
-
 const services = [
 	{ label: 'Roof replacement', href: '/residential/roof-replacement' },
 	{ label: 'Roof repair', href: '/residential/roof-repair' },
 	{ label: 'Roof inspection', href: '/residential/roof-inspection' },
 	{ label: 'Storm damage', href: '/residential/storm-damage-roofing' },
-	{ label: 'Gutter installation + repair', href: '/residential/gutter-installation-and-repair' },
-	{ label: 'Skylight installation + repair', href: '/residential/skylight-installation-and-repair' },
+	{ label: 'Gutters', href: '/residential/gutter-installation-and-repair' },
+	{ label: 'Skylights', href: '/residential/skylight-installation-and-repair' },
 	{ label: 'Attic ventilation', href: '/residential/attic-ventilation' },
-	{ label: 'Chimney flashing + repair', href: '/residential/chimney-flashing-and-repair' },
-	{ label: 'Asphalt shingle roofs', href: '/residential/asphalt-shingle-roofs' },
-	{ label: 'Metal roofs (residential)', href: '/residential/metal-roofs' },
-	{ label: 'Tile roofs', href: '/residential/tile-roofs' },
-	{ label: 'TPO roofing', href: '/commercial/tpo-roofing' },
-	{ label: 'EPDM roofing', href: '/commercial/epdm-roofing' },
+	{ label: 'Chimney flashing', href: '/residential/chimney-flashing-and-repair' },
+];
+
+const materials = [
+	{ label: 'Asphalt shingle', href: '/residential/asphalt-shingle-roofs' },
+	{ label: 'Metal (residential)', href: '/residential/metal-roofs' },
+	{ label: 'Tile', href: '/residential/tile-roofs' },
+];
+
+const systems = [
+	{ label: 'TPO', href: '/commercial/tpo-roofing' },
+	{ label: 'EPDM', href: '/commercial/epdm-roofing' },
 	{ label: 'Modified bitumen', href: '/commercial/modified-bitumen-roofing' },
-	{ label: 'Metal roofing', href: '/commercial/metal-roofing' },
+	{ label: 'Metal (commercial)', href: '/commercial/metal-roofing' },
 	{ label: 'Built-up (BUR)', href: '/commercial/built-up-roofing' },
-	{ label: 'Coatings + restorations', href: '/commercial/roof-coatings-and-restorations' },
+	{ label: 'Coatings', href: '/commercial/roof-coatings-and-restorations' },
+	{ label: 'Maintenance programs', href: '/commercial/maintenance-programs' },
 ];
 
 const cities = [
 	{ label: 'Tyler, TX', href: '/service-areas/tyler-tx' },
-	{ label: 'Longview, TX', href: '/service-areas/longview-tx' },
-	{ label: 'Marshall, TX', href: '/service-areas/marshall-tx' },
-	{ label: 'Kilgore, TX', href: '/service-areas/kilgore-tx' },
-	{ label: 'Henderson, TX', href: '/service-areas/henderson-tx' },
-	{ label: 'Nacogdoches, TX', href: '/service-areas/nacogdoches-tx' },
-	{ label: 'Little Rock, AR', href: '/service-areas/little-rock-ar' },
-	{ label: 'Conway, AR', href: '/service-areas/conway-ar' },
+	{ label: 'Longview, TX', href: '/service-areas' },
+	{ label: 'Marshall, TX', href: '/service-areas' },
+	{ label: 'Kilgore, TX', href: '/service-areas' },
+	{ label: 'Henderson, TX', href: '/service-areas' },
+	{ label: 'Nacogdoches, TX', href: '/service-areas' },
+	{ label: 'Little Rock, AR', href: '/service-areas' },
+	{ label: 'Conway, AR', href: '/service-areas' },
+	{ label: 'Fort Smith, AR', href: '/service-areas' },
+	{ label: 'Russellville, AR', href: '/service-areas' },
 	{ label: 'View all areas →', href: '/service-areas' },
 ];
 
@@ -41,70 +48,112 @@ const company = [
 ];
 ---
 
-<div class="dir">
-	<div class="dir-grid">
-		<div class="dir-col">
-			<p class="dir-h">Services</p>
-			<ul>
-				{services.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
-			</ul>
+<footer class="dir">
+	<div class="container">
+		<div class="dir-top">
+			<div class="dir-mark">
+				<span class="dir-logo">H</span>
+				<span class="dir-name">HERITAGE Co. ROOFING</span>
+			</div>
+			<a href="tel:9032428102" class="dir-phone">903-242-8102</a>
 		</div>
-		<div class="dir-col">
-			<p class="dir-h">Service areas</p>
-			<ul>
-				{cities.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
-			</ul>
-		</div>
-		<div class="dir-col">
-			<p class="dir-h">Company</p>
-			<ul>
-				{company.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
-			</ul>
-		</div>
-		<div class="dir-col">
-			<p class="dir-h">Contact</p>
-			<ul>
-				<li><a href="tel:9032428102">903-242-8102</a></li>
-				<li><HeritagePlaceholder inline={true} fact="email address" /></li>
-				<li><HeritagePlaceholder inline={true} fact="hours of operation" /></li>
-				<li><HeritagePlaceholder inline={true} fact="HQ mailing address — Longview, TX" /></li>
-			</ul>
+		<div class="dir-grid">
+			<div class="dir-col">
+				<p class="dir-h">Residential services</p>
+				<ul>{services.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+			</div>
+			<div class="dir-col">
+				<p class="dir-h">Materials</p>
+				<ul>{materials.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+				<p class="dir-h dir-h-spaced">Commercial systems</p>
+				<ul>{systems.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+			</div>
+			<div class="dir-col">
+				<p class="dir-h">Service areas</p>
+				<ul>{cities.map((c) => <li><a href={c.href}>{c.label}</a></li>)}</ul>
+			</div>
+			<div class="dir-col">
+				<p class="dir-h">Company</p>
+				<ul>{company.map((c) => <li><a href={c.href}>{c.label}</a></li>)}</ul>
+				<p class="dir-h dir-h-spaced">Contact</p>
+				<ul>
+					<li><a href="tel:9032428102">903-242-8102</a></li>
+					<li><a href="mailto:contact@heritagecoroofing.com">contact@heritagecoroofing.com</a></li>
+					<li><span class="dir-placeholder">hours · pending</span></li>
+					<li><span class="dir-placeholder">Longview, TX HQ</span></li>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
+</footer>
 
 <style>
 	.dir {
-		background: var(--charcoal);
-		padding: 72px 48px 48px;
+		background: var(--ink-bg);
+		color: var(--bg);
+		padding: clamp(72px, 8vw, 120px) 0 56px;
 	}
+	.dir-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 24px;
+		padding-bottom: clamp(40px, 5vw, 72px);
+		border-bottom: 1px solid rgba(255,255,255,0.1);
+		margin-bottom: clamp(40px, 5vw, 72px);
+		flex-wrap: wrap;
+	}
+	.dir-mark { display: inline-flex; align-items: center; gap: 14px; }
+	.dir-logo {
+		display: inline-flex; align-items: center; justify-content: center;
+		width: 44px; height: 44px;
+		background: var(--bg); color: var(--ink);
+		font-size: 22px; font-weight: 600;
+	}
+	.dir-name { font-size: 16px; font-weight: 600; letter-spacing: 0.08em; }
+	.dir-phone {
+		font-size: clamp(28px, 3vw, 44px);
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		color: var(--bg);
+		border-bottom: 2px solid transparent;
+		transition: border-color 220ms ease, color 220ms ease;
+	}
+	.dir-phone:hover { border-bottom-color: var(--rust); color: var(--rust); }
+
 	.dir-grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: 48px;
-		max-width: 1200px;
-		margin: 0 auto;
+		grid-template-columns: 1.2fr 1.2fr 1fr 1fr;
+		gap: 40px;
 	}
-	.dir-col {}
 	.dir-h {
 		color: var(--rust);
 		font-size: 11px;
 		font-weight: 600;
-		letter-spacing: 1.5px;
+		letter-spacing: 0.18em;
 		text-transform: uppercase;
-		margin: 0 0 18px;
+		margin-bottom: 16px;
 	}
-	.dir-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+	.dir-h-spaced { margin-top: 36px; }
+	.dir-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 	.dir-col a {
-		color: var(--off-white);
-		font-size: 14px;
-		text-decoration: none;
+		color: var(--bg);
 		opacity: 0.78;
-		transition: opacity 150ms ease;
+		font-size: 14px;
+		transition: opacity 150ms ease, color 150ms ease;
 	}
-	.dir-col a:hover { opacity: 1; }
-
+	.dir-col a:hover { opacity: 1; color: var(--rust); }
+	.dir-placeholder {
+		font-size: 13px;
+		color: var(--ink-bg-mute);
+		opacity: 0.7;
+		font-style: normal;
+	}
 	@media (max-width: 880px) {
-		.dir-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+		.dir-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+		.dir-top { flex-direction: column; align-items: flex-start; }
+	}
+	@media (max-width: 540px) {
+		.dir-grid { grid-template-columns: 1fr; }
 	}
 </style>

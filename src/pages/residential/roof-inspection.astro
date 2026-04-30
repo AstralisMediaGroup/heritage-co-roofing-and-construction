@@ -1,97 +1,50 @@
 ---
-import ServiceDetailLayout from '../../layouts/ServiceDetailLayout.astro';
-import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const checkItems = [
-	{ title: 'Roof surface', body: 'Granule loss, curling, cracking, missing shingles, exposed nail heads, sealant failures.' },
-	{ title: 'Flashings', body: 'Chimney, vents, skylights, walls. The #1 source of leaks. Looking for separation, rust, sealant gaps.' },
-	{ title: 'Ventilation', body: 'Ridge vents, soffit vents, exhaust vents. Balanced intake + exhaust or signs the roof is overheating.' },
-	{ title: 'Gutters + drainage', body: 'Pitch, blockages, downspout extensions, fascia condition where the gutter ties in.' },
-	{ title: 'Attic decking', body: 'When accessible — rafters, decking, signs of past leaks, ventilation flow, insulation contact.' },
-	{ title: 'Fascia + soffit', body: 'Wood rot, wasp nests, displaced soffit panels, anywhere water can intrude.' },
-];
-
-const faqs = [
-	{ q: 'What does the inspection report include?', a: 'Photos of every concern, a written summary of findings, an honest opinion on what needs work, what can wait, and what is fine. If we recommend repair or replacement, the report covers why with specific evidence — not just "looks old."' },
-	{ q: 'Do you charge if nothing\'s wrong?', a: 'The free inspection is free regardless of outcome. If we find nothing, we say so and you pay nothing. If we find something and you proceed with the work, the inspection stays free. If we find something and you do not proceed, the inspection is still free.' },
-	{ q: 'How long does the inspection take?', a: 'Most residential roofs take 30–60 minutes on the roof + 15–30 minutes in the attic + writing time. You get the report the same day or next day depending on schedule.' },
-	{ q: 'Will you take photos?', a: 'Always. Photos of every concern, dated and labeled. They go to you, your insurance, or your buyer\'s inspector — wherever you need them.' },
-	{ q: 'Can the report be shared with my insurance?', a: 'Yes. Most insurance adjusters welcome a contractor\'s documentation. We write the report in language an adjuster reads, with measurements and photos.' },
-	{ q: 'Pre-purchase vs annual — what\'s the difference?', a: 'Pre-purchase is a buyer\'s due-diligence inspection — we tell you what you would inherit. Annual is for owners getting older roofs ahead of insurance renewal. Same inspection, different framing in the report.' },
-	{ q: 'Post-storm — should I file a claim before or after the inspection?', a: 'After. The inspection report becomes your filing documentation. Filing first then inspecting later means you might miss damage that should have been on the claim.' },
-];
+const v2 = imagery.v2;
 ---
 
-<ServiceDetailLayout
-	title="Roof Inspection — Heritage Co."
-	heroEyebrow="Residential · Roof inspection"
-	heroH1="Free roof inspection. Photos and a written report."
-	heroSub="Pre-purchase, post-storm, or just the age your insurer wants checked. Three different inspections, three different reports. The inspection itself is free."
-	heroPhoto={imagery.heroCandidates.residentialRoofC.url}
-	heroPhotoAlt="Aerial view of a residential roof"
-	whatWeMeanHeading="A real inspection, not a sales appointment."
-	whatWeMeanParagraphs={[
-		'A Heritage inspection is a 90-minute job: 30–60 minutes on the roof, 15–30 minutes in the attic when accessible, then a written report with photos. We climb the roof, we walk the eaves, we check the flashings — every penetration. We do not stand in the driveway and call it done.',
-		'The report names what we found, with photos, and an honest read on what needs work, what can wait, and what is fine. If you proceed with the work, the inspection is free. If you do not, the inspection is still free.',
+<SystemPage
+	title="Roof inspection"
+	heroEyebrow="Residential · service"
+	heroHeading="Free roof inspection.<br />Real person on the ladder."
+	heroLede="Free roof inspection from a Heritage crew member, not a salesperson. Photos, documented findings, written report — whether you need work or not."
+	heroPhoto={v2.pageHeros.roofInspection}
+	heroCta={{ label: 'Schedule my inspection', href: '/free-inspection' }}
+	bleedPhoto={v2.bleeds.workmanship}
+	bleedHeading="Documented.<br />Photographed.<br />Yours to keep."
+	overview={{
+		eyebrow: 'What an inspection is',
+		heading: 'A walk-and-document. Not a sales pitch.',
+		body: "Heritage inspections are free, no-obligation, and run by a roofer — not a sales rep. We climb the roof, walk the field, photograph every penetration and edge, look at decking and ventilation from inside the attic if access permits, and write a report with findings and (only if needed) a quote. If your roof is fine, we tell you that. If it needs work, we tell you what and price it."
+	}}
+	keyPoints={[
+		{
+			heading: 'What we look at.',
+			body: "Field membrane condition, granule loss, shingle lift, flashings at every penetration, chimney step + counter flashing, valleys and ridges, gutters and drip edge, decking from above where visible, attic ventilation balance from inside if access is available.",
+			bullets: ['Field condition + granule loss', 'Every penetration + flashing', 'Decking + structure from inside attic', 'Ventilation balance (intake + exhaust)'],
+			photo: v2.serviceTiles.inspection,
+			photoSide: 'left',
+		},
+		{
+			heading: 'When you should book one.',
+			body: "After any meaningful storm event (hail, high wind). Before buying or selling a house. When the roof hits 15 years (asphalt) or 25 years (metal). When you see a stain on a ceiling. As a yearly check-in if the roof is 12+ years old.",
+			bullets: ['After any major storm', 'Pre-purchase or pre-sale', 'At 15 years (asphalt) / 25 (metal)', 'Annual check-in past year 12'],
+			photo: v2.bleeds.storm,
+			photoSide: 'right',
+		},
 	]}
-	whenYouNeedHeading="When to schedule one."
-	whenYouNeedItems={[
-		{ title: 'Buying or selling a home', body: 'Pre-purchase inspection from a roofer is sharper than a generalist home inspector — we look at flashings and ventilation that a home inspector skims.' },
-		{ title: 'After a wind or hail event', body: 'Document the damage before filing the insurance claim. Our written report becomes the filing record.' },
-		{ title: 'Roof age 10+ years', body: 'Annual checks past year 10 catch problems while they are still repairable, not after they have caused interior damage.' },
-		{ title: 'Insurance renewal coming up', body: 'Some carriers ask for a roof condition report at renewal on older roofs. We write it in language an adjuster reads.' },
+	faq={[
+		{ q: "Is it really free?", a: '<p>Yes. No upsell, no fine print. The inspection itself costs us about an hour of crew time and we treat it as a marketing cost — most homeowners we inspect end up calling us when they actually need work, and that\'s the math that pays for the inspection time.</p>' },
+		{ q: "Will you tell me my roof is fine?", a: '<p>Yes, if it is. We don\'t fabricate work to do. The Founder Input page actively tracks our "no-work-needed" inspection rate as a quality metric. A roof that doesn\'t need a thing gets a written report saying so and a calendar reminder for the next inspection.</p>' },
+		{ q: "Do I need to be home?", a: '<p>Preferred but not required. We can inspect with the homeowner away if exterior access is available, then text or call you with findings. Attic inspection (recommended) requires interior access.</p>' },
+		{ q: "How long does it take?", a: '<p>30 to 60 minutes for most residential roofs. Longer for larger or steeper homes, or roofs with multiple slopes and complex flashings.</p>' },
+		{ q: "What if I need work after?", a: '<p>You get a written quote with the work scope, the warranty, and the timeline. No high-pressure close. The quote is good for 30 days. Most homeowners take 1–2 weeks to decide.</p>' },
 	]}
-	processHeading="Four steps from call to report."
-	processSteps={[
-		{ label: 'Schedule', caption: 'Same-day or next-day for most addresses.' },
-		{ label: 'Inspect', caption: 'Roof, attic, eaves. 90 minutes typical.' },
-		{ label: 'Document', caption: 'Photos, measurements, written summary.' },
-		{ label: 'Report', caption: 'Same-day or next-day delivery. No pressure.' },
-	]}
-	materialsHeading="What we check."
-	materialsSub="Six checkpoints on every inspection."
-	costHeading="Free. Period."
-	costPriceBandFact="Confirm: free inspection has no fee under any condition. If a Heritage inspector finds nothing wrong, the homeowner pays nothing. If they find something and the homeowner does not proceed, still free. See Founder Input page §8."
-	costFactors={[
-		'Pre-purchase inspections — same fee structure (free) or separate? Confirm.',
-		'Post-storm inspections — same? Confirm.',
-		'Travel charges if address is outside primary footprint',
-	]}
-	warrantyHeading="No warranty on an inspection — but standing behind the report."
-	warrantyRows={[
-		{ label: 'Report accuracy', fact: 'Confirm: if Heritage misses something on inspection that we should have caught, we re-inspect free and credit any related repair work. See Founder Input page §1.' },
-		{ label: 'Report turnaround', fact: 'Typical days from inspection to written report delivery. See Founder Input page §8.' },
-	]}
-	faqItems={faqs}
-	endCtaPhoto={imagery.heroCandidates.residentialRoofA.url}
-	endCtaHeading="Free inspection. Same-day or next-day."
-	endCtaSub="The four founders are the four people on the line."
-	endCtaLabel="Schedule my free inspection"
-	endCtaHref="/free-inspection"
->
-	<div slot="materials">
-		<div class="check-grid">
-			{checkItems.map((c) => (
-				<div class="check-item">
-					<p class="check-title">{c.title}</p>
-					<p class="check-body">{c.body}</p>
-				</div>
-			))}
-		</div>
-	</div>
-</ServiceDetailLayout>
-
-<style>
-	.check-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 0;
-		border-top: 1px solid var(--border);
-	}
-	.check-item { padding: 24px 28px 0 0; }
-	.check-item + .check-item { padding-left: 28px; border-left: 1px solid var(--border); }
-	.check-item:nth-child(n+4) { padding-top: 24px; border-top: 1px solid var(--border); margin-top: 24px; }
-	.check-title { color: var(--charcoal); font-size: 16px; font-weight: 600; margin: 0 0 8px; }
-	.check-body { color: var(--warm-gray); font-size: 14px; line-height: 1.55; margin: 0; }
-</style>
+	ctaHeading="Free inspection.<br />No obligation."
+	ctaLede="Same-day or next-day. Real person on the ladder. Written report whether you need work or not."
+	ctaPhoto={v2.pageHeros.freeInspection}
+	ctaPrimary={{ label: 'Schedule my inspection', href: '/free-inspection' }}
+	promises={['Free + no obligation', 'Real person, not a salesperson', 'Written report']}
+/>

@@ -23,118 +23,118 @@ const commercialSystems = [
 	{ label: 'Metal', href: '/commercial/metal-roofing' },
 	{ label: 'Built-up (BUR)', href: '/commercial/built-up-roofing' },
 	{ label: 'Coatings + restorations', href: '/commercial/roof-coatings-and-restorations' },
-];
-
-const commercialPrograms = [
 	{ label: 'Maintenance programs', href: '/commercial/maintenance-programs' },
-	{ label: 'All commercial', href: '/commercial' },
 ];
 ---
 
-<div class="nav" data-nav>
-	<div class="nav-inner">
-	<a class="nav-logo" href="/">HERITAGE Co. ROOFING</a>
-	<nav class="nav-links" aria-label="Primary">
-		<div class="nav-item has-dropdown">
-			<a href="/residential" class="nav-trigger">Residential</a>
-			<div class="dropdown dropdown-2col" role="menu">
-				<div class="dropdown-col">
-					<p class="dropdown-h">Services</p>
-					<ul>
-						{residentialServices.map((s) => (
-							<li><a href={s.href} role="menuitem">{s.label}</a></li>
-						))}
-					</ul>
-				</div>
-				<div class="dropdown-col">
-					<p class="dropdown-h">Materials</p>
-					<ul>
-						{residentialMaterials.map((s) => (
-							<li><a href={s.href} role="menuitem">{s.label}</a></li>
-						))}
-					</ul>
+<header class="nav" data-nav>
+	<div class="container nav-inner">
+		<a class="nav-logo" href="/">
+			<span class="logo-mark">H</span>
+			<span class="logo-text">HERITAGE Co. ROOFING</span>
+		</a>
+		<nav class="nav-links" aria-label="Primary">
+			<div class="nav-item has-dropdown">
+				<a href="/residential" class="nav-trigger">Residential</a>
+				<div class="dropdown" role="menu">
+					<div class="dropdown-col">
+						<p class="dropdown-h">Services</p>
+						<ul>{residentialServices.map((s) => <li><a href={s.href} role="menuitem">{s.label}</a></li>)}</ul>
+					</div>
+					<div class="dropdown-col">
+						<p class="dropdown-h">Materials</p>
+						<ul>{residentialMaterials.map((s) => <li><a href={s.href} role="menuitem">{s.label}</a></li>)}</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="nav-item has-dropdown">
-			<a href="/commercial" class="nav-trigger">Commercial</a>
-			<div class="dropdown dropdown-2col" role="menu">
-				<div class="dropdown-col">
-					<p class="dropdown-h">Systems</p>
-					<ul>
-						{commercialSystems.map((s) => (
-							<li><a href={s.href} role="menuitem">{s.label}</a></li>
-						))}
-					</ul>
-				</div>
-				<div class="dropdown-col">
-					<p class="dropdown-h">Programs</p>
-					<ul>
-						{commercialPrograms.map((s) => (
-							<li><a href={s.href} role="menuitem">{s.label}</a></li>
-						))}
-					</ul>
+			<div class="nav-item has-dropdown">
+				<a href="/commercial" class="nav-trigger">Commercial</a>
+				<div class="dropdown dropdown-1col" role="menu">
+					<div class="dropdown-col">
+						<p class="dropdown-h">Systems + programs</p>
+						<ul>{commercialSystems.map((s) => <li><a href={s.href} role="menuitem">{s.label}</a></li>)}</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-		<a href="/service-areas">Service area</a>
-		<a href="/about">About</a>
-		<a href="/reviews">Reviews</a>
-		<a class="nav-cta" href="/free-inspection">Free inspection</a>
-	</nav>
+			<a href="/service-areas">Service area</a>
+			<a href="/about">About</a>
+			<a href="/reviews">Reviews</a>
+			<a class="nav-cta" href="/free-inspection">Free inspection</a>
+		</nav>
+		<button type="button" class="nav-mobile-toggle" data-mobile-toggle aria-label="Open menu">
+			<span></span><span></span><span></span>
+		</button>
 	</div>
-</div>
+	<div class="nav-mobile" data-mobile-menu>
+		<a href="/residential" class="nav-mobile-link">Residential</a>
+		<a href="/commercial" class="nav-mobile-link">Commercial</a>
+		<a href="/service-areas" class="nav-mobile-link">Service area</a>
+		<a href="/about" class="nav-mobile-link">About</a>
+		<a href="/reviews" class="nav-mobile-link">Reviews</a>
+		<a href="/free-inspection" class="nav-mobile-link nav-mobile-cta">Free inspection →</a>
+		<a href="tel:9032428102" class="nav-mobile-phone">Call 903-242-8102</a>
+	</div>
+</header>
 
 <style>
 	.nav {
-		background: #faf8f4;
-		border-bottom: 1px solid #ece7de;
-		transition: padding 250ms ease, background 250ms ease, box-shadow 250ms ease;
-		position: relative;
+		position: sticky;
+		top: 0;
 		z-index: 50;
-		width: 100%;
+		background: var(--bg);
+		border-bottom: 1px solid transparent;
+		transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease, padding 220ms ease;
 	}
 	.nav-inner {
-		max-width: 1280px;
-		margin: 0 auto;
-		padding: 22px 48px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		transition: padding 250ms ease;
+		padding-top: 22px;
+		padding-bottom: 22px;
+		transition: padding 220ms ease;
 	}
 	.nav.is-scrolled {
-		background: rgba(250, 248, 244, 0.92);
-		backdrop-filter: saturate(160%) blur(8px);
-		-webkit-backdrop-filter: saturate(160%) blur(8px);
-		box-shadow: var(--shadow-subtle);
+		background: rgba(246, 241, 231, 0.94);
+		backdrop-filter: saturate(140%) blur(8px);
+		-webkit-backdrop-filter: saturate(140%) blur(8px);
+		border-bottom-color: var(--rule);
 	}
-	.nav.is-scrolled .nav-inner { padding: 14px 48px; }
+	.nav.is-scrolled .nav-inner { padding-top: 14px; padding-bottom: 14px; }
+
 	.nav-logo {
-		color: #1a1a1a;
-		font-weight: 600;
-		font-size: 20px;
-		letter-spacing: 0.5px;
-	}
-	.nav-links {
-		display: flex;
-		gap: 28px;
-		align-items: center;
-		font-size: 14px;
-		color: #1a1a1a;
-		font-weight: 500;
-	}
-	.nav-links a { color: inherit; text-decoration: none; }
-	.nav-item.has-dropdown { position: relative; }
-	.nav-trigger {
-		cursor: default;
 		display: inline-flex;
 		align-items: center;
-		gap: 4px;
+		gap: 12px;
+		color: var(--ink);
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		font-size: 14px;
 	}
+	.logo-mark {
+		display: inline-flex; align-items: center; justify-content: center;
+		width: 36px; height: 36px;
+		background: var(--ink);
+		color: var(--bg);
+		font-size: 18px;
+		font-weight: 600;
+		letter-spacing: 0;
+	}
+	.logo-text { display: inline-block; }
+
+	.nav-links {
+		display: flex;
+		gap: 32px;
+		align-items: center;
+		font-size: 14px;
+		color: var(--ink);
+		font-weight: 500;
+	}
+	.nav-links a { color: inherit; }
+
+	.nav-item.has-dropdown { position: relative; }
+	.nav-trigger { display: inline-flex; align-items: center; gap: 6px; cursor: default; }
 	.nav-trigger::after {
-		content: '';
-		width: 6px; height: 6px;
+		content: ''; width: 6px; height: 6px;
 		border-right: 1.5px solid currentColor;
 		border-bottom: 1.5px solid currentColor;
 		transform: translateY(-2px) rotate(45deg);
@@ -144,69 +144,109 @@ const commercialPrograms = [
 	.has-dropdown:focus-within .nav-trigger::after {
 		transform: translateY(0) rotate(225deg);
 	}
-
 	.dropdown {
 		position: absolute;
-		top: calc(100% + 14px);
-		left: -16px;
-		background: #ffffff;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-large);
-		box-shadow: var(--shadow-active);
-		padding: 24px 28px;
+		top: calc(100% + 16px);
+		left: -20px;
+		background: var(--bg);
+		border: 1px solid var(--rule);
+		padding: 28px 32px;
 		display: grid;
-		gap: 32px;
+		grid-template-columns: 1fr 1fr;
+		gap: 40px;
 		opacity: 0;
 		transform: translateY(-6px);
 		pointer-events: none;
 		transition: opacity 180ms ease, transform 180ms ease;
-		min-width: 280px;
+		min-width: 540px;
+		box-shadow: var(--shadow-lift);
 	}
-	.dropdown-1col { grid-template-columns: 1fr; }
-	.dropdown-2col { grid-template-columns: 1fr 1fr; min-width: 480px; }
+	.dropdown-1col { grid-template-columns: 1fr; min-width: 280px; }
 	.has-dropdown:hover .dropdown,
 	.has-dropdown:focus-within .dropdown {
 		opacity: 1;
 		transform: translateY(0);
 		pointer-events: auto;
 	}
-	.dropdown-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
-	.dropdown-col li {}
+	.dropdown-col ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
 	.dropdown-col a {
 		display: block;
-		padding: 8px 12px;
+		padding: 8px 0;
 		font-size: 14px;
-		color: var(--charcoal);
-		border-radius: var(--radius-card);
-		transition: background 120ms ease;
-		white-space: nowrap;
+		color: var(--ink);
+		transition: color 140ms ease, padding-left 200ms ease;
+		border-bottom: 1px solid transparent;
 	}
-	.dropdown-col a:hover { background: var(--ivory-tint); }
+	.dropdown-col a:hover { color: var(--rust); padding-left: 6px; }
 	.dropdown-h {
 		color: var(--rust);
 		font-size: 11px;
 		font-weight: 600;
-		letter-spacing: 1.5px;
+		letter-spacing: 0.18em;
 		text-transform: uppercase;
-		margin: 0 0 8px;
-		padding: 0 12px;
+		margin-bottom: 14px;
 	}
 
-	.nav-cta {
-		background: #1a1a1a;
-		color: #faf8f4;
-		padding: 12px 24px;
-		font-size: 14px;
+	.nav-links a.nav-cta {
+		background: var(--ink);
+		color: var(--bg);
+		padding: 12px 22px;
+		border-radius: var(--r-pill);
 		font-weight: 500;
-		border-radius: var(--radius-pill);
-		transition: background 150ms ease;
+		transition: background 160ms ease;
 	}
-	.nav-cta:hover { background: #b54620; }
+	.nav-links a.nav-cta:hover { background: var(--rust); color: var(--bg); }
 
-	/* Mobile: dropdowns become inline accordions */
-	@media (max-width: 880px) {
-		.nav { padding: 16px 24px; }
+	.nav-mobile-toggle {
+		display: none;
+		flex-direction: column;
+		gap: 5px;
+		padding: 8px;
+	}
+	.nav-mobile-toggle span {
+		display: block;
+		width: 24px;
+		height: 2px;
+		background: var(--ink);
+		transition: transform 200ms ease, opacity 200ms ease;
+	}
+	.nav.is-mobile-open .nav-mobile-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+	.nav.is-mobile-open .nav-mobile-toggle span:nth-child(2) { opacity: 0; }
+	.nav.is-mobile-open .nav-mobile-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+	.nav-mobile {
+		display: none;
+		flex-direction: column;
+		gap: 0;
+		padding: 12px var(--gutter) 32px;
+		border-top: 1px solid var(--rule);
+		background: var(--bg);
+	}
+	.nav-mobile-link {
+		display: block;
+		padding: 16px 0;
+		font-size: 18px;
+		font-weight: 500;
+		color: var(--ink);
+		border-bottom: 1px solid var(--rule);
+	}
+	.nav-mobile-cta { color: var(--rust); }
+	.nav-mobile-phone {
+		display: block;
+		margin-top: 18px;
+		padding: 14px 0;
+		text-align: center;
+		background: var(--ink);
+		color: var(--bg);
+		border-radius: var(--r-pill);
+		font-weight: 500;
+	}
+
+	@media (max-width: 920px) {
 		.nav-links { display: none; }
+		.nav-mobile-toggle { display: inline-flex; }
+		.nav.is-mobile-open .nav-mobile { display: flex; }
+		.logo-text { font-size: 13px; }
 	}
 </style>
 
@@ -215,10 +255,19 @@ const commercialPrograms = [
 		const nav = document.querySelector('[data-nav]');
 		if (!nav) return;
 		const update = () => {
-			if (window.scrollY > 200) nav.classList.add('is-scrolled');
+			if (window.scrollY > 80) nav.classList.add('is-scrolled');
 			else nav.classList.remove('is-scrolled');
 		};
 		update();
 		window.addEventListener('scroll', update, { passive: true });
+
+		const toggle = nav.querySelector('[data-mobile-toggle]');
+		if (toggle) {
+			toggle.addEventListener('click', () => {
+				nav.classList.toggle('is-mobile-open');
+				const expanded = nav.classList.contains('is-mobile-open');
+				toggle.setAttribute('aria-label', expanded ? 'Close menu' : 'Open menu');
+			});
+		}
 	})();
 </script>

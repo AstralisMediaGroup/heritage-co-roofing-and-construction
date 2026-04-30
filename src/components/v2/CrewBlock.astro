@@ -1,0 +1,77 @@
+---
+import { founders } from '../../content/founders';
+
+interface Props {
+	heading?: string;
+	eyebrow?: string;
+	lede?: string;
+}
+const { heading = "The people answering your call.", eyebrow = 'Meet the team', lede = '30+ combined years of roofing. Locally owned and operated.' } = Astro.props;
+---
+
+<section class="crew-block">
+	<div class="container">
+		<div class="crew-head">
+			<p class="eyebrow">{eyebrow}</p>
+			<h2 class="h2 crew-h" set:html={heading} />
+			{lede && <p class="lede crew-lede">{lede}</p>}
+		</div>
+		<div class="crew-grid">
+			{founders.map((f) => (
+				<div class="crew-card">
+					<div class="crew-photo" aria-label={`Portrait of ${f.name}`}>
+						<div class="crew-fallback">
+							<span class="crew-initials">{f.name.charAt(0)}</span>
+						</div>
+					</div>
+					<div class="crew-info">
+						<p class="crew-name">{f.name}</p>
+						<p class="crew-role">{f.role}</p>
+						<p class="crew-cred" set:html={f.cred} />
+					</div>
+				</div>
+			))}
+		</div>
+		<p class="crew-link">
+			<a href="/about" class="text-link">Read about the founders →</a>
+		</p>
+	</div>
+</section>
+
+<style>
+	.crew-block { padding: clamp(72px, 8vw, 128px) 0; }
+	.crew-head { max-width: 720px; margin-bottom: clamp(48px, 5vw, 80px); }
+	.crew-h { margin-top: 18px; }
+	.crew-lede { margin-top: 18px; }
+	.crew-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 24px;
+	}
+	.crew-card { display: flex; flex-direction: column; }
+	.crew-photo {
+		aspect-ratio: 4 / 5;
+		overflow: hidden;
+		background: var(--bg-deep);
+		margin-bottom: 20px;
+		position: relative;
+	}
+	.crew-fallback {
+		width: 100%; height: 100%;
+		background: linear-gradient(135deg, #948c7d 0%, #5a5347 100%);
+		display: flex; align-items: center; justify-content: center;
+	}
+	.crew-initials {
+		color: rgba(255,255,255,0.4);
+		font-size: 80px;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+	}
+	.crew-name { font-size: 20px; font-weight: 600; color: var(--ink); }
+	.crew-role { font-size: 14px; color: var(--ink-2); margin-top: 2px; }
+	.crew-cred { font-size: 13px; color: var(--ink-3); margin-top: 8px; line-height: 1.4; }
+	.crew-link { margin-top: 40px; }
+	@media (max-width: 880px) {
+		.crew-grid { grid-template-columns: repeat(2, 1fr); }
+	}
+</style>

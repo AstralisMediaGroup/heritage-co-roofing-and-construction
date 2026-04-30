@@ -1,0 +1,75 @@
+---
+import type { ImageRef } from '../../content/imagery';
+
+interface Props {
+	photo: ImageRef;
+	eyebrow?: string;
+	heading: string;
+	body: string;
+	bullets?: string[];
+	cta?: { label: string; href: string };
+	photoSide?: 'left' | 'right';
+	scale?: 'large' | 'medium';
+}
+const { photo, eyebrow, heading, body, bullets = [], cta, photoSide = 'left', scale = 'large' } = Astro.props;
+---
+
+<div class={`photo-lede side-${photoSide} scale-${scale}`}>
+	<div class="photo-lede-photo">
+		{photo.url ? (
+			<img src={photo.url} alt={photo.alt} loading="lazy" />
+		) : (
+			<div class="photo-lede-fallback" aria-label={photo.placeholderFact || 'Photo placeholder'} />
+		)}
+	</div>
+	<div class="photo-lede-content">
+		{eyebrow && <p class="eyebrow">{eyebrow}</p>}
+		<h2 class="h2 pl-h" set:html={heading} />
+		<p class="lede pl-body">{body}</p>
+		{bullets.length > 0 && (
+			<ul class="pl-bullets">
+				{bullets.map((b) => (
+					<li>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+						<span>{b}</span>
+					</li>
+				))}
+			</ul>
+		)}
+		{cta && <a class="text-link pl-cta" href={cta.href}>{cta.label}</a>}
+	</div>
+</div>
+
+<style>
+	.photo-lede {
+		display: grid;
+		grid-template-columns: 1.2fr 1fr;
+		gap: clamp(40px, 6vw, 96px);
+		align-items: center;
+	}
+	.side-right { grid-template-columns: 1fr 1.2fr; }
+	.side-right .photo-lede-photo { order: 2; }
+	.scale-medium { grid-template-columns: 1fr 1fr; }
+	.photo-lede-photo {
+		aspect-ratio: 5 / 6;
+		overflow: hidden;
+		background: var(--bg-deep);
+	}
+	.scale-large .photo-lede-photo { aspect-ratio: 4 / 5; }
+	.photo-lede-photo img { width: 100%; height: 100%; object-fit: cover; }
+	.photo-lede-fallback { width: 100%; height: 100%; background: linear-gradient(135deg, #5a5347 0%, #2a2826 100%); }
+	.photo-lede-content { max-width: 540px; }
+	.photo-lede-content .eyebrow { margin-bottom: 16px; }
+	.pl-body { margin-top: 22px; color: var(--ink-2); }
+	.pl-bullets { margin-top: 24px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+	.pl-bullets li { display: inline-flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--ink-2); }
+	.pl-bullets svg { color: var(--rust); margin-top: 4px; flex-shrink: 0; }
+	.pl-cta { margin-top: 32px; display: inline-block; }
+	@media (max-width: 880px) {
+		.photo-lede,
+		.side-right { grid-template-columns: 1fr; gap: 32px; }
+		.side-right .photo-lede-photo { order: 0; }
+		.photo-lede-photo,
+		.scale-large .photo-lede-photo { aspect-ratio: 16 / 11; }
+	}
+</style>

@@ -1,399 +1,68 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Accordion from '../../components/Accordion.astro';
-import TrustStrip from '../../components/TrustStrip.astro';
-import BeforeAfterSlider from '../../components/BeforeAfterSlider.astro';
-import ProcessFlow from '../../components/ProcessFlow.astro';
-import ConstrainedSection from '../../components/ConstrainedSection.astro';
-import FullBleedSection from '../../components/FullBleedSection.astro';
-import HeritagePlaceholder from '../../components/HeritagePlaceholder.astro';
+import SystemPage from '../../components/v2/SystemPage.astro';
 import { imagery } from '../../content/imagery';
 
-const insuranceSteps = [
-	{
-		n: '01',
-		h: 'Free inspection',
-		body: 'We come out, climb the roof, and document what we find. No charge, no obligation.',
-	},
-	{
-		n: '02',
-		h: 'We document the damage',
-		body: 'Photos, measurements, a written summary. The kind of paperwork an adjuster actually wants.',
-	},
-	{
-		n: '03',
-		h: 'We work directly with your adjuster',
-		body: 'You forward our report. We talk to them on your behalf. You stay out of the back-and-forth.',
-	},
-];
-
-const damageTypes = [
-	{ label: 'Hail', body: 'Bruising, granule loss, fractured shingles. Often invisible from the ground.' },
-	{ label: 'Wind', body: 'Lifted shingles, missing tabs, exposed underlayment. Common after East Texas storms.' },
-	{ label: 'Tree fall', body: 'Impact damage, structural compromise, immediate tarp + repair plan.' },
-	{ label: 'Water intrusion', body: 'Stained ceilings, attic moisture, soft decking. We trace it to the source.' },
-];
-
-const timelineSteps = [
-	{ n: '1', label: 'You call', body: 'You reach a person on the line. We schedule the inspection.' },
-	{ n: '2', label: 'We inspect', body: 'On the roof, in the attic, around the eaves. Photos and a written report.' },
-	{ n: '3', label: 'You file the claim', body: 'You give your adjuster our report. We are available if they have questions.' },
-	{ n: '4', label: 'Adjuster visit', body: 'Adjuster comes out. We meet them on the roof when scheduling allows.' },
-	{ n: '5', label: 'Scope agreed', body: 'Carrier approves a scope of work. You sign with us. Deductible is the only out-of-pocket on most jobs.' },
-	{ n: '6', label: 'Install', body: 'Most residential roofs install in one day. Yard cleaned, magnets run for nails, debris hauled.' },
-	{ n: '7', label: 'Warranty hand-off', body: 'You get the workmanship warranty paperwork and the manufacturer pass-through.' },
-];
-
-const faqs = [
-	{
-		q: 'Will my premium go up if I file a claim?',
-		a: 'Storm damage claims typically do not raise rates the way at-fault claims do — most carriers treat hail and wind as acts of nature. Your specific policy is what matters. We can read the relevant section with you before you decide.',
-	},
-	{
-		q: 'Do I pay anything upfront?',
-		a: 'No. The inspection is free. The only out-of-pocket cost on most insurance jobs is your deductible, due when work begins. We walk you through every line item before you sign.',
-	},
-	{
-		q: 'How long does the process take?',
-		a: 'Inspection turnaround and total timeline depend on the carrier and the scope. Most residential roofs install in one day once the claim is approved. The full start-to-finish window is in the placeholder below — we do not want to quote a number we cannot stand behind.',
-		placeholderFact: 'Heritage typical timelines, plain numbers: free inspection turnaround SLA, days from inspection to adjuster meeting, days from claim approval to install. See Founder Input page §8.',
-	},
-	{
-		q: 'What if my claim is denied?',
-		a: 'It happens. Sometimes the adjuster misses damage; sometimes the policy genuinely does not cover it. If we believe damage was missed, we help you request a re-inspection. If the denial sticks, you owe us nothing for the original inspection.',
-	},
-	{
-		q: 'Will I get the same warranty on a storm job as a regular install?',
-		a: 'The workmanship and manufacturer pass-through warranties are the same. A claim job is the same install — same crew, same materials, same paperwork.',
-		placeholderFact: 'Confirm: storm-damage roof warranty is identical to a standard install (workmanship length + manufacturer pass-through length + transferability). See Founder Input page §1.',
-	},
-	{
-		q: 'What insurance carriers do you work with?',
-		a: 'We work with most major Texas and Arkansas carriers. The list of carriers we file claims with most often is in the placeholder below.',
-		placeholderFact: 'Carriers Heritage works with most often (State Farm, Allstate, USAA, Farmers, Texas Farm Bureau, Liberty Mutual, etc.) — list 6–10. See Founder Input page §8.',
-	},
-	{
-		q: 'Do I need to be home during the inspection or the install?',
-		a: 'For the inspection, no — we work from outside and the attic when accessible. For the install, you do not have to be home, but it helps if we can reach you for any judgment call. Either way we coordinate access in advance.',
-	},
-	{
-		q: 'Can I pay my deductible over time?',
-		a: 'Deductible payment options vary. The detail is in the placeholder below.',
-		placeholderFact: 'Whether Heritage accepts payment plans on the homeowner deductible (Y/N + terms). See Founder Input page §4 + §8.',
-	},
-];
+const v2 = imagery.v2;
 ---
 
-<BaseLayout title="Storm Damage Roofing — Heritage Co.">
-	<!-- Hero -->
-	<section class="hero">
-		<div class="hero-photo" aria-hidden="true"></div>
-		<div class="hero-overlay" aria-hidden="true"></div>
-		<div class="hero-content">
-			<p class="hero-eyebrow">Residential · Storm damage</p>
-			<h1 class="hero-h1">Storm damage?<br />We handle the whole roof.</h1>
-			<p class="hero-sub">
-				Hail, wind, tree fall, water intrusion. We inspect, document, and work directly with your insurance adjuster. You stay out of the back-and-forth.
-			</p>
-			<div class="hero-cta-row">
-				<a class="cta-primary" href="/#inspection">Get my free inspection</a>
-				<a class="cta-secondary" href="tel:9032428102">Call 903-242-8102</a>
-			</div>
-		</div>
-	</section>
-
-	<!-- Constrained narrative intro -->
-	<ConstrainedSection background="ivory" paddingY="md">
-		<p class="cs-eyebrow">If you have storm damage</p>
-		<h2 class="cs-h">Three sentences before the process flow.</h2>
-		<p class="cs-body">Hail and wind are acts of nature. Most carriers do not raise rates for those claims. Filing the right way starts with documentation we put together for the adjuster — that part is on us.</p>
-	</ConstrainedSection>
-
-	<!-- How insurance claims work -->
-	<section class="claims">
-		<p class="section-eyebrow">How it works</p>
-		<h2 class="section-h">How insurance claims work with us.</h2>
-		<p class="section-sub">Three steps. We do most of the work.</p>
-		<ProcessFlow steps={[
-			{ label: 'Free inspection', caption: 'We climb the roof, document what we find. No charge.' },
-			{ label: 'We document', caption: 'Photos, measurements, a written report for the adjuster.' },
-			{ label: 'We talk to your adjuster', caption: 'You stay out of the back-and-forth.' },
-		]} />
-	</section>
-
-	<!-- Damage types -->
-	<section class="damage">
-		<p class="section-eyebrow on-dark">What we see</p>
-		<h2 class="section-h on-dark">Damage we handle.</h2>
-		<p class="section-sub on-dark">If it is on the roof, we have probably worked it.</p>
-		<div class="damage-grid">
-			{damageTypes.map((d) => (
-				<div class="damage-card">
-					<div class="damage-photo" aria-hidden="true"></div>
-					<p class="damage-label">{d.label}</p>
-					<p class="damage-body">{d.body}</p>
-				</div>
-			))}
-		</div>
-	</section>
-
-	<!-- FullBleed cinematic between damage types and proof -->
-	<FullBleedSection
-		gradient="linear-gradient(180deg, #4a4a48 0%, #6b5d4a 60%, #2a2a28 100%)"
-		overlayPosition="bottom-left"
-		minHeight="380px"
-		overlayDarken={0.55}
-	>
-		<p class="fb-eyebrow">If it is on the roof</p>
-		<h2 class="fb-h">We have probably worked it.</h2>
-	</FullBleedSection>
-
-	<!-- Before/after proof -->
-	<section class="proof">
-		<div class="proof-photo-overlay" aria-hidden="true"></div>
-		<div class="proof-inner">
-			<p class="section-eyebrow on-dark">Before / after</p>
-			<h2 class="section-h on-dark">Same roof. Same angle. Different story.</h2>
-			<p class="section-sub on-dark">Three storm-damage jobs. Photos pulled from the inspection report and the closeout walk.</p>
-			<div class="proof-grid">
-				<BeforeAfterSlider
-					placeholderFact="Illustrative — Unsplash stand-ins. Replace with a real Heritage hail-damage job pair (City + month/year). Permission required. See Founder Input page §10."
-					beforeImage={imagery.beforeAfterPairs.hailBefore.url}
-					afterImage={imagery.beforeAfterPairs.hailAfter.url}
-					beforeAlt={imagery.beforeAfterPairs.hailBefore.alt}
-					afterAlt={imagery.beforeAfterPairs.hailAfter.alt}
-					caption="Hail damage example (illustrative) — drag the handle to compare"
-				/>
-				<BeforeAfterSlider
-					placeholderFact="Illustrative — Unsplash stand-ins. Replace with a real Heritage wind-damage job pair. See Founder Input page §10."
-					beforeImage={imagery.beforeAfterPairs.windBefore.url}
-					afterImage={imagery.beforeAfterPairs.windAfter.url}
-					beforeAlt={imagery.beforeAfterPairs.windBefore.alt}
-					afterAlt={imagery.beforeAfterPairs.windAfter.alt}
-					caption="Wind damage example (illustrative)"
-				/>
-				<BeforeAfterSlider
-					placeholderFact="Illustrative — Unsplash stand-ins. Replace with a real Heritage water-intrusion or tree-fall job pair. See Founder Input page §10."
-					beforeImage={imagery.beforeAfterPairs.waterBefore.url}
-					afterImage={imagery.beforeAfterPairs.waterAfter.url}
-					beforeAlt={imagery.beforeAfterPairs.waterBefore.alt}
-					afterAlt={imagery.beforeAfterPairs.waterAfter.alt}
-					caption="Water / tree-fall damage example (illustrative)"
-				/>
-			</div>
-		</div>
-	</section>
-
-	<!-- What to expect timeline (compact ProcessFlow with captions) -->
-	<section class="timeline">
-		<p class="section-eyebrow">What to expect</p>
-		<h2 class="section-h">From your call to a new roof.</h2>
-		<p class="section-sub">Seven steps. We tell you where you are at each one.</p>
-		<div class="timeline-flow">
-			<ProcessFlow steps={[
-				{ label: 'You call', caption: 'You reach a person on the line.' },
-				{ label: 'We inspect', caption: 'Roof, attic, eaves. Photos and a written report.' },
-				{ label: 'You file', caption: 'You give your adjuster our report.' },
-				{ label: 'Adjuster visit', caption: 'We meet them on the roof when scheduling allows.' },
-				{ label: 'Scope agreed', caption: 'Carrier approves. You sign with us. Deductible only.' },
-				{ label: 'Install', caption: 'Most residential roofs install in one day.' },
-				{ label: 'Warranty hand-off', caption: 'Workmanship + manufacturer pass-through paperwork.' },
-			]} />
-		</div>
-		<div class="timeline-sla">
-			<HeritagePlaceholder fact="Free-inspection turnaround in plain words (e.g. 'same-day or next-day') and total typical timeline from inspection to install on an approved claim. See Founder Input page §8." />
-		</div>
-	</section>
-
-	<!-- Constrained narrative around carriers section -->
-	<ConstrainedSection background="ivory" paddingY="md">
-		<p class="cs-eyebrow">Carrier work</p>
-		<h2 class="cs-h">We file with most major Texas + Arkansas carriers.</h2>
-		<p class="cs-body">If your carrier is not on the list below, call us anyway. The handful we have not worked with directly, we can usually still file with on your behalf.</p>
-	</ConstrainedSection>
-
-	<!-- Insurance carriers -->
-	<section class="carriers">
-		<p class="section-eyebrow">Carriers we work with</p>
-		<h2 class="section-h">We file with most major Texas + Arkansas carriers.</h2>
-		<p class="section-sub">Specific carriers Heritage handles most often go below. If you do not see yours, call — we can usually still help.</p>
-		<HeritagePlaceholder fact="6–10 carriers Heritage files with most often (State Farm, Allstate, USAA, Farmers, Texas Farm Bureau, Liberty Mutual, etc.). Listed as plain text. See Founder Input page §8." />
-	</section>
-
-	<!-- Warranty on storm jobs -->
-	<section class="warranty">
-		<p class="section-eyebrow on-dark">Warranty</p>
-		<h2 class="section-h on-dark">A storm roof gets the same warranty as a regular install.</h2>
-		<p class="warranty-body">Same workmanship warranty. Same manufacturer pass-through. Same crew on a callback. The warranty terms are filled in below.</p>
-		<div class="warranty-grid">
-			<div class="warranty-card">
-				<p class="warranty-label">Workmanship</p>
-				<HeritagePlaceholder fact="Workmanship warranty length on residential storm jobs (years). See Founder Input page §1." />
-			</div>
-			<div class="warranty-card">
-				<p class="warranty-label">Manufacturer pass-through</p>
-				<HeritagePlaceholder fact="Manufacturer warranty pass-through (which manufacturer, how long, transferable Y/N). See Founder Input page §1." />
-			</div>
-		</div>
-	</section>
-
-	<TrustStrip items={["Insurance accepted", "Workmanship warranty", "Locally owned"]} />
-
-	<!-- FAQ (Accordion — interactive) -->
-	<section class="faq">
-		<p class="section-eyebrow">Common questions</p>
-		<h2 class="section-h">What homeowners ask us.</h2>
-		<Accordion items={faqs} />
-	</section>
-</BaseLayout>
-
-<style>
-	/* Plan 006 helpers */
-	.cs-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 14px; text-align: center; }
-	.cs-h { color: var(--charcoal); font-size: 32px; font-weight: 600; letter-spacing: -0.6px; line-height: 1.2; margin: 0 0 16px; text-align: center; }
-	.cs-body { color: var(--warm-gray); font-size: 15px; line-height: 1.65; margin: 0 auto; text-align: center; max-width: 600px; }
-	.fb-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
-	.fb-h { color: var(--off-white); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0; max-width: 580px; }
-
-	/* Hero */
-	.hero { position: relative; min-height: 540px; background: #1a1a1a; }
-	.hero-photo {
-		position: absolute; inset: 0;
-		background: linear-gradient(180deg, #4a4a48 0%, #6b5d4a 50%, #2a2a28 100%);
-		opacity: 0.92;
-	}
-	.hero-overlay {
-		position: absolute; inset: 0;
-		background: linear-gradient(90deg, rgba(26,26,26,0.82) 0%, rgba(26,26,26,0.4) 60%, rgba(26,26,26,0.15) 100%);
-	}
-	.hero-content { position: relative; padding: 96px 48px 80px; max-width: 720px; }
-	.hero-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase;
-	}
-	.hero-h1 {
-		color: #faf8f4; font-size: 56px; font-weight: 600;
-		line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px;
-	}
-	.hero-sub {
-		color: #d8d2c2; font-size: 17px; line-height: 1.55;
-		margin: 0 0 32px; max-width: 560px;
-	}
-	.hero-cta-row { display: flex; gap: 16px; align-items: center; }
-	.cta-primary {
-		background: #b54620; color: #faf8f4;
-		padding: 14px 28px; font-size: 15px; font-weight: 500;
-		border-radius: var(--radius-pill);
-		transition: background 150ms ease, box-shadow 150ms ease;
-	}
-	.cta-primary:hover { background: #9d3a1a; box-shadow: var(--shadow-active); }
-	.cta-secondary {
-		color: #faf8f4; padding: 12px 26px;
-		font-size: 15px; font-weight: 500;
-		border: 2px solid #faf8f4;
-		border-radius: var(--radius-pill);
-		transition: background 150ms ease, color 150ms ease;
-	}
-	.cta-secondary:hover { background: #faf8f4; color: #1a1a1a; }
-
-	.section-eyebrow {
-		color: #b54620; font-size: 13px; font-weight: 500;
-		text-align: center; margin: 0 0 16px;
-		letter-spacing: 1px; text-transform: uppercase;
-	}
-	.section-eyebrow.on-dark { color: #b54620; }
-	.section-h {
-		color: #1a1a1a; font-size: 40px; font-weight: 600;
-		text-align: center; margin: 0 0 16px;
-		letter-spacing: -1px; line-height: 1.1;
-	}
-	.section-h.on-dark { color: #faf8f4; }
-	.section-sub {
-		color: #5a5347; font-size: 16px; text-align: center;
-		margin: 0 auto 56px; max-width: 600px;
-	}
-	.section-sub.on-dark { color: #d8d2c2; }
-
-	/* Claims */
-	.claims { padding: 96px 48px; background: #faf8f4; }
-	.claims-grid {
-		display: grid; grid-template-columns: repeat(3, 1fr);
-		gap: 40px; max-width: 1100px; margin: 0 auto;
-	}
-	.claim-step { padding: 36px; background: #ffffff; border: 1px solid #ece7de; }
-	.claim-num { color: #b54620; font-size: 12px; font-weight: 500; margin: 0 0 16px; letter-spacing: 1.5px; }
-	.claim-h { color: #1a1a1a; font-size: 22px; font-weight: 600; margin: 0 0 12px; letter-spacing: -0.3px; line-height: 1.2; }
-	.claim-body { color: #5a5347; font-size: 15px; line-height: 1.6; margin: 0; }
-
-	/* Damage */
-	.damage { padding: 120px 48px; background: #1a1a1a; }
-	.damage-grid {
-		display: grid; grid-template-columns: repeat(4, 1fr);
-		gap: 24px; max-width: 1100px; margin: 0 auto;
-	}
-	.damage-card { background: transparent; }
-	.damage-photo {
-		aspect-ratio: 4 / 3;
-		background: linear-gradient(180deg, #4a4a48 0%, #6b5d4a 100%);
-		margin-bottom: 20px;
-		border-radius: var(--radius-card);
-	}
-	.damage-label { color: #faf8f4; font-size: 22px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.3px; line-height: 1.2; }
-	.damage-body { color: #c4c1ba; font-size: 14px; line-height: 1.6; margin: 0; }
-
-	/* Proof (charcoal-with-photo-overlay-darkened) */
-	.proof {
-		position: relative;
-		background: var(--charcoal-deep);
-		padding: 96px 48px;
-		overflow: hidden;
-	}
-	.proof-photo-overlay {
-		position: absolute; inset: 0;
-		background:
-			radial-gradient(ellipse at 25% 20%, rgba(181,70,32,0.08) 0%, transparent 50%),
-			radial-gradient(ellipse at 75% 80%, rgba(143,168,192,0.05) 0%, transparent 50%),
-			linear-gradient(180deg, #141413 0%, #1a1a1a 100%);
-		opacity: 1;
-	}
-	.proof-inner { position: relative; max-width: 1200px; margin: 0 auto; }
-	.proof-grid {
-		display: grid;
-		grid-template-columns: repeat(1, 1fr);
-		gap: 48px;
-		max-width: 1000px;
-		margin: 56px auto 0;
-	}
-
-	/* Timeline (uses ProcessFlow with 7 cols) */
-	.timeline { padding: 96px 48px; background: #ffffff; border-top: 1px solid #ece7de; }
-	.timeline-flow { --cols: 7; }
-	.timeline-sla { max-width: 1100px; margin: 40px auto 0; }
-
-	/* Carriers */
-	.carriers { padding: 96px 48px; background: #faf8f4; }
-	.carriers > :global(.placeholder) { max-width: 800px; margin-left: auto; margin-right: auto; }
-
-	/* Warranty (dark) */
-	.warranty { background: #1a1a1a; padding: 96px 48px; }
-	.warranty-body {
-		color: #d8d2c2; font-size: 16px; line-height: 1.6;
-		max-width: 720px; margin: 0 auto 40px; text-align: center;
-	}
-	.warranty-grid {
-		display: grid; grid-template-columns: repeat(2, 1fr);
-		gap: 24px; max-width: 800px; margin: 0 auto;
-	}
-	.warranty-card {
-		padding: 28px;
-		background: rgba(250,248,244,0.04);
-		border: 1px solid rgba(250,248,244,0.12);
-	}
-	.warranty-label { color: #b54620; font-size: 12px; font-weight: 500; margin: 0 0 14px; letter-spacing: 1.5px; text-transform: uppercase; }
-
-	/* FAQ */
-	.faq { background: #faf8f4; padding: 96px 48px; }
-	.faq-list { max-width: 800px; margin: 0 auto; }
-	.faq-wrap {}
-	.faq-placeholder { margin: 0 0 12px; padding: 0 0 16px; border-bottom: 1px solid #ece7de; }
-</style>
+<SystemPage
+	title="Storm damage roofing"
+	heroEyebrow="Residential · storm damage"
+	heroHeading="Storm damage?<br />We handle the whole roof."
+	heroLede="Hail, wind, tree fall, water intrusion. Next-day inspection, full damage documentation, work with any carrier. You pay your deductible. We do the rest."
+	heroPhoto={v2.pageHeros.stormDamage}
+	heroCta={{ label: 'Storm damage inspection', href: '/free-inspection' }}
+	bleedPhoto={v2.bleeds.storm}
+	bleedHeading="Hail. Wind. Tree fall.<br />We handle the whole job."
+	overview={{
+		eyebrow: 'What we do on a storm claim',
+		heading: 'Inspection. Documentation. Install. Heritage Standard warranty.',
+		body: "Heritage handles storm damage as an end-to-end job: free next-day roof inspection, full photo and video documentation, on-site adjuster meeting on request, supplement requests when the initial estimate undervalues scope, and the install once the claim is approved. Same 10-year workmanship warranty as a standard install. You handle your deductible. We handle everything else."
+	}}
+	keyPoints={[
+		{
+			heading: 'How insurance claims actually work.',
+			body: "You report damage to your insurer. They send an adjuster. The adjuster writes a scope and a number. We attend the adjuster meeting on request, walk the roof together, and make sure the scope is complete. If the carrier's number is short, we file a supplement with the documentation. The carrier issues payment minus your deductible. We do the work.",
+			bullets: ['Free next-day inspection', 'Adjuster meeting on request', 'Photo + video documentation', 'Supplement requests when needed', 'We attend the re-inspection if the claim is denied'],
+			photo: v2.serviceTiles.storm,
+			photoSide: 'left',
+		},
+		{
+			heading: 'What gets covered.',
+			body: "Hail damage to shingles (granule loss, fractures, exposed mat). Wind damage (lifted, missing, or torn shingles). Tree fall (puncture, structural). Water intrusion from any of the above. Insurance covers the roof replacement; coverage for related items (interior ceiling damage, gutters, fence) depends on your policy. We work with every major carrier — State Farm, Allstate, USAA, Farmers, Texas Farm Bureau, Liberty Mutual, anything you've got.",
+			bullets: ['Hail damage (granule loss, mat exposure)', 'Wind damage (missing, lifted, torn shingles)', 'Tree fall + impact', 'Water intrusion + ceiling damage', 'Every major carrier'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'right',
+		},
+		{
+			heading: 'Deductible. Payment plans. No surprise costs.',
+			body: "Your deductible is the only out-of-pocket on a covered claim. Heritage offers payment plans on the deductible — split it across the install timeline if cash flow is tight. Anything beyond your deductible is between Heritage and the carrier; you don't see those numbers and you don't pay them.",
+			bullets: ['Deductible payment plans available', 'Nothing out-of-pocket beyond deductible on covered claims', 'GoodLeap financing if you want longer terms'],
+			photo: v2.bleeds.workmanship,
+			photoSide: 'left',
+		},
+	]}
+	stats={[
+		{ value: 'Next day', label: 'Free inspection turnaround' },
+		{ value: '$0', label: 'Out-of-pocket beyond deductible' },
+		{ value: '10 yr', label: 'Workmanship warranty · Heritage Standard' },
+		{ value: 'Any', label: 'Insurance carrier · we work with all' },
+	]}
+	projectPhotos={[v2.projects[0], v2.projects[1], v2.projects[6], v2.projects[7]]}
+	projectCaptions={['Hail damage replacement, Tyler', 'Wind damage claim, Longview', 'Tree fall + roof rebuild, Marshall', 'Insurance install, Kilgore']}
+	faq={[
+		{ q: 'How fast do you come out?', a: '<p>Next day on storm-damage calls in our service area, weather and daylight permitting. Inspection is free and the report comes with photos.</p>' },
+		{ q: 'How long does the whole process take?', a: '<p>As fast as the insurance side moves. Free inspection: next day. Adjuster meeting: usually inside a week of the claim being filed. Approval: 1–2 weeks after the adjuster visit. Install: same week as approval, weather permitting. The carrier sets the pace; Heritage shows up the day they say go.</p>' },
+		{ q: 'Will my premium go up?', a: "<p>In Texas, premiums don't typically go up on a single weather-related claim filed properly. (General guidance — your specific carrier and policy govern. We're not insurance professionals; talk to your agent on this.)</p>" },
+		{ q: 'Do I pay anything upfront?', a: '<p>Your deductible is the only out-of-pocket on a covered claim. We can split the deductible across a payment plan if cash flow is tight. Some carriers send the deductible directly to the contractor; some send it to you. Heritage works with both arrangements.</p>' },
+		{ q: 'Will you attend my adjuster meeting?', a: "<p>Yes — on request. Many homeowners ask us to be there to walk the roof with the adjuster and make sure nothing gets missed. We're happy to do it. If you'd rather handle the meeting yourself, that's fine too — we still document the damage and stay in the loop.</p>" },
+		{ q: 'What if my claim is denied?', a: "<p>We attend the re-inspection. If the adjuster sees no covered damage, we write up our findings independently and request a re-inspection — sometimes that re-opens the claim with a different adjuster. If the damage is real but the carrier disagrees on scope, we file a supplement. If there's genuinely no covered damage, we tell you that and you don't pay us anything.</p>" },
+		{ q: 'Do you handle the paperwork?', a: '<p>Yes. We handle the adjuster meeting, the scope discussion, supplement requests with photo evidence, and most of the back-and-forth. You sign the documents and stay informed; we do the work.</p>' },
+		{ q: 'What about emergency tarping?', a: "<p>If your roof is actively leaking, call and we'll get a tarp on it. We tarp first to stop the water, then handle the inspection and claim process.</p>" },
+	]}
+	ctaHeading="Storm damage?<br />Next-day inspection."
+	ctaLede="Free inspection. We handle the adjuster on request, the scope, and the install. 10-year workmanship warranty on the new roof."
+	ctaPhoto={v2.pageHeros.stormDamage}
+	ctaPrimary={{ label: 'Storm damage inspection', href: '/free-inspection' }}
+	promises={['Every major carrier', 'Deductible payment plans', '10-year workmanship warranty']}
+/>

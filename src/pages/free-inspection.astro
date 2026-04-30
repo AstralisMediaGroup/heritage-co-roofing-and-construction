@@ -1,134 +1,242 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactForm from '../components/ContactForm.astro';
-import ProcessFlow from '../components/ProcessFlow.astro';
-import HeritagePlaceholder from '../components/HeritagePlaceholder.astro';
+import SectionHead from '../components/v2/SectionHead.astro';
+import PromiseStrip from '../components/v2/PromiseStrip.astro';
+import Reveal from '../components/v2/Reveal.astro';
 import { imagery } from '../content/imagery';
 
-const inspectionItems = [
-	{ title: 'Roof surface', body: 'Granule loss, curling, missing shingles, sealant gaps.' },
-	{ title: 'Flashings', body: 'Chimney, vents, skylights. The #1 source of leaks.' },
-	{ title: 'Gutters + drainage', body: 'Pitch, blockages, fascia condition.' },
-	{ title: 'Attic decking', body: 'When accessible — rafters, decking, ventilation flow.' },
-];
+const v2 = imagery.v2;
 ---
 
-<BaseLayout title="Free Roof Inspection — Heritage Co.">
-	<!-- Hero -->
-	<section class="fi-hero">
-		<div class="fi-hero-photo" aria-hidden="true">
-			<img src={imagery.heroCandidates.residentialRoofA.url} alt="Residential roof" loading="eager" />
-		</div>
-		<div class="fi-hero-overlay" aria-hidden="true"></div>
-		<div class="fi-hero-content">
-			<p class="fi-hero-eyebrow">Free inspection</p>
-			<h1 class="fi-hero-h1">Free roof inspection.<br />No obligation.</h1>
-			<p class="fi-hero-sub">A real 90-minute inspection — roof, attic, eaves — with photos and a written report. Same-day or next-day on most addresses.</p>
+<BaseLayout
+	title="Free roof inspection — Heritage Co. Roofing & Construction"
+	description="Free roof inspection in East Texas and Central Arkansas. Real person on the ladder. Same-day or next-day quote. No obligation."
+>
+	<section class="inspect-hero">
+		<div class="container inspect-hero-grid">
+			<div class="inspect-hero-text">
+				<p class="eyebrow">Free inspection</p>
+				<h1 class="display inspect-h1">Free roof inspection.<br />Next day, real person on the ladder.</h1>
+				<p class="lede inspect-lede">Next day in the service area. Written report and a real quote whether you need work or not. No high-pressure close.</p>
+				<div class="inspect-promise">
+					<PromiseStrip items={['Real person, not a salesperson', 'Written report', 'No obligation', 'Next day · region-wide']} />
+				</div>
+			</div>
+			<div class="inspect-hero-photo">
+				{v2.pageHeros.freeInspection.url && (
+					<img src={v2.pageHeros.freeInspection.url} alt={v2.pageHeros.freeInspection.alt} loading="eager" />
+				)}
+			</div>
 		</div>
 	</section>
 
-	<div class="flow">
-
-		<!-- Form -->
-		<section class="block fi-form-block">
-			<div class="fi-form-row">
-				<div class="fi-form-content">
-					<p class="eyebrow">Send your details</p>
-					<h2 class="block-h">Tell us about the roof.</h2>
-					<p class="block-sub">We call back the same day on most submissions — usually within an hour during business hours. Or call <a class="inline-link" href="tel:9032428102">903-242-8102</a> directly.</p>
-				</div>
-				<div class="fi-form-side">
-					<ContactForm />
-				</div>
-			</div>
-		</section>
-
-		<!-- What happens after submit -->
-		<section class="block">
-			<p class="eyebrow">After you submit</p>
-			<h2 class="block-h">Four steps. We tell you where you are at each.</h2>
-			<ProcessFlow steps={[
-				{ label: 'We call back', caption: 'Usually within the hour during business hours.' },
-				{ label: 'Schedule', caption: 'Same-day or next-day inspection on most addresses.' },
-				{ label: 'Inspect', caption: 'Roof, attic, eaves. Photos and written report.' },
-				{ label: 'No-pressure read', caption: 'We tell you what we found. No sales pitch.' },
-			]} />
-			<div style="max-width: 1100px; margin: 32px auto 0;">
-				<HeritagePlaceholder fact="Heritage's typical callback time on web-form submissions (e.g. 'within 1 hour during business hours, next morning otherwise'). See Founder Input page §8 + §11." />
-			</div>
-		</section>
-
-		<!-- What we'll inspect -->
-		<section class="block">
-			<p class="eyebrow">What we'll inspect</p>
-			<h2 class="block-h">Four checkpoints on every visit.</h2>
-			<div class="fi-check-grid">
-				{inspectionItems.map((c) => (
-					<div class="fi-check">
-						<p class="fi-check-title">{c.title}</p>
-						<p class="fi-check-body">{c.body}</p>
+	<Reveal>
+		<section class="page-section">
+			<div class="container form-grid">
+				<div class="form-side">
+					<SectionHead
+						eyebrow="Schedule"
+						heading="Tell us about your roof."
+						lede="A real person calls you back within one business day — usually within the hour. Calling is faster if you'd rather skip the form."
+					/>
+					<div class="form-direct">
+						<a href="tel:9032428102" class="form-call">
+							<span class="form-call-label">Or call us direct</span>
+							<span class="form-call-num">903-242-8102</span>
+						</a>
+						<a href="mailto:contact@heritagecoroofing.com" class="form-email">
+							<span class="form-call-label">Email</span>
+							<span class="form-email-addr">contact@heritagecoroofing.com</span>
+						</a>
 					</div>
-				))}
+				</div>
+				<form class="inspect-form" onsubmit="event.preventDefault(); alert('Form submission is wired up post-launch. Call 903-242-8102 in the meantime.');">
+					<div class="form-row">
+						<label class="form-label" for="name">Your name</label>
+						<input class="form-input" id="name" name="name" type="text" required placeholder="Jordy Smith" />
+					</div>
+					<div class="form-2col">
+						<div class="form-row">
+							<label class="form-label" for="phone">Phone</label>
+							<input class="form-input" id="phone" name="phone" type="tel" required placeholder="903-555-0100" />
+						</div>
+						<div class="form-row">
+							<label class="form-label" for="email">Email</label>
+							<input class="form-input" id="email" name="email" type="email" placeholder="optional" />
+						</div>
+					</div>
+					<div class="form-row">
+						<label class="form-label" for="address">Property address</label>
+						<input class="form-input" id="address" name="address" type="text" required placeholder="Street, City, TX or AR" />
+					</div>
+					<div class="form-2col">
+						<div class="form-row">
+							<label class="form-label" for="type">Roof type</label>
+							<select class="form-input" id="type" name="type">
+								<option>Asphalt shingle</option>
+								<option>Metal</option>
+								<option>Tile</option>
+								<option>Commercial flat</option>
+								<option>Not sure</option>
+							</select>
+						</div>
+						<div class="form-row">
+							<label class="form-label" for="reason">Why you're calling</label>
+							<select class="form-input" id="reason" name="reason">
+								<option>General inspection</option>
+								<option>Suspected leak</option>
+								<option>Storm / hail damage</option>
+								<option>Insurance claim</option>
+								<option>Replacement quote</option>
+								<option>Other</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-row">
+						<label class="form-label" for="note">Anything else we should know?</label>
+						<textarea class="form-input form-textarea" id="note" name="note" rows="3" placeholder="Optional — when you noticed it, what you've seen, etc."></textarea>
+					</div>
+					<button class="btn btn-primary form-submit" type="submit">Schedule my inspection</button>
+					<p class="form-fineprint">By submitting, you agree we may call or text you. We don't sell your info, ever.</p>
+				</form>
 			</div>
 		</section>
+	</Reveal>
 
-		<!-- Other ways to reach us -->
-		<section class="block">
-			<p class="eyebrow">Other ways to reach us</p>
-			<h2 class="block-h">If you'd rather skip the form.</h2>
-			<dl class="data-list">
-				<div class="data-row">
-					<dt class="data-row-label">Phone</dt>
-					<dd class="data-row-value"><a class="inline-link" href="tel:9032428102">903-242-8102</a></dd>
-				</div>
-				<div class="data-row">
-					<dt class="data-row-label">Email</dt>
-					<dd class="data-row-value"><HeritagePlaceholder inline={true} fact="email address for general inquiries" /></dd>
-				</div>
-				<div class="data-row">
-					<dt class="data-row-label">Hours</dt>
-					<dd class="data-row-value"><HeritagePlaceholder inline={true} fact="business hours / emergency-line policy" /></dd>
-				</div>
-				<div class="data-row">
-					<dt class="data-row-label">HQ</dt>
-					<dd class="data-row-value"><HeritagePlaceholder inline={true} fact="full mailing address — Longview, TX" /></dd>
-				</div>
-			</dl>
+	<Reveal>
+		<section class="page-section">
+			<div class="container">
+				<SectionHead
+					eyebrow="What happens next"
+					heading="Three steps. No surprises."
+					maxWidth="640px"
+				/>
+				<ol class="steps">
+					<li class="step">
+						<span class="step-num">01</span>
+						<h3 class="h3">We call you back.</h3>
+						<p>Within one business day, usually inside the hour during business hours. Real person, not a CSR.</p>
+					</li>
+					<li class="step">
+						<span class="step-num">02</span>
+						<h3 class="h3">We come out.</h3>
+						<p>Same-day or next-day inspection in most cases. We climb the roof, document everything, and walk you through what we found.</p>
+					</li>
+					<li class="step">
+						<span class="step-num">03</span>
+						<h3 class="h3">You get a written quote.</h3>
+						<p>Quote covers scope, system, warranty, and timeline. Good for 30 days. No high-pressure close.</p>
+					</li>
+				</ol>
+			</div>
 		</section>
-
-	</div>
+	</Reveal>
 </BaseLayout>
 
 <style>
-	.fi-hero { position: relative; min-height: 440px; background: var(--charcoal); overflow: hidden; }
-	.fi-hero-photo { position: absolute; inset: 0; }
-	.fi-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-	.fi-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(26,26,26,0.85) 0%, rgba(26,26,26,0.55) 50%, rgba(26,26,26,0.25) 100%); }
-	.fi-hero-content { position: relative; padding: 80px 48px 64px; max-width: 720px; }
-	.fi-hero-eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; margin: 0 0 20px; letter-spacing: 1px; text-transform: uppercase; }
-	.fi-hero-h1 { color: var(--off-white); font-size: 56px; font-weight: 600; line-height: 1.05; margin: 0 0 24px; letter-spacing: -1.8px; }
-	.fi-hero-sub { color: var(--subhead-dark); font-size: 17px; line-height: 1.55; margin: 0; max-width: 580px; }
+	.inspect-hero {
+		padding-top: clamp(56px, 7vw, 96px);
+		padding-bottom: clamp(40px, 5vw, 72px);
+	}
+	.inspect-hero-grid {
+		display: grid;
+		grid-template-columns: 1.2fr 1fr;
+		gap: clamp(32px, 5vw, 88px);
+		align-items: end;
+	}
+	.inspect-h1 { margin-top: 18px; font-size: clamp(48px, 6vw, 88px); }
+	.inspect-lede { margin-top: 22px; max-width: 540px; }
+	.inspect-promise { margin-top: 28px; }
+	.inspect-hero-photo {
+		aspect-ratio: 5 / 6;
+		overflow: hidden;
+		background: var(--ink-bg);
+	}
+	.inspect-hero-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-	.flow { background: var(--off-white); }
-	.block { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
-	.block + .block { border-top: 1px solid var(--border); }
-	.eyebrow { color: var(--rust); font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
-	.block-h { color: var(--charcoal); font-size: 36px; font-weight: 600; letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 16px; }
-	.block-sub { color: var(--warm-gray); font-size: 17px; line-height: 1.6; margin: 0 0 32px; max-width: 580px; }
+	.page-section { padding: clamp(72px, 8vw, 120px) 0; }
+	.form-grid {
+		display: grid;
+		grid-template-columns: 1fr 1.2fr;
+		gap: clamp(40px, 5vw, 88px);
+		align-items: start;
+	}
+	.form-direct { margin-top: 32px; }
+	.form-call {
+		display: inline-flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 18px 24px;
+		border: 1px solid var(--rule-strong);
+		border-radius: var(--r-soft);
+		transition: border-color 220ms ease, background 220ms ease;
+	}
+	.form-call:hover { border-color: var(--rust); background: var(--rust-soft); }
+	.form-call-label { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); }
+	.form-call-num { font-size: clamp(28px, 3vw, 36px); font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+	.form-email {
+		display: inline-flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 18px 24px;
+		margin-top: 12px;
+		border: 1px solid var(--rule-strong);
+		border-radius: var(--r-soft);
+		transition: border-color 220ms ease, background 220ms ease;
+	}
+	.form-email:hover { border-color: var(--rust); background: var(--rust-soft); }
+	.form-email-addr { font-size: 16px; font-weight: 600; color: var(--ink); }
 
-	.fi-form-row { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 56px; align-items: start; }
-	.fi-form-side {}
+	.inspect-form {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		padding: clamp(28px, 3vw, 48px);
+		background: var(--bg-deep);
+		border: 1px solid var(--rule);
+	}
+	.form-2col {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 16px;
+	}
+	.form-row { display: flex; flex-direction: column; gap: 8px; }
+	.form-label { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--ink-2); text-transform: uppercase; }
+	.form-input {
+		font: inherit;
+		padding: 14px 16px;
+		background: var(--bg);
+		border: 1px solid var(--rule-strong);
+		border-radius: var(--r-soft);
+		color: var(--ink);
+		transition: border-color 200ms ease, box-shadow 200ms ease;
+	}
+	.form-input:focus { outline: none; border-color: var(--rust); box-shadow: 0 0 0 3px var(--rust-soft); }
+	.form-textarea { resize: vertical; min-height: 96px; }
+	.form-submit { align-self: flex-start; margin-top: 8px; }
+	.form-fineprint { font-size: 12px; color: var(--ink-3); }
 
-	.fi-check-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--border); }
-	.fi-check { padding: 24px 28px 0 0; }
-	.fi-check + .fi-check { padding-left: 28px; border-left: 1px solid var(--border); }
-	.fi-check-title { color: var(--charcoal); font-size: 16px; font-weight: 600; margin: 0 0 8px; }
-	.fi-check-body { color: var(--warm-gray); font-size: 14px; line-height: 1.55; margin: 0; }
+	.steps {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: clamp(32px, 4vw, 64px);
+		list-style: none;
+		margin-top: clamp(40px, 4vw, 64px);
+	}
+	.step {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		padding-top: 28px;
+		border-top: 1px solid var(--rule-strong);
+	}
+	.step-num { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: var(--rust); }
+	.step p { font-size: 15px; line-height: 1.6; color: var(--ink-2); }
 
-	.data-list { max-width: 880px; margin: 0; display: flex; flex-direction: column; gap: 0; }
-	.data-row { display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 16px 0; border-top: 1px solid var(--border); align-items: start; }
-	.data-row:last-child { border-bottom: 1px solid var(--border); }
-	.data-row-label { color: var(--charcoal); font-size: 14px; font-weight: 600; }
-	.data-row-value { color: var(--warm-gray); font-size: 15px; line-height: 1.55; margin: 0; }
-	.inline-link { color: var(--charcoal); border-bottom: 1px solid var(--charcoal); }
+	@media (max-width: 880px) {
+		.inspect-hero-grid,
+		.form-grid { grid-template-columns: 1fr; gap: 32px; }
+		.steps { grid-template-columns: 1fr; }
+		.form-2col { grid-template-columns: 1fr; }
+	}
 </style>
