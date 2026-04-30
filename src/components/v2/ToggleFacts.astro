@@ -1,0 +1,148 @@
+---
+interface Fact {
+	label: string;
+	body: string;
+}
+interface Props {
+	facts: Fact[];
+}
+const { facts } = Astro.props;
+---
+
+<div class="tf" data-toggle-facts>
+	<div class="tf-tabs" role="tablist">
+		{facts.map((f, i) => (
+			<button
+				type="button"
+				role="tab"
+				class={`tf-tab ${i === 0 ? 'is-active' : ''}`}
+				data-tf-trigger={String(i)}
+				aria-selected={i === 0 ? 'true' : 'false'}
+			>
+				<span class="tf-tab-num">{String(i + 1).padStart(2, '0')}</span>
+				<span class="tf-tab-label">{f.label}</span>
+			</button>
+		))}
+	</div>
+	<div class="tf-body">
+		{facts.map((f, i) => (
+			<p
+				class={`tf-text ${i === 0 ? 'is-active' : ''}`}
+				data-tf-panel={String(i)}
+				role="tabpanel"
+			>{f.body}</p>
+		))}
+	</div>
+</div>
+
+<style>
+	.tf {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(24px, 3vw, 40px);
+	}
+
+	.tf-tabs {
+		display: grid;
+		grid-template-columns: repeat(var(--tf-cols, 3), 1fr);
+		gap: 0;
+		border-top: 1px solid var(--rule);
+		border-bottom: 1px solid var(--rule);
+	}
+	.tf-tab {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+		padding: 20px 24px;
+		text-align: left;
+		background: transparent;
+		border: 0;
+		border-right: 1px solid var(--rule);
+		cursor: pointer;
+		transition: background 200ms ease, color 200ms ease;
+		position: relative;
+		font: inherit;
+		color: inherit;
+	}
+	.tf-tab:last-child { border-right: 0; }
+	.tf-tab:hover { background: var(--bg-deep); }
+	.tf-tab.is-active {
+		background: var(--ink);
+		color: var(--bg);
+	}
+	.tf-tab.is-active::after {
+		content: '';
+		position: absolute;
+		left: 0; right: 0;
+		bottom: -1px;
+		height: 3px;
+		background: var(--rust);
+	}
+	.tf-tab-num {
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.18em;
+		color: var(--rust);
+		font-feature-settings: 'tnum';
+	}
+	.tf-tab.is-active .tf-tab-num { color: var(--rust); }
+	.tf-tab-label {
+		font-size: clamp(15px, 1.4vw, 17px);
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		line-height: 1.25;
+	}
+
+	.tf-body {
+		min-height: 96px;
+		padding: 0 4px;
+	}
+	.tf-text {
+		display: none;
+		font-size: clamp(18px, 1.6vw, 21px);
+		line-height: 1.55;
+		color: var(--ink-2);
+		margin: 0;
+		max-width: 680px;
+	}
+	.tf-text.is-active {
+		display: block;
+		animation: tf-fade 280ms ease;
+	}
+	@keyframes tf-fade {
+		from { opacity: 0; transform: translateY(4px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.tf-text.is-active { animation: none; }
+	}
+
+	@media (max-width: 640px) {
+		.tf-tabs { grid-template-columns: 1fr; }
+		.tf-tab { border-right: 0; border-bottom: 1px solid var(--rule); }
+		.tf-tab:last-child { border-bottom: 0; }
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		document.querySelectorAll('[data-toggle-facts]').forEach((root) => {
+			const tabs = root.querySelectorAll('[data-tf-trigger]');
+			const panels = root.querySelectorAll('[data-tf-panel]');
+			tabs.forEach((tab) => {
+				tab.addEventListener('click', () => {
+					const id = tab.getAttribute('data-tf-trigger');
+					tabs.forEach((t) => {
+						const active = t === tab;
+						t.classList.toggle('is-active', active);
+						t.setAttribute('aria-selected', active ? 'true' : 'false');
+					});
+					panels.forEach((p) => {
+						p.classList.toggle('is-active', p.getAttribute('data-tf-panel') === id);
+					});
+				});
+			});
+		});
+	})();
+</script>

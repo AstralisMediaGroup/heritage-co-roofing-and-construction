@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroPage from '../../components/v2/HeroPage.astro';
 import PromiseStrip from '../../components/v2/PromiseStrip.astro';
 import SectionHead from '../../components/v2/SectionHead.astro';
+import ToggleFacts from '../../components/v2/ToggleFacts.astro';
 import TileGrid from '../../components/v2/TileGrid.astro';
 import PageCTA from '../../components/v2/PageCTA.astro';
 import Reveal from '../../components/v2/Reveal.astro';
@@ -74,10 +75,21 @@ const otherSystems = [
 
 	<Reveal>
 		<section class="page-section">
-			<div class="container narrow">
-				<p class="lede">
-					TPO is a thermoplastic membrane installed in wide sheets and welded together at every overlap. The reflective white surface drops summer cooling load. We spec it on most flat or low-slope re-roofs unless the building calls for something different. Free assessment tells you whether it's the right call.
-				</p>
+			<div class="container">
+				<ToggleFacts facts={[
+					{
+						label: 'What it is',
+						body: 'Thermoplastic single-ply membrane installed in wide sheets and heat-welded at every overlap. Reflective white surface drops summer cooling load. The dominant new-construction membrane in commercial since the mid-2000s.',
+					},
+					{
+						label: 'When we spec it',
+						body: "Cooling-dominated buildings — retail, light commercial, restaurants, schools, government. Anything flat or low-slope with a meaningful summer HVAC bill. Most re-roofs over a sound existing single-ply qualify too.",
+					},
+					{
+						label: 'When we skip it',
+						body: "Cold-climate jobs sometimes favor EPDM. Heavy rooftop foot traffic favors mod-bit. Tight budget on a small re-roof might land on a coating system instead. The free assessment tells you which — see the other commercial systems below.",
+					},
+				]} />
 			</div>
 		</section>
 	</Reveal>
@@ -110,12 +122,5 @@ const otherSystems = [
 <style>
 	.page-section { padding: clamp(64px, 7vw, 112px) 0; }
 	.section-tight { padding-top: clamp(40px, 4vw, 64px); }
-	.container.narrow { max-width: 760px; }
-	.lede {
-		font-size: clamp(18px, 1.6vw, 21px);
-		line-height: 1.55;
-		color: var(--ink-2);
-		margin: 0;
-	}
 	.systems-spacer { margin-top: clamp(40px, 4vw, 64px); }
 </style>
